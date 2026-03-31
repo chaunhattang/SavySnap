@@ -1,0 +1,74 @@
+.sidebar {
+  background: #f3f4f6 !important;
+  height: 100vh;
+  border-right: 1px solid #e5e7eb;
+}
+
+/* logo chữ Gemini */
+
+.logo {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 22px;
+  font-weight: 600;
+  color: #4b5563;
+}
+
+/* menu container */
+
+.menu {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* center icon */
+
+.menu :global(.ant-menu-item) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 70px;
+  margin: 10px 0;
+}
+
+/* icon */
+
+.menu :global(.ant-menu-item .anticon) {
+  font-size: 22px;
+  color: #94a3b8;
+}
+
+/* hover */
+
+.menu :global(.ant-menu-item:hover) {
+  background: transparent;
+}
+
+/* selected icon background */
+
+.menu :global(.ant-menu-item-selected) {
+  background: transparent !important;
+}
+
+/* green rounded button */
+
+.menu :global(.ant-menu-item-selected .anticon) {
+  background: #16a34a;
+  color: white;
+
+  padding: 12px;
+  border-radius: 14px;
+
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* normal icon box */
+
+.menu :global(.ant-menu-item .anticon) {
+  padding: 12px;
+  border-radius: 14px;
+}

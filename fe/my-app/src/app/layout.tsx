@@ -1,4 +1,4 @@
-import "./globals.css";
+import Sidebar from "@/components/Sidebar/Sidebar";
 
 export const metadata = {
   title: "SavvySnap",
@@ -12,7 +12,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="vi">
-      <body>{children}</body>
+      <body>
+        <Sidebar />
+        {children}
+      </body>
     </html>
   );
 }
