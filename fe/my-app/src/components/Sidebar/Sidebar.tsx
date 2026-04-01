@@ -3,19 +3,22 @@
 import styles from "./styles.module.css";
 import React from "react";
 import {
-  UploadOutlined,
+  CameraOutlined,
+  WalletOutlined,
+  PieChartOutlined,
+  BellOutlined,
+  SearchOutlined,
   UserOutlined,
-  VideoCameraOutlined,
 } from "@ant-design/icons";
-import { Layout, Menu, theme } from "antd";
+import { Avatar, Button, Input, Layout, Menu, theme } from "antd";
 
 const { Header, Content, Footer, Sider } = Layout;
 
 const items = [
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  UserOutlined,
+  CameraOutlined,
+  WalletOutlined,
+  PieChartOutlined,
+  BellOutlined,
 ].map((icon, index) => ({
   key: String(index + 1),
   icon: React.createElement(icon),
@@ -31,21 +34,40 @@ const App: React.FC = () => {
       <Sider
         width={100}
         breakpoint="lg"
-        collapsedWidth={100}
+        collapsedWidth={90}
         className={styles.sidebar}
       >
-        <div className={styles.logo}>SavySnap</div>
+        <Avatar size={64} icon={<UserOutlined />} className={styles.avatar} />
 
         <Menu
-          className={styles.menu}
-          theme="dark"
+          className={styles.menuSidebar}
           mode="inline"
           defaultSelectedKeys={["1"]}
           items={items}
         />
       </Sider>
       <Layout>
-        <Header style={{ background: colorBgContainer }} />
+        <Header className={styles.headerCotainer}>
+          {/* LEFT: Logo */}
+          <div className={styles.logoText}>
+            <span className={styles.brand}>SavySnap</span>
+            <span className={styles.subtitle}>DASHBOARD TIẾT KIỆM</span>
+          </div>
+
+          {/* RIGHT: Search + Button */}
+          <div className={styles.actions}>
+            <Input
+              className={styles.search}
+              placeholder="Tìm kiếm ghi chú..."
+              prefix={<SearchOutlined />}
+              allowClear
+            />
+
+            <Button type="primary" size="large" className={styles.addButton}>
+              + Thêm mới
+            </Button>
+          </div>
+        </Header>
         <Content style={{ margin: "24px 16px 0" }}>
           <div
             style={{
