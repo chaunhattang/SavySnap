@@ -1,0 +1,16 @@
+{
+  "Index": {
+    "title": "Xin chào thế giới!"
+  },
+  "Welcome": {
+    "title": "Chào mừng bạn đến với Next.js!",
+    "description": "Đây là một ứng dụng mẫu sử dụng Next.js App Router",
+    "multiLanguageslDescription": "Template này hỗ trợ đa ngôn ngữ với Next-Intl, tự động phát hiện ngôn ngữ trình duyệt và chuyển hướng người dùng đến ngôn ngữ phù hợp. Bạn có thể thêm các ngôn ngữ khác bằng cách tạo các tệp JSON trong thư mục messages.",
+    "create": "npx create-....-next-app",
+    "docs": "Tài liệu Next.js",
+    "followMe": "Theo dõi tôi trên",
+    "author": "Tác giả: ",
+    "support": "Hỗ trợ",
+    "multiLanguages": "Đa ngôn ngữ"
+  }
+}

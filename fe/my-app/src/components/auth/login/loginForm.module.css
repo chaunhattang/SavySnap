@@ -1,0 +1,99 @@
+.inputLabel {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #94a3b8;
+}
+
+.forgotLink {
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #059669;
+  text-decoration: none;
+}
+.forgotLink:hover {
+  text-decoration: underline;
+}
+
+.customInput {
+  padding: 1rem !important;
+  border-radius: 1rem !important;
+  background-color: #f8fafc !important;
+  border: none !important;
+}
+.customInput:focus-within {
+  box-shadow: 0 0 0 2px #10b981 !important;
+  background-color: #ffffff !important;
+}
+
+.submitBtn {
+  height: 3.5rem !important;
+  border-radius: 1rem !important;
+  background-color: #059669 !important;
+  font-weight: 900 !important;
+  font-size: 1rem !important;
+  box-shadow: 0 20px 25px -5px rgba(5, 150, 105, 0.2) !important;
+}
+.submitBtn:hover {
+  background-color: #047857 !important;
+}
+
+.dividerContainer {
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.dividerLine {
+  height: 1px;
+  flex: 1;
+  background-color: #f1f5f9;
+}
+.dividerText {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.socialGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+.socialBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  border: 1px solid #f1f5f9;
+  font-weight: bold;
+  color: #475569;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.socialBtn:hover {
+  background-color: #f8fafc;
+}
+/* ép 2 chữ "MẬT KHẨU" và "QUÊN MẬT KHẨU?" dạt sát ra 2 bờ */
+.fullWidthLabel :global(.ant-form-item-label),
+.fullWidthLabel :global(.ant-form-item-label > label) {
+  width: 100% !important;
+}
+.fullWidthLabel :global(.ant-form-item-label > label:after) {
+  display: none !important;
+  content: "" !important;
+}
+.labelContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
