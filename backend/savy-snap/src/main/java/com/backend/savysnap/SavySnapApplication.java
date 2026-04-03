@@ -8,6 +8,7 @@ public class SavySnapApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SavySnapApplication.class, args);
+        System.out.println("========Successfully Started=========");
     }
 
 }
