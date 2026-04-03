@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Form, Input, Button, Divider, Row, Col, Flex } from 'antd';
+import { Form, Input, Button, Divider, Row, Col, Flex, Typography } from 'antd';
 import {
     MailOutlined,
     LockOutlined,
@@ -8,18 +8,15 @@ import {
     GoogleOutlined,
     GithubOutlined,
 } from '@ant-design/icons';
-import styles from './loginForm.module.css';
+import styles from '@/app/[locale]/(auth)/login/styles/login.module.css';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
-interface LoginFormValues {
-    email?: string;
-    password?: string;
-}
-
-const LoginForm = () => {
+const LoginForm: React.FC<any> = () => {
+    const t = useTranslations('auth.login');
     const [loading, setLoading] = useState(false);
 
-    const onFinish = async (values: LoginFormValues) => {
+    const onFinish = async (values: any) => {
         setLoading(true);
         try {
             console.log('Success:', values);
@@ -33,18 +30,32 @@ const LoginForm = () => {
 
     return (
         <>
+            <div>
+                <h3 className={styles.headerText}>{t('headerText')}</h3>
+                <p className={styles.subHeaderText}>{t('subHeaderText')}</p>
+            </div>
             <Form name="login" layout="vertical" onFinish={onFinish} requiredMark={false}>
                 <Form.Item
-                    label={<span className={styles.inputLabel}>Địa chỉ Email</span>}
+                    label={
+                        <Typography.Text className={styles.inputLabel}>
+                            {t('emailLabel')}
+                        </Typography.Text>
+                    }
                     name="email"
                     rules={[
-                        { required: true, message: 'Vui lòng nhập địa chỉ email!' },
-                        { type: 'email', message: 'Email không đúng định dạng!' },
+                        {
+                            required: true,
+                            message: <Typography.Text>{t('emailRequired')}</Typography.Text>,
+                        },
+                        {
+                            type: 'email',
+                            message: <Typography.Text>{t('emailInvalid')}</Typography.Text>,
+                        },
                     ]}
                 >
                     <Input
                         prefix={<MailOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
-                        placeholder="name@example.com"
+                        placeholder={t('emailPlaceholder')}
                         variant="filled"
                         className={styles.customInput}
                     />
@@ -54,18 +65,25 @@ const LoginForm = () => {
                     className={styles.fullWidthLabel}
                     label={
                         <div className={styles.labelContainer}>
-                            <span className={styles.inputLabel}>Mật khẩu</span>
+                            <span className={styles.inputLabel}>
+                                <Typography.Text>{t('passwordLabel')}</Typography.Text>
+                            </span>
                             <Link href="/forgot-password" className={styles.forgotLink}>
-                                Quên mật khẩu?
+                                <Typography.Text>{t('forgotPassword')}</Typography.Text>
                             </Link>
                         </div>
                     }
                     name="password"
-                    rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
+                    rules={[
+                        {
+                            required: true,
+                            message: <Typography.Text>{t('passwordRequired')}</Typography.Text>,
+                        },
+                    ]}
                 >
                     <Input.Password
                         prefix={<LockOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
-                        placeholder="••••••••"
+                        placeholder={t('passwordPlaceholder')}
                         variant="filled"
                         className={styles.customInput}
                     />
@@ -81,26 +99,25 @@ const LoginForm = () => {
                         icon={!loading && <ArrowRightOutlined />}
                         iconPosition="end"
                     >
-                        Đăng nhập ngay
+                        <Typography.Text>{t('submit')}</Typography.Text>
                     </Button>
                 </Form.Item>
             </Form>
-
-            <Divider style={{ fontSize: 12, color: '#cbd5e1', fontWeight: 'bold' }}>HOẶC</Divider>
-
+            <Divider style={{ fontSize: 12, color: '#cbd5e1', fontWeight: 'bold' }}>
+                <Typography.Text>{t('divider')}</Typography.Text>
+            </Divider>
             <Row gutter={16}>
                 <Col span={12}>
                     <Button block className={styles.socialBtn} icon={<GoogleOutlined />}>
-                        Google
+                        <Typography.Text>{t('loginWithGoogle')}</Typography.Text>
                     </Button>
                 </Col>
                 <Col span={12}>
                     <Button block className={styles.socialBtn} icon={<GithubOutlined />}>
-                        Github
+                        <Typography.Text>{t('loginWithGithub')}</Typography.Text>
                     </Button>
                 </Col>
             </Row>
-
             <p
                 style={{
                     marginTop: 40,
@@ -109,7 +126,7 @@ const LoginForm = () => {
                     color: '#64748b',
                 }}
             >
-                Chưa có tài khoản?{' '}
+                <Typography.Text>{t('noAccount')}</Typography.Text>?{' '}
                 <Link
                     href="/register"
                     style={{
@@ -118,7 +135,7 @@ const LoginForm = () => {
                         textDecoration: 'none',
                     }}
                 >
-                    Đăng ký miễn phí
+                    <Typography.Text>{t('register')}</Typography.Text>
                 </Link>
             </p>
         </>

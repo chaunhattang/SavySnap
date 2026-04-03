@@ -1,12 +1,11 @@
 /** @format */
 
 'use client';
-
-import handleAPI from '@/services/apis/handleAPI';
+import React, { useEffect } from 'react';
+import Link from 'next/link';
 import { Button, Divider, Space, Typography } from 'antd';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
-import { useEffect } from 'react';
+import { PostService } from '@/services/PostService';
 
 const Home = () => {
     const t = useTranslations('Welcome');
@@ -21,13 +20,9 @@ const Home = () => {
         },
     ];
 
-    // ví dụ dùng Redux
-    // const auth = useSelector(authSelector);
-    // console.log(auth);
-    // ví dụ dùng handleAPI
     const getPosts = async () => {
         try {
-            const res = await handleAPI('/posts');
+            const res = await PostService.getPosts();
             console.log(res);
         } catch (error) {
             console.log(error);

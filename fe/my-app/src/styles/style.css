@@ -1,25 +1,25 @@
 :root {
-  --bg-white: #ffffff;
-  --bg-green-primary: rgb(5 150 105 / var(--tw-bg-opacity, 1)) !important;
+    --bg-white: #ffffff;
+    --bg-green-primary: rgb(5 150 105 / var(--tw-bg-opacity, 1)) !important;
 }
 .ant-card-body {
-  padding: 16px !important;
+    padding: 16px !important;
 }
 
 .ant-form-item-label label {
-  height: auto !important;
+    height: auto !important;
 }
 
 .main-container {
-  min-height: 100vh;
+    min-height: 100vh;
 }
 .my-button {
-  background-color: rgb(5 150 105 / var(--tw-bg-opacity, 1)) !important;
-  color: white !important;
+    background-color: rgb(5 150 105 / var(--tw-bg-opacity, 1)) !important;
+    color: white !important;
 }
 .my-checkbox {
-  color: white !important;
+    color: white !important;
 }
 .my-divider {
-  background-color: white !important;
+    background-color: white !important;
 }

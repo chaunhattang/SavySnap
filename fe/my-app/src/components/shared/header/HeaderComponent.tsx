@@ -3,19 +3,13 @@
 
 import { Select } from 'antd';
 import { useLocale } from 'next-intl';
-import { usePathname, useRouter } from 'next/navigation';
+import { useLanguageChange } from '@/hooks';
 
-const HeaderComponent = () => {
+interface HeaderComponentProps {}
+
+const HeaderComponent: React.FC<HeaderComponentProps> = () => {
     const locale = useLocale();
-    const router = useRouter();
-    const pathname = usePathname();
-
-    const handleLanguageChange = (value: string) => {
-        document.cookie = `NEXT_LOCALE=${value}; path=/; max-age=31536000; SameSite=Lax`;
-        const newPath = pathname.replace(`/${locale}`, `/${value}`);
-        router.push(newPath || '/');
-        router.refresh();
-    };
+    const handleLanguageChange = useLanguageChange();
 
     return (
         <nav className="navbar navbar-expand-lg p-2 navbar-light bg-white fixed-top d-flex justify-content-between">

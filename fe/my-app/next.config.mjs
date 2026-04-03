@@ -9,5 +9,5 @@ const nextConfig = {
 	},
 };
 
-const withNextIntl = createNextIntlPlugin();
+const withNextIntl = createNextIntlPlugin('./src/locales/request.ts');
 export default withNextIntl(nextConfig);

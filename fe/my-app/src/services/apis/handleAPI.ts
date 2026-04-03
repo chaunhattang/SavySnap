@@ -24,20 +24,20 @@ import axiosClient from './axiosClient';
  * const response = await handleAPI('/upload', formData, 'post', true);
  */
 const handleAPI = async <T = unknown, R = unknown>(
-	url: string,
-	data?: T,
-	method: 'post' | 'put' | 'get' | 'delete' = 'get',
-	isFile?: boolean
+    url: string,
+    data?: T,
+    method: 'post' | 'put' | 'get' | 'delete' = 'get',
+    isFile?: boolean
 ): Promise<R | undefined> => {
-	if (!url) return undefined;
+    if (!url) return undefined;
 
-	return (await axiosClient(url, {
-		method,
-		data,
-		headers: {
-			'Content-Type': isFile ? 'multipart/form-data' : 'application/json',
-		},
-	})) as R;
+    return (await axiosClient(url, {
+        method,
+        data,
+        headers: {
+            'Content-Type': isFile ? 'multipart/form-data' : 'application/json',
+        },
+    })) as R;
 };
 
 export default handleAPI;

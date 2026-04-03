@@ -1,21 +1,11 @@
 /** @format */
 
-/**
- *
- * - Uses Next.js app directory conventions and server components.
- * - Metadata is well-structured for SEO and social sharing, but placeholders should be replaced with actual values.
- * - Locale is dynamically set from cookies, defaulting to 'vi'.
- * - Includes Bootstrap via CDN for styling and scripts.
- * - Applies global styles and ensures minimum viewport height.
- * - Consider moving inline styles and scripts to separate files for maintainability.
- * - Good use of TypeScript types for props.
- */
-
 import { Metadata } from 'next';
 import { cookies } from 'next/headers';
 import '../styles/style.css';
 import ReduxProvider from '@/utils/ReduxProvider';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
+import { NextIntlClientProvider } from 'next-intl';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
@@ -51,6 +41,8 @@ export default async function RootLayout({
         return cookieStore.get('NEXT_LOCALE')?.value || 'vi';
     };
     const locale = await getLocale();
+    // Dynamically import messages for the current locale
+    const messages = (await import(`../locales/messages/${locale}.json`)).default;
 
     return (
         <html lang={locale} suppressHydrationWarning>
@@ -71,7 +63,9 @@ export default async function RootLayout({
             <body className="m-0 p-0">
                 <div className=" bg-light main-container">
                     <AntdRegistry>
-                        <ReduxProvider>{children}</ReduxProvider>
+                        <NextIntlClientProvider messages={messages} locale={locale}>
+                            <ReduxProvider>{children}</ReduxProvider>
+                        </NextIntlClientProvider>
                     </AntdRegistry>
                 </div>
                 <Script
