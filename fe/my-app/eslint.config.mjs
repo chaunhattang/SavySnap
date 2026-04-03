@@ -19,6 +19,16 @@ const eslintConfig = [
       "build/**",
       "next-env.d.ts",
     ],
+  }, {
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',        // Allow using `any`
+      '@typescript-eslint/no-unused-vars': ['warn', {
+        argsIgnorePattern: '^_',                           // Ignore variables starting with _
+        varsIgnorePattern: '^_'
+      }],
+      'prefer-const': 'warn',                             // Prefer using const
+      'no-var': 'warn',                                   // Don't use var
+    }
   },
 ];
 
