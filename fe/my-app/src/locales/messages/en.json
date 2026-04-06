@@ -84,6 +84,17 @@
             "emailPlaceholder": "name@example.com",
             "submit": "Send request",
             "backToLogin": "Back to login page"
+        },
+        "terms": {
+            "headerText": "Terms of Service",
+            "subHeaderText": "Please read these terms carefully before registering.",
+            "term1Title": "Acceptance of Terms",
+            "term1Content": "By registering an account, you agree to comply with our regulations and privacy policies.",
+            "term2Title": "Privacy",
+            "term2Content": "All your financial images and notes are securely encrypted and will not be shared with third parties without consent.",
+            "term3Title": "User Responsibility",
+            "term3Content": "You are responsible for securing your account and login information, and not abusing the application for inappropriate purposes.",
+            "backToRegister": "Back to Register page"
         }
     }
 }

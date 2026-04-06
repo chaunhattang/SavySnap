@@ -86,6 +86,17 @@
             "emailPlaceholder": "name@example.com",
             "submit": "Gửi yêu cầu",
             "backToLogin": "Quay lại trang đăng nhập"
+        },
+        "terms": {
+            "headerText": "Điều khoản Dịch vụ",
+            "subHeaderText": "Vui lòng đọc kỹ các điều khoản dưới đây trước khi đăng ký.",
+            "term1Title": "Chấp nhận điều khoản",
+            "term1Content": "Bằng việc đăng ký tài khoản, bạn đồng ý tuân thủ các quy định và chính sách bảo mật của chúng tôi.",
+            "term2Title": "Quyền riêng tư",
+            "term2Content": "Mọi hình ảnh và ghi chú tài chính của bạn được mã hoá an toàn và không chia sẻ cho bên thứ ba khi chưa có sự đồng ý.",
+            "term3Title": "Trách nhiệm người dùng",
+            "term3Content": "Bạn chịu trách nhiệm bảo vệ thông tin tài khoản và đăng nhập của mình, không lạm dụng ứng dụng cho các mục đích sai trái.",
+            "backToRegister": "Quay lại trang Đăng ký"
         }
     }
 }
