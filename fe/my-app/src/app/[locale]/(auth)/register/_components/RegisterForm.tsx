@@ -38,22 +38,26 @@ const RegisterForm: React.FC = () => {
                 requiredMark={false}
             >
                 <Form.Item
-                    name="fullName"
+                    name="username"
                     label={
                         <Typography.Text className={styles.inputLabel}>
-                            {t('fullNameLabel')}
+                            {t('usernameLabel')}
                         </Typography.Text>
                     }
                     rules={[
                         {
                             required: true,
-                            message: <Typography.Text style={{ color: 'inherit' }}>{t('fullNameRequired')}</Typography.Text>,
+                            message: (
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('usernameRequired')}
+                                </Typography.Text>
+                            ),
                         },
                     ]}
                 >
                     <Input
                         prefix={<UserOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
-                        placeholder={t('fullNamePlaceholder')}
+                        placeholder={t('usernamePlaceholder')}
                         variant="filled"
                         className={styles.customInput}
                     />
@@ -69,11 +73,19 @@ const RegisterForm: React.FC = () => {
                     rules={[
                         {
                             type: 'email',
-                            message: <Typography.Text style={{ color: 'inherit' }}>{t('emailInvalid')}</Typography.Text>,
+                            message: (
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('emailInvalid')}
+                                </Typography.Text>
+                            ),
                         },
                         {
                             required: true,
-                            message: <Typography.Text style={{ color: 'inherit' }}>{t('emailRequired')}</Typography.Text>,
+                            message: (
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('emailRequired')}
+                                </Typography.Text>
+                            ),
                         },
                     ]}
                 >
@@ -95,7 +107,11 @@ const RegisterForm: React.FC = () => {
                     rules={[
                         {
                             required: true,
-                            message: <Typography.Text style={{ color: 'inherit' }}>{t('passwordRequired')}</Typography.Text>,
+                            message: (
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('passwordRequired')}
+                                </Typography.Text>
+                            ),
                         },
                     ]}
                     hasFeedback
@@ -121,7 +137,15 @@ const RegisterForm: React.FC = () => {
                     ]}
                 >
                     <Checkbox>
-                        <Typography.Text style={{ color: 'inherit' }}>{t('agreement')}</Typography.Text>
+                        <Typography.Text style={{ color: 'inherit' }}>
+                            {t('agreementPrefix')}
+                            <Link
+                                href="/terms"
+                                style={{ color: '#059669', textDecoration: 'underline' }}
+                            >
+                                {t('termsLink')}
+                            </Link>
+                        </Typography.Text>
                     </Checkbox>
                 </Form.Item>
 
@@ -157,7 +181,9 @@ const RegisterForm: React.FC = () => {
                         textDecoration: 'none',
                     }}
                 >
-                    <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>{t('loginUrlText')}</Typography.Text>
+                    <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>
+                        {t('loginUrlText')}
+                    </Typography.Text>
                 </Link>
             </p>
         </>

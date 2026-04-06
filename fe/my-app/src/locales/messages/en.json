@@ -23,6 +23,9 @@
             "emailRequired": "Please enter your email address!",
             "emailInvalid": "Invalid email format!",
             "emailPlaceholder": "name@example.com",
+            "usernameLabel": "Username",
+            "usernameRequired": "Please enter your username!",
+            "usernamePlaceholder": "johndoe",
             "passwordLabel": "Password",
             "forgotPassword": "Forgot password?",
             "passwordRequired": "Please enter your password!",
@@ -41,9 +44,9 @@
             "bannerTitle": "Build a strong financial future.",
             "bannerSubtitle": "Join over 10,000 smart savers today.",
             "testimonial": "\"SavySnap helped me save 20% of my monthly income by tracking expenses visually.\"",
-            "fullNameLabel": "Full Name",
-            "fullNameRequired": "Please enter your full name!",
-            "fullNamePlaceholder": "John Doe",
+            "usernameLabel": "Username",
+            "usernameRequired": "Please enter your username!",
+            "usernamePlaceholder": "johndoe",
             "emailLabel": "Email Address",
             "emailRequired": "Please enter your email!",
             "emailInvalid": "Invalid email format!",
@@ -64,12 +67,34 @@
                 "female": "Female",
                 "other": "Other"
             },
-            "agreement": "I have read and agree to the terms",
+            "agreementPrefix": "I have read and agree to the ",
+            "termsLink": "Terms of Service",
             "submit": "Register",
             "headerText": "Create new account!",
             "subHeaderText": "Please fill in the details below to register.",
             "hasAccount": "Already have an account?",
             "loginUrlText": "Login now"
+        },
+        "forgotPassword": {
+            "headerText": "Forgot password?",
+            "subHeaderText": "Please enter your registered email to receive a password reset link.",
+            "emailLabel": "Email address",
+            "emailRequired": "Please enter your email address!",
+            "emailInvalid": "Invalid email format!",
+            "emailPlaceholder": "name@example.com",
+            "submit": "Send request",
+            "backToLogin": "Back to login page"
+        },
+        "terms": {
+            "headerText": "Terms of Service",
+            "subHeaderText": "Please read these terms carefully before registering.",
+            "term1Title": "Acceptance of Terms",
+            "term1Content": "By registering an account, you agree to comply with our regulations and privacy policies.",
+            "term2Title": "Privacy",
+            "term2Content": "All your financial images and notes are securely encrypted and will not be shared with third parties without consent.",
+            "term3Title": "User Responsibility",
+            "term3Content": "You are responsible for securing your account and login information, and not abusing the application for inappropriate purposes.",
+            "backToRegister": "Back to Register page"
         }
     }
 }

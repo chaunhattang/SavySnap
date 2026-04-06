@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import { CameraOutlined } from '@ant-design/icons';
 import styles from '@/app/[locale]/(auth)/login/styles/login.module.css';
