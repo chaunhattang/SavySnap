@@ -1,0 +1,77 @@
+{
+    "Index": {
+        "title": "Xin chào thế giới!"
+    },
+    "Welcome": {
+        "title": "Chào mừng đến với Next.js!",
+        "description": "Đây là một ứng dụng mẫu sử dụng Next.js App Router",
+        "create": "npx create-....-next-app",
+        "multiLanguageslDescription": "Template này hỗ trợ đa ngôn ngữ với Next-Intl, tự động phát hiện ngôn ngữ trình duyệt và chuyển hướng người dùng đến ngôn ngữ phù hợp. Bạn có thể thêm ngôn ngữ bằng cách tạo file JSON trong thư mục messages.",
+        "docs": "Tài liệu Next.js",
+        "author": "Tác giả: ",
+        "followMe": "Theo dõi tôi tại",
+        "support": "Hỗ trợ",
+        "multiLanguages": "Đa ngôn ngữ"
+    },
+    "auth": {
+        "login": {
+            "title": "Tiết kiệm thông minh qua từng khung hình.",
+            "subtitle": "Bắt đầu hành trình quản lý tài chính trực quan ngay hôm nay.",
+            "brandName": "SavySnap",
+            "trustedUsers": "Hơn 10,000 người đã tin dùng",
+            "emailLabel": "Địa chỉ Email",
+            "emailRequired": "Vui lòng nhập địa chỉ email!",
+            "emailInvalid": "Email không đúng định dạng!",
+            "emailPlaceholder": "name@example.com",
+            "passwordLabel": "Mật khẩu",
+            "forgotPassword": "Quên mật khẩu?",
+            "passwordRequired": "Vui lòng nhập mật khẩu!",
+            "passwordPlaceholder": "••••••••",
+            "submit": "Đăng nhập ngay",
+            "divider": "HOẶC",
+            "loginWithGoogle": "Google",
+            "loginWithGithub": "Github",
+            "noAccount": "Chưa có tài khoản?",
+            "register": "Đăng ký miễn phí",
+            "headerText": "Chào mừng trở lại!",
+            "subHeaderText": "Vui lòng đăng nhập để tiếp tục quản lý các Snap của bạn."
+        },
+        "register": {
+            "brandName": "SavySnap",
+            "bannerTitle": "Kiến tạo tương lai tài chính vững chắc.",
+            "bannerSubtitle": "Tham gia cùng cộng đồng hơn 10,000 người tiết kiệm thông minh.",
+            "testimonial": "\"SavySnap giúp tôi tiết kiệm được 20% thu nhập hàng tháng nhờ việc theo dõi chi tiêu qua hình ảnh cực kỳ trực quan.\"",
+            "fullNameLabel": "Họ và tên",
+            "fullNameRequired": "Vui lòng nhập họ và tên!",
+            "fullNamePlaceholder": "Nguyễn Văn A",
+            "emailLabel": "Địa chỉ email",
+            "emailRequired": "Vui lòng nhập email!",
+            "emailInvalid": "Email không đúng định dạng!",
+            "emailPlaceholder": "name@example.com",
+            "passwordLabel": "Mật khẩu",
+            "passwordRequired": "Vui lòng nhập mật khẩu!",
+            "passwordPlaceholder": "Tối thiểu 8 ký tự",
+            "confirmPasswordLabel": "Xác nhận mật khẩu",
+            "confirmPasswordRequired": "Vui lòng xác nhận mật khẩu!",
+            "confirmPasswordNotMatch": "Mật khẩu không khớp!",
+            "phoneLabel": "Số điện thoại",
+            "phoneRequired": "Vui lòng nhập số điện thoại!",
+            "agreementRequired": "Bạn phải đồng ý với điều khoản",
+            "genderLabel": "Giới tính",
+            "genderRequired": "Vui lòng chọn giới tính!",
+            "genderOptions": {
+                "male": "Nam",
+                "female": "Nữ",
+                "other": "Khác"
+            },
+
+            "agreement": "Tôi đã đọc và đồng ý với điều khoản",
+
+            "submit": "Đăng ký",
+            "headerText": "Tạo tài khoản mới!",
+            "subHeaderText": "Vui lòng điền thông tin để đăng ký.",
+            "hasAccount": "Đã có tài khoản?",
+            "loginUrlText": "Đăng nhập ngay"
+        }
+    }
+}
