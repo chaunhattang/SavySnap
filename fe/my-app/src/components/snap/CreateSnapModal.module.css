@@ -1,0 +1,42 @@
+@import '../../app/globals.css';
+
+.uploadBox {
+    margin-bottom: 20px;
+}
+
+.icon {
+    color: var(--btn_background) !important;
+}
+.section {
+    margin-bottom: 16px;
+}
+
+.label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--title);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.inputNumber {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.submitButton {
+    height: 48px;
+    border-radius: 12px;
+    background: var(--btn_background);
+    border: none;
+    font-weight: 600;
+}
+
+.submitButton:hover {
+    background-color: var(--btn_hover) !important;
+}

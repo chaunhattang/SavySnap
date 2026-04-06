@@ -1,0 +1,33 @@
+@import '../../app/globals.css';
+
+.container {
+    display: flex;
+    gap: 10px;
+    margin: 16px 0;
+}
+
+.tab {
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: none;
+    background: var(--background);
+    color: var(--foreground);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tab:hover {
+    background: var(--hover);
+}
+
+.active {
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: none;
+    background: var(--btn_background);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--btn_boxShadow);
+}
