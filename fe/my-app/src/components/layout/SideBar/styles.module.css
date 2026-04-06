@@ -1,0 +1,71 @@
+@import "../../../app/globals.css";
+
+.sidebar {
+  background: var(--background);
+  height: 100vh;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+/* logo chữ app */
+
+/* menu container */
+
+.menuSidebar {
+  background: transparent;
+  border: none;
+  width: 100%;
+}
+
+/* center icon */
+
+.menuSidebar :global(.ant-menu-item) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  margin: 10px 0;
+}
+
+/* icon */
+
+.menuSidebar :global(.ant-menu-item .anticon) {
+  font-size: 22px;
+  color: var(--title);
+  padding: 12px;
+
+  border-radius: 14px;
+  transition: all 0.5s ease;
+}
+
+/* hover */
+.menuSidebar :global(.ant-menu-item:hover) {
+  background: transparent !important;
+}
+
+.menuSidebar :global(.ant-menu-item .anticon:hover) {
+  background: var(--btn_background);
+  color: var(--btn_color);
+
+  padding: 12px;
+  transform: scale(0.9);
+}
+
+/* selected icon background */
+
+.menuSidebar :global(.ant-menu-item-selected) {
+  background: transparent;
+}
+
+/* green rounded button */
+
+.menuSidebar :global(.ant-menu-item-selected .anticon) {
+  background: var(--btn_background);
+  color: var(--btn_color);
+  padding: 12px;
+  border-radius: 14px;
+  box-shadow: var(--btn_boxShadow);
+}
