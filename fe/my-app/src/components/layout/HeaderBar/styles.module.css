@@ -1,0 +1,74 @@
+@import '../../../app/globals.css';
+
+.headerCotainer {
+    background: var(--background);
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+/* LEFT */
+
+.logoText {
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    line-height: 1.5;
+}
+
+.brand {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.subtitle {
+    font-size: 12px;
+    color: var(--title);
+    letter-spacing: 1px;
+}
+
+/* RIGHT */
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.search {
+    width: 260px;
+    border-radius: 20px;
+    padding: 8px 12px;
+    transition: all 0.8s ease;
+    border: 2px solid transparent;
+    background-color: var(--border);
+}
+
+.search:hover {
+    border-color: var(--btn_background);
+    background-color: var(--border);
+}
+
+.search:focus-within {
+    border-color: var(--btn_background);
+    background-color: var(--border);
+}
+
+.addButton {
+    background-color: var(--btn_background);
+    box-shadow: var(--btn_boxShadow);
+    border-radius: 12px;
+    padding: 0 20px;
+    font-weight: 600;
+
+    transition: all 0.2s ease;
+}
+
+.addButton:hover {
+    background-color: rgb(4 120 87) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--btn_boxShadow);
+}

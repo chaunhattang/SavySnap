@@ -1,0 +1,11 @@
+:root {
+    --background: #ffffff;
+    --foreground: #171717;
+    --btn_background: #059669;
+    --btn_color: white;
+    --title: #6b7280;
+    --border: #e5e7eb;
+    --btn_boxShadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+    --hover: #e5e7eb;
+    --btn_hover: rgb(4 120 87);
+}
