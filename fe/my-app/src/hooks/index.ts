@@ -21,5 +21,7 @@ export const useLanguageChange = () => {
         [pathname, locale, router]
     );
 
+    var a = 1;
+
     return handleLanguageChange;
 };
