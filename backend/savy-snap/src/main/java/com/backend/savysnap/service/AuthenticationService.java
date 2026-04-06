@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.StringJoiner;
 
 @Slf4j
 @Service
@@ -57,14 +58,19 @@ public class AuthenticationService {
     }
 
     private String generateToken(User user) {
-        JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
+        JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);
+
+        StringJoiner stringJoiner = new StringJoiner(" ");
+        if (user.getRoles() != null && !user.getRoles().isEmpty()) {
+            user.getRoles().forEach(role -> stringJoiner.add("ROLE_" + role));
+        }
 
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
-                .subject(user.getId())
+                .subject(user.getUsername())
                 .issuer("savy-snap")
                 .issueTime(new Date())
                 .expirationTime(new Date(Instant.now().plus(VALID_DURATION, ChronoUnit.HOURS).toEpochMilli())) // Token sống 1 tiếng
-                .claim("username", user.getUsername())
+                .claim("scope", stringJoiner.toString())
                 .build();
 
         Payload payload = new Payload(jwtClaimsSet.toJSONObject());

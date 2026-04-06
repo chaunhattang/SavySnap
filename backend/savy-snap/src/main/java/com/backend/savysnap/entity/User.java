@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,7 +20,11 @@ public class User {
     String id;
     String username;
     String password;
+    String email;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     List<SavingNote> savingNotes;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    Set<String> roles;
 }

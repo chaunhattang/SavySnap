@@ -1,6 +1,6 @@
 package com.backend.savysnap.entity;
 
-import com.backend.savysnap.enums.PaymentCategory;
+import com.backend.savysnap.enums.PaymentCategoryEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -21,7 +21,7 @@ public class SavingNote {
     String title;
     Long amount;
     @Enumerated(EnumType.STRING)
-    PaymentCategory category;
+    PaymentCategoryEnum category;
     String description;
     String imageUrl;
     LocalDateTime createdAt;

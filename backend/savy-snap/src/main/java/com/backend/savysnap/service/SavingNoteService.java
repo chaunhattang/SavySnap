@@ -14,6 +14,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +29,10 @@ public class SavingNoteService {
     SavingNoteRepository savingNoteRepository;
     SavingNoteMapper savingNoteMapper;
 
-    public SavingNoteResponse createSavingNote(String username, SavingNoteCreateRequest request) {
+    public SavingNoteResponse createSavingNote(SavingNoteCreateRequest request) {
+        var context = SecurityContextHolder.getContext();
+        String username = context.getAuthentication().getName();
+
         User user = userRepository.findByUsername(username).orElseThrow(()
                 -> new AppException(ErrorCode.USER_NOT_FOUND)
         );
@@ -40,7 +44,20 @@ public class SavingNoteService {
     }
 
     public List<SavingNoteResponse> getAllSavingNotes() {
-        return savingNoteRepository.findAll().stream()
+        var context = SecurityContextHolder.getContext();
+        var authentication = context.getAuthentication();
+        String username = authentication.getName();
+
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(role -> role.getAuthority().equals("SCOPE_ROLE_ADMIN"));
+
+        if (isAdmin) {
+            return savingNoteRepository.findAll().stream()
+                    .map(savingNoteMapper::toSavingNoteResponse)
+                    .collect(Collectors.toList());
+        }
+
+        return savingNoteRepository.findAllByUserUsername(username).stream()
                 .map(savingNoteMapper::toSavingNoteResponse)
                 .collect(Collectors.toList());
     }

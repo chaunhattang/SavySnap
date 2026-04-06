@@ -1,6 +1,5 @@
 package com.backend.savysnap.controller;
 
-import com.backend.savysnap.dto.request.UserCreateRequest;
 import com.backend.savysnap.dto.request.UserUpdateRequest;
 import com.backend.savysnap.dto.response.ApiResponse;
 import com.backend.savysnap.dto.response.UserResponse;
@@ -10,6 +9,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,14 +22,8 @@ import java.util.List;
 public class UserController {
     UserService userService;
 
-    @PostMapping
-    public ApiResponse<UserResponse> createUser(@RequestBody @Valid UserCreateRequest request) {
-        return ApiResponse.<UserResponse>builder()
-                .result(userService.createUser(request))
-                .build();
-    }
-
     @GetMapping
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     public ApiResponse<List<UserResponse>> getAllUsers() {
         return ApiResponse.<List<UserResponse>>builder()
                 .result(userService.getAllUsers())

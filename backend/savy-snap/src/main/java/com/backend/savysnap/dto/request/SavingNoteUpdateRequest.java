@@ -1,6 +1,6 @@
 package com.backend.savysnap.dto.request;
 
-import com.backend.savysnap.enums.PaymentCategory;
+import com.backend.savysnap.enums.PaymentCategoryEnum;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -12,7 +12,7 @@ import lombok.experimental.FieldDefaults;
 public class SavingNoteUpdateRequest {
     String title;
     Long amount;
-    PaymentCategory category;
+    PaymentCategoryEnum category;
     String description;
     String imageUrl;
 }

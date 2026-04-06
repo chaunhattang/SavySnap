@@ -1,6 +1,6 @@
 package com.backend.savysnap.dto.response;
 
-import com.backend.savysnap.enums.PaymentCategory;
+import com.backend.savysnap.enums.PaymentCategoryEnum;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -15,7 +15,7 @@ public class SavingNoteResponse {
     String id;
     String title;
     Long amount;
-    PaymentCategory category;
+    PaymentCategoryEnum category;
     String description;
     String imageUrl;
     LocalDateTime createdAt;

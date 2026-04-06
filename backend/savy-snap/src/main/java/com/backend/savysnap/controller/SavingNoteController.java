@@ -1,6 +1,7 @@
 package com.backend.savysnap.controller;
 
 import com.backend.savysnap.dto.request.SavingNoteCreateRequest;
+import com.backend.savysnap.dto.request.SavingNoteUpdateRequest;
 import com.backend.savysnap.dto.response.ApiResponse;
 import com.backend.savysnap.dto.response.SavingNoteResponse;
 import com.backend.savysnap.service.SavingNoteService;
@@ -20,10 +21,10 @@ import java.util.List;
 public class SavingNoteController {
     SavingNoteService savingNoteService;
 
-    @PostMapping("/{userID}")
-    public ApiResponse<SavingNoteResponse> createSavingNote(@PathVariable String userId, @RequestBody SavingNoteCreateRequest request) {
+    @PostMapping()
+    public ApiResponse<SavingNoteResponse> createSavingNote(@RequestBody SavingNoteCreateRequest request) {
         return ApiResponse.<SavingNoteResponse>builder()
-                .result(savingNoteService.createSavingNote(userId, request))
+                .result(savingNoteService.createSavingNote(request))
                 .build();
     }
 
@@ -38,6 +39,13 @@ public class SavingNoteController {
     public ApiResponse<SavingNoteResponse> getSavingNote(@PathVariable String id) {
         return ApiResponse.<SavingNoteResponse>builder()
                 .result(savingNoteService.getSavingNoteById(id))
+                .build();
+    }
+
+    @PutMapping("/{id}")
+    ApiResponse<SavingNoteResponse> update(@PathVariable String id, @RequestBody SavingNoteUpdateRequest request) {
+        return ApiResponse.<SavingNoteResponse>builder()
+                .result(savingNoteService.updateSavingNote(id, request))
                 .build();
     }
 
