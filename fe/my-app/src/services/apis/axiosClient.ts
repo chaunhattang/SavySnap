@@ -24,7 +24,7 @@ import queryString from 'query-string';
  */
 
 const axiosClient = axios.create({
-    baseURL: 'http://localhost:8080', // base url server
+    baseURL: 'http://localhost:3001', // base url server
     paramsSerializer: (params) => queryString.stringify(params),
 });
 

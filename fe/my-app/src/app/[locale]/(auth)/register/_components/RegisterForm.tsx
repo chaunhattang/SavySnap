@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import { MailOutlined, LockOutlined, ArrowRightOutlined, UserOutlined } from '@ant-design/icons';
 import styles from '@/app/[locale]/(auth)/register/styles/register.module.css';
 import Link from 'next/link';
-import axios from '@/lib/api/axios';
 
 const RegisterForm: React.FC = () => {
     const [form] = Form.useForm();
@@ -17,8 +16,6 @@ const RegisterForm: React.FC = () => {
         try {
             console.log('Received values of form: ', values);
             await new Promise((resolve) => setTimeout(resolve, 1500));
-            await axios.post('http://localhost:8080/api/auth/register', values);
-            console.log('Register success');
         } catch (error) {
             console.error(error);
         } finally {
@@ -41,26 +38,22 @@ const RegisterForm: React.FC = () => {
                 requiredMark={false}
             >
                 <Form.Item
-                    name="username"
+                    name="fullName"
                     label={
                         <Typography.Text className={styles.inputLabel}>
-                            {t('usernameLabel')}
+                            {t('fullNameLabel')}
                         </Typography.Text>
                     }
                     rules={[
                         {
                             required: true,
-                            message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
-                                    {t('usernameRequired')}
-                                </Typography.Text>
-                            ),
+                            message: <Typography.Text style={{ color: 'inherit' }}>{t('fullNameRequired')}</Typography.Text>,
                         },
                     ]}
                 >
                     <Input
                         prefix={<UserOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
-                        placeholder={t('usernamePlaceholder')}
+                        placeholder={t('fullNamePlaceholder')}
                         variant="filled"
                         className={styles.customInput}
                     />
@@ -76,19 +69,11 @@ const RegisterForm: React.FC = () => {
                     rules={[
                         {
                             type: 'email',
-                            message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
-                                    {t('emailInvalid')}
-                                </Typography.Text>
-                            ),
+                            message: <Typography.Text style={{ color: 'inherit' }}>{t('emailInvalid')}</Typography.Text>,
                         },
                         {
                             required: true,
-                            message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
-                                    {t('emailRequired')}
-                                </Typography.Text>
-                            ),
+                            message: <Typography.Text style={{ color: 'inherit' }}>{t('emailRequired')}</Typography.Text>,
                         },
                     ]}
                 >
@@ -110,11 +95,7 @@ const RegisterForm: React.FC = () => {
                     rules={[
                         {
                             required: true,
-                            message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
-                                    {t('passwordRequired')}
-                                </Typography.Text>
-                            ),
+                            message: <Typography.Text style={{ color: 'inherit' }}>{t('passwordRequired')}</Typography.Text>,
                         },
                     ]}
                     hasFeedback
@@ -125,6 +106,23 @@ const RegisterForm: React.FC = () => {
                         variant="filled"
                         className={styles.customInput}
                     />
+                </Form.Item>
+
+                <Form.Item
+                    name="agreement"
+                    valuePropName="checked"
+                    rules={[
+                        {
+                            validator: (_, value) =>
+                                value
+                                    ? Promise.resolve()
+                                    : Promise.reject(new Error(t('agreementRequired'))),
+                        },
+                    ]}
+                >
+                    <Checkbox>
+                        <Typography.Text style={{ color: 'inherit' }}>{t('agreement')}</Typography.Text>
+                    </Checkbox>
                 </Form.Item>
 
                 <Form.Item style={{ marginBottom: 0, marginTop: 16 }}>
@@ -159,9 +157,7 @@ const RegisterForm: React.FC = () => {
                         textDecoration: 'none',
                     }}
                 >
-                    <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>
-                        {t('loginUrlText')}
-                    </Typography.Text>
+                    <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>{t('loginUrlText')}</Typography.Text>
                 </Link>
             </p>
         </>

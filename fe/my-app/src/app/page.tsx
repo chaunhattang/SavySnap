@@ -1,10 +1,5 @@
-import React from 'react';
+import { redirect } from 'next/navigation';
 
-export default function HomePage() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold mb-4">Welcome to SavySnap</h1>
-      <p className="text-lg text-gray-600">Your next‑generation snapshot app.</p>
-    </main>
-  );
+export default function RootPage() {
+    redirect('/vi');
 }

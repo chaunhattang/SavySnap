@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { Snap } from "@/types/snap";
+import { Snap } from "@/types/snap.td";
 import { snapService } from "@/lib/api/snap.service"
 
 export function useSnaps() {

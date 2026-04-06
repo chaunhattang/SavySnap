@@ -5,14 +5,12 @@ import {
     MailOutlined,
     LockOutlined,
     ArrowRightOutlined,
-    UserOutlined,
     GoogleOutlined,
     GithubOutlined,
 } from '@ant-design/icons';
 import styles from '@/app/[locale]/(auth)/login/styles/login.module.css';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import axios from 'axios';
 
 const LoginForm: React.FC<any> = () => {
     const t = useTranslations('auth.login');
@@ -23,8 +21,6 @@ const LoginForm: React.FC<any> = () => {
         try {
             console.log('Success:', values);
             await new Promise((resolve) => setTimeout(resolve, 1500));
-            const response = await axios.post('http://localhost:8080/api/auth/login', values);
-            console.log('Login success', response.data);
         } catch (error) {
             console.error('Lỗi đăng nhập:', error);
         } finally {
@@ -42,24 +38,32 @@ const LoginForm: React.FC<any> = () => {
                 <Form.Item
                     label={
                         <Typography.Text className={styles.inputLabel}>
-                            {t('usernameLabel')}
+                            {t('emailLabel')}
                         </Typography.Text>
                     }
-                    name="username"
+                    name="email"
                     rules={[
                         {
                             required: true,
                             message: (
                                 <Typography.Text style={{ color: 'inherit' }}>
-                                    {t('usernameRequired')}
+                                    {t('emailRequired')}
+                                </Typography.Text>
+                            ),
+                        },
+                        {
+                            type: 'email',
+                            message: (
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('emailInvalid')}
                                 </Typography.Text>
                             ),
                         },
                     ]}
                 >
                     <Input
-                        prefix={<UserOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
-                        placeholder={t('usernamePlaceholder')}
+                        prefix={<MailOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
+                        placeholder={t('emailPlaceholder')}
                         variant="filled"
                         className={styles.customInput}
                     />
@@ -72,8 +76,8 @@ const LoginForm: React.FC<any> = () => {
                             <Typography.Text className={styles.inputLabel}>
                                 {t('passwordLabel')}
                             </Typography.Text>
-                            <Link href="/forgotPassword" className={styles.forgotLink}>
-                                <Typography.Text style={{ color: 'inherit', fontSize: 'inherit' }}>
+                            <Link href="/forgot-password" className={styles.forgotLink}>
+                                <Typography.Text style={{ color: 'inherit' }}>
                                     {t('forgotPassword')}
                                 </Typography.Text>
                             </Link>
