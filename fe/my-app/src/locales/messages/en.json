@@ -1,0 +1,89 @@
+{
+    "Index": {
+        "title": "Hello world!"
+    },
+    "Welcome": {
+        "title": "Welcome to Next.js!",
+        "description": "This is a sample application using Next.js App Router",
+        "create": "npx create-....-next-app",
+        "multiLanguageslDescription": "This template supports multiple languages with Next-Intl, automatically detecting the browser language and redirecting users to the appropriate language. You can add more languages by creating JSON files in the messages folder.",
+        "docs": "Next.js Documentation",
+        "author": "Author: ",
+        "followMe": "Follow me on",
+        "support": "Support",
+        "multiLanguages": "Multi Languages"
+    },
+    "auth": {
+        "login": {
+            "title": "Smart saving through every snapshot.",
+            "subtitle": "Start your visual financial management journey today.",
+            "brandName": "SavySnap",
+            "trustedUsers": "Trusted by over 10,000 users",
+            "emailLabel": "Email address",
+            "emailRequired": "Please enter your email address!",
+            "emailInvalid": "Invalid email format!",
+            "emailPlaceholder": "name@example.com",
+            "usernameLabel": "Username",
+            "usernameRequired": "Please enter your username!",
+            "usernamePlaceholder": "johndoe",
+            "passwordLabel": "Password",
+            "forgotPassword": "Forgot password?",
+            "passwordRequired": "Please enter your password!",
+            "passwordPlaceholder": "••••••••",
+            "submit": "Login now",
+            "divider": "OR",
+            "loginWithGoogle": "Google",
+            "loginWithGithub": "Github",
+            "noAccount": "Don't have an account?",
+            "register": "Register for free",
+            "headerText": "Welcome back!",
+            "subHeaderText": "Please login to continue managing your Snaps."
+        },
+        "register": {
+            "brandName": "SavySnap",
+            "bannerTitle": "Build a strong financial future.",
+            "bannerSubtitle": "Join over 10,000 smart savers today.",
+            "testimonial": "\"SavySnap helped me save 20% of my monthly income by tracking expenses visually.\"",
+            "usernameLabel": "Username",
+            "usernameRequired": "Please enter your username!",
+            "usernamePlaceholder": "johndoe",
+            "emailLabel": "Email Address",
+            "emailRequired": "Please enter your email!",
+            "emailInvalid": "Invalid email format!",
+            "emailPlaceholder": "name@example.com",
+            "passwordLabel": "Password",
+            "passwordRequired": "Please enter your password!",
+            "passwordPlaceholder": "Minimum 8 characters",
+            "confirmPasswordLabel": "Confirm Password",
+            "confirmPasswordRequired": "Please confirm your password!",
+            "confirmPasswordNotMatch": "Passwords do not match!",
+            "phoneLabel": "Phone Number",
+            "phoneRequired": "Please enter your phone number!",
+            "genderLabel": "Gender",
+            "agreementRequired": "You must accept the agreement",
+            "genderRequired": "Please select gender!",
+            "genderOptions": {
+                "male": "Male",
+                "female": "Female",
+                "other": "Other"
+            },
+            "agreementPrefix": "I have read and agree to the ",
+            "termsLink": "Terms of Service",
+            "submit": "Register",
+            "headerText": "Create new account!",
+            "subHeaderText": "Please fill in the details below to register.",
+            "hasAccount": "Already have an account?",
+            "loginUrlText": "Login now"
+        },
+        "forgotPassword": {
+            "headerText": "Forgot password?",
+            "subHeaderText": "Please enter your registered email to receive a password reset link.",
+            "emailLabel": "Email address",
+            "emailRequired": "Please enter your email address!",
+            "emailInvalid": "Invalid email format!",
+            "emailPlaceholder": "name@example.com",
+            "submit": "Send request",
+            "backToLogin": "Back to login page"
+        }
+    }
+}
