@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { MailOutlined, LockOutlined, ArrowRightOutlined, UserOutlined } from '@ant-design/icons';
 import styles from '@/app/[locale]/(auth)/register/styles/register.module.css';
 import Link from 'next/link';
+import axios from '@/lib/api/axios';
 
 const RegisterForm: React.FC = () => {
     const [form] = Form.useForm();
@@ -16,6 +17,8 @@ const RegisterForm: React.FC = () => {
         try {
             console.log('Received values of form: ', values);
             await new Promise((resolve) => setTimeout(resolve, 1500));
+            await axios.post('http://localhost:8080/api/auth/register', values);
+            console.log('Register success');
         } catch (error) {
             console.error(error);
         } finally {
@@ -122,31 +125,6 @@ const RegisterForm: React.FC = () => {
                         variant="filled"
                         className={styles.customInput}
                     />
-                </Form.Item>
-
-                <Form.Item
-                    name="agreement"
-                    valuePropName="checked"
-                    rules={[
-                        {
-                            validator: (_, value) =>
-                                value
-                                    ? Promise.resolve()
-                                    : Promise.reject(new Error(t('agreementRequired'))),
-                        },
-                    ]}
-                >
-                    <Checkbox>
-                        <Typography.Text style={{ color: 'inherit' }}>
-                            {t('agreementPrefix')}
-                            <Link
-                                href="/terms"
-                                style={{ color: '#059669', textDecoration: 'underline' }}
-                            >
-                                {t('termsLink')}
-                            </Link>
-                        </Typography.Text>
-                    </Checkbox>
                 </Form.Item>
 
                 <Form.Item style={{ marginBottom: 0, marginTop: 16 }}>
