@@ -35,15 +35,15 @@
 
 /*    Typography    */
 .headerText {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #1e293b;
-    margin-bottom: 0.5rem;
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+    color: #1e293b !important;
+    margin-bottom: 0.5rem !important;
 }
 .subHeaderText {
-    color: #94a3b8;
-    font-size: 0.875rem;
-    margin-bottom: 2.5rem;
+    color: #94a3b8 !important;
+    font-size: 0.875rem !important;
+    margin-bottom: 2.5rem !important;
 }
 
 /*    Card component    */
@@ -73,17 +73,17 @@
     display: flex;
 }
 .leftTitle {
-    font-size: 2.25rem;
-    font-weight: 900;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-    color: white;
+    font-size: 2.25rem !important;
+    font-weight: 900 !important;
+    line-height: 1.2 !important;
+    margin-bottom: 1rem !important;
+    color: white !important;
     position: relative;
     z-index: 10;
 }
 .leftSubtitle {
-    color: #d1fae5;
-    opacity: 0.8;
+    color: #d1fae5 !important;
+    opacity: 0.8 !important;
     position: relative;
     z-index: 10;
 }
@@ -91,8 +91,9 @@
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 0.875rem;
-    font-weight: 500;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    color: white !important;
     position: relative;
     z-index: 10;
 }
@@ -131,19 +132,19 @@
 
 /*    Form component    */
 .inputLabel {
-    font-size: 10px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #94a3b8;
+    font-size: 10px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    color: #94a3b8 !important;
 }
 .forgotLink {
-    font-size: 10px;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #059669;
-    text-decoration: none;
+    font-size: 10px !important;
+    font-weight: 900 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.1em !important;
+    color: #059669 !important;
+    text-decoration: none !important;
 }
 .forgotLink:hover {
     text-decoration: underline;

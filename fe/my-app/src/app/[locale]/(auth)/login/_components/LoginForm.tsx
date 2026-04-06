@@ -45,11 +45,19 @@ const LoginForm: React.FC<any> = () => {
                     rules={[
                         {
                             required: true,
-                            message: <Typography.Text>{t('emailRequired')}</Typography.Text>,
+                            message: (
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('emailRequired')}
+                                </Typography.Text>
+                            ),
                         },
                         {
                             type: 'email',
-                            message: <Typography.Text>{t('emailInvalid')}</Typography.Text>,
+                            message: (
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('emailInvalid')}
+                                </Typography.Text>
+                            ),
                         },
                     ]}
                 >
@@ -65,11 +73,13 @@ const LoginForm: React.FC<any> = () => {
                     className={styles.fullWidthLabel}
                     label={
                         <div className={styles.labelContainer}>
-                            <span className={styles.inputLabel}>
-                                <Typography.Text>{t('passwordLabel')}</Typography.Text>
-                            </span>
+                            <Typography.Text className={styles.inputLabel}>
+                                {t('passwordLabel')}
+                            </Typography.Text>
                             <Link href="/forgot-password" className={styles.forgotLink}>
-                                <Typography.Text>{t('forgotPassword')}</Typography.Text>
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('forgotPassword')}
+                                </Typography.Text>
                             </Link>
                         </div>
                     }
@@ -77,7 +87,11 @@ const LoginForm: React.FC<any> = () => {
                     rules={[
                         {
                             required: true,
-                            message: <Typography.Text>{t('passwordRequired')}</Typography.Text>,
+                            message: (
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('passwordRequired')}
+                                </Typography.Text>
+                            ),
                         },
                     ]}
                 >
@@ -99,22 +113,30 @@ const LoginForm: React.FC<any> = () => {
                         icon={!loading && <ArrowRightOutlined />}
                         iconPosition="end"
                     >
-                        <Typography.Text>{t('submit')}</Typography.Text>
+                        <Typography.Text style={{ color: 'white' }}>{t('submit')}</Typography.Text>
                     </Button>
                 </Form.Item>
             </Form>
             <Divider style={{ fontSize: 12, color: '#cbd5e1', fontWeight: 'bold' }}>
-                <Typography.Text>{t('divider')}</Typography.Text>
+                <Typography.Text
+                    style={{ color: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
+                >
+                    {t('divider')}
+                </Typography.Text>
             </Divider>
             <Row gutter={16}>
                 <Col span={12}>
                     <Button block className={styles.socialBtn} icon={<GoogleOutlined />}>
-                        <Typography.Text>{t('loginWithGoogle')}</Typography.Text>
+                        <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>
+                            {t('loginWithGoogle')}
+                        </Typography.Text>
                     </Button>
                 </Col>
                 <Col span={12}>
                     <Button block className={styles.socialBtn} icon={<GithubOutlined />}>
-                        <Typography.Text>{t('loginWithGithub')}</Typography.Text>
+                        <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>
+                            {t('loginWithGithub')}
+                        </Typography.Text>
                     </Button>
                 </Col>
             </Row>
@@ -126,7 +148,7 @@ const LoginForm: React.FC<any> = () => {
                     color: '#64748b',
                 }}
             >
-                <Typography.Text>{t('noAccount')}</Typography.Text>?{' '}
+                <Typography.Text style={{ color: 'inherit' }}>{t('noAccount')}</Typography.Text>?{' '}
                 <Link
                     href="/register"
                     style={{
@@ -135,7 +157,9 @@ const LoginForm: React.FC<any> = () => {
                         textDecoration: 'none',
                     }}
                 >
-                    <Typography.Text>{t('register')}</Typography.Text>
+                    <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>
+                        {t('register')}
+                    </Typography.Text>
                 </Link>
             </p>
         </>

@@ -12,12 +12,18 @@ const LoginCard: React.FC<any> = () => {
                     <div className={styles.logoIcon}>
                         <CameraOutlined style={{ fontSize: 24 }} />
                     </div>
-                    <Typography.Text style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
+                    <Typography.Text
+                        style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'white' }}
+                    >
                         {t('brandName')}
                     </Typography.Text>
                 </div>
-                <Typography.Title level={2}>{t('title')}</Typography.Title>
-                <Typography.Paragraph>{t('subtitle')}</Typography.Paragraph>
+                <Typography.Title level={2} className={styles.leftTitle}>
+                    {t('title')}
+                </Typography.Title>
+                <Typography.Paragraph className={styles.leftSubtitle}>
+                    {t('subtitle')}
+                </Typography.Paragraph>
             </div>
 
             <div className={styles.trustGroup}>
@@ -26,7 +32,7 @@ const LoginCard: React.FC<any> = () => {
                         <span key={i} className={styles.avatar}></span>
                     ))}
                 </div>
-                <Typography.Text>{t('trustedUsers')}</Typography.Text>
+                <Typography.Text style={{ color: 'white' }}>{t('trustedUsers')}</Typography.Text>
             </div>
 
             <div className={styles.shapeTopRight}></div>

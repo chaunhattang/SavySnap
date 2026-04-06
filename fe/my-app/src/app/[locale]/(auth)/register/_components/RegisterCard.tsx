@@ -13,16 +13,22 @@ function RegisterCard() {
                     <div className={styles.logoIcon}>
                         <CameraOutlined style={{ fontSize: 24 }} />
                     </div>
-                    <Typography.Text style={{ fontSize: '1.25rem', fontWeight: 'bold' }}>
+                    <Typography.Text
+                        style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'white' }}
+                    >
                         {t('brandName')}
                     </Typography.Text>
                 </div>
-                <Typography.Title level={2}>{t('bannerTitle')}</Typography.Title>
-                <Typography.Paragraph>{t('bannerSubtitle')}</Typography.Paragraph>
+                <Typography.Title level={2} className={styles.rightTitle}>
+                    {t('bannerTitle')}
+                </Typography.Title>
+                <Typography.Paragraph className={styles.rightSubtitle}>
+                    {t('bannerSubtitle')}
+                </Typography.Paragraph>
             </div>
 
             <div className={styles.trustGroup}>
-                <Typography.Text>{t('testimonial')}</Typography.Text>
+                <Typography.Text style={{ color: 'white' }}>{t('testimonial')}</Typography.Text>
             </div>
 
             <div className={styles.shapeTopRight}></div>

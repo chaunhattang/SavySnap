@@ -8,13 +8,13 @@ const RegisterPage = () => {
     return (
         <div className={styles.pageWrapper}>
             <Row className={styles.loginCardContainer} align="stretch">
-                <Col xs={0} md={12}>
+                <Col xs={24} md={12}>
                     <div className={styles.leftPanel}>
                         <RegisterForm />
                     </div>
                 </Col>
 
-                <Col xs={24} md={12} className={styles.rightCol}>
+                <Col xs={0} md={12} className={styles.rightCol}>
                     <div className={styles.rightPanel}>
                         <RegisterCard />
                     </div>

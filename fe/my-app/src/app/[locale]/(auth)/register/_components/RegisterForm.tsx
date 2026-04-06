@@ -1,226 +1,166 @@
 'use client';
 import React, { useState } from 'react';
-import type { CascaderProps, FormItemProps, FormProps, Typography } from 'antd';
-import {
-    AutoComplete,
-    Button,
-    Cascader,
-    Checkbox,
-    Col,
-    Form,
-    Input,
-    InputNumber,
-    Row,
-    Select,
-    Space,
-} from 'antd';
+import { Button, Checkbox, Form, Input, Typography } from 'antd';
 import { useTranslations } from 'next-intl';
-import type { DefaultOptionType } from 'antd/es/select';
-
-interface FormCascaderOption {
-    value: string;
-    label: string;
-    children?: FormCascaderOption[];
-}
-
-const formItemLayout: FormProps = {
-    labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-    },
-    wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-    },
-};
-
-const tailFormItemLayout: FormItemProps = {
-    wrapperCol: {
-        xs: {
-            span: 24,
-            offset: 0,
-        },
-        sm: {
-            span: 16,
-            offset: 8,
-        },
-    },
-};
-
-interface PhoneValue {
-    prefix?: string;
-    phone?: string;
-}
-
-interface PhoneInputProps {
-    id?: string;
-    value?: PhoneValue;
-    onChange?: (value: PhoneValue) => void;
-}
-
-const PhoneInput: React.FC<PhoneInputProps> = ({ id, value = {}, onChange }) => {
-    const [prefix, setPrefix] = useState('86');
-    const [phone, setPhone] = useState('');
-
-    const triggerChange = (changedValue: PhoneValue) => {
-        onChange?.({ ...value, ...changedValue });
-    };
-
-    const onPrefixChange = (newPrefix: string) => {
-        if (!('prefix' in value)) {
-            setPrefix(newPrefix);
-        }
-        triggerChange({ prefix: newPrefix });
-    };
-
-    const onPhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newPhone = e.target.value;
-        if (!('phone' in value)) {
-            setPhone(newPhone);
-        }
-        triggerChange({ phone: newPhone });
-    };
-
-    return (
-        <span id={id}>
-            <Space.Compact block>
-                <Select
-                    value={value.prefix || prefix}
-                    onChange={onPrefixChange}
-                    style={{ width: 70 }}
-                    options={[{ label: '+84', value: '84' }]}
-                />
-                <Input
-                    value={value.phone || phone}
-                    onChange={onPhoneChange}
-                    style={{ width: '100%' }}
-                />
-            </Space.Compact>
-        </span>
-    );
-};
+import { MailOutlined, LockOutlined, ArrowRightOutlined, UserOutlined } from '@ant-design/icons';
+import styles from '@/app/[locale]/(auth)/register/styles/register.module.css';
+import Link from 'next/link';
 
 const RegisterForm: React.FC = () => {
     const [form] = Form.useForm();
     const t = useTranslations('auth.register');
+    const [loading, setLoading] = useState(false);
 
-    const onFinish = (values: any) => {
-        console.log('Received values of form: ', values);
+    const onFinish = async (values: any) => {
+        setLoading(true);
+        try {
+            console.log('Received values of form: ', values);
+            await new Promise((resolve) => setTimeout(resolve, 1500));
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    const [autoCompleteResult, setAutoCompleteResult] = useState<string[]>([]);
-
     return (
-        <Form
-            {...formItemLayout}
-            form={form}
-            name="register"
-            onFinish={onFinish}
-            initialValues={{
-                phone: { prefix: '84' },
-                gender: 'male',
-            }}
-            style={{ maxWidth: 600 }}
-            scrollToFirstError
-        >
-            <Form.Item
-                name="email"
-                label={t('emailLabel')}
-                rules={[
-                    {
-                        type: 'email',
-                        message: t('emailInvalid'),
-                    },
-                    {
-                        required: true,
-                        message: t('emailRequired'),
-                    },
-                ]}
+        <>
+            <div>
+                <h3 className={styles.headerText}>{t('headerText')}</h3>
+                <p className={styles.subHeaderText}>{t('subHeaderText')}</p>
+            </div>
+            <Form
+                form={form}
+                name="register"
+                layout="vertical"
+                onFinish={onFinish}
+                initialValues={{}}
+                requiredMark={false}
             >
-                <Input />
-            </Form.Item>
-
-            <Form.Item
-                name="password"
-                label={t('passwordLabel')}
-                rules={[
-                    {
-                        required: true,
-                        message: t('passwordRequired'),
-                    },
-                ]}
-                hasFeedback
-            >
-                <Input.Password />
-            </Form.Item>
-
-            <Form.Item
-                name="confirm"
-                label={t('confirmPasswordLabel')}
-                dependencies={['password']}
-                hasFeedback
-                rules={[
-                    {
-                        required: true,
-                        message: t('confirmPasswordRequired'),
-                    },
-                    ({ getFieldValue }) => ({
-                        validator(_, value) {
-                            if (!value || getFieldValue('password') === value) {
-                                return Promise.resolve();
-                            }
-                            return Promise.reject(new Error(t('confirmPasswordNotMatch')));
+                <Form.Item
+                    name="fullName"
+                    label={
+                        <Typography.Text className={styles.inputLabel}>
+                            {t('fullNameLabel')}
+                        </Typography.Text>
+                    }
+                    rules={[
+                        {
+                            required: true,
+                            message: <Typography.Text style={{ color: 'inherit' }}>{t('fullNameRequired')}</Typography.Text>,
                         },
-                    }),
-                ]}
-            >
-                <Input.Password />
-            </Form.Item>
-
-            <Form.Item
-                name="phone"
-                label={t('phoneLabel')}
-                rules={[{ required: true, message: t('phoneRequired') }]}
-            >
-                <PhoneInput />
-            </Form.Item>
-
-            <Form.Item
-                name="gender"
-                label={t('genderLabel')}
-                rules={[{ required: true, message: t('genderRequired') }]}
-            >
-                <Select
-                    placeholder={t('genderLabel')}
-                    options={[
-                        { label: t('genderOptions.male'), value: 'male' },
-                        { label: t('genderOptions.female'), value: 'female' },
-                        { label: t('genderOptions.other'), value: 'other' },
                     ]}
-                />
-            </Form.Item>
+                >
+                    <Input
+                        prefix={<UserOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
+                        placeholder={t('fullNamePlaceholder')}
+                        variant="filled"
+                        className={styles.customInput}
+                    />
+                </Form.Item>
 
-            <Form.Item
-                name="agreement"
-                valuePropName="checked"
-                rules={[
-                    {
-                        validator: (_, value) =>
-                            value
-                                ? Promise.resolve()
-                                : Promise.reject(new Error(t('agreementRequired'))),
-                    },
-                ]}
-                {...tailFormItemLayout}
+                <Form.Item
+                    name="email"
+                    label={
+                        <Typography.Text className={styles.inputLabel}>
+                            {t('emailLabel')}
+                        </Typography.Text>
+                    }
+                    rules={[
+                        {
+                            type: 'email',
+                            message: <Typography.Text style={{ color: 'inherit' }}>{t('emailInvalid')}</Typography.Text>,
+                        },
+                        {
+                            required: true,
+                            message: <Typography.Text style={{ color: 'inherit' }}>{t('emailRequired')}</Typography.Text>,
+                        },
+                    ]}
+                >
+                    <Input
+                        prefix={<MailOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
+                        placeholder={t('emailPlaceholder')}
+                        variant="filled"
+                        className={styles.customInput}
+                    />
+                </Form.Item>
+
+                <Form.Item
+                    name="password"
+                    label={
+                        <Typography.Text className={styles.inputLabel}>
+                            {t('passwordLabel')}
+                        </Typography.Text>
+                    }
+                    rules={[
+                        {
+                            required: true,
+                            message: <Typography.Text style={{ color: 'inherit' }}>{t('passwordRequired')}</Typography.Text>,
+                        },
+                    ]}
+                    hasFeedback
+                >
+                    <Input.Password
+                        prefix={<LockOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
+                        placeholder={t('passwordPlaceholder')}
+                        variant="filled"
+                        className={styles.customInput}
+                    />
+                </Form.Item>
+
+                <Form.Item
+                    name="agreement"
+                    valuePropName="checked"
+                    rules={[
+                        {
+                            validator: (_, value) =>
+                                value
+                                    ? Promise.resolve()
+                                    : Promise.reject(new Error(t('agreementRequired'))),
+                        },
+                    ]}
+                >
+                    <Checkbox>
+                        <Typography.Text style={{ color: 'inherit' }}>{t('agreement')}</Typography.Text>
+                    </Checkbox>
+                </Form.Item>
+
+                <Form.Item style={{ marginBottom: 0, marginTop: 16 }}>
+                    <Button
+                        type="primary"
+                        htmlType="submit"
+                        block
+                        loading={loading}
+                        className={styles.submitBtn}
+                        icon={!loading && <ArrowRightOutlined />}
+                        iconPosition="end"
+                    >
+                        <Typography.Text style={{ color: 'white' }}>{t('submit')}</Typography.Text>
+                    </Button>
+                </Form.Item>
+            </Form>
+
+            <p
+                style={{
+                    marginTop: 20,
+                    textAlign: 'center',
+                    fontSize: 14,
+                    color: '#64748b',
+                }}
             >
-                <Checkbox>{t('agreement')}</Checkbox>
-            </Form.Item>
-            <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
-                    {t('submit')}
-                </Button>
-            </Form.Item>
-        </Form>
+                <Typography.Text style={{ color: 'inherit' }}>{t('hasAccount')}</Typography.Text>{' '}
+                <Link
+                    href="/login"
+                    style={{
+                        fontWeight: 'bold',
+                        color: '#059669',
+                        textDecoration: 'none',
+                    }}
+                >
+                    <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>{t('loginUrlText')}</Typography.Text>
+                </Link>
+            </p>
+        </>
     );
 };
 

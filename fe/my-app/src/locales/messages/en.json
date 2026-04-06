@@ -41,11 +41,16 @@
             "bannerTitle": "Build a strong financial future.",
             "bannerSubtitle": "Join over 10,000 smart savers today.",
             "testimonial": "\"SavySnap helped me save 20% of my monthly income by tracking expenses visually.\"",
+            "fullNameLabel": "Full Name",
+            "fullNameRequired": "Please enter your full name!",
+            "fullNamePlaceholder": "John Doe",
             "emailLabel": "Email Address",
             "emailRequired": "Please enter your email!",
             "emailInvalid": "Invalid email format!",
+            "emailPlaceholder": "name@example.com",
             "passwordLabel": "Password",
             "passwordRequired": "Please enter your password!",
+            "passwordPlaceholder": "Minimum 8 characters",
             "confirmPasswordLabel": "Confirm Password",
             "confirmPasswordRequired": "Please confirm your password!",
             "confirmPasswordNotMatch": "Passwords do not match!",
@@ -60,7 +65,11 @@
                 "other": "Other"
             },
             "agreement": "I have read and agree to the terms",
-            "submit": "Register"
+            "submit": "Register",
+            "headerText": "Create new account!",
+            "subHeaderText": "Please fill in the details below to register.",
+            "hasAccount": "Already have an account?",
+            "loginUrlText": "Login now"
         }
     }
 }
