@@ -11,12 +11,8 @@ import {
     UserOutlined,
 } from '@ant-design/icons';
 
-<<<<<<< Updated upstream
-import { Avatar, Layout, Menu } from "antd";
-=======
 import { Avatar, Layout, Menu } from 'antd';
-import { Link } from '@/locales/routing';
->>>>>>> Stashed changes
+import Link from 'next/link';
 
 const { Sider } = Layout;
 
@@ -28,26 +24,11 @@ const items = [CameraOutlined, WalletOutlined, PieChartOutlined, BellOutlined].m
 );
 
 export default function Sidebar() {
-<<<<<<< Updated upstream
-  return (
-    <Sider
-      width={100}
-      breakpoint="lg"
-      collapsedWidth={90}
-      className={styles.sidebar}
-    >
-      <Avatar
-        size={64}
-        icon={<UserOutlined />}
-        style={{ cursor: "pointer" }}
-      ></Avatar>
-=======
     return (
         <Sider width={100} breakpoint="lg" collapsedWidth={90} className={styles.sidebar}>
             <Link href="/login">
                 <Avatar size={64} icon={<UserOutlined />} style={{ cursor: 'pointer' }}></Avatar>
             </Link>
->>>>>>> Stashed changes
 
             <Menu
                 className={styles.menuSidebar}

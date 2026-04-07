@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import { MailOutlined, LockOutlined, ArrowRightOutlined, UserOutlined } from '@ant-design/icons';
 import styles from '@/app/[locale]/(auth)/register/styles/register.module.css';
 import Link from 'next/link';
+import axios from 'axios';
 
 const RegisterForm: React.FC = () => {
     const [form] = Form.useForm();
@@ -16,11 +17,8 @@ const RegisterForm: React.FC = () => {
         try {
             console.log('Received values of form: ', values);
             await new Promise((resolve) => setTimeout(resolve, 1500));
-<<<<<<< Updated upstream
-=======
             await axios.post('http://localhost:8080/api/auth/register', values);
             console.log('Register success');
->>>>>>> Stashed changes
         } catch (error) {
             console.error(error);
         } finally {
@@ -52,7 +50,11 @@ const RegisterForm: React.FC = () => {
                     rules={[
                         {
                             required: true,
-                            message: <Typography.Text style={{ color: 'inherit' }}>{t('fullNameRequired')}</Typography.Text>,
+                            message: (
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('fullNameRequired')}
+                                </Typography.Text>
+                            ),
                         },
                     ]}
                 >
@@ -74,11 +76,19 @@ const RegisterForm: React.FC = () => {
                     rules={[
                         {
                             type: 'email',
-                            message: <Typography.Text style={{ color: 'inherit' }}>{t('emailInvalid')}</Typography.Text>,
+                            message: (
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('emailInvalid')}
+                                </Typography.Text>
+                            ),
                         },
                         {
                             required: true,
-                            message: <Typography.Text style={{ color: 'inherit' }}>{t('emailRequired')}</Typography.Text>,
+                            message: (
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('emailRequired')}
+                                </Typography.Text>
+                            ),
                         },
                     ]}
                 >
@@ -100,7 +110,11 @@ const RegisterForm: React.FC = () => {
                     rules={[
                         {
                             required: true,
-                            message: <Typography.Text style={{ color: 'inherit' }}>{t('passwordRequired')}</Typography.Text>,
+                            message: (
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('passwordRequired')}
+                                </Typography.Text>
+                            ),
                         },
                     ]}
                     hasFeedback
@@ -126,7 +140,9 @@ const RegisterForm: React.FC = () => {
                     ]}
                 >
                     <Checkbox>
-                        <Typography.Text style={{ color: 'inherit' }}>{t('agreement')}</Typography.Text>
+                        <Typography.Text style={{ color: 'inherit' }}>
+                            {t('agreement')}
+                        </Typography.Text>
                     </Checkbox>
                 </Form.Item>
 
@@ -162,7 +178,9 @@ const RegisterForm: React.FC = () => {
                         textDecoration: 'none',
                     }}
                 >
-                    <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>{t('loginUrlText')}</Typography.Text>
+                    <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>
+                        {t('loginUrlText')}
+                    </Typography.Text>
                 </Link>
             </p>
         </>

@@ -7,19 +7,11 @@ import { SearchOutlined } from '@ant-design/icons';
 
 import { Button, Input, Layout } from 'antd';
 import CreateSnapModal from '@/components/snap/CreateSnapModal';
-<<<<<<< Updated upstream
-=======
-import { useLocale } from 'next-intl';
->>>>>>> Stashed changes
 
 const { Header } = Layout;
 
 export default function HeaderBar() {
     const [open, setOpen] = useState(false);
-<<<<<<< Updated upstream
-=======
-    const locale = useLocale();
->>>>>>> Stashed changes
 
     return (
         <Header className={styles.headerCotainer}>
@@ -38,11 +30,6 @@ export default function HeaderBar() {
                     prefix={<SearchOutlined />}
                     allowClear
                 />
-<<<<<<< Updated upstream
-=======
-
-                <Select value={locale} style={{ width: 120 }} />
->>>>>>> Stashed changes
 
                 <Button
                     type="primary"
