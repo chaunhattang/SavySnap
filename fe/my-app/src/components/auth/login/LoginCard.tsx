@@ -1,11 +1,10 @@
-'use client';
 import React from 'react';
 import { CameraOutlined } from '@ant-design/icons';
-import styles from '@/app/[locale]/(auth)/register/styles/register.module.css';
-import { Typography } from 'antd';
+import styles from './login.module.css';
 import { useTranslations } from 'next-intl';
-function RegisterCard() {
-    const t = useTranslations('auth.register');
+import { Typography } from 'antd';
+const LoginCard: React.FC<any> = () => {
+    const t = useTranslations('auth.login');
     return (
         <div className={styles.container}>
             <div>
@@ -19,22 +18,27 @@ function RegisterCard() {
                         {t('brandName')}
                     </Typography.Text>
                 </div>
-                <Typography.Title level={2} className={styles.rightTitle}>
-                    {t('bannerTitle')}
+                <Typography.Title level={2} className={styles.leftTitle}>
+                    {t('title')}
                 </Typography.Title>
-                <Typography.Paragraph className={styles.rightSubtitle}>
-                    {t('bannerSubtitle')}
+                <Typography.Paragraph className={styles.leftSubtitle}>
+                    {t('subtitle')}
                 </Typography.Paragraph>
             </div>
 
             <div className={styles.trustGroup}>
-                <Typography.Text style={{ color: 'white' }}>{t('testimonial')}</Typography.Text>
+                <div>
+                    {[1, 2, 3].map((i) => (
+                        <span key={i} className={styles.avatar}></span>
+                    ))}
+                </div>
+                <Typography.Text style={{ color: 'white' }}>{t('trustedUsers')}</Typography.Text>
             </div>
 
             <div className={styles.shapeTopRight}></div>
             <div className={styles.shapeBottomLeft}></div>
         </div>
     );
-}
+};
 
-export default RegisterCard;
+export default LoginCard;

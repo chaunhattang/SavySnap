@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input, Typography } from 'antd';
 import { useTranslations } from 'next-intl';
 import { MailOutlined, LockOutlined, ArrowRightOutlined, UserOutlined } from '@ant-design/icons';
-import styles from '@/app/[locale]/(auth)/register/styles/register.module.css';
+import styles from './register.module.css';
 import Link from 'next/link';
 import axios from 'axios';
 

@@ -8,7 +8,7 @@ import {
     GoogleOutlined,
     GithubOutlined,
 } from '@ant-design/icons';
-import styles from '@/app/[locale]/(auth)/login/styles/login.module.css';
+import styles from './login.module.css';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import axios from 'axios';
