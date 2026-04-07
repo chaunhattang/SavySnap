@@ -7,9 +7,10 @@ import {
     ArrowRightOutlined,
     GoogleOutlined,
     GithubOutlined,
+    UserOutlined,
 } from '@ant-design/icons';
 import styles from '@/app/[locale]/(auth)/login/styles/login.module.css';
-import Link from 'next/link';
+import { Link } from '@/locales/routing';
 import { useTranslations } from 'next-intl';
 
 const LoginForm: React.FC<any> = () => {
@@ -38,32 +39,24 @@ const LoginForm: React.FC<any> = () => {
                 <Form.Item
                     label={
                         <Typography.Text className={styles.inputLabel}>
-                            {t('emailLabel')}
+                            {t('usernameLabel')}
                         </Typography.Text>
                     }
-                    name="email"
+                    name="username"
                     rules={[
                         {
                             required: true,
                             message: (
                                 <Typography.Text style={{ color: 'inherit' }}>
-                                    {t('emailRequired')}
-                                </Typography.Text>
-                            ),
-                        },
-                        {
-                            type: 'email',
-                            message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
-                                    {t('emailInvalid')}
+                                    {t('usernameRequired')}
                                 </Typography.Text>
                             ),
                         },
                     ]}
                 >
                     <Input
-                        prefix={<MailOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
-                        placeholder={t('emailPlaceholder')}
+                        prefix={<UserOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
+                        placeholder={t('usernamePlaceholder')}
                         variant="filled"
                         className={styles.customInput}
                     />
@@ -77,7 +70,7 @@ const LoginForm: React.FC<any> = () => {
                                 {t('passwordLabel')}
                             </Typography.Text>
                             <Link href="/forgot-password" className={styles.forgotLink}>
-                                <Typography.Text style={{ color: 'inherit' }}>
+                                <Typography.Text style={{ color: 'inherit', fontSize: 'inherit' }}>
                                     {t('forgotPassword')}
                                 </Typography.Text>
                             </Link>

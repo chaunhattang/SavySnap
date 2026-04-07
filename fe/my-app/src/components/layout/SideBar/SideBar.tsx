@@ -12,6 +12,7 @@ import {
 } from "@ant-design/icons";
 
 import { Avatar, Layout, Menu } from "antd";
+import { Link } from '@/locales/routing';
 
 const { Sider } = Layout;
 
@@ -33,11 +34,13 @@ export default function Sidebar() {
       collapsedWidth={90}
       className={styles.sidebar}
     >
-      <Avatar
-        size={64}
-        icon={<UserOutlined />}
-        style={{ cursor: "pointer" }}
-      ></Avatar>
+      <Link href="/login">
+        <Avatar
+          size={64}
+          icon={<UserOutlined />}
+          style={{ cursor: "pointer" }}
+        ></Avatar>
+      </Link>
 
       <Menu
         className={styles.menuSidebar}
