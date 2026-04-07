@@ -16,6 +16,11 @@ const RegisterForm: React.FC = () => {
         try {
             console.log('Received values of form: ', values);
             await new Promise((resolve) => setTimeout(resolve, 1500));
+<<<<<<< Updated upstream
+=======
+            await axios.post('http://localhost:8080/api/auth/register', values);
+            console.log('Register success');
+>>>>>>> Stashed changes
         } catch (error) {
             console.error(error);
         } finally {

@@ -1,7 +1,7 @@
 'use client';
 
 import { Modal, Input, InputNumber, Button, Select } from 'antd';
-import { useUpdateSnap } from '@/lib/hook/useUpdateSnap';
+import { useUpdateSnap } from '@/hooks/useUpdateSnap';
 import styles from './UpdateSnapModal.module.css';
 import Dragger from 'antd/es/upload/Dragger';
 import { InboxOutlined } from '@ant-design/icons';

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { message, Upload } from 'antd';
 import { RcFile } from 'antd/es/upload';
-import { snapService } from '../api/snap.service';
+import { snapService } from '@/services/apis/snap.service';
 
 export function useUpdateSnap(snap: any, onClose?: () => void) {
     const [title, setTitle] = useState('');

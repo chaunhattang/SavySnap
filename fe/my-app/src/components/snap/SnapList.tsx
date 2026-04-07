@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Spin } from 'antd';
 
 import SnapCard from './SnapCard';
-import { useSnaps } from '@/lib/hook/useSnaps';
+import { useSnaps } from '@/hooks/useSnaps';
 
 import styles from './SnapList.module.css';
 import CategoryTabs from './CategoryTabs';

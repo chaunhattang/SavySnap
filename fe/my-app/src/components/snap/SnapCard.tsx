@@ -1,6 +1,6 @@
 'use client';
 import { Card, Button, Popconfirm, Tag } from 'antd';
-import { useDeleteSnap } from '@/lib/hook/useDeleteSnap';
+import { useDeleteSnap } from '@/hooks/useDeleteSnap';
 import UpdateSnapModal from './UpdateSnapModal';
 import { useState } from 'react';
 import dayjs from 'dayjs';

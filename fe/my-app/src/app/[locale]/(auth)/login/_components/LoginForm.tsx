@@ -11,6 +11,7 @@ import {
 import styles from '@/app/[locale]/(auth)/login/styles/login.module.css';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import axios from 'axios';
 
 const LoginForm: React.FC<any> = () => {
     const t = useTranslations('auth.login');
@@ -21,6 +22,8 @@ const LoginForm: React.FC<any> = () => {
         try {
             console.log('Success:', values);
             await new Promise((resolve) => setTimeout(resolve, 1500));
+            const res = await axios.post('http://localhost:8080/api/auth/login', values);
+            console.log(res.data);
         } catch (error) {
             console.error('Lỗi đăng nhập:', error);
         } finally {
