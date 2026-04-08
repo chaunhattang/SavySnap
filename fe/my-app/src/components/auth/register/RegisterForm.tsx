@@ -41,10 +41,10 @@ const RegisterForm: React.FC = () => {
                 requiredMark={false}
             >
                 <Form.Item
-                    name="fullName"
+                    name="username"
                     label={
                         <Typography.Text className={styles.inputLabel}>
-                            {t('fullNameLabel')}
+                            {t('usernameLabel')}
                         </Typography.Text>
                     }
                     rules={[
@@ -52,7 +52,7 @@ const RegisterForm: React.FC = () => {
                             required: true,
                             message: (
                                 <Typography.Text style={{ color: 'inherit' }}>
-                                    {t('fullNameRequired')}
+                                    {t('usernameRequired')}
                                 </Typography.Text>
                             ),
                         },
@@ -60,7 +60,7 @@ const RegisterForm: React.FC = () => {
                 >
                     <Input
                         prefix={<UserOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
-                        placeholder={t('fullNamePlaceholder')}
+                        placeholder={t('usernamePlaceholder')}
                         variant="filled"
                         className={styles.customInput}
                     />
@@ -125,25 +125,6 @@ const RegisterForm: React.FC = () => {
                         variant="filled"
                         className={styles.customInput}
                     />
-                </Form.Item>
-
-                <Form.Item
-                    name="agreement"
-                    valuePropName="checked"
-                    rules={[
-                        {
-                            validator: (_, value) =>
-                                value
-                                    ? Promise.resolve()
-                                    : Promise.reject(new Error(t('agreementRequired'))),
-                        },
-                    ]}
-                >
-                    <Checkbox>
-                        <Typography.Text style={{ color: 'inherit' }}>
-                            {t('agreement')}
-                        </Typography.Text>
-                    </Checkbox>
                 </Form.Item>
 
                 <Form.Item style={{ marginBottom: 0, marginTop: 16 }}>

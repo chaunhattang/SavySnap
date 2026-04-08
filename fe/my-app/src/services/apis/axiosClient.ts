@@ -42,14 +42,20 @@ axiosClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) 
 axiosClient.interceptors.response.use(
     (res) => {
         if (res.data && res.status >= 200 && res.status < 300) {
-            return res.data.data;
+            // Support both { data: { data: [...] } } and { data: [...] } shapes
+            return res.data.data !== undefined ? res.data.data : res.data;
         } else {
             return Promise.reject(res.data);
         }
     },
     (error) => {
         const { response } = error;
-        return Promise.reject(response.data.message as string);
+        // Guard against network errors where response is undefined
+        if (!response) {
+            return Promise.reject(error.message ?? 'Network error');
+        }
+        const message = response?.data?.message ?? response?.data ?? 'An error occurred';
+        return Promise.reject(message as string);
     }
 );
 
