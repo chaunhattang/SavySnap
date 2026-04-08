@@ -21,6 +21,8 @@ public class User {
     String username;
     String password;
     String email;
+    @Builder.Default
+    Long totalPayment = 0L;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     List<SavingNote> savingNotes;

@@ -23,6 +23,8 @@ public class SavingNote {
     @Enumerated(EnumType.STRING)
     PaymentCategoryEnum category;
     String description;
+    @Lob
+    @Column(name = "image_url", columnDefinition = "LONGTEXT")
     String imageUrl;
     LocalDateTime createdAt;
 

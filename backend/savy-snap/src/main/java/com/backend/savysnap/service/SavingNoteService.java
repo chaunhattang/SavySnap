@@ -40,6 +40,12 @@ public class SavingNoteService {
         SavingNote savingNote = savingNoteMapper.toSavingNote(request);
         savingNote.setUser(user);
 
+        long currentTotal = user.getTotalPayment() == null ? 0L : user.getTotalPayment();
+        long addedAmount = request.getAmount() == null ? 0L : request.getAmount();
+
+        user.setTotalPayment(currentTotal + addedAmount);
+        userRepository.save(user);
+
         return savingNoteMapper.toSavingNoteResponse(savingNoteRepository.save(savingNote));
     }
 
@@ -73,13 +79,31 @@ public class SavingNoteService {
         SavingNote savingNote = savingNoteRepository.findById(idSavingNote)
                 .orElseThrow(() -> new AppException(ErrorCode.SAVING_NOTE_NOT_FOUND));
 
+        User user = savingNote.getUser();
+        long currentTotal = user.getTotalPayment() == null ? 0L : user.getTotalPayment();
+        long oldAmount = savingNote.getAmount() == null ? 0L : savingNote.getAmount();
+        long newAmount = request.getAmount() == null ? 0L : request.getAmount();
+
+        user.setTotalPayment(currentTotal - oldAmount + newAmount);
+        userRepository.save(user);
+
         savingNoteMapper.updateSavingNote(savingNote, request);
 
         return savingNoteMapper.toSavingNoteResponse(savingNoteRepository.save(savingNote));
     }
 
-    public String deleteSavingNote(String id) {
-        savingNoteRepository.deleteById(id);
+    public String deleteSavingNote(String idSavingNote) {
+        var savingNote = savingNoteRepository.findById(idSavingNote)
+                .orElseThrow(() -> new AppException(ErrorCode.SAVING_NOTE_NOT_FOUND));
+
+        User user = savingNote.getUser();
+        long currentTotal = user.getTotalPayment() == null ? 0L : user.getTotalPayment();
+        long oldAmount = savingNote.getAmount() == null ? 0L : savingNote.getAmount();
+
+        user.setTotalPayment(currentTotal - oldAmount);
+        userRepository.save(user);
+
+        savingNoteRepository.deleteById(idSavingNote);
         return "Saving note deleted successfully";
     }
 }
