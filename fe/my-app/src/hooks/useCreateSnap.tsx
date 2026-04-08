@@ -49,16 +49,13 @@ export function useCreateSnap(onClose?: () => void) {
         try {
             setLoading(true);
 
-            let tt = await snapService.create({
+            await snapService.create({
                 title,
                 amount,
                 category: categoryMap[category],
                 description: title,
-                // imageUrl: file?.name ?? '',
                 imageUrl: base64Image, // Gửi chuỗi dài ngoằng này lên (thay vì file.name)
             });
-
-            console.log(tt);
 
             window.dispatchEvent(new Event('snap-updated'));
 
