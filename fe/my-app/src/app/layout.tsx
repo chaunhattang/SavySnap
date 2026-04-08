@@ -2,7 +2,6 @@ import './globals.css';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, getLocale } from 'next-intl/server';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
-import ReduxProvider from '@/utils/ReduxProvider';
 
 export const metadata = {
     title: 'SavvySnap',
@@ -17,9 +16,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <html lang={locale}>
             <body>
                 <NextIntlClientProvider messages={messages}>
-                    <AntdRegistry>
-                        <ReduxProvider>{children}</ReduxProvider>
-                    </AntdRegistry>
+                    <AntdRegistry>{children}</AntdRegistry>
                 </NextIntlClientProvider>
             </body>
         </html>
