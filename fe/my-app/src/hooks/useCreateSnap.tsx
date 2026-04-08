@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { message, Upload } from 'antd';
 import { RcFile } from 'antd/es/upload';
-import { snapService } from '@/lib/api/snap.service';
+import { snapService } from '@/services/apis/snap.service';
 export function useCreateSnap(onClose?: () => void) {
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState<number | null>(null);

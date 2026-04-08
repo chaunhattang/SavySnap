@@ -1,4 +1,4 @@
-import axiosClient from './axios';
+import axiosClient from '@/services/apis/axiosClient';
 import { Snap, CreateSnapDto, UpdateSnapDto } from '@/types/snap.td';
 
 export const snapService = {

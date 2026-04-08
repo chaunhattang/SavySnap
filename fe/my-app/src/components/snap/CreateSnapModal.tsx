@@ -5,7 +5,7 @@ import { Button, Input, InputNumber, Modal, Select } from 'antd';
 import Dragger from 'antd/es/upload/Dragger';
 
 import styles from './CreateSnapModal.module.css';
-import { useCreateSnap } from '@/lib/hook/useCreateSnap';
+import { useCreateSnap } from '@/hooks/useCreateSnap';
 
 export default function CreateSnapModal({ open, onClose }: any) {
     const {

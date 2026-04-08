@@ -1,9 +1,9 @@
 'use client';
-import React from 'react';
+
 import { Row, Col } from 'antd';
-import LoginForm from '@/app/[locale]/(auth)/login/_components/LoginForm';
-import LoginCard from '@/app/[locale]/(auth)/login/_components/LoginCard';
-import styles from '@/app/[locale]/(auth)/login/styles/login.module.css';
+import LoginForm from '@/components/auth/login/LoginForm';
+import LoginCard from '@/components/auth/login/LoginCard';
+import styles from '@/components/auth/login/login.module.css';
 
 const LoginPage = () => {
     return (
