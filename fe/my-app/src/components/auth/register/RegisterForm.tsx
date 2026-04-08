@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input, Typography } from 'antd';
 import { useTranslations } from 'next-intl';
 import { MailOutlined, LockOutlined, ArrowRightOutlined, UserOutlined } from '@ant-design/icons';
-import styles from './register.module.css';
-import Link from 'next/link';
+import styles from '@/app/[locale]/(auth)/register/styles/register.module.css';
+import { Link } from '@/locales/routing';
 import axios from 'axios';
 
 const RegisterForm: React.FC = () => {
@@ -17,7 +17,7 @@ const RegisterForm: React.FC = () => {
         try {
             console.log('Received values of form: ', values);
             await new Promise((resolve) => setTimeout(resolve, 1500));
-            await axios.post('http://localhost:8080/api/auth/register', values);
+            await axios.post('http://localhost:8000/api/auth/register', values);
             console.log('Register success');
         } catch (error) {
             console.error(error);

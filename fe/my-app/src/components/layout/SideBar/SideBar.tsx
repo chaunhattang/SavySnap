@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons';
 
 import { Avatar, Layout, Menu } from 'antd';
-import Link from 'next/link';
+import { Link } from '@/locales/routing';
 
 const { Sider } = Layout;
 
