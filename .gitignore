@@ -1,0 +1,69 @@
+# ==========================================
+# 1. BẢO MẬT KEY & CẤU HÌNH (QUAN TRỌNG NHẤT)
+# ==========================================
+# Ẩn toàn bộ file chứa biến môi trường (Frontend + Backend)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Ẩn file cấu hình nhạy cảm của Spring Boot (nơi chứa DB username, password, Cloudinary key...)
+application.properties
+application.yml
+application-dev.properties
+application-dev.yml
+application-prod.properties
+application-prod.yml
+
+# ==========================================
+# 2. BACKEND (Spring Boot / Java)
+# ==========================================
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+*.log
+
+# ==========================================
+# 3. FRONTEND (React / Next.js / Node.js)
+# ==========================================
+node_modules/
+dist/
+build/
+.next/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# ==========================================
+# 4. CẤU HÌNH IDE & HỆ ĐIỀU HÀNH
+# ==========================================
+# IntelliJ IDEA / WebStorm
+.idea/
+*.iml
+*.iws
+
+# Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+# VS Code
+.vscode/
+
+# Mac OS / Windows
+.DS_Store
+Thumbs.db
