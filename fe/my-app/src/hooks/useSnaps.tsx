@@ -11,6 +11,7 @@ export function useSnaps() {
     const fetchSnaps = useCallback(async () => {
         try {
             setLoading(true);
+
             const data = await snapService.getAll();
             setSnaps(data);
         } catch (error) {
@@ -21,6 +22,9 @@ export function useSnaps() {
     }, []);
 
     useEffect(() => {
+        const token = localStorage.getItem('accessToken');
+
+        if (!token) return;
         fetchSnaps();
 
         const handleRefresh = () => {

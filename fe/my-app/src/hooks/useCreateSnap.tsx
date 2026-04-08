@@ -9,6 +9,7 @@ export function useCreateSnap(onClose?: () => void) {
     const [category, setCategory] = useState('Thiết yếu');
     const [file, setFile] = useState<RcFile | null>(null);
     const [loading, setLoading] = useState(false);
+
     const beforeUpload = (file: RcFile) => {
         const isImage = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isImage) {

@@ -6,19 +6,24 @@ import { MailOutlined, LockOutlined, ArrowRightOutlined, UserOutlined } from '@a
 import styles from './register.module.css';
 import Link from 'next/link';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const RegisterForm: React.FC = () => {
     const [form] = Form.useForm();
     const t = useTranslations('auth.register');
     const [loading, setLoading] = useState(false);
-
+    const router = useRouter();
     const onFinish = async (values: any) => {
         setLoading(true);
         try {
             console.log('Received values of form: ', values);
             await new Promise((resolve) => setTimeout(resolve, 1500));
-            await axios.post('http://localhost:8080/api/auth/register', values);
+            await axios.post('http://10.60.250.222:8080/api/auth/register', values);
+            console.log(values);
             console.log('Register success');
+            localStorage.setItem('registeredEmail', values.email);
+            localStorage.setItem('registeredPassword', values.password);
+            router.push('/login');
         } catch (error) {
             console.error(error);
         } finally {
@@ -41,10 +46,10 @@ const RegisterForm: React.FC = () => {
                 requiredMark={false}
             >
                 <Form.Item
-                    name="fullName"
+                    name="username"
                     label={
                         <Typography.Text className={styles.inputLabel}>
-                            {t('fullNameLabel')}
+                            {t('usernameLabel')}
                         </Typography.Text>
                     }
                     rules={[
@@ -52,7 +57,7 @@ const RegisterForm: React.FC = () => {
                             required: true,
                             message: (
                                 <Typography.Text style={{ color: 'inherit' }}>
-                                    {t('fullNameRequired')}
+                                    {t('usernameRequired')}
                                 </Typography.Text>
                             ),
                         },
@@ -60,7 +65,8 @@ const RegisterForm: React.FC = () => {
                 >
                     <Input
                         prefix={<UserOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
-                        placeholder={t('fullNamePlaceholder')}
+                        autoComplete="username"
+                        placeholder={t('usernamePlaceholder')}
                         variant="filled"
                         className={styles.customInput}
                     />

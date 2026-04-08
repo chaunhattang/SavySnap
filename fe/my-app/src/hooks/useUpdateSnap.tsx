@@ -65,12 +65,18 @@ export function useUpdateSnap(snap: any, onClose?: () => void) {
         return false;
     };
     const categoryMap: Record<string, string> = {
-        'Thiết yếu': 'NEED',
-        'Ăn uống': 'WANT',
-        'Giải trí': 'WANT',
-        'Mua sắm': 'WANT',
+        NEED: 'NEED',
+        WANT: 'WANT',
+        SAVING: 'SAVING',
     };
-
+    const convertBase64 = (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file); // Đọc file dưới dạng Data URL (Base64)
+            fileReader.onload = () => resolve(fileReader.result as string);
+            fileReader.onerror = (error) => reject(error);
+        });
+    };
     const handleUpdate = async () => {
         try {
             if (!snap?.id) {
@@ -80,18 +86,19 @@ export function useUpdateSnap(snap: any, onClose?: () => void) {
 
             setLoading(true);
 
-            let imageUrl = snap.image;
+            let base64Image = snap.imageUrl;
 
             if (file) {
-                imageUrl = URL.createObjectURL(file);
+                base64Image = await convertBase64(file);
             }
 
             await snapService.update({
+                id: snap.id,
                 title,
-                amount,
+                amount: Number(amount),
                 category: categoryMap[category],
                 description: title,
-                imageUrl: file?.name ?? '',
+                imageUrl: base64Image,
             });
 
             message.success('Cập nhật thành công');
@@ -101,7 +108,6 @@ export function useUpdateSnap(snap: any, onClose?: () => void) {
             onClose?.();
         } catch (error) {
             console.error(error);
-
             message.error('Cập nhật thất bại');
         } finally {
             setLoading(false);
