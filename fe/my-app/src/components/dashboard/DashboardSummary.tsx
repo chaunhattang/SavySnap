@@ -2,7 +2,7 @@
 
 import { Row, Col, Card } from 'antd';
 import { useSnaps } from '@/hooks/useSnaps';
-import { useMemo } from 'react';
+
 export default function DashboardSummary() {
     const { snaps } = useSnaps();
     const totalExpense = snaps.reduce(

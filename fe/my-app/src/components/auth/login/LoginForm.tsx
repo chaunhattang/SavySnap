@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, Divider, Row, Col, Flex, Typography } from 'antd';
 import {
     MailOutlined,
@@ -19,13 +19,26 @@ const LoginForm: React.FC<any> = () => {
     const [loading, setLoading] = useState(false);
 
     const router = useRouter();
+    const [form] = Form.useForm();
+
+    useEffect(() => {
+        const email = localStorage.getItem('registeredEmail');
+        const password = localStorage.getItem('registeredPassword');
+
+        if (email && password) {
+            form.setFieldsValue({
+                email: email,
+                password: password,
+            });
+        }
+    }, []);
 
     const onFinish = async (values: any) => {
         setLoading(true);
 
         try {
             console.log('Success:', values);
-            const res = await axios.post('http://localhost:8080/api/auth/login', values);
+            const res = await axios.post('http://10.60.250.222:8080/api/auth/login', values);
 
             console.log(res.data);
 
@@ -52,7 +65,13 @@ const LoginForm: React.FC<any> = () => {
                 <h3 className={styles.headerText}>{t('headerText')}</h3>
                 <p className={styles.subHeaderText}>{t('subHeaderText')}</p>
             </div>
-            <Form name="login" layout="vertical" onFinish={onFinish} requiredMark={false}>
+            <Form
+                form={form}
+                name="login"
+                layout="vertical"
+                onFinish={onFinish}
+                requiredMark={false}
+            >
                 <Form.Item
                     label={
                         <Typography.Text className={styles.inputLabel}>
@@ -84,6 +103,7 @@ const LoginForm: React.FC<any> = () => {
                         placeholder={t('emailPlaceholder')}
                         variant="filled"
                         className={styles.customInput}
+                        autoComplete="email"
                     />
                 </Form.Item>
 

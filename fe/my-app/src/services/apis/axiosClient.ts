@@ -4,7 +4,7 @@ import axios, { InternalAxiosRequestConfig } from 'axios';
 import queryString from 'query-string';
 
 const axiosClient = axios.create({
-    baseURL: 'http://localhost:8080/api', // base url server
+    baseURL: 'http://10.60.250.222:8080/api', // base url server
     paramsSerializer: (params) => queryString.stringify(params),
 });
 
