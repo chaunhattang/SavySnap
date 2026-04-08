@@ -32,6 +32,11 @@ server:
   servlet:
     context-path: /api
 
+cloudinary:
+  cloud-name: "diat0h0nq"
+  api-key: "435431475554726"
+  api-secret: "bUfOZxIP58JtQeBMoS1GJdxvpLQ"
+
 jwt:
   signerKey: "+V6R5Wp2Z8uN9bX4kR1vM7aQ3sY6hJ9pL0oC2nF5mE8="
   valid-duration: 1000 # in second

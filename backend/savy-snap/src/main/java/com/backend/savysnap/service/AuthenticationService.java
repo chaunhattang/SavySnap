@@ -41,7 +41,7 @@ public class AuthenticationService {
 
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        User user = userRepository.findByUsername(request.getUsername()).orElseThrow(()
+        User user = userRepository.findByEmail(request.getEmail()).orElseThrow(()
                 -> new AppException(ErrorCode.USER_NOT_FOUND)
         );
 

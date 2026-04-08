@@ -24,6 +24,7 @@ public class ApplicationInitConfig implements ApplicationRunner {
             User admin = User.builder()
                     .username("admin")
                     .password(passwordEncoder.encode("admin"))
+                    .email("admin@gmail.com")
                     .roles(Set.of("ADMIN"))
                     .build();
 

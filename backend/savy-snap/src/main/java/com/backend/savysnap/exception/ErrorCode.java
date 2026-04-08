@@ -23,7 +23,7 @@ public enum ErrorCode {
     WRONG_PASSWORD(2003, "Wrong password", HttpStatus.FORBIDDEN),
     
     SAVING_NOTE_NOT_FOUND(2004, "Saving note not found", HttpStatus.NOT_FOUND),
-
+    ERROR_UPLOAD_IMAGE(2005, "Error uploading image", HttpStatus.BAD_REQUEST),
 
     UNAUTHENTICATED(3001, "Unauthenticated", HttpStatus.UNAUTHORIZED),
     UNAUTHORIZED(3002, "You do not have permission", HttpStatus.FORBIDDEN),

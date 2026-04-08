@@ -9,7 +9,9 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,10 +23,13 @@ import java.util.List;
 public class SavingNoteController {
     SavingNoteService savingNoteService;
 
-    @PostMapping()
-    public ApiResponse<SavingNoteResponse> createSavingNote(@RequestBody SavingNoteCreateRequest request) {
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ApiResponse<SavingNoteResponse> createSavingNote(
+            @ModelAttribute SavingNoteCreateRequest request,
+            @RequestParam(value = "file", required = false) MultipartFile file
+    ) {
         return ApiResponse.<SavingNoteResponse>builder()
-                .result(savingNoteService.createSavingNote(request))
+                .result(savingNoteService.createSavingNote(request, file))
                 .build();
     }
 
@@ -35,22 +40,30 @@ public class SavingNoteController {
                 .build();
     }
 
-    @GetMapping("/{id}")
-    public ApiResponse<SavingNoteResponse> getSavingNote(@PathVariable String id) {
+    @GetMapping(value = "/{id}")
+    public ApiResponse<SavingNoteResponse> getSavingNote(
+            @PathVariable("id") String id
+    ) {
         return ApiResponse.<SavingNoteResponse>builder()
                 .result(savingNoteService.getSavingNoteById(id))
                 .build();
     }
 
-    @PutMapping("/{id}")
-    ApiResponse<SavingNoteResponse> update(@PathVariable String id, @RequestBody SavingNoteUpdateRequest request) {
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    ApiResponse<SavingNoteResponse> update(
+            @PathVariable("id") String id,
+            @ModelAttribute SavingNoteUpdateRequest request,
+            @RequestParam(value = "file", required = false) MultipartFile file
+    ) {
         return ApiResponse.<SavingNoteResponse>builder()
-                .result(savingNoteService.updateSavingNote(id, request))
+                .result(savingNoteService.updateSavingNote(id, request, file))
                 .build();
     }
 
-    @DeleteMapping("/{id}")
-    public ApiResponse<String> deleteSavingNote(@PathVariable String id) {
+    @DeleteMapping(value = "/{id}")
+    public ApiResponse<String> deleteSavingNote(
+            @PathVariable("id") String id
+    ) {
         return ApiResponse.<String>builder()
                 .result(savingNoteService.deleteSavingNote(id))
                 .build();

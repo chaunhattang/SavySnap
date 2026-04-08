@@ -10,14 +10,19 @@ import com.backend.savysnap.exception.ErrorCode;
 import com.backend.savysnap.mapper.SavingNoteMapper;
 import com.backend.savysnap.repository.SavingNoteRepository;
 import com.backend.savysnap.repository.UserRepository;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -28,8 +33,21 @@ public class SavingNoteService {
     UserRepository userRepository;
     SavingNoteRepository savingNoteRepository;
     SavingNoteMapper savingNoteMapper;
+    Cloudinary cloudinary;
 
-    public SavingNoteResponse createSavingNote(SavingNoteCreateRequest request) {
+    private String uploadImageToCloudinary(MultipartFile file) {
+        if (file == null || file.isEmpty()) {
+            return null;
+        }
+        try {
+            Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+            return uploadResult.get("secure_url").toString();
+        } catch (IOException e) {
+            throw new AppException(ErrorCode.ERROR_UPLOAD_IMAGE);
+        }
+    }
+
+    public SavingNoteResponse createSavingNote(SavingNoteCreateRequest request, MultipartFile file) {
         var context = SecurityContextHolder.getContext();
         String username = context.getAuthentication().getName();
 
@@ -39,6 +57,12 @@ public class SavingNoteService {
 
         SavingNote savingNote = savingNoteMapper.toSavingNote(request);
         savingNote.setUser(user);
+
+        String imageUrl = uploadImageToCloudinary(file);
+        if (imageUrl != null) {
+            savingNote.setImageUrl(imageUrl);
+        }
+
 
         long currentTotal = user.getTotalPayment() == null ? 0L : user.getTotalPayment();
         long addedAmount = request.getAmount() == null ? 0L : request.getAmount();
@@ -75,7 +99,7 @@ public class SavingNoteService {
         return savingNoteMapper.toSavingNoteResponse(savingNote);
     }
 
-    public SavingNoteResponse updateSavingNote(String idSavingNote, SavingNoteUpdateRequest request) {
+    public SavingNoteResponse updateSavingNote(String idSavingNote, SavingNoteUpdateRequest request, MultipartFile file) {
         SavingNote savingNote = savingNoteRepository.findById(idSavingNote)
                 .orElseThrow(() -> new AppException(ErrorCode.SAVING_NOTE_NOT_FOUND));
 
@@ -88,6 +112,11 @@ public class SavingNoteService {
         userRepository.save(user);
 
         savingNoteMapper.updateSavingNote(savingNote, request);
+
+        String imageUrl = uploadImageToCloudinary(file);
+        if (imageUrl != null) {
+            savingNote.setImageUrl(imageUrl);
+        }
 
         return savingNoteMapper.toSavingNoteResponse(savingNoteRepository.save(savingNote));
     }

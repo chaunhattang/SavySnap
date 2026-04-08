@@ -13,6 +13,7 @@ import java.util.List;
 public class UserResponse {
     String id;
     String username;
+    String email;
     Long totalPayment;
     List<SavingNoteResponse> savingNotes;
 }

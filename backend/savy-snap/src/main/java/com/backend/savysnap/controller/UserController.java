@@ -30,22 +30,30 @@ public class UserController {
                 .build();
     }
 
-    @GetMapping("/{username}")
-    public ApiResponse<UserResponse> getUser(@PathVariable String username) {
+    @GetMapping(value = "/{username}")
+    public ApiResponse<UserResponse> getUser(
+            @PathVariable("username") String username
+    ) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.getUserByUsername(username))
                 .build();
     }
 
-    @PutMapping("/{username}")
-    public ApiResponse<UserResponse> updateUserByUsername(@PathVariable String username, @RequestBody @Valid UserUpdateRequest request) {
+    @PutMapping(value = "/{username}")
+    public ApiResponse<UserResponse> updateUserByUsername(
+            @PathVariable("username") String username,
+            @RequestBody @Valid UserUpdateRequest request
+    ) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.updateUserByUsername(username, request))
                 .build();
     }
 
-    @DeleteMapping("/{username}")
-    public ApiResponse<String> deleteUser(@PathVariable String username) {
+    @DeleteMapping(value = "/{username}")
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
+    public ApiResponse<String> deleteUser(
+            @PathVariable("username") String username
+    ) {
         return ApiResponse.<String>builder()
                 .result(userService.deleteByUsername(username))
                 .build();

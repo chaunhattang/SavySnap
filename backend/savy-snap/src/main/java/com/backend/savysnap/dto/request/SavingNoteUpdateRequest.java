@@ -14,5 +14,5 @@ public class SavingNoteUpdateRequest {
     Long amount;
     PaymentCategoryEnum category;
     String description;
-    String imageUrl;
+//    String imageUrl;
 }
