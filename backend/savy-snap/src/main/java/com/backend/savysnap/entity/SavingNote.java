@@ -24,7 +24,7 @@ public class SavingNote {
     PaymentCategoryEnum category;
     String description;
     @Lob
-    @Column(name = "image_url", columnDefinition = "LONGTEXT")
+    @Column(columnDefinition = "TEXT")
     String imageUrl;
     LocalDateTime createdAt;
 
