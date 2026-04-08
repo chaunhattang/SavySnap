@@ -10,8 +10,6 @@ import com.backend.savysnap.exception.ErrorCode;
 import com.backend.savysnap.mapper.SavingNoteMapper;
 import com.backend.savysnap.repository.SavingNoteRepository;
 import com.backend.savysnap.repository.UserRepository;
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -20,9 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -33,19 +29,7 @@ public class SavingNoteService {
     UserRepository userRepository;
     SavingNoteRepository savingNoteRepository;
     SavingNoteMapper savingNoteMapper;
-    Cloudinary cloudinary;
-
-    private String uploadImageToCloudinary(MultipartFile file) {
-        if (file == null || file.isEmpty()) {
-            return null;
-        }
-        try {
-            Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-            return uploadResult.get("secure_url").toString();
-        } catch (IOException e) {
-            throw new AppException(ErrorCode.ERROR_UPLOAD_IMAGE);
-        }
-    }
+    CloudinaryService cloudinaryService;
 
     public SavingNoteResponse createSavingNote(SavingNoteCreateRequest request, MultipartFile file) {
         var context = SecurityContextHolder.getContext();
@@ -58,7 +42,7 @@ public class SavingNoteService {
         SavingNote savingNote = savingNoteMapper.toSavingNote(request);
         savingNote.setUser(user);
 
-        String imageUrl = uploadImageToCloudinary(file);
+        String imageUrl = cloudinaryService.uploadImage(file);
         if (imageUrl != null) {
             savingNote.setImageUrl(imageUrl);
         }
@@ -113,7 +97,7 @@ public class SavingNoteService {
 
         savingNoteMapper.updateSavingNote(savingNote, request);
 
-        String imageUrl = uploadImageToCloudinary(file);
+        String imageUrl = cloudinaryService.uploadImage(file);
         if (imageUrl != null) {
             savingNote.setImageUrl(imageUrl);
         }

@@ -14,6 +14,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Set;
@@ -26,7 +27,9 @@ import java.util.stream.Collectors;
 public class UserService {
     UserRepository userRepository;
     UserMapper userMapper;
+    CloudinaryService cloudinaryService;
     PasswordEncoder passwordEncoder;
+
 
     public UserResponse createUser(UserCreateRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
@@ -44,13 +47,18 @@ public class UserService {
                 .map(userMapper::toUserResponse).collect(Collectors.toList());
     }
 
-    public UserResponse updateUserByUsername(String username, UserUpdateRequest request) {
+    public UserResponse updateUserByUsername(String username, UserUpdateRequest request, MultipartFile file) {
         User user = userRepository.findByUsername(username).orElseThrow(()
                 -> new AppException(ErrorCode.USER_NOT_FOUND)
         );
 
         userMapper.updateUser(user, request);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        String imageUrl = cloudinaryService.uploadImage(file);
+        if (imageUrl != null) {
+            user.setImageUrl(imageUrl);
+        }
 
         return userMapper.toUserResponse(userRepository.save(user));
     }
@@ -59,7 +67,7 @@ public class UserService {
         User user = userRepository.findByUsername(username).orElseThrow(()
                 -> new AppException(ErrorCode.USER_NOT_FOUND)
         );
-        return userMapper.toUserResponse(userRepository.save(user));
+        return userMapper.toUserResponse(user);
     }
 
     public String deleteByUsername(String username) {

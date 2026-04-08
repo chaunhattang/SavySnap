@@ -40,10 +40,20 @@ public class AuthenticationService {
     protected long VALID_DURATION;
 
 
+    private User getUser(AuthenticationRequest request) {
+        if (userRepository.existsByUsername(request.getAccountName())) {
+            return userRepository.findByUsername(request.getAccountName()).orElse(null);
+        }
+        if (userRepository.existsByEmail(request.getAccountName())) {
+            return userRepository.findByEmail(request.getAccountName()).orElse(null);
+        }
+        return null;
+    }
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        User user = userRepository.findByEmail(request.getEmail()).orElseThrow(()
-                -> new AppException(ErrorCode.USER_NOT_FOUND)
-        );
+        User user = getUser(request);
+        if (user == null) {
+            throw new AppException(ErrorCode.USER_NOT_FOUND);
+        }
 
         boolean passwordMatch = passwordEncoder.matches(request.getPassword(), user.getPassword());
         if (!passwordMatch) {

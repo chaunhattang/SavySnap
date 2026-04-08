@@ -4,13 +4,14 @@ import com.backend.savysnap.dto.request.UserUpdateRequest;
 import com.backend.savysnap.dto.response.ApiResponse;
 import com.backend.savysnap.dto.response.UserResponse;
 import com.backend.savysnap.service.UserService;
-import jakarta.validation.Valid;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -39,13 +40,14 @@ public class UserController {
                 .build();
     }
 
-    @PutMapping(value = "/{username}")
+    @PutMapping(value = "/{username}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ApiResponse<UserResponse> updateUserByUsername(
             @PathVariable("username") String username,
-            @RequestBody @Valid UserUpdateRequest request
+            @ModelAttribute UserUpdateRequest request,
+            @RequestParam(value = "file", required = false) MultipartFile file
     ) {
         return ApiResponse.<UserResponse>builder()
-                .result(userService.updateUserByUsername(username, request))
+                .result(userService.updateUserByUsername(username, request, file))
                 .build();
     }
 

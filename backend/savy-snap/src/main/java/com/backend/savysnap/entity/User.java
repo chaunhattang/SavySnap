@@ -28,6 +28,9 @@ public class User {
     @Builder.Default
     Long totalPayment = 0L;
 
+    @Column(columnDefinition = "TEXT")
+    String imageUrl;
+    
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     List<SavingNote> savingNotes;
 

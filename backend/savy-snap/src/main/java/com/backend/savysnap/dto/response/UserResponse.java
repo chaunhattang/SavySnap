@@ -15,5 +15,6 @@ public class UserResponse {
     String username;
     String email;
     Long totalPayment;
+    String imageUrl;
     List<SavingNoteResponse> savingNotes;
 }
