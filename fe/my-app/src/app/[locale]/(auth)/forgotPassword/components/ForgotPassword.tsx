@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Typography } from 'antd';
 import { MailOutlined, ArrowRightOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import styles from '@/app/[locale]/(auth)/forgotPassword/styles/forgotPassword.module.css';
-import Link from 'next/link';
+import { Link } from '@/locales/routing';
 import { useTranslations } from 'next-intl';
 
 const ForgotPassword: React.FC<any> = () => {

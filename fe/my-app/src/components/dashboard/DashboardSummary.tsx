@@ -1,7 +1,7 @@
 'use client';
 
 import { Row, Col, Card } from 'antd';
-import { useSnaps } from '@/lib/hook/useSnaps';
+import { useSnaps } from '@/hooks/useSnaps';
 import { useMemo } from 'react';
 export default function DashboardSummary() {
     const { snaps } = useSnaps();

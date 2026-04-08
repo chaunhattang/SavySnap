@@ -1,5 +1,5 @@
-import axiosClient from './axios';
-import { Snap, CreateSnapDto, UpdateSnapDto } from '../../types/snap';
+import axiosClient from '@/services/apis/axiosClient';
+import { Snap, CreateSnapDto, UpdateSnapDto } from '@/types/snap.td';
 
 export const snapService = {
     getAll: async (): Promise<Snap[]> => {

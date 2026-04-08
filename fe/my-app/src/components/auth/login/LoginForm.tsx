@@ -5,13 +5,14 @@ import {
     MailOutlined,
     LockOutlined,
     ArrowRightOutlined,
-    UserOutlined,
     GoogleOutlined,
     GithubOutlined,
+    UserOutlined,
 } from '@ant-design/icons';
 import styles from '@/app/[locale]/(auth)/login/styles/login.module.css';
-import Link from 'next/link';
+import { Link } from '@/locales/routing';
 import { useTranslations } from 'next-intl';
+import axios from 'axios';
 
 const LoginForm: React.FC<any> = () => {
     const t = useTranslations('auth.login');
@@ -22,6 +23,8 @@ const LoginForm: React.FC<any> = () => {
         try {
             console.log('Success:', values);
             await new Promise((resolve) => setTimeout(resolve, 1500));
+            const res = await axios.post('http://localhost:8080/api/auth/login', values);
+            console.log(res.data);
         } catch (error) {
             console.error('Lỗi đăng nhập:', error);
         } finally {
@@ -69,7 +72,7 @@ const LoginForm: React.FC<any> = () => {
                             <Typography.Text className={styles.inputLabel}>
                                 {t('passwordLabel')}
                             </Typography.Text>
-                            <Link href="/forgotPassword" className={styles.forgotLink}>
+                            <Link href="/forgot-password" className={styles.forgotLink}>
                                 <Typography.Text style={{ color: 'inherit', fontSize: 'inherit' }}>
                                     {t('forgotPassword')}
                                 </Typography.Text>

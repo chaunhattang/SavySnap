@@ -1,8 +1,7 @@
-import React from 'react';
-import styles from '@/app/[locale]/(auth)/register/styles/register.module.css';
+import styles from '@/components/auth/register/register.module.css';
 import { Row, Col } from 'antd';
-import RegisterCard from '@/app/[locale]/(auth)/register/_components/RegisterCard';
-import RegisterForm from '@/app/[locale]/(auth)/register/_components/RegisterForm';
+import RegisterCard from '@/components/auth/register/RegisterCard';
+import RegisterForm from '@/components/auth/register/RegisterForm';
 
 const RegisterPage = () => {
     return (
