@@ -100,5 +100,57 @@
             "term3Content": "Bạn chịu trách nhiệm bảo vệ thông tin tài khoản và đăng nhập của mình, không lạm dụng ứng dụng cho các mục đích sai trái.",
             "backToRegister": "Quay lại trang Đăng ký"
         }
+    },
+
+    "snap": {
+        "create": {
+            "title": "Chụp khoảnh khắc",
+            "uploadTitle": "Tải ảnh hóa đơn hoặc món đồ",
+            "uploadHint": "JPG, PNG LÊN ĐẾN 5MB",
+
+            "noteLabel": "TIÊU ĐỀ GHI CHÚ",
+            "notePlaceholder": "VD: Cà phê sáng, Giày mới...",
+
+            "amountLabel": "SỐ TIỀN",
+            "amountPlaceholder": "Số tiền...",
+
+            "categoryLabel": "DANH MỤC",
+
+            "category": {
+                "need": "Thiết yếu",
+                "want": "Ăn uống",
+                "saving": "Giải trí"
+            },
+
+            "submit": "Xác nhận lưu Snap"
+        },
+        "update": {
+            "title": "Cập nhật Snap",
+
+            "uploadTitle": "Tải ảnh hóa đơn hoặc món đồ",
+            "uploadHint": "JPG, PNG LÊN ĐẾN 5MB",
+
+            "noteLabel": "TIÊU ĐỀ GHI CHÚ",
+            "notePlaceholder": "VD: Cà phê sáng, Giày mới...",
+
+            "amountLabel": "SỐ TIỀN",
+            "amountPlaceholder": "Số tiền...",
+
+            "categoryLabel": "DANH MỤC",
+
+            "category": {
+                "need": "Thiết yếu",
+                "want": "Ăn uống",
+                "saving": "Giải trí"
+            },
+
+            "submit": "Cập nhật Snap"
+        },
+        "category": {
+            "all": "Tất cả",
+            "need": "Thiết yếu",
+            "want": "Ăn uống",
+            "saving": "Giải trí"
+        }
     }
 }

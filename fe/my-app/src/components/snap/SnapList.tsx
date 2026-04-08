@@ -17,7 +17,9 @@ export default function SnapList() {
     if (loading) return <Spin />;
 
     const filteredSnaps =
-        category === 'all' ? snaps : snaps.filter((snap) => snap.category === category);
+        category === 'all'
+            ? snaps
+            : snaps.filter((snap) => snap.category.toUpperCase() === category.toUpperCase());
 
     return (
         <>

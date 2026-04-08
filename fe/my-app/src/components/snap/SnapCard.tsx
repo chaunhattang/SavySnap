@@ -5,13 +5,16 @@ import UpdateSnapModal from './UpdateSnapModal';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import styles from './SnapCard.module.css';
+import { useTranslations } from 'next-intl';
 export default function SnapCard({ snap }: any) {
+    const t = useTranslations('snap.create');
     const [open, setOpen] = useState(false);
     const { handleDelete } = useDeleteSnap();
+
     const categoryMap: Record<string, string> = {
-        NEED: 'An uống',
-        WANT: 'Muon',
-        SAVING: 'luu',
+        NEED: t('category.need'),
+        WANT: t('category.want'),
+        SAVING: t('category.saving'),
     };
     return (
         <>

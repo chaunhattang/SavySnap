@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { message, Upload } from 'antd';
 import { RcFile } from 'antd/es/upload';
 import { snapService } from '@/services/apis/snap.service';
+
 export function useCreateSnap(onClose?: () => void) {
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState<number | null>(null);
@@ -22,42 +23,50 @@ export function useCreateSnap(onClose?: () => void) {
             return Upload.LIST_IGNORE;
         }
         setFile(file);
-        return false;
+        return false; // Trả về false để ngăn Ant Design tự động upload
     };
+
+    // Mở rộng map để xử lý được cả tiếng Việt (từ giao diện) và tiếng Anh
     const categoryMap: Record<string, string> = {
+        'Thiết yếu': 'NEED',
+        'Không thiết yếu': 'WANT',
+        'Tiết kiệm': 'SAVING',
         NEED: 'NEED',
         WANT: 'WANT',
         SAVING: 'SAVING',
     };
-    // Hàm chuyển đổi File sang Base64
-    const convertBase64 = (file: File): Promise<string> => {
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(file); // Đọc file dưới dạng Data URL (Base64)
-            fileReader.onload = () => resolve(fileReader.result as string);
-            fileReader.onerror = (error) => reject(error);
-        });
-    };
 
     const handleSubmit = async () => {
         if (!title || !amount || !file) {
-            message.error('Vui lòng nhập tiêu đề và số tiền');
+            message.error('Vui lòng nhập tiêu đề, số tiền và chọn ảnh');
             return;
         }
-        // Xử lý chuyển đổi trước khi gọi API
-        let base64Image = await convertBase64(file);
 
         try {
             setLoading(true);
 
-            await snapService.create({
-                title,
-                amount,
-                category: categoryMap[category],
-                description: title,
-                imageUrl: base64Image, // Gửi chuỗi dài ngoằng này lên (thay vì file.name)
-            });
+            // 1. Khởi tạo hộp FormData thay vì JSON Object
+            const formData = new FormData();
 
+            // 2. Nạp dữ liệu vào FormData (chuyển số thành chuỗi)
+            formData.append('title', title);
+            formData.append('amount', amount.toString());
+
+            // Lấy đúng giá trị Enum cho Backend, default về NEED nếu không map được
+            const mappedCategory = categoryMap[category] || 'NEED';
+            formData.append('category', mappedCategory);
+
+            formData.append('description', title); // Bạn đang dùng title làm description
+
+            // 3. Nạp file trực tiếp
+            formData.append('file', file);
+
+            // 4. Gửi FormData qua Service
+            await snapService.create(formData);
+
+            console.log(Object.fromEntries(formData));
+
+            // Cập nhật lại UI sau khi thành công
             window.dispatchEvent(new Event('snap-updated'));
 
             setTitle('');
@@ -69,7 +78,7 @@ export function useCreateSnap(onClose?: () => void) {
             message.success('Lưu Snap thành công');
         } catch (err) {
             console.error(err);
-            message.error('Tạo Snap thất bại');
+            message.error('Tạo Snap thất bại. Vui lòng kiểm tra lại!');
         } finally {
             setLoading(false);
         }
