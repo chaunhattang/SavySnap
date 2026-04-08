@@ -140,7 +140,9 @@
                 "saving": "Entertainment"
             },
 
-            "submit": "Update Snap"
+            "submit": "Update Snap",
+            "edit": "Edit",
+            "delete": "Delete"
         },
         "category": {
             "all": "All",
@@ -148,5 +150,15 @@
             "want": "Food & Drink",
             "saving": "Entertainment"
         }
+    },
+    "dashboard": {
+        "totalFee": "Total Expense"
+    },
+    "headerBar": {
+        "placeholder": "Search notes",
+        "addNew": "Add New"
+    },
+    "sideBar": {
+        "SignIn": "Sign in"
     }
 }

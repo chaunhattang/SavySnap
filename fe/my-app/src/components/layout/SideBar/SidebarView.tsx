@@ -15,6 +15,7 @@ import {
 import { Avatar, Layout, Menu, Tooltip, Dropdown, Modal, Form, Input, Button } from 'antd';
 
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 const { Sider } = Layout;
 
@@ -62,6 +63,8 @@ export default function SidebarView({ loggedIn, email, onLogout }: Props) {
         },
     ];
 
+    const t = useTranslations('sideBar');
+
     return (
         <Sider width={100} breakpoint="lg" collapsedWidth={90} className={styles.sidebar}>
             {/* USER AREA */}
@@ -103,14 +106,15 @@ export default function SidebarView({ loggedIn, email, onLogout }: Props) {
                     </>
                 ) : (
                     <Link href="/login">
-                        <Avatar
-                            size={64}
-                            icon={<UserOutlined />}
+                        <Button
                             style={{
                                 cursor: 'pointer',
-                                backgroundColor: '#d9d9d9',
+                                backgroundColor: 'darkgray',
                             }}
-                        />
+                            className={styles.logout}
+                        >
+                            {t('SignIn')}
+                        </Button>
                     </Link>
                 )}
             </div>
