@@ -42,7 +42,7 @@ axiosClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) 
 axiosClient.interceptors.response.use(
     (res) => {
         if (res.data && res.status >= 200 && res.status < 300) {
-            return res.data.data;
+            return res.data.result;
         } else {
             return Promise.reject(res.data);
         }

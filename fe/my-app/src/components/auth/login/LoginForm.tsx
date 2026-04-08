@@ -12,18 +12,33 @@ import styles from './login.module.css';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const LoginForm: React.FC<any> = () => {
     const t = useTranslations('auth.login');
     const [loading, setLoading] = useState(false);
 
+    const router = useRouter();
+
     const onFinish = async (values: any) => {
         setLoading(true);
+
         try {
             console.log('Success:', values);
-            await new Promise((resolve) => setTimeout(resolve, 1500));
             const res = await axios.post('http://localhost:8080/api/auth/login', values);
+
             console.log(res.data);
+
+            const token = res.data?.result?.token;
+
+            if (token) {
+                localStorage.setItem('accessToken', token);
+                localStorage.setItem('email', values.email);
+
+                console.log('Login success');
+
+                router.push('/');
+            }
         } catch (error) {
             console.error('Lỗi đăng nhập:', error);
         } finally {

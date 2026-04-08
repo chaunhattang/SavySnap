@@ -78,20 +78,16 @@ export default function CreateSnapModal({ open, onClose }: any) {
                         }}
                         options={[
                             {
-                                value: 'Thiết yếu',
+                                value: 'NEED',
                                 label: 'Thiết yếu',
                             },
                             {
-                                value: 'Ăn uống',
+                                value: 'WANT',
                                 label: 'Ăn uống',
                             },
                             {
-                                value: 'Giải trí',
+                                value: 'SAVING',
                                 label: 'Giải trí',
-                            },
-                            {
-                                value: 'Mua sắm',
-                                label: 'Mua sắm',
                             },
                         ]}
                     />

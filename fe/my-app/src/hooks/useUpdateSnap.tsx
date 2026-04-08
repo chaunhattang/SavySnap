@@ -64,6 +64,12 @@ export function useUpdateSnap(snap: any, onClose?: () => void) {
 
         return false;
     };
+    const categoryMap: Record<string, string> = {
+        'Thiết yếu': 'NEED',
+        'Ăn uống': 'WANT',
+        'Giải trí': 'WANT',
+        'Mua sắm': 'WANT',
+    };
 
     const handleUpdate = async () => {
         try {
@@ -81,12 +87,11 @@ export function useUpdateSnap(snap: any, onClose?: () => void) {
             }
 
             await snapService.update({
-                id: snap.id,
                 title,
                 amount,
-                type: snap.type,
-                category,
-                image: imageUrl,
+                category: categoryMap[category],
+                description: title,
+                imageUrl: file?.name ?? '',
             });
 
             message.success('Cập nhật thành công');

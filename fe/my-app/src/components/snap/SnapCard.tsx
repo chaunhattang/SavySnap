@@ -8,7 +8,11 @@ import styles from './SnapCard.module.css';
 export default function SnapCard({ snap }: any) {
     const [open, setOpen] = useState(false);
     const { handleDelete } = useDeleteSnap();
-
+    const categoryMap: Record<string, string> = {
+        NEED: 'An uống',
+        WANT: 'Muon',
+        SAVING: 'luu',
+    };
     return (
         <>
             <Card
@@ -28,11 +32,11 @@ export default function SnapCard({ snap }: any) {
             >
                 <div className={styles.containerImg}>
                     {/* IMAGE */}
-                    <img src={snap.image} alt={snap.title} className={styles.img} />
+                    <img src={snap.imageUrl} alt={snap.title} className={styles.img} />
 
                     {/* BADGE */}
                     <Tag color="orange" className={styles.category}>
-                        {snap.category}
+                        {categoryMap[snap.category]}
                     </Tag>
 
                     {/* GRADIENT OVERLAY */}
