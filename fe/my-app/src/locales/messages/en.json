@@ -40,6 +40,7 @@
             "subHeaderText": "Please login to continue managing your Snaps."
         },
         "register": {
+            "agreement": "I argee",
             "brandName": "SavySnap",
             "bannerTitle": "Build a strong financial future.",
             "bannerSubtitle": "Join over 10,000 smart savers today.",

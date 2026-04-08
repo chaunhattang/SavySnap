@@ -9,6 +9,7 @@ export function useCreateSnap(onClose?: () => void) {
     const [category, setCategory] = useState('Thiết yếu');
     const [file, setFile] = useState<RcFile | null>(null);
     const [loading, setLoading] = useState(false);
+
     const beforeUpload = (file: RcFile) => {
         const isImage = file.type === 'image/jpeg' || file.type === 'image/png';
         if (!isImage) {
@@ -23,21 +24,52 @@ export function useCreateSnap(onClose?: () => void) {
         setFile(file);
         return false;
     };
+    const categoryMap: Record<string, string> = {
+        NEED: 'NEED',
+        WANT: 'WANT',
+        SAVING: 'SAVING',
+    };
+    // Hàm chuyển đổi File sang Base64
+    const convertBase64 = (file: File): Promise<string> => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file); // Đọc file dưới dạng Data URL (Base64)
+            fileReader.onload = () => resolve(fileReader.result as string);
+            fileReader.onerror = (error) => reject(error);
+        });
+    };
+
     const handleSubmit = async () => {
+        if (!title || !amount || !file) {
+            message.error('Vui lòng nhập tiêu đề và số tiền');
+            return;
+        }
+        // Xử lý chuyển đổi trước khi gọi API
+        let base64Image = await convertBase64(file);
+
         try {
             setLoading(true);
-            let imageUrl = '';
-            if (file) {
-                imageUrl = URL.createObjectURL(file);
-            }
-            await snapService.create({ title, amount, type: 'income', category, image: imageUrl });
+
+            await snapService.create({
+                title,
+                amount,
+                category: categoryMap[category],
+                description: title,
+                imageUrl: base64Image, // Gửi chuỗi dài ngoằng này lên (thay vì file.name)
+            });
+
             window.dispatchEvent(new Event('snap-updated'));
+
             setTitle('');
             setAmount(null);
             setFile(null);
+
             onClose?.();
+
+            message.success('Lưu Snap thành công');
         } catch (err) {
             console.error(err);
+            message.error('Tạo Snap thất bại');
         } finally {
             setLoading(false);
         }

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, Divider, Row, Col, Flex, Typography } from 'antd';
 import {
     MailOutlined,
@@ -7,24 +7,51 @@ import {
     ArrowRightOutlined,
     GoogleOutlined,
     GithubOutlined,
-    UserOutlined,
 } from '@ant-design/icons';
-import styles from '@/app/[locale]/(auth)/login/styles/login.module.css';
-import { Link } from '@/locales/routing';
+import styles from './login.module.css';
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const LoginForm: React.FC<any> = () => {
     const t = useTranslations('auth.login');
     const [loading, setLoading] = useState(false);
 
+    const router = useRouter();
+    const [form] = Form.useForm();
+
+    useEffect(() => {
+        const email = localStorage.getItem('registeredEmail');
+        const password = localStorage.getItem('registeredPassword');
+
+        if (email && password) {
+            form.setFieldsValue({
+                email: email,
+                password: password,
+            });
+        }
+    }, []);
+
     const onFinish = async (values: any) => {
         setLoading(true);
+
         try {
             console.log('Success:', values);
-            await new Promise((resolve) => setTimeout(resolve, 1500));
-            const res = await axios.post('http://localhost:8080/api/auth/login', values);
+            const res = await axios.post('http://10.60.250.222:8080/api/auth/login', values);
+
             console.log(res.data);
+
+            const token = res.data?.result?.token;
+
+            if (token) {
+                localStorage.setItem('accessToken', token);
+                localStorage.setItem('email', values.email);
+
+                console.log('Login success');
+
+                router.push('/');
+            }
         } catch (error) {
             console.error('Lỗi đăng nhập:', error);
         } finally {
@@ -38,30 +65,45 @@ const LoginForm: React.FC<any> = () => {
                 <h3 className={styles.headerText}>{t('headerText')}</h3>
                 <p className={styles.subHeaderText}>{t('subHeaderText')}</p>
             </div>
-            <Form name="login" layout="vertical" onFinish={onFinish} requiredMark={false}>
+            <Form
+                form={form}
+                name="login"
+                layout="vertical"
+                onFinish={onFinish}
+                requiredMark={false}
+            >
                 <Form.Item
                     label={
                         <Typography.Text className={styles.inputLabel}>
-                            {t('usernameLabel')}
+                            {t('emailLabel')}
                         </Typography.Text>
                     }
-                    name="username"
+                    name="email"
                     rules={[
                         {
                             required: true,
                             message: (
                                 <Typography.Text style={{ color: 'inherit' }}>
-                                    {t('usernameRequired')}
+                                    {t('emailRequired')}
+                                </Typography.Text>
+                            ),
+                        },
+                        {
+                            type: 'email',
+                            message: (
+                                <Typography.Text style={{ color: 'inherit' }}>
+                                    {t('emailInvalid')}
                                 </Typography.Text>
                             ),
                         },
                     ]}
                 >
                     <Input
-                        prefix={<UserOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
-                        placeholder={t('usernamePlaceholder')}
+                        prefix={<MailOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
+                        placeholder={t('emailPlaceholder')}
                         variant="filled"
                         className={styles.customInput}
+                        autoComplete="email"
                     />
                 </Form.Item>
 
@@ -73,7 +115,7 @@ const LoginForm: React.FC<any> = () => {
                                 {t('passwordLabel')}
                             </Typography.Text>
                             <Link href="/forgot-password" className={styles.forgotLink}>
-                                <Typography.Text style={{ color: 'inherit', fontSize: 'inherit' }}>
+                                <Typography.Text style={{ color: 'inherit' }}>
                                     {t('forgotPassword')}
                                 </Typography.Text>
                             </Link>

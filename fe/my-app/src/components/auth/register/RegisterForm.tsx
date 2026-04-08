@@ -3,22 +3,27 @@ import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input, Typography } from 'antd';
 import { useTranslations } from 'next-intl';
 import { MailOutlined, LockOutlined, ArrowRightOutlined, UserOutlined } from '@ant-design/icons';
-import styles from '@/app/[locale]/(auth)/register/styles/register.module.css';
-import { Link } from '@/locales/routing';
+import styles from './register.module.css';
+import Link from 'next/link';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const RegisterForm: React.FC = () => {
     const [form] = Form.useForm();
     const t = useTranslations('auth.register');
     const [loading, setLoading] = useState(false);
-
+    const router = useRouter();
     const onFinish = async (values: any) => {
         setLoading(true);
         try {
             console.log('Received values of form: ', values);
             await new Promise((resolve) => setTimeout(resolve, 1500));
-            await axios.post('http://localhost:8000/api/auth/register', values);
+            await axios.post('http://10.60.250.222:8080/api/auth/register', values);
+            console.log(values);
             console.log('Register success');
+            localStorage.setItem('registeredEmail', values.email);
+            localStorage.setItem('registeredPassword', values.password);
+            router.push('/login');
         } catch (error) {
             console.error(error);
         } finally {
@@ -60,6 +65,7 @@ const RegisterForm: React.FC = () => {
                 >
                     <Input
                         prefix={<UserOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
+                        autoComplete="username"
                         placeholder={t('usernamePlaceholder')}
                         variant="filled"
                         className={styles.customInput}
@@ -125,6 +131,25 @@ const RegisterForm: React.FC = () => {
                         variant="filled"
                         className={styles.customInput}
                     />
+                </Form.Item>
+
+                <Form.Item
+                    name="agreement"
+                    valuePropName="checked"
+                    rules={[
+                        {
+                            validator: (_, value) =>
+                                value
+                                    ? Promise.resolve()
+                                    : Promise.reject(new Error(t('agreementRequired'))),
+                        },
+                    ]}
+                >
+                    <Checkbox>
+                        <Typography.Text style={{ color: 'inherit' }}>
+                            {t('agreement')}
+                        </Typography.Text>
+                    </Checkbox>
                 </Form.Item>
 
                 <Form.Item style={{ marginBottom: 0, marginTop: 16 }}>
