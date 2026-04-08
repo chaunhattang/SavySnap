@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 public class SavingNote {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "note_id")
     String id;
     String title;
     Long amount;

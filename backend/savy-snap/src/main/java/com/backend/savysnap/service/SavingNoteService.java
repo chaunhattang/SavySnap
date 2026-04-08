@@ -83,7 +83,11 @@ public class SavingNoteService {
         return savingNoteMapper.toSavingNoteResponse(savingNote);
     }
 
-    public SavingNoteResponse updateSavingNote(String idSavingNote, SavingNoteUpdateRequest request, MultipartFile file) {
+    public SavingNoteResponse updateSavingNote(
+            String idSavingNote,
+            SavingNoteUpdateRequest request,
+            MultipartFile file
+    ) {
         SavingNote savingNote = savingNoteRepository.findById(idSavingNote)
                 .orElseThrow(() -> new AppException(ErrorCode.SAVING_NOTE_NOT_FOUND));
 
