@@ -1,13 +1,20 @@
 'use client';
 
 import { InboxOutlined } from '@ant-design/icons';
-import { Button, Input, InputNumber, Modal, Select } from 'antd';
+import { Button, Input, InputNumber, Modal, Select, Typography } from 'antd';
+
 import Dragger from 'antd/es/upload/Dragger';
 
 import styles from './CreateSnapModal.module.css';
 import { useCreateSnap } from '@/hooks/useCreateSnap';
 
+import { useTranslations } from 'next-intl';
+
+const { Text } = Typography;
+
 export default function CreateSnapModal({ open, onClose }: any) {
+    const t = useTranslations('snap.create');
+
     const {
         title,
         setTitle,
@@ -21,8 +28,9 @@ export default function CreateSnapModal({ open, onClose }: any) {
     } = useCreateSnap(onClose);
 
     return (
-        <Modal open={open} footer={null} onCancel={onClose} title="Chụp khoảnh khắc" width={420}>
+        <Modal open={open} footer={null} onCancel={onClose} title={t('title')} width={420}>
             {/* Upload box */}
+
             <Dragger
                 beforeUpload={beforeUpload}
                 maxCount={1}
@@ -33,17 +41,22 @@ export default function CreateSnapModal({ open, onClose }: any) {
                     <InboxOutlined style={{ fontSize: 32 }} className={styles.icon} />
                 </p>
 
-                <p style={{ fontWeight: 500 }}>Tải ảnh hóa đơn hoặc món đồ</p>
+                <Text strong>{t('uploadTitle')}</Text>
 
-                <p style={{ fontSize: 12, color: '#999' }}>JPG, PNG LÊN ĐẾN 5MB</p>
+                <br />
+
+                <Text type="secondary" style={{ fontSize: 12 }}>
+                    {t('uploadHint')}
+                </Text>
             </Dragger>
 
             {/* Title */}
+
             <div className={styles.section}>
-                <label className={styles.label}>TIÊU ĐỀ GHI CHÚ</label>
+                <Text className={styles.label}>{t('noteLabel')}</Text>
 
                 <Input
-                    placeholder="VD: Cà phê sáng, Giày mới..."
+                    placeholder={t('notePlaceholder')}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     size="large"
@@ -52,13 +65,14 @@ export default function CreateSnapModal({ open, onClose }: any) {
             </div>
 
             {/* Amount + Category */}
+
             <div className={styles.grid}>
                 <div>
-                    <label className={styles.label}>$ SỐ TIỀN</label>
+                    <Text className={styles.label}>{t('amountLabel')}</Text>
 
                     <InputNumber
                         className={styles.inputNumber}
-                        placeholder="Số tiền..."
+                        placeholder={t('amountPlaceholder')}
                         value={amount}
                         onChange={(v) => setAmount(v)}
                         size="large"
@@ -66,7 +80,7 @@ export default function CreateSnapModal({ open, onClose }: any) {
                 </div>
 
                 <div>
-                    <label className={styles.label}>DANH MỤC</label>
+                    <Text className={styles.label}>{t('categoryLabel')}</Text>
 
                     <Select
                         value={category}
@@ -79,15 +93,15 @@ export default function CreateSnapModal({ open, onClose }: any) {
                         options={[
                             {
                                 value: 'NEED',
-                                label: 'Thiết yếu',
+                                label: t('category.need'),
                             },
                             {
                                 value: 'WANT',
-                                label: 'Ăn uống',
+                                label: t('category.want'),
                             },
                             {
                                 value: 'SAVING',
-                                label: 'Giải trí',
+                                label: t('category.saving'),
                             },
                         ]}
                     />
@@ -95,6 +109,7 @@ export default function CreateSnapModal({ open, onClose }: any) {
             </div>
 
             {/* Button */}
+
             <Button
                 color="green"
                 type="primary"
@@ -104,7 +119,7 @@ export default function CreateSnapModal({ open, onClose }: any) {
                 size="large"
                 className={styles.submitButton}
             >
-                Xác nhận lưu Snap
+                {t('submit')}
             </Button>
         </Modal>
     );

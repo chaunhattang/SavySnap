@@ -20,14 +20,8 @@
 }
 
 .brand {
-    font-size: 20px;
+    font-size: 35px;
     font-weight: 700;
-}
-
-.subtitle {
-    font-size: 12px;
-    color: var(--title);
-    letter-spacing: 1px;
 }
 
 /* RIGHT */

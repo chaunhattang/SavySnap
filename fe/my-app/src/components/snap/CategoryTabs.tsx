@@ -1,14 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import styles from './CategoryTabs.module.css';
-
-const CATEGORIES = [
-    { label: 'Tất cả', value: 'all' },
-    { label: 'Thiết yếu', value: 'Thiết yếu' },
-    { label: 'Ăn uống', value: 'Ăn uống' },
-    { label: 'Giải trí', value: 'Giải trí' },
-    { label: 'Mua sắm', value: 'Mua sắm' },
-];
 
 export default function CategoryTabs({
     selected,
@@ -17,6 +10,27 @@ export default function CategoryTabs({
     selected: string;
     onChange: (value: string) => void;
 }) {
+    const t = useTranslations('snap.category');
+
+    const CATEGORIES = [
+        {
+            label: t('all'),
+            value: 'all',
+        },
+        {
+            label: t('need'),
+            value: 'NEED',
+        },
+        {
+            label: t('want'),
+            value: 'WANT',
+        },
+        {
+            label: t('saving'),
+            value: 'SAVING',
+        },
+    ];
+
     return (
         <div className={styles.container}>
             {CATEGORIES.map((item) => (

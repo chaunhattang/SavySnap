@@ -69,3 +69,20 @@
     border-radius: 14px;
     box-shadow: var(--btn_boxShadow);
 }
+.logout {
+    padding: 20px 9px;
+    background-color: var(--btn_background) !important;
+    box-shadow: var(--btn_boxShadow);
+    border-radius: 12px;
+    font-weight: 600;
+
+    color: white;
+    transition: all 0.2s ease;
+}
+.logout:hover {
+    transform: scale(0.93);
+    border-color: transparent !important;
+    color: white !important;
+    background-color: rgb(4 120 87) !important;
+    box-shadow: var(--btn_boxShadow);
+}

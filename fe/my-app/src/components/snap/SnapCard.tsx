@@ -5,27 +5,32 @@ import UpdateSnapModal from './UpdateSnapModal';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import styles from './SnapCard.module.css';
+import { useTranslations } from 'next-intl';
 export default function SnapCard({ snap }: any) {
     const [open, setOpen] = useState(false);
     const { handleDelete } = useDeleteSnap();
+
+    const t = useTranslations('snap.update');
+
     const categoryMap: Record<string, string> = {
-        NEED: 'An uống',
-        WANT: 'Muon',
-        SAVING: 'luu',
+        NEED: t('category.need'),
+        WANT: t('category.want'),
+        SAVING: t('category.saving'),
     };
+
     return (
         <>
             <Card
                 className={styles.card}
                 title={
                     <Button type="text" onClick={() => setOpen(true)}>
-                        Edit
+                        {t('edit')}
                     </Button>
                 }
                 extra={
                     <Popconfirm title="Delete?" onConfirm={() => handleDelete(snap.id)}>
                         <Button danger type="text">
-                            delete
+                            {t('delete')}
                         </Button>
                     </Popconfirm>
                 }
