@@ -13,6 +13,7 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { AuthService } from '@/services/apis/AuthService';
 
 const LoginForm: React.FC<any> = () => {
     const t = useTranslations('auth.login');
@@ -33,12 +34,24 @@ const LoginForm: React.FC<any> = () => {
         }
     }, []);
 
+    const handleLogin = async () => {
+        try {
+            await AuthService.Login();
+        } catch {}
+    };
+
     const onFinish = async (values: any) => {
         setLoading(true);
 
         try {
+            const port = process.env.NEXT_PUBLIC_API_BASE_URL + '/auth/login';
             console.log('Success:', values);
-            const res = await axios.post('http://10.60.250.222:8080/api/auth/login', values);
+            console.log(port);
+            const res = await axios.post(port, values);
+
+            // const info = await axios.get('http://10.60.250.222:8080/api/users');
+
+            // console.log(info.data);
 
             console.log(res.data);
 
@@ -46,7 +59,6 @@ const LoginForm: React.FC<any> = () => {
 
             if (token) {
                 localStorage.setItem('accessToken', token);
-                localStorage.setItem('email', values.email);
 
                 console.log('Login success');
 
@@ -78,7 +90,7 @@ const LoginForm: React.FC<any> = () => {
                             {t('emailLabel')}
                         </Typography.Text>
                     }
-                    name="email"
+                    name="accountName"
                     rules={[
                         {
                             required: true,
@@ -89,7 +101,7 @@ const LoginForm: React.FC<any> = () => {
                             ),
                         },
                         {
-                            type: 'email',
+                            type: 'string',
                             message: (
                                 <Typography.Text style={{ color: 'inherit' }}>
                                     {t('emailInvalid')}

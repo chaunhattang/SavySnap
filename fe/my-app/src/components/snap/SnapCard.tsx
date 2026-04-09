@@ -8,7 +8,7 @@ import styles from './SnapCard.module.css';
 import { useTranslations } from 'next-intl';
 export default function SnapCard({ snap }: any) {
     const [open, setOpen] = useState(false);
-    const { handleDelete } = useDeleteSnap();
+    const { handleDelete, loading } = useDeleteSnap();
 
     const t = useTranslations('snap.update');
 
@@ -29,7 +29,7 @@ export default function SnapCard({ snap }: any) {
                 }
                 extra={
                     <Popconfirm title="Delete?" onConfirm={() => handleDelete(snap.id)}>
-                        <Button danger type="text">
+                        <Button danger type="text" loading={loading}>
                             {t('delete')}
                         </Button>
                     </Popconfirm>
