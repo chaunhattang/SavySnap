@@ -1,5 +1,7 @@
+
+
 import axiosClient from '@/services/apis/axiosClient';
-import { Snap, CreateSnapDto, UpdateSnapDto } from '@/types/snap.td';
+import { Snap } from '@/types/snap.td'; // Không cần Create/Update DTO ở đây nữa vì mình dùng FormData
 
 export const snapService = {
     // GET ALL
@@ -8,19 +10,24 @@ export const snapService = {
     },
 
     // CREATE
-    create: async (data: CreateSnapDto): Promise<Snap> => {
-        return axiosClient.post('/notes', {
-            title: data.title,
-            amount: data.amount,
-            category: data.category,
-            description: data.description,
-            imageUrl: data.imageUrl,
+    // Tham số nhận vào giờ là FormData
+    create: async (formData: FormData): Promise<Snap> => {
+        // Ném thẳng formData vào, KHÔNG bọc trong dấu {}
+        return axiosClient.post('/notes', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
         });
     },
 
     // UPDATE
-    update: async (data: UpdateSnapDto): Promise<Snap> => {
-        return axiosClient.put(`/notes/${data.id}`, data);
+    // Tương tự, nhận id và FormData
+    update: async (id: string, formData: FormData): Promise<Snap> => {
+        return axiosClient.put(`/notes/${id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
     },
 
     // DELETE

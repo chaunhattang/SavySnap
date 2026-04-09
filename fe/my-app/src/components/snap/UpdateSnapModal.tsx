@@ -1,13 +1,21 @@
 'use client';
 
-import { Modal, Input, InputNumber, Button, Select } from 'antd';
+import { Modal, Input, InputNumber, Button, Select, Typography } from 'antd';
+
 import { useUpdateSnap } from '@/hooks/useUpdateSnap';
 import styles from './UpdateSnapModal.module.css';
+
 import Dragger from 'antd/es/upload/Dragger';
 import { InboxOutlined } from '@ant-design/icons';
 
+import { useTranslations } from 'next-intl';
+
+const { Text } = Typography;
+
 export default function UpdateSnapModal({ open, onClose, snap }: any) {
     if (!snap) return null;
+
+    const t = useTranslations('snap.update');
 
     const {
         title,
@@ -23,8 +31,9 @@ export default function UpdateSnapModal({ open, onClose, snap }: any) {
     } = useUpdateSnap(snap, onClose);
 
     return (
-        <Modal open={open} onCancel={onClose} footer={null} title="Cập nhật Snap" destroyOnHidden>
-            {/* Upload box */}
+        <Modal open={open} onCancel={onClose} footer={null} title={t('title')} destroyOnHidden>
+            {/* Upload */}
+
             <Dragger
                 beforeUpload={beforeUpload}
                 maxCount={1}
@@ -36,17 +45,22 @@ export default function UpdateSnapModal({ open, onClose, snap }: any) {
                     <InboxOutlined style={{ fontSize: 32 }} />
                 </p>
 
-                <p style={{ fontWeight: 500 }}>Tải ảnh hóa đơn hoặc món đồ</p>
+                <Text strong>{t('uploadTitle')}</Text>
 
-                <p style={{ fontSize: 12, color: '#999' }}>JPG, PNG LÊN ĐẾN 5MB</p>
+                <br />
+
+                <Text type="secondary" style={{ fontSize: 12 }}>
+                    {t('uploadHint')}
+                </Text>
             </Dragger>
 
             {/* Title */}
+
             <div className={styles.section}>
-                <label className={styles.label}>TIÊU ĐỀ GHI CHÚ</label>
+                <Text className={styles.label}>{t('noteLabel')}</Text>
 
                 <Input
-                    placeholder="VD: Cà phê sáng, Giày mới..."
+                    placeholder={t('notePlaceholder')}
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     size="large"
@@ -55,13 +69,14 @@ export default function UpdateSnapModal({ open, onClose, snap }: any) {
             </div>
 
             {/* Amount + Category */}
+
             <div className={styles.grid}>
                 <div>
-                    <label className={styles.label}>$ SỐ TIỀN</label>
+                    <Text className={styles.label}>{t('amountLabel')}</Text>
 
                     <InputNumber
                         className={styles.inputNumber}
-                        placeholder="Số tiền..."
+                        placeholder={t('amountPlaceholder')}
                         value={amount}
                         onChange={(v) => setAmount(v)}
                         size="large"
@@ -69,7 +84,7 @@ export default function UpdateSnapModal({ open, onClose, snap }: any) {
                 </div>
 
                 <div>
-                    <label className={styles.label}>DANH MỤC</label>
+                    <Text className={styles.label}>{t('categoryLabel')}</Text>
 
                     <Select
                         value={category}
@@ -81,20 +96,16 @@ export default function UpdateSnapModal({ open, onClose, snap }: any) {
                         }}
                         options={[
                             {
-                                value: 'Thiết yếu',
-                                label: 'Thiết yếu',
+                                value: 'NEED',
+                                label: t('category.need'),
                             },
                             {
-                                value: 'Ăn uống',
-                                label: 'Ăn uống',
+                                value: 'WANT',
+                                label: t('category.want'),
                             },
                             {
-                                value: 'Giải trí',
-                                label: 'Giải trí',
-                            },
-                            {
-                                value: 'Mua sắm',
-                                label: 'Mua sắm',
+                                value: 'SAVING',
+                                label: t('category.saving'),
                             },
                         ]}
                     />
@@ -102,6 +113,7 @@ export default function UpdateSnapModal({ open, onClose, snap }: any) {
             </div>
 
             {/* Button */}
+
             <Button
                 type="primary"
                 block
@@ -110,7 +122,7 @@ export default function UpdateSnapModal({ open, onClose, snap }: any) {
                 size="large"
                 className={styles.submitButton}
             >
-                Cập nhật Snap
+                {t('submit')}
             </Button>
         </Modal>
     );

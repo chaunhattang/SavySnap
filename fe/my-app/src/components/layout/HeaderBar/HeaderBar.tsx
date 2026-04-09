@@ -7,26 +7,28 @@ import { SearchOutlined } from '@ant-design/icons';
 
 import { Button, Input, Layout } from 'antd';
 import CreateSnapModal from '@/components/snap/CreateSnapModal';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
+import { useTranslations } from 'next-intl';
 
 const { Header } = Layout;
 
 export default function HeaderBar() {
     const [open, setOpen] = useState(false);
+    const t = useTranslations('headerBar');
 
     return (
         <Header className={styles.headerCotainer}>
             {/* LEFT */}
             <div className={styles.logoText}>
                 <span className={styles.brand}>SavySnap</span>
-
-                <span className={styles.subtitle}>DASHBOARD TIẾT KIỆM</span>
             </div>
 
             {/* RIGHT */}
             <div className={styles.actions}>
+                <LanguageSwitcher />
                 <Input
                     className={styles.search}
-                    placeholder="Tìm kiếm ghi chú..."
+                    placeholder={t('placeholder')}
                     prefix={<SearchOutlined />}
                     allowClear
                 />
@@ -37,7 +39,7 @@ export default function HeaderBar() {
                     className={styles.addButton}
                     onClick={() => setOpen(true)}
                 >
-                    + Thêm mới
+                    {t('addNew')}
                 </Button>
                 <CreateSnapModal open={open} onClose={() => setOpen(false)} />
             </div>

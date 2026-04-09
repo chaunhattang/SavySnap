@@ -97,5 +97,68 @@
             "term3Content": "You are responsible for securing your account and login information, and not abusing the application for inappropriate purposes.",
             "backToRegister": "Back to Register page"
         }
+    },
+    "snap": {
+        "create": {
+            "title": "Capture a moment",
+            "uploadTitle": "Upload receipt or item image",
+            "uploadHint": "JPG, PNG UP TO 5MB",
+
+            "noteLabel": "NOTE TITLE",
+            "notePlaceholder": "Eg: Morning coffee, New shoes...",
+
+            "amountLabel": "AMOUNT",
+            "amountPlaceholder": "Enter amount...",
+
+            "categoryLabel": "CATEGORY",
+
+            "category": {
+                "need": "Essential",
+                "want": "Food & Drink",
+                "saving": "Entertainment"
+            },
+
+            "submit": "Save Snap"
+        },
+        "update": {
+            "title": "Update Snap",
+
+            "uploadTitle": "Upload receipt or item image",
+            "uploadHint": "JPG, PNG UP TO 5MB",
+
+            "noteLabel": "NOTE TITLE",
+            "notePlaceholder": "Eg: Morning coffee, New shoes...",
+
+            "amountLabel": "AMOUNT",
+            "amountPlaceholder": "Enter amount...",
+
+            "categoryLabel": "CATEGORY",
+
+            "category": {
+                "need": "Essential",
+                "want": "Food & Drink",
+                "saving": "Entertainment"
+            },
+
+            "submit": "Update Snap",
+            "edit": "Edit",
+            "delete": "Delete"
+        },
+        "category": {
+            "all": "All",
+            "need": "Essential",
+            "want": "Food & Drink",
+            "saving": "Entertainment"
+        }
+    },
+    "dashboard": {
+        "totalFee": "Total Expense"
+    },
+    "headerBar": {
+        "placeholder": "Search notes",
+        "addNew": "Add New"
+    },
+    "sideBar": {
+        "SignIn": "Sign in"
     }
 }

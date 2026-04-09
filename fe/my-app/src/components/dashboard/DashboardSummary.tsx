@@ -2,6 +2,7 @@
 
 import { Row, Col, Card } from 'antd';
 import { useSnaps } from '@/hooks/useSnaps';
+import { useTranslations } from 'next-intl';
 
 export default function DashboardSummary() {
     const { snaps } = useSnaps();
@@ -9,6 +10,9 @@ export default function DashboardSummary() {
         (sum, snap) => sum + (snap.amount ? Number(snap.amount) : 0),
         0
     );
+
+    const t = useTranslations('dashboard');
+
     return (
         <Row gutter={16} style={{ marginBottom: 24 }}>
             <Col span={16}>
@@ -19,7 +23,7 @@ export default function DashboardSummary() {
                         borderRadius: 20,
                     }}
                 >
-                    <div>Tổng chi tiêu</div>
+                    <div>{t('totalFee')}</div>
 
                     <h1>{totalExpense.toLocaleString()} đ</h1>
                 </Card>
@@ -31,7 +35,7 @@ export default function DashboardSummary() {
                         borderRadius: 20,
                     }}
                 >
-                    <div>Chi tiêu</div>
+                    <div>_____________</div>
 
                     <h2>5.050.000 đ</h2>
                 </Card>
