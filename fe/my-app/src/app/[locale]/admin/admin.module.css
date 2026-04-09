@@ -1,0 +1,247 @@
+.layout {
+    min-height: 100vh;
+}
+
+.sider {
+    position: fixed !important;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.logoContainer {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logoIconWrapper {
+    background: #10b981;
+    padding: 6px 8px;
+    border-radius: 8px;
+    color: white;
+}
+
+.logoIcon {
+    font-size: 20px;
+}
+
+.logoText {
+    color: white;
+    font-size: 20px;
+}
+
+.menu {
+    margin-top: 24px;
+}
+
+.logoutContainer {
+    position: absolute;
+    bottom: 24px;
+    width: 100%;
+    padding: 0 16px;
+}
+
+.logoutButton {
+    text-align: left !important;
+    background: rgba(255, 0, 0, 0.1) !important;
+    font-weight: bold !important;
+}
+
+.mainLayout {
+    margin-left: 280px;
+    background-color: #f8fafc;
+}
+
+.header {
+    background: #fff !important;
+    padding: 0 24px !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #f0f0f0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.searchContainer {
+    width: 400px;
+}
+
+.searchInput {
+    border-radius: 16px;
+    background: #f8fafc;
+}
+
+.searchIcon {
+    color: #bfbfbf;
+    margin-right: 8px;
+}
+
+.bellIcon {
+    font-size: 20px;
+    cursor: pointer;
+    color: #595959;
+}
+
+.profileContainer {
+    margin-left: 16px;
+    border-left: 1px solid #f0f0f0;
+    padding-left: 24px;
+}
+
+.profileTextContainer {
+    text-align: right;
+}
+
+.profileName {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.profileRole {
+    font-size: 10px;
+    color: #10b981;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.profileAvatar {
+    background-color: #0f172a;
+    font-weight: bold;
+}
+
+.content {
+    padding: 32px !important;
+}
+
+.dashboardHeader {
+    margin-bottom: 32px;
+}
+
+.dashboardTitle {
+    margin: 0 !important;
+    margin-bottom: 8px !important;
+    font-weight: 900 !important;
+}
+
+.dashboardDesc {
+    font-size: 16px;
+}
+
+.statsRow {
+    margin-bottom: 32px;
+}
+
+.statCard {
+    border-radius: 16px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+.statContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.statLabel {
+    font-size: 12px;
+    color: #8c8c8c;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.statValue {
+    font-size: 28px;
+    font-weight: 900;
+    margin: 8px 0;
+}
+
+.statChange {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.statVsText {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.statIconWrapper {
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.statIcon {
+    font-size: 24px;
+}
+
+.tableCard {
+    border-radius: 16px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+.tableCardHeader {
+    padding: 24px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fafafa;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.tableCardTitle {
+    font-size: 18px;
+    display: block;
+}
+
+.tableCardDesc {
+    margin-top: 8px;
+    display: block;
+}
+
+.viewAllBtn {
+    color: #10b981 !important;
+    background: #ecfdf5 !important;
+    font-weight: bold !important;
+}
+
+.usernameText {
+    font-size: 12px;
+}
+
+.deleteBtn {
+    font-weight: bold !important;
+}
+
+.profileInfoBox {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 4px;
+}
+
+.profileInfoText {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.profileInfoUsername {
+    font-size: 16px !important;
+}
+
+.profileInfoEmail {
+    font-size: 13px !important;
+}

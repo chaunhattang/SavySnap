@@ -2,6 +2,7 @@
 
 import axios, { InternalAxiosRequestConfig } from 'axios';
 import queryString from 'query-string';
+import Cookies from 'js-cookie';
 
 const axiosClient = axios.create({
     baseURL: 'http://10.60.250.222:8080/api', // base url server
@@ -9,7 +10,7 @@ const axiosClient = axios.create({
 });
 
 axiosClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
-    const accesstoken = localStorage.getItem('accessToken');
+    const accesstoken = Cookies.get('accessToken');
 
     if (accesstoken) {
         config.headers.Authorization = `Bearer ${accesstoken}`;

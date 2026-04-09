@@ -10,8 +10,8 @@ const Terms: React.FC = () => {
     const t = useTranslations('auth.terms');
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-            <div style={{ marginBottom: '1.5rem' }}>
+        <div className={styles.wrapper}>
+            <div className={styles.headerMargin}>
                 <h3 className={styles.headerText}>{t('headerText')}</h3>
                 <p className={styles.subHeaderText}>{t('subHeaderText')}</p>
             </div>

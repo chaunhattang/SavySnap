@@ -149,6 +149,60 @@
         "addNew": "Thêm Mới"
     },
     "sideBar": {
-        "SignIn": "Đăng nhập"
+        "SignIn": "Đăng nhập",
+        "editProfile": "Chỉnh sửa thông tin",
+        "logout": "Đăng xuất"
+    },
+    "admin": {
+        "title": "SavyAdmin",
+        "menu": {
+            "overview": "Tổng quan",
+            "users": "Người dùng",
+            "snaps": "Bài đăng (Snaps)",
+            "settings": "Cài đặt hệ thống"
+        },
+        "logout": "Đăng xuất",
+        "searchPlaceholder": "Tìm kiếm người dùng, ID giao dịch...",
+        "dashboardTitle": "Bảng điều khiển",
+        "dashboardDesc": "Thống kê tổng quan hoạt động hệ thống SavySnap hôm nay.",
+        "stats": {
+            "totalUsers": "Tổng người dùng",
+            "createdSnaps": "Snaps đã tạo",
+            "totalTrackingValue": "Tổng giá trị theo dõi",
+            "dailyVisits": "Lượt truy cập/Ngày",
+            "vsLastMonth": "so với tháng trước"
+        },
+        "recentSnaps": {
+            "title": "Snaps mới cập nhật từ hệ thống",
+            "viewAll": "Xem toàn bộ hệ thống",
+            "columns": {
+                "user": "Người dùng",
+                "goalAndSpend": "Mục tiêu / Chi tiêu",
+                "amount": "Số tiền",
+                "date": "Ngày tạo",
+                "status": "Trạng thái",
+                "statusTypes": {
+                    "approved": "Duyệt",
+                    "pending": "Chờ",
+                    "rejected": "Từ chối"
+                }
+            }
+        },
+        "users": {
+            "title": "Quản lý Người dùng",
+            "desc": "Danh sách toàn bộ người dùng đang hoạt động trong hệ thống.",
+            "searchPlaceholder": "Tìm user bằng tên...",
+            "columns": {
+                "id": "ID",
+                "username": "Tên đăng nhập",
+                "email": "Email",
+                "totalPayment": "Tổng chi tiêu",
+                "action": "Thao tác"
+            },
+            "delete": "Xoá",
+            "deleteConfirm": "Bạn có chắc chắn muốn xoá người dùng này không?",
+            "deleteSuccess": "Xoá người dùng thành công!",
+            "deleteFail": "Thất bại khi xoá người dùng"
+        }
     }
 }

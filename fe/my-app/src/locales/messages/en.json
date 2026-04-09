@@ -159,6 +159,60 @@
         "addNew": "Add New"
     },
     "sideBar": {
-        "SignIn": "Sign in"
+        "SignIn": "Sign in",
+        "editProfile": "Edit Profile",
+        "logout": "Logout"
+    },
+    "admin": {
+        "title": "SavyAdmin",
+        "menu": {
+            "overview": "Overview",
+            "users": "Users",
+            "snaps": "Snaps",
+            "settings": "Settings"
+        },
+        "logout": "Logout",
+        "searchPlaceholder": "Search users, transaction IDs...",
+        "dashboardTitle": "Dashboard",
+        "dashboardDesc": "Overview of SavySnap system activities today.",
+        "stats": {
+            "totalUsers": "Total Users",
+            "createdSnaps": "Created Snaps",
+            "totalTrackingValue": "Total Tracking Value",
+            "dailyVisits": "Daily Visits",
+            "vsLastMonth": "vs last month"
+        },
+        "recentSnaps": {
+            "title": "Recent System Snaps",
+            "viewAll": "View all",
+            "columns": {
+                "user": "User",
+                "goalAndSpend": "Goal / Spend",
+                "amount": "Amount",
+                "date": "Date",
+                "status": "Status",
+                "statusTypes": {
+                    "approved": "Approved",
+                    "pending": "Pending",
+                    "rejected": "Rejected"
+                }
+            }
+        },
+        "users": {
+            "title": "User Management",
+            "desc": "List of all active users in the system.",
+            "searchPlaceholder": "Search users by name...",
+            "columns": {
+                "id": "ID",
+                "username": "Username",
+                "email": "Email",
+                "totalPayment": "Total Payment",
+                "action": "Action"
+            },
+            "delete": "Delete",
+            "deleteConfirm": "Are you sure you want to delete this user?",
+            "deleteSuccess": "User deleted successfully!",
+            "deleteFail": "Failed to delete user"
+        }
     }
 }

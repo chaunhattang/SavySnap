@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import ForgotPassword from '@/app/[locale]/(auth)/forgotPassword/components/ForgotPassword';
-import LoginCard from '@/app/[locale]/(auth)/login/_components/LoginCard';
+import LoginCard from '@/components/auth/login/LoginCard';
 import styles from '@/app/[locale]/(auth)/forgotPassword/styles/forgotPassword.module.css';
 
 const ForgotPasswordPage = () => {
