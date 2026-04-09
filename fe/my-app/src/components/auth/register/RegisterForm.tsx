@@ -18,9 +18,10 @@ const RegisterForm: React.FC = () => {
         try {
             console.log('Received values of form: ', values);
             await new Promise((resolve) => setTimeout(resolve, 1500));
+            const port = process.env.NEXT_PUBLIC_API_URL + '/auth/register';
+
             await axios.post('http://10.60.250.222:8080/api/auth/register', values);
-            console.log(values);
-            console.log('Register success');
+
             localStorage.setItem('registeredEmail', values.email);
             localStorage.setItem('registeredPassword', values.password);
             router.push('/login');
