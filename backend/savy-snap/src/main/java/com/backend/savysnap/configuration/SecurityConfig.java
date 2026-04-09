@@ -30,7 +30,11 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SecurityConfig {
 
-    final String[] PUBLIC_ENDPOINTS = {"/auth/login", "/auth/register", "/users"};
+    final String[] PUBLIC_ENDPOINTS = {
+            "/auth/login", "/auth/register",
+            "/users", "users/my-info",
+            "/error"
+    };
 
     @NonFinal
     @Value("${jwt.signerKey}")

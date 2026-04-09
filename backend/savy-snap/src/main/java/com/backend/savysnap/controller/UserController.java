@@ -23,7 +23,7 @@ import java.util.List;
 public class UserController {
     UserService userService;
 
-    @GetMapping
+    @GetMapping("/all")
     @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     public ApiResponse<List<UserResponse>> getAllUsers() {
         return ApiResponse.<List<UserResponse>>builder()
@@ -31,7 +31,15 @@ public class UserController {
                 .build();
     }
 
+    @GetMapping("/my-info")
+    public ApiResponse<UserResponse> getMyInfo() {
+        return ApiResponse.<UserResponse>builder()
+                .result(userService.getMyInfo())
+                .build();
+    }
+
     @GetMapping(value = "/{username}")
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN') or #username == authentication.name")
     public ApiResponse<UserResponse> getUser(
             @PathVariable("username") String username
     ) {
@@ -41,6 +49,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/{username}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN') or #username == authentication.name")
     public ApiResponse<UserResponse> updateUserByUsername(
             @PathVariable("username") String username,
             @ModelAttribute UserUpdateRequest request,
