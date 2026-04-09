@@ -1,11 +1,12 @@
-import axios from "axios";
-import { url } from "inspector";
-import { ENDPOINT } from "../endpoint";
+import { ENDPOINT } from '../endpoint';
+import axiosClient from './axiosClient';
+
+type LoginResponse = {
+    token: string;
+};
 
 export class AuthService {
-    static Login() {
-        await axios.post(
-            url: ENDPOINT.AUTH.LOGIN;
-        )
+    static async login(data: { accountName: string; password: string }): Promise<LoginResponse> {
+        return axiosClient.post<LoginResponse>(ENDPOINT.AUTH.LOGIN, data);
     }
 }

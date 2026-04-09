@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { message } from 'antd';
-import { snapService } from '@/services/apis/snap.service';
+import { SnapService } from '@/services/apis/snap.service';
 
 export function useDeleteSnap() {
     const [loading, setLoading] = useState(false);
@@ -11,7 +11,7 @@ export function useDeleteSnap() {
         try {
             setLoading(true);
 
-            await snapService.delete(id);
+            await SnapService.delete(id);
 
             message.success('Xóa thành công');
 

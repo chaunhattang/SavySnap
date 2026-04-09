@@ -11,7 +11,6 @@ import {
 import styles from './login.module.css';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { AuthService } from '@/services/apis/AuthService';
 
@@ -34,28 +33,15 @@ const LoginForm: React.FC<any> = () => {
         }
     }, []);
 
-    const handleLogin = async () => {
-        try {
-            await AuthService.Login();
-        } catch {}
-    };
-
     const onFinish = async (values: any) => {
         setLoading(true);
 
         try {
-            const port = process.env.NEXT_PUBLIC_API_BASE_URL + '/auth/login';
-            console.log('Success:', values);
-            console.log(port);
-            const res = await axios.post(port, values);
+            console.log('Login values:', values);
 
-            // const info = await axios.get('http://10.60.250.222:8080/api/users');
+            const res = await AuthService.login(values);
 
-            // console.log(info.data);
-
-            console.log(res.data);
-
-            const token = res.data?.result?.token;
+            const token = res?.token;
 
             if (token) {
                 localStorage.setItem('accessToken', token);

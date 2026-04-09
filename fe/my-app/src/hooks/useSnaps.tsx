@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react';
 import { Snap } from '@/types/snap.td';
-import { snapService } from '@/services/apis/snap.service';
+import { SnapService } from '@/services/apis/snap.service';
 
 export function useSnaps() {
     const [snaps, setSnaps] = useState<Snap[]>([]);
@@ -12,7 +12,7 @@ export function useSnaps() {
         try {
             setLoading(true);
 
-            const data = await snapService.getAll();
+            const data = await SnapService.getAll();
             setSnaps(data);
         } catch (error) {
             console.error(error);

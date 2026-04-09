@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { message, Upload } from 'antd';
 import { RcFile } from 'antd/es/upload';
-import { snapService } from '@/services/apis/snap.service';
+import { SnapService } from '@/services/apis/snap.service';
 
 export function useCreateSnap(onClose?: () => void) {
     const [title, setTitle] = useState('');
@@ -62,7 +62,7 @@ export function useCreateSnap(onClose?: () => void) {
             formData.append('file', file);
 
             // 4. Gửi FormData qua Service
-            await snapService.create(formData);
+            await SnapService.create(formData);
 
             console.log(Object.fromEntries(formData));
 

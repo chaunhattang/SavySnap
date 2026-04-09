@@ -1,37 +1,29 @@
-
-
 import axiosClient from '@/services/apis/axiosClient';
-import { Snap } from '@/types/snap.td'; // Không cần Create/Update DTO ở đây nữa vì mình dùng FormData
+import { ENDPOINT } from '../endpoint';
+import { Snap } from '@/types/snap.td';
 
-export const snapService = {
-    // GET ALL
-    getAll: async (): Promise<Snap[]> => {
-        return axiosClient.get('/notes');
-    },
+export class SnapService {
+    static async getAll(): Promise<Snap[]> {
+        return axiosClient.get(ENDPOINT.NOTES.GET_ALL);
+    }
 
-    // CREATE
-    // Tham số nhận vào giờ là FormData
-    create: async (formData: FormData): Promise<Snap> => {
-        // Ném thẳng formData vào, KHÔNG bọc trong dấu {}
-        return axiosClient.post('/notes', formData, {
+    static async create(formData: FormData): Promise<Snap> {
+        return axiosClient.post(ENDPOINT.NOTES.CREATE, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         });
-    },
+    }
 
-    // UPDATE
-    // Tương tự, nhận id và FormData
-    update: async (id: string, formData: FormData): Promise<Snap> => {
-        return axiosClient.put(`/notes/${id}`, formData, {
+    static async update(id: string, formData: FormData): Promise<Snap> {
+        return axiosClient.put(ENDPOINT.NOTES.UPDATE(id), formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         });
-    },
+    }
 
-    // DELETE
-    delete: async (id: string): Promise<void> => {
-        return axiosClient.delete(`/notes/${id}`);
-    },
-};
+    static async delete(id: string): Promise<void> {
+        return axiosClient.delete(ENDPOINT.NOTES.DELETE(id));
+    }
+}

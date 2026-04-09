@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 export function useAuth() {
     const [loggedIn, setLoggedIn] = useState(false);
+
     const [email, setEmail] = useState<string | null>(null);
 
     useEffect(() => {
@@ -12,18 +13,22 @@ export function useAuth() {
         if (token) {
             setLoggedIn(true);
 
-            setEmail(localStorage.getItem('email'));
+            const storedEmail = localStorage.getItem('email');
+
+            setEmail(storedEmail);
         }
     }, []);
 
     const handleLogout = () => {
-        localStorage.clear();
-        window.location.href = '/';
+        localStorage.removeItem('accessToken');
+
+        localStorage.removeItem('email');
+
+        window.location.href = '/login';
     };
 
     return {
         loggedIn,
-
         email,
         handleLogout,
     };

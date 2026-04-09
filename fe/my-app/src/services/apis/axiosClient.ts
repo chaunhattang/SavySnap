@@ -1,35 +1,36 @@
-/** @format */
-
-import axios, { InternalAxiosRequestConfig } from 'axios';
+import axios, { InternalAxiosRequestConfig, AxiosResponse } from 'axios';
 import queryString from 'query-string';
 
 const axiosClient = axios.create({
-    baseURL: 'http://10.60.250.222:8080/api', // base url server
+    baseURL: 'http://10.60.250.222:8080/api',
     paramsSerializer: (params) => queryString.stringify(params),
 });
 
 axiosClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
-    const accesstoken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('accessToken');
 
-    if (accesstoken) {
-        config.headers.Authorization = `Bearer ${accesstoken}`;
+    if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
     }
+
     config.headers.Accept = 'application/json';
 
     return config;
 });
 
 axiosClient.interceptors.response.use(
-    (res) => {
-        if (res.data && res.status >= 200 && res.status < 300) {
-            return res.data.result;
-        } else {
-            return Promise.reject(res.data);
+    (res: AxiosResponse) => {
+        if (res.status >= 200 && res.status < 300) {
+            return res.data?.result;
         }
+
+        return Promise.reject(res.data);
     },
+
     (error) => {
-        const { response } = error;
-        return Promise.reject(response.data.message as string);
+        const message = error?.response?.data?.message || 'Server error';
+
+        return Promise.reject(message);
     }
 );
 

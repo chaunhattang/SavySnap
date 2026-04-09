@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { message, Upload } from 'antd';
 import { RcFile } from 'antd/es/upload';
-import { snapService } from '@/services/apis/snap.service';
+import { SnapService } from '@/services/apis/snap.service';
 
 export function useUpdateSnap(snap: any, onClose?: () => void) {
     const [title, setTitle] = useState('');
@@ -109,7 +109,7 @@ export function useUpdateSnap(snap: any, onClose?: () => void) {
             }
 
             // 3. Gọi API với id và FormData
-            await snapService.update(snap.id, formData);
+            await SnapService.update(snap.id, formData);
 
             message.success('Cập nhật thành công');
             window.dispatchEvent(new Event('snap-updated'));
