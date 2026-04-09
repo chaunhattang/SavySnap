@@ -12,6 +12,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -47,6 +48,17 @@ public class UserService {
                 .map(userMapper::toUserResponse).collect(Collectors.toList());
     }
 
+    public UserResponse getMyInfo() {
+        var context = SecurityContextHolder.getContext();
+        var authentication = context.getAuthentication();
+        String username = authentication.getName();
+
+        User user = userRepository.findByUsername(username).orElseThrow(()
+                -> new AppException(ErrorCode.USER_NOT_FOUND)
+        );
+
+        return userMapper.toUserResponse(user);
+    }
     public UserResponse updateUserByUsername(String username, UserUpdateRequest request, MultipartFile file) {
         User user = userRepository.findByUsername(username).orElseThrow(()
                 -> new AppException(ErrorCode.USER_NOT_FOUND)
@@ -62,6 +74,7 @@ public class UserService {
 
         return userMapper.toUserResponse(userRepository.save(user));
     }
+
 
     public UserResponse getUserByUsername(String username) {
         User user = userRepository.findByUsername(username).orElseThrow(()

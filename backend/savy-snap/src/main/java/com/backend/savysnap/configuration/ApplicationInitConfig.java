@@ -2,7 +2,9 @@ package com.backend.savysnap.configuration;
 
 import com.backend.savysnap.entity.User;
 import com.backend.savysnap.repository.UserRepository;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -14,9 +16,10 @@ import java.util.Set;
 @Slf4j
 @Component
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ApplicationInitConfig implements ApplicationRunner {
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+    UserRepository userRepository;
+    PasswordEncoder passwordEncoder;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
