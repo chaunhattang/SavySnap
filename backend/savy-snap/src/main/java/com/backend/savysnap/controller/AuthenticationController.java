@@ -12,6 +12,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +36,15 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ApiResponse<UserResponse> createUser(@RequestBody @Valid UserCreateRequest request) {
+    public ApiResponse<UserResponse> register(@RequestBody @Valid UserCreateRequest request) {
+        return ApiResponse.<UserResponse>builder()
+                .result(userService.createUser(request))
+                .build();
+    }
+
+    @PostMapping("/create")
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
+    public ApiResponse<UserResponse> create(@RequestBody @Valid UserCreateRequest request) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.createUser(request))
                 .build();

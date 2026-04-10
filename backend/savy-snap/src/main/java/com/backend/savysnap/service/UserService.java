@@ -67,7 +67,7 @@ public class UserService {
 
         String imageUrl = cloudinaryService.uploadImage(file);
         if (imageUrl != null) {
-            user.setImageUrl(imageUrl);
+            user.setAvatarUrl(imageUrl);
         }
 
         return userMapper.toUserResponse(userRepository.save(user));

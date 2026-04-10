@@ -41,8 +41,7 @@ public class UserController {
     @GetMapping(value = "/{username}")
     @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN') or #username == authentication.name")
     public ApiResponse<UserResponse> getUser(
-            @PathVariable("username") String username
-    ) {
+            @PathVariable("username") String username) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.getUserByUsername(username))
                 .build();
@@ -53,8 +52,7 @@ public class UserController {
     public ApiResponse<UserResponse> updateUserByUsername(
             @PathVariable("username") String username,
             @ModelAttribute UserUpdateRequest request,
-            @RequestParam(value = "file", required = false) MultipartFile file
-    ) {
+            @RequestParam(value = "file", required = false) MultipartFile file) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.updateUserByUsername(username, request, file))
                 .build();
@@ -63,8 +61,7 @@ public class UserController {
     @DeleteMapping(value = "/{username}")
     @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
     public ApiResponse<String> deleteUser(
-            @PathVariable("username") String username
-    ) {
+            @PathVariable("username") String username) {
         return ApiResponse.<String>builder()
                 .result(userService.deleteByUsername(username))
                 .build();
