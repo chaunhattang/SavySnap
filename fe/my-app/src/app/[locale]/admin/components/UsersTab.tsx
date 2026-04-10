@@ -18,14 +18,10 @@ import {
     Tooltip,
 } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import {
-    DeleteOutlined,
-    EditOutlined,
-    UserAddOutlined,
-    UserOutlined,
-} from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, UserAddOutlined, UserOutlined } from '@ant-design/icons';
 import { useTranslations } from 'next-intl';
 import { userService } from '@/services/apis/user.service';
+import { authService } from '@/services/apis/auth.service';
 import { User } from '@/types/user.td';
 import styles from '../admin.module.css';
 
@@ -46,7 +42,6 @@ export default function UsersTab() {
     const [modalMode, setModalMode] = useState<ModalMode>('edit');
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
     const [saving, setSaving] = useState(false);
-    const [form] = Form.useForm();
 
     // ─── Fetch ───────────────────────────────────────────────────────
     const fetchUsers = async () => {
@@ -61,17 +56,14 @@ export default function UsersTab() {
         }
     };
 
-    useEffect(() => { fetchUsers(); }, []);
+    useEffect(() => {
+        fetchUsers();
+    }, []);
 
     // ─── Open Edit Modal ─────────────────────────────────────────────
     const openEdit = (user: User) => {
         setModalMode('edit');
         setSelectedUser(user);
-        form.setFieldsValue({
-            username: user.username,
-            email: user.email,
-            role: user.role ?? 'USER',
-        });
         setModalOpen(true);
     };
 
@@ -79,30 +71,36 @@ export default function UsersTab() {
     const openAdd = () => {
         setModalMode('add');
         setSelectedUser(null);
-        form.resetFields();
-        form.setFieldsValue({ role: 'USER' });
         setModalOpen(true);
     };
 
     // ─── Submit ──────────────────────────────────────────────────────
-    const handleSubmit = async (values: { username: string; email: string; role: string }) => {
+    const handleSubmit = async (values: { username: string; email: string; role: string; password?: string }) => {
         setSaving(true);
         try {
             if (modalMode === 'edit' && selectedUser) {
-                await userService.updateByUserName(selectedUser.username, {
-                    username: values.username,
-                    email: values.email,
-                    role: values.role,
-                });
+                // Edit: PUT /users/{username} (multipart/form-data)
+                // Only password is supported by backend UserUpdateRequest
+                const formData = new FormData();
+                if (values.password) {
+                    formData.append('password', values.password);
+                }
+                await userService.updateProfile(selectedUser.username, formData);
                 message.success('Cập nhật người dùng thành công!');
             } else {
-                // Add new — uses register endpoint pattern; adjust if backend differs
-                await userService.updateByUserName(values.username, {
+                // Add: POST /auth/register (JSON)
+                // Backend accepts: username, email, password
+                if (!values.password) {
+                    message.error('Vui lòng nhập mật khẩu!');
+                    setSaving(false);
+                    return;
+                }
+                await authService.register({
                     username: values.username,
                     email: values.email,
-                    role: values.role,
+                    password: values.password,
                 });
-                message.success('Thêm người dùng thành công!');
+                message.success('Tạo tài khoản thành công!');
             }
             setModalOpen(false);
             fetchUsers();
@@ -207,11 +205,7 @@ export default function UsersTab() {
                         placement="left"
                     >
                         <Tooltip title="Xoá người dùng">
-                            <Button
-                                type="text"
-                                danger
-                                icon={<DeleteOutlined />}
-                            />
+                            <Button type="text" danger icon={<DeleteOutlined />} />
                         </Tooltip>
                     </Popconfirm>
                 </Space>
@@ -268,7 +262,9 @@ export default function UsersTab() {
                 title={
                     <div>
                         <Text strong style={{ fontSize: 18 }}>
-                            {modalMode === 'edit' ? 'Sửa thông tin người dùng' : 'Thêm người dùng mới'}
+                            {modalMode === 'edit'
+                                ? 'Sửa thông tin người dùng'
+                                : 'Thêm người dùng mới'}
                         </Text>
                         <br />
                         <Text type="secondary" style={{ fontSize: 13 }}>
@@ -285,11 +281,19 @@ export default function UsersTab() {
                 destroyOnHidden
             >
                 <Form
-                    form={form}
                     layout="vertical"
                     onFinish={handleSubmit}
                     requiredMark={false}
                     style={{ marginTop: 16 }}
+                    initialValues={
+                        modalMode === 'edit' && selectedUser
+                            ? {
+                                  username: selectedUser.username,
+                                  email: selectedUser.email,
+                                  role: selectedUser.role ?? 'USER',
+                              }
+                            : { role: 'USER' }
+                    }
                 >
                     <Form.Item
                         label={<Text strong>Tên đăng nhập</Text>}
@@ -315,29 +319,59 @@ export default function UsersTab() {
                         <Input
                             placeholder="email@example.com"
                             style={{ borderRadius: 10 }}
+                            disabled={modalMode === 'edit'}
                         />
                     </Form.Item>
 
                     <Form.Item
-                        label={<Text strong>Role</Text>}
-                        name="role"
-                        rules={[{ required: true, message: 'Vui lòng chọn role!' }]}
+                        label={<Text strong>Mật khẩu</Text>}
+                        name="password"
+                        rules={
+                            modalMode === 'add'
+                                ? [{ required: true, message: 'Vui lòng nhập mật khẩu!' }]
+                                : []
+                        }
                     >
-                        <Select style={{ borderRadius: 10 }}>
-                            <Select.Option value="USER">
-                                <Tag color="green" style={{ fontWeight: 700 }}>USER</Tag>
-                            </Select.Option>
-                            <Select.Option value="ADMIN">
-                                <Tag color="volcano" style={{ fontWeight: 700 }}>ADMIN</Tag>
-                            </Select.Option>
-                        </Select>
+                        <Input.Password
+                            placeholder={
+                                modalMode === 'edit'
+                                    ? 'Bỏ trống nếu không muốn đổi'
+                                    : 'Mật khẩu người dùng'
+                            }
+                            style={{ borderRadius: 10 }}
+                        />
                     </Form.Item>
+
+                    {/* Role: only editable when editing existing user */}
+                    {modalMode === 'edit' ? (
+                        <Form.Item
+                            label={<Text strong>Role</Text>}
+                            name="role"
+                            rules={[{ required: true, message: 'Vui lòng chọn role!' }]}
+                        >
+                            <Select style={{ borderRadius: 10 }}>
+                                <Select.Option value="USER">
+                                    <Tag color="green" style={{ fontWeight: 700 }}>USER</Tag>
+                                </Select.Option>
+                                <Select.Option value="ADMIN">
+                                    <Tag color="volcano" style={{ fontWeight: 700 }}>ADMIN</Tag>
+                                </Select.Option>
+                            </Select>
+                        </Form.Item>
+                    ) : (
+                        <Form.Item label={<Text strong>Role</Text>}>
+                            <Tag color="green" style={{ fontWeight: 700, padding: '4px 10px', borderRadius: 8 }}>
+                                USER (mặc định)
+                            </Tag>
+                            <Text type="secondary" style={{ marginLeft: 8, fontSize: 12 }}>
+                                Sau khi tạo, vào Sửa để đổi role
+                            </Text>
+                        </Form.Item>
+                    )}
 
                     <Form.Item style={{ marginBottom: 0, marginTop: 8 }}>
                         <Space style={{ width: '100%', justifyContent: 'flex-end' }}>
-                            <Button onClick={() => setModalOpen(false)}>
-                                Huỷ
-                            </Button>
+                            <Button onClick={() => setModalOpen(false)}>Huỷ</Button>
                             <Button
                                 type="primary"
                                 htmlType="submit"
