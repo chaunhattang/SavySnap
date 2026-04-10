@@ -1,3 +1,4 @@
+import { App } from 'antd';
 import './globals.css';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 
@@ -10,7 +11,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     return (
         <html>
             <body>
-                <AntdRegistry>{children}</AntdRegistry>
+                <AntdRegistry>
+                    <App>{children}</App>
+                </AntdRegistry>
             </body>
         </html>
     );

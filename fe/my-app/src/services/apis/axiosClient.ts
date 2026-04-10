@@ -5,7 +5,7 @@ import queryString from 'query-string';
 import Cookies from 'js-cookie';
 
 const axiosClient = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL, // base url server
+    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL, // base url server
     paramsSerializer: (params) => queryString.stringify(params),
 });
 

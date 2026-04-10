@@ -26,6 +26,7 @@ export function useSnaps() {
         const token = Cookies.get('accessToken');
 
         if (!token) return;
+
         fetchSnaps();
 
         const handleRefresh = () => {

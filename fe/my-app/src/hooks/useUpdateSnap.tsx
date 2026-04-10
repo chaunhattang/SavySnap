@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { message, Upload } from 'antd';
+import { App, Upload } from 'antd';
 import { RcFile } from 'antd/es/upload';
 import { snapService } from '@/services/apis/snap.service';
 
@@ -12,6 +12,8 @@ export function useUpdateSnap(snap: any, onClose?: () => void) {
     const [file, setFile] = useState<RcFile | null>(null);
     const [loading, setLoading] = useState(false);
     const [fileList, setFileList] = useState<any[]>([]);
+
+    const { message } = App.useApp();
 
     useEffect(() => {
         if (snap) {

@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import { message } from 'antd';
+import { App } from 'antd';
 import { snapService } from '@/services/apis/snap.service';
 
 export function useDeleteSnap() {
+    const { message } = App.useApp();
     const [loading, setLoading] = useState(false);
 
     const handleDelete = async (id: string) => {
