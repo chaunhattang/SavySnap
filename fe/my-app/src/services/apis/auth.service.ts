@@ -1,25 +1,41 @@
 import axiosClient from './axiosClient';
 import { ENDPOINT } from '../endpoint';
 import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 
 export const authService = {
     login: async (data: any) => {
         const response: any = await axiosClient.post(ENDPOINT.AUTH.LOGIN, data);
 
+        console.log('Login response:', response);
+
         const token = response?.token;
-        if (token) {
-            const isAdmin =
-                data.accountName === 'admin' ||
-                response?.role === 'ADMIN' ||
-                response?.roles?.includes('ADMIN');
 
-            Cookies.set('accessToken', token, { expires: 7, path: '/' });
-            Cookies.set('role', isAdmin ? 'ADMIN' : 'USER', { expires: 7, path: '/' });
+        if (!token) return response;
 
-            return { isAdmin, ...response };
-        }
+        const decoded: any = jwtDecode(token);
 
-        return response;
+        // LẤY ROLE TỪ scope
+        const role = decoded.scope;
+
+        const isAdmin = role === 'ROLE_ADMIN';
+
+        // lưu cookie
+        Cookies.set('accessToken', token, {
+            expires: 7,
+            path: '/'
+        });
+
+        Cookies.set('role', role, {
+            expires: 7,
+            path: '/'
+        });
+
+        return {
+            ...response,
+            role,
+            isAdmin
+        };
     },
 
     register: async (data: any) => {
