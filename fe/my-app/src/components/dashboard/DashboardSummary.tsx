@@ -7,6 +7,7 @@ import styles from './DashboardSummary.module.css';
 
 export default function DashboardSummary() {
     const { snaps } = useSnaps();
+
     const totalExpense = snaps.reduce(
         (sum, snap) => sum + (snap.amount ? Number(snap.amount) : 0),
         0
@@ -19,20 +20,22 @@ export default function DashboardSummary() {
     const t = useTranslations('dashboard');
 
     return (
-        <Row gutter={16} className={styles.rowMargin}>
-            <Col span={16}>
+        <Row gutter={[16, 16]} className={styles.rowMargin}>
+            {/* TOTAL EXPENSE */}
+            <Col xs={24} sm={24} md={16}>
                 <Card className={styles.totalFeeCard}>
                     <div>{t('totalFee')}</div>
 
-                    <h1>{totalExpense.toLocaleString()} đ</h1>
+                    <h1 className={styles.bigNumber}>{totalExpense.toLocaleString()} đ</h1>
                 </Card>
             </Col>
 
-            <Col span={8}>
+            {/* SAVING */}
+            <Col xs={24} sm={24} md={8}>
                 <Card className={styles.normalCard}>
                     <div>{t('totalSaving')}</div>
 
-                    <h2>{totalSaving.toLocaleString()} đ</h2>
+                    <h2 className={styles.smallNumber}>{totalSaving.toLocaleString()} đ</h2>
                 </Card>
             </Col>
         </Row>

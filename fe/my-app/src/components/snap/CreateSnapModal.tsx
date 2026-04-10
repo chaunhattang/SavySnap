@@ -36,6 +36,8 @@ export default function CreateSnapModal({ open, onClose }: any) {
                 maxCount={1}
                 showUploadList
                 className={styles.uploadBox}
+                accept="image/*"
+                capture="environment"
             >
                 <p className="ant-upload-drag-icon">
                     <InboxOutlined className={`${styles.icon} ${styles.largeIcon}`} />
