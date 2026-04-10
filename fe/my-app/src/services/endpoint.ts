@@ -1,7 +1,13 @@
 export const ENDPOINT = {
     AUTH: {
-        LOGIN: 'abc',
-        avbbb,
+        LOGIN: '/auth/login',
+        REGISTER: '/auth/register',
+    },
+    USERS: {
+        BASE: '/users',
+    },
+    NOTES: {
+        BASE: '/notes',
     },
     MACHINES: {},
 };

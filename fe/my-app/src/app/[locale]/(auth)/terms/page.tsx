@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'antd';
 import Terms from '@/app/[locale]/(auth)/terms/components/Terms';
-import LoginCard from '@/app/[locale]/(auth)/login/_components/LoginCard';
+import LoginCard from '@/components/auth/login/LoginCard';
 import styles from '@/app/[locale]/(auth)/terms/styles/terms.module.css';
 
 const TermsPage = () => {

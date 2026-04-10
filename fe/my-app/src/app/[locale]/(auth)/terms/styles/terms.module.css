@@ -7,6 +7,14 @@
     background-color: #f8fafc;
     padding: 1rem;
 }
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.headerMargin {
+    margin-bottom: 1.5rem;
+}
 .loginCardContainer {
     width: 100%;
     max-width: 896px;

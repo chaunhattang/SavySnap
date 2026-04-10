@@ -11,11 +11,9 @@ function RegisterCard() {
             <div>
                 <div className={styles.logoBox}>
                     <div className={styles.logoIcon}>
-                        <CameraOutlined style={{ fontSize: 24 }} />
+                        <CameraOutlined className={styles.largeCameraIcon} />
                     </div>
-                    <Typography.Text
-                        style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'white' }}
-                    >
+                    <Typography.Text className={styles.brandNameText}>
                         {t('brandName')}
                     </Typography.Text>
                 </div>
@@ -28,7 +26,7 @@ function RegisterCard() {
             </div>
 
             <div className={styles.trustGroup}>
-                <Typography.Text style={{ color: 'white' }}>{t('testimonial')}</Typography.Text>
+                <Typography.Text className={styles.whiteText}>{t('testimonial')}</Typography.Text>
             </div>
 
             <div className={styles.shapeTopRight}></div>

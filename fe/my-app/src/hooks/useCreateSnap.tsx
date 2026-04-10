@@ -1,10 +1,11 @@
 'use client';
 import { useState } from 'react';
-import { message, Upload } from 'antd';
+import { App, Upload } from 'antd';
 import { RcFile } from 'antd/es/upload';
 import { snapService } from '@/services/apis/snap.service';
 
 export function useCreateSnap(onClose?: () => void) {
+    const { message } = App.useApp();
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState<number | null>(null);
     const [category, setCategory] = useState('Thiết yếu');

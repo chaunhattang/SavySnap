@@ -40,7 +40,7 @@ const ForgotPassword: React.FC<any> = () => {
                         {
                             required: true,
                             message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
+                                <Typography.Text className={styles.inheritColorText}>
                                     {t('emailRequired')}
                                 </Typography.Text>
                             ),
@@ -48,7 +48,7 @@ const ForgotPassword: React.FC<any> = () => {
                         {
                             type: 'email',
                             message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
+                                <Typography.Text className={styles.inheritColorText}>
                                     {t('emailInvalid')}
                                 </Typography.Text>
                             ),
@@ -73,33 +73,15 @@ const ForgotPassword: React.FC<any> = () => {
                         icon={!loading && <ArrowRightOutlined />}
                         iconPosition="end"
                     >
-                        <Typography.Text style={{ color: 'white' }}>{t('submit')}</Typography.Text>
+                        <Typography.Text className={styles.whiteText}>{t('submit')}</Typography.Text>
                     </Button>
                 </Form.Item>
             </Form>
 
-            <p
-                style={{
-                    marginTop: 40,
-                    textAlign: 'center',
-                    fontSize: 14,
-                    color: '#64748b',
-                }}
-            >
-                <Link
-                    href="/login"
-                    style={{
-                        fontWeight: 'bold',
-                        color: '#059669',
-                        textDecoration: 'none',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '8px',
-                    }}
-                >
+            <p className={styles.footerText}>
+                <Link href="/login" className={styles.backLink}>
                     <ArrowLeftOutlined />
-                    <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>
+                    <Typography.Text className={styles.inheritWeightText}>
                         {t('backToLogin')}
                     </Typography.Text>
                 </Link>

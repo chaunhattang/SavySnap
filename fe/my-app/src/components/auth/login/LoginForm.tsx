@@ -11,9 +11,8 @@ import {
 import styles from './login.module.css';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { AuthService } from '@/services/apis/AuthService';
+import { authService } from '@/services/apis/auth.service';
 
 const LoginForm: React.FC<any> = () => {
     const t = useTranslations('auth.login');
@@ -34,35 +33,16 @@ const LoginForm: React.FC<any> = () => {
         }
     }, []);
 
-    const handleLogin = async () => {
-        try {
-            await AuthService.Login();
-        } catch {}
-    };
-
     const onFinish = async (values: any) => {
         setLoading(true);
 
         try {
-            const port = process.env.NEXT_PUBLIC_API_BASE_URL + '/auth/login';
             console.log('Success:', values);
-            console.log(port);
-            const res = await axios.post(port, values);
-
-            // const info = await axios.get('http://10.60.250.222:8080/api/users');
-
-            // console.log(info.data);
-
-            console.log(res.data);
-
-            const token = res.data?.result?.token;
+            const { isAdmin, token } = await authService.login(values);
 
             if (token) {
-                localStorage.setItem('accessToken', token);
-
                 console.log('Login success');
-
-                router.push('/');
+                router.push(isAdmin ? '/admin' : '/user');
             }
         } catch (error) {
             console.error('Lỗi đăng nhập:', error);
@@ -95,7 +75,7 @@ const LoginForm: React.FC<any> = () => {
                         {
                             required: true,
                             message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
+                                <Typography.Text className={styles.inheritColorText}>
                                     {t('emailRequired')}
                                 </Typography.Text>
                             ),
@@ -103,7 +83,7 @@ const LoginForm: React.FC<any> = () => {
                         {
                             type: 'string',
                             message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
+                                <Typography.Text className={styles.inheritColorText}>
                                     {t('emailInvalid')}
                                 </Typography.Text>
                             ),
@@ -127,7 +107,7 @@ const LoginForm: React.FC<any> = () => {
                                 {t('passwordLabel')}
                             </Typography.Text>
                             <Link href="/forgot-password" className={styles.forgotLink}>
-                                <Typography.Text style={{ color: 'inherit' }}>
+                                <Typography.Text className={styles.inheritColorText}>
                                     {t('forgotPassword')}
                                 </Typography.Text>
                             </Link>
@@ -138,7 +118,7 @@ const LoginForm: React.FC<any> = () => {
                         {
                             required: true,
                             message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
+                                <Typography.Text className={styles.inheritColorText}>
                                     {t('passwordRequired')}
                                 </Typography.Text>
                             ),
@@ -163,51 +143,38 @@ const LoginForm: React.FC<any> = () => {
                         icon={!loading && <ArrowRightOutlined />}
                         iconPosition="end"
                     >
-                        <Typography.Text style={{ color: 'white' }}>{t('submit')}</Typography.Text>
+                        <Typography.Text className={styles.whiteText}>
+                            {t('submit')}
+                        </Typography.Text>
                     </Button>
                 </Form.Item>
             </Form>
-            <Divider style={{ fontSize: 12, color: '#cbd5e1', fontWeight: 'bold' }}>
-                <Typography.Text
-                    style={{ color: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}
-                >
-                    {t('divider')}
-                </Typography.Text>
+            <Divider className={styles.customDivider}>
+                <Typography.Text className={styles.inheritAllText}>{t('divider')}</Typography.Text>
             </Divider>
             <Row gutter={16}>
                 <Col span={12}>
                     <Button block className={styles.socialBtn} icon={<GoogleOutlined />}>
-                        <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>
+                        <Typography.Text className={styles.inheritWeightText}>
                             {t('loginWithGoogle')}
                         </Typography.Text>
                     </Button>
                 </Col>
                 <Col span={12}>
                     <Button block className={styles.socialBtn} icon={<GithubOutlined />}>
-                        <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>
+                        <Typography.Text className={styles.inheritWeightText}>
                             {t('loginWithGithub')}
                         </Typography.Text>
                     </Button>
                 </Col>
             </Row>
-            <p
-                style={{
-                    marginTop: 40,
-                    textAlign: 'center',
-                    fontSize: 14,
-                    color: '#64748b',
-                }}
-            >
-                <Typography.Text style={{ color: 'inherit' }}>{t('noAccount')}</Typography.Text>?{' '}
-                <Link
-                    href="/register"
-                    style={{
-                        fontWeight: 'bold',
-                        color: '#059669',
-                        textDecoration: 'none',
-                    }}
-                >
-                    <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>
+            <p className={styles.footerText}>
+                <Typography.Text className={styles.inheritColorText}>
+                    {t('noAccount')}
+                </Typography.Text>
+                ?{' '}
+                <Link href="/register" className={styles.registerLink}>
+                    <Typography.Text className={styles.inheritWeightText}>
                         {t('register')}
                     </Typography.Text>
                 </Link>

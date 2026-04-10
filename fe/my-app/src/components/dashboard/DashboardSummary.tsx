@@ -3,6 +3,7 @@
 import { Row, Col, Card } from 'antd';
 import { useSnaps } from '@/hooks/useSnaps';
 import { useTranslations } from 'next-intl';
+import styles from './DashboardSummary.module.css';
 
 export default function DashboardSummary() {
     const { snaps } = useSnaps();
@@ -11,18 +12,16 @@ export default function DashboardSummary() {
         0
     );
 
+    const totalSaving = snaps
+        .filter((snap) => snap.category === 'SAVING')
+        .reduce((sum, snap) => sum + (snap.amount ? Number(snap.amount) : 0), 0);
+
     const t = useTranslations('dashboard');
 
     return (
-        <Row gutter={16} style={{ marginBottom: 24 }}>
+        <Row gutter={16} className={styles.rowMargin}>
             <Col span={16}>
-                <Card
-                    style={{
-                        background: 'linear-gradient(135deg, #0f172a, #065f46)',
-                        color: 'white',
-                        borderRadius: 20,
-                    }}
-                >
+                <Card className={styles.totalFeeCard}>
                     <div>{t('totalFee')}</div>
 
                     <h1>{totalExpense.toLocaleString()} đ</h1>
@@ -30,14 +29,10 @@ export default function DashboardSummary() {
             </Col>
 
             <Col span={8}>
-                <Card
-                    style={{
-                        borderRadius: 20,
-                    }}
-                >
-                    <div>_____________</div>
+                <Card className={styles.normalCard}>
+                    <div>{t('totalSaving')}</div>
 
-                    <h2>5.050.000 đ</h2>
+                    <h2>{totalSaving.toLocaleString()} đ</h2>
                 </Card>
             </Col>
         </Row>

@@ -8,6 +8,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 20px;
+    overflow: hidden;
 }
 
 /* logo chữ app */
@@ -85,4 +86,82 @@
     color: white !important;
     background-color: rgb(4 120 87) !important;
     box-shadow: var(--btn_boxShadow);
+}
+
+.userArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 16px;
+    gap: 8px;
+}
+
+.avatarIcon {
+    background-color: #1677ff;
+    cursor: pointer;
+}
+
+.emailText {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+    padding: 0 8px;
+}
+
+.signInBtn {
+    cursor: pointer;
+    background-color: darkgray !important;
+}
+
+.profileInfoBox {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 4px;
+}
+
+.profileInfoText {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.profileInfoUsername {
+    font-size: 16px !important;
+}
+
+.profileInfoEmail {
+    font-size: 13px !important;
+}
+/* ── Bell — perfectly mirrors antd Menu item li ── */
+.bellItem {
+    list-style: none;
+    width: 88px;
+    height: 70px;
+    margin: 10px 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.bellIcon {
+    font-size: 22px !important;
+    color: var(--title) !important;
+    padding: 12px;
+    border-radius: 14px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bellItem:hover .bellIcon {
+    background: var(--btn_background);
+    color: var(--btn_color) !important;
+    transform: scale(0.9);
 }

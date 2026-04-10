@@ -10,10 +10,10 @@ const LoginCard: React.FC<any> = () => {
             <div>
                 <div className={styles.logoBox}>
                     <div className={styles.logoIcon}>
-                        <CameraOutlined style={{ fontSize: 24 }} />
+                        <CameraOutlined className={styles.largeCameraIcon} />
                     </div>
                     <Typography.Text
-                        style={{ fontSize: '1.25rem', fontWeight: 'bold', color: 'white' }}
+                        className={styles.brandNameText}
                     >
                         {t('brandName')}
                     </Typography.Text>
@@ -32,7 +32,7 @@ const LoginCard: React.FC<any> = () => {
                         <span key={i} className={styles.avatar}></span>
                     ))}
                 </div>
-                <Typography.Text style={{ color: 'white' }}>{t('trustedUsers')}</Typography.Text>
+                <Typography.Text className={styles.trustedUserText}>{t('trustedUsers')}</Typography.Text>
             </div>
 
             <div className={styles.shapeTopRight}></div>

@@ -38,14 +38,14 @@ export default function CreateSnapModal({ open, onClose }: any) {
                 className={styles.uploadBox}
             >
                 <p className="ant-upload-drag-icon">
-                    <InboxOutlined style={{ fontSize: 32 }} className={styles.icon} />
+                    <InboxOutlined className={`${styles.icon} ${styles.largeIcon}`} />
                 </p>
 
                 <Text strong>{t('uploadTitle')}</Text>
 
                 <br />
 
-                <Text type="secondary" style={{ fontSize: 12 }}>
+                <Text type="secondary" className={styles.smallHint}>
                     {t('uploadHint')}
                 </Text>
             </Dragger>
@@ -60,7 +60,7 @@ export default function CreateSnapModal({ open, onClose }: any) {
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     size="large"
-                    style={{ marginTop: 6 }}
+                    className={styles.inputField}
                 />
             </div>
 
@@ -86,10 +86,7 @@ export default function CreateSnapModal({ open, onClose }: any) {
                         value={category}
                         onChange={setCategory}
                         size="large"
-                        style={{
-                            width: '100%',
-                            marginTop: 6,
-                        }}
+                        className={styles.selectField}
                         options={[
                             {
                                 value: 'NEED',

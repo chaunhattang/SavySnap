@@ -1,0 +1,13 @@
+.rowMargin {
+    margin-bottom: 24px;
+}
+
+.totalFeeCard {
+    background: linear-gradient(135deg, #0f172a, #065f46) !important;
+    color: white !important;
+    border-radius: 20px !important;
+}
+
+.normalCard {
+    border-radius: 20px !important;
+}

@@ -7,6 +7,11 @@
 .icon {
     color: var(--btn_background) !important;
 }
+
+.largeIcon {
+    font-size: 32px;
+}
+
 .section {
     margin-bottom: 16px;
 }
@@ -39,4 +44,17 @@
 
 .submitButton:hover {
     background-color: var(--btn_hover) !important;
+}
+
+.smallHint {
+    font-size: 12px;
+}
+
+.inputField {
+    margin-top: 6px;
+}
+
+.selectField {
+    width: 100%;
+    margin-top: 6px;
 }

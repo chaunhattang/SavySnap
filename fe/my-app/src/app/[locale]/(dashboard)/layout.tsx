@@ -3,18 +3,19 @@
 import { Layout } from 'antd';
 import Sidebar from '@/components/layout/SideBar/SideBar';
 import HeaderBar from '@/components/layout/HeaderBar/HeaderBar';
+import styles from './layout.module.css';
 
 const { Content } = Layout;
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     return (
-        <Layout style={{ minHeight: '100vh' }}>
+        <Layout className={styles.dashboardLayout}>
             <Sidebar />
 
             <Layout>
                 <HeaderBar />
 
-                <Content style={{ padding: 24 }}>{children}</Content>
+                <Content className={styles.dashboardContent}>{children}</Content>
             </Layout>
         </Layout>
     );

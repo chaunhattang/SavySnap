@@ -5,8 +5,8 @@ import { useTranslations } from 'next-intl';
 import { MailOutlined, LockOutlined, ArrowRightOutlined, UserOutlined } from '@ant-design/icons';
 import styles from './register.module.css';
 import Link from 'next/link';
-import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { authService } from '@/services/apis/auth.service';
 
 const RegisterForm: React.FC = () => {
     const [form] = Form.useForm();
@@ -18,10 +18,7 @@ const RegisterForm: React.FC = () => {
         try {
             console.log('Received values of form: ', values);
             await new Promise((resolve) => setTimeout(resolve, 1500));
-            const port = process.env.NEXT_PUBLIC_API_URL + '/auth/register';
-
-            await axios.post('http://10.60.250.222:8080/api/auth/register', values);
-
+            await authService.register(values);
             localStorage.setItem('registeredEmail', values.email);
             localStorage.setItem('registeredPassword', values.password);
             router.push('/login');
@@ -57,7 +54,7 @@ const RegisterForm: React.FC = () => {
                         {
                             required: true,
                             message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
+                                <Typography.Text className={styles.inheritColorText}>
                                     {t('usernameRequired')}
                                 </Typography.Text>
                             ),
@@ -84,7 +81,7 @@ const RegisterForm: React.FC = () => {
                         {
                             type: 'email',
                             message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
+                                <Typography.Text className={styles.inheritColorText}>
                                     {t('emailInvalid')}
                                 </Typography.Text>
                             ),
@@ -92,7 +89,7 @@ const RegisterForm: React.FC = () => {
                         {
                             required: true,
                             message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
+                                <Typography.Text className={styles.inheritColorText}>
                                     {t('emailRequired')}
                                 </Typography.Text>
                             ),
@@ -118,7 +115,7 @@ const RegisterForm: React.FC = () => {
                         {
                             required: true,
                             message: (
-                                <Typography.Text style={{ color: 'inherit' }}>
+                                <Typography.Text className={styles.inheritColorText}>
                                     {t('passwordRequired')}
                                 </Typography.Text>
                             ),
@@ -147,7 +144,7 @@ const RegisterForm: React.FC = () => {
                     ]}
                 >
                     <Checkbox>
-                        <Typography.Text style={{ color: 'inherit' }}>
+                        <Typography.Text className={styles.inheritColorText}>
                             {t('agreement')}
                         </Typography.Text>
                     </Checkbox>
@@ -163,29 +160,15 @@ const RegisterForm: React.FC = () => {
                         icon={!loading && <ArrowRightOutlined />}
                         iconPosition="end"
                     >
-                        <Typography.Text style={{ color: 'white' }}>{t('submit')}</Typography.Text>
+                        <Typography.Text className={styles.whiteText}>{t('submit')}</Typography.Text>
                     </Button>
                 </Form.Item>
             </Form>
 
-            <p
-                style={{
-                    marginTop: 20,
-                    textAlign: 'center',
-                    fontSize: 14,
-                    color: '#64748b',
-                }}
-            >
-                <Typography.Text style={{ color: 'inherit' }}>{t('hasAccount')}</Typography.Text>{' '}
-                <Link
-                    href="/login"
-                    style={{
-                        fontWeight: 'bold',
-                        color: '#059669',
-                        textDecoration: 'none',
-                    }}
-                >
-                    <Typography.Text style={{ color: 'inherit', fontWeight: 'inherit' }}>
+            <p style={{ marginTop: 20 }} className={styles.footerText}>
+                <Typography.Text className={styles.inheritColorText}>{t('hasAccount')}</Typography.Text>{' '}
+                <Link href="/login" className={styles.loginLink}>
+                    <Typography.Text className={styles.inheritWeightText}>
                         {t('loginUrlText')}
                     </Typography.Text>
                 </Link>
