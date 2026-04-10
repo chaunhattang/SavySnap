@@ -22,9 +22,6 @@ export function useSnaps() {
     }, []);
 
     useEffect(() => {
-        const token = localStorage.getItem('accessToken');
-
-        if (!token) return;
         fetchSnaps();
 
         const handleRefresh = () => {
