@@ -10,5 +10,5 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserUpdateRequest {
     String password;
-//    String imageUrl;
+    String avatarUrl;
 }

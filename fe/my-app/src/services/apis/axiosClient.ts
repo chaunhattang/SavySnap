@@ -33,7 +33,10 @@ axiosClient.interceptors.response.use(
         if (response?.data?.message) {
             return Promise.reject(response.data.message);
         }
-        if (response?.data) {
+        if (
+            response?.data &&
+            (typeof response.data !== 'object' || Object.keys(response.data).length > 0)
+        ) {
             return Promise.reject(response.data);
         }
         return Promise.reject(error.message || error);
