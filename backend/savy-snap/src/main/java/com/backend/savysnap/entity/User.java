@@ -29,8 +29,8 @@ public class User {
     Long totalPayment = 0L;
 
     @Column(columnDefinition = "TEXT")
-    String imageUrl;
-    
+    String avatarUrl;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     List<SavingNote> savingNotes;
 

@@ -32,7 +32,6 @@ public class SecurityConfig {
 
     final String[] PUBLIC_ENDPOINTS = {
             "/auth/login", "/auth/register",
-            "/users", "users/my-info",
             "/error"
     };
 
@@ -49,12 +48,9 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(request -> request
                 .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
-                .anyRequest().authenticated()
-        );
+                .anyRequest().authenticated());
 
-        http.oauth2ResourceServer(oauth2 ->
-                oauth2.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder()))
-        );
+        http.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder())));
 
         return http.build();
     }

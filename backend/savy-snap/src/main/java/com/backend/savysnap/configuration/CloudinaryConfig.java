@@ -25,6 +25,10 @@ public class CloudinaryConfig {
 
     @Bean
     public Cloudinary cloudinary() {
+        if (cloudName == null || apiKey == null || apiSecret == null) {
+            throw new IllegalStateException("Cloudinary credentials not configured");
+        }
+
         Map<String, String> config = new HashMap<>();
         config.put("cloud_name", cloudName);
         config.put("api_key", apiKey);

@@ -31,7 +31,6 @@ public class UserService {
     CloudinaryService cloudinaryService;
     PasswordEncoder passwordEncoder;
 
-
     public UserResponse createUser(UserCreateRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new AppException(ErrorCode.USER_ALREADY_EXISTS);
@@ -53,33 +52,30 @@ public class UserService {
         var authentication = context.getAuthentication();
         String username = authentication.getName();
 
-        User user = userRepository.findByUsername(username).orElseThrow(()
-                -> new AppException(ErrorCode.USER_NOT_FOUND)
-        );
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
 
         return userMapper.toUserResponse(user);
     }
+
     public UserResponse updateUserByUsername(String username, UserUpdateRequest request, MultipartFile file) {
-        User user = userRepository.findByUsername(username).orElseThrow(()
-                -> new AppException(ErrorCode.USER_NOT_FOUND)
-        );
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
 
         userMapper.updateUser(user, request);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         String imageUrl = cloudinaryService.uploadImage(file);
         if (imageUrl != null) {
-            user.setImageUrl(imageUrl);
+            user.setAvatarUrl(imageUrl);
         }
 
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
-
     public UserResponse getUserByUsername(String username) {
-        User user = userRepository.findByUsername(username).orElseThrow(()
-                -> new AppException(ErrorCode.USER_NOT_FOUND)
-        );
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         return userMapper.toUserResponse(user);
     }
 
