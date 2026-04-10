@@ -33,7 +33,8 @@ public class SecurityConfig {
     final String[] PUBLIC_ENDPOINTS = {
             "/auth/login", "/auth/register",
             "/users", "users/my-info",
-            "/error"
+            "/error",
+            "ádhasdkasdasdasd"
     };
 
     @NonFinal
