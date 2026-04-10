@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import styles from './styles.module.css';
-
+import React, { useEffect, useState } from 'react';
+import { Avatar, Badge, Layout, Menu, Dropdown, Button, Typography } from 'antd';
 import {
     CameraOutlined,
     WalletOutlined,
@@ -12,35 +11,15 @@ import {
     LogoutOutlined,
     EditOutlined,
 } from '@ant-design/icons';
-
-import {
-    Avatar,
-    Layout,
-    Menu,
-    Dropdown,
-    Modal,
-    Form,
-    Input,
-    Button,
-    message,
-    Typography,
-    Divider,
-} from 'antd';
-
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { userService } from '@/services/apis/user.service';
+import { useRouter } from 'next/navigation';
 import { User } from '@/types/user.td';
+import { NotificationPanel } from '@/components/notification/NotificationDropdown';
+import styles from './styles.module.css';
 
 const { Sider } = Layout;
 const { Text } = Typography;
-
-const items = [CameraOutlined, WalletOutlined, PieChartOutlined, BellOutlined].map(
-    (icon, index) => ({
-        key: String(index + 1),
-        icon: React.createElement(icon),
-    })
-);
 
 interface Props {
     loggedIn: boolean;
@@ -49,44 +28,32 @@ interface Props {
     onRefreshUser: () => Promise<void>;
 }
 
-export default function SidebarView({ loggedIn, user, onLogout, onRefreshUser }: Props) {
-    const [openProfile, setOpenProfile] = useState(false);
-    const [saving, setSaving] = useState(false);
-    const [form] = Form.useForm();
+export default function SidebarView({ loggedIn, user, onLogout }: Props) {
     const t = useTranslations('sideBar');
+    const router = useRouter();
 
-    // Pre-fill form when modal opens with latest user data
+    // Notification unread count — synced from localStorage so badge matches
+    const [unreadCount, setUnreadCount] = useState(0);
+    const [notifOpen, setNotifOpen] = useState(false);
+
     useEffect(() => {
-        if (openProfile && user) {
-            form.setFieldsValue({
-                username: user.username,
-                email: user.email,
-            });
+        const key = 'savysnap_notifs_user';
+        const raw = localStorage.getItem(key);
+        if (raw) {
+            const notifs = JSON.parse(raw);
+            setUnreadCount(notifs.filter((n: any) => !n.read).length);
+        } else {
+            // default 2 unread (matches DEFAULT_USER in NotificationDropdown)
+            setUnreadCount(2);
         }
-    }, [openProfile, user, form]);
+    }, []);
 
-    const handleSave = async (values: { email: string }) => {
-        if (!user?.username) return;
-        setSaving(true);
-        try {
-            await userService.updateByUserName(user.username, { email: values.email });
-            message.success('Cập nhật thông tin thành công!');
-            await onRefreshUser();
-            setOpenProfile(false);
-        } catch (error) {
-            message.error('Cập nhật thất bại. Vui lòng thử lại!');
-            console.error(error);
-        } finally {
-            setSaving(false);
-        }
-    };
-
-    const menuItems = [
+    const avatarMenuItems = [
         {
             key: 'profile',
             label: t('editProfile'),
             icon: <EditOutlined />,
-            onClick: () => setOpenProfile(true),
+            onClick: () => router.push('/profile'),
         },
         {
             key: 'logout',
@@ -97,22 +64,29 @@ export default function SidebarView({ loggedIn, user, onLogout, onRefreshUser }:
         },
     ];
 
+    // Nav icons — bell handled separately via Dropdown below
+    const navItems = [CameraOutlined, WalletOutlined, PieChartOutlined].map(
+        (icon, index) => ({
+            key: String(index + 1),
+            icon: React.createElement(icon),
+        })
+    );
+
     return (
         <Sider width={100} breakpoint="lg" collapsedWidth={90} className={styles.sidebar}>
             {/* USER AREA */}
             <div className={styles.userArea}>
                 {loggedIn ? (
                     <>
-                        <Dropdown menu={{ items: menuItems }} placement="bottomRight">
+                        <Dropdown menu={{ items: avatarMenuItems }} placement="bottomRight">
                             <Avatar
                                 size={56}
-                                icon={<UserOutlined />}
+                                src={user?.avatarUrl}
+                                icon={!user?.avatarUrl && <UserOutlined />}
                                 className={styles.avatarIcon}
                             />
                         </Dropdown>
-                        {user && (
-                            <span className={styles.emailText}>{user.username}</span>
-                        )}
+                        {user && <span className={styles.emailText}>{user.username}</span>}
                     </>
                 ) : (
                     <Link href="/login">
@@ -123,79 +97,37 @@ export default function SidebarView({ loggedIn, user, onLogout, onRefreshUser }:
                 )}
             </div>
 
+            {/* NAV MENU - Camera, Wallet, PieChart */}
             <Menu
                 className={styles.menuSidebar}
                 mode="inline"
                 defaultSelectedKeys={['1']}
-                items={items}
+                items={navItems}
             />
 
-            {/* PROFILE MODAL */}
-            <Modal
-                title={
-                    <div>
-                        <Text strong style={{ fontSize: 18 }}>Chỉnh sửa thông tin</Text>
-                        <br />
-                        <Text type="secondary" style={{ fontSize: 13 }}>
-                            Cập nhật thông tin cá nhân của bạn
-                        </Text>
-                    </div>
-                }
-                open={openProfile}
-                onCancel={() => setOpenProfile(false)}
-                footer={null}
-                width={480}
-            >
-                {/* Thông tin hiện tại */}
-                {user && (
-                    <div className={styles.profileInfoBox}>
-                        <Avatar size={64} icon={<UserOutlined />} className={styles.avatarIcon} />
-                        <div className={styles.profileInfoText}>
-                            <Text strong className={styles.profileInfoUsername}>{user.username}</Text>
-                            <Text type="secondary" className={styles.profileInfoEmail}>{user.email}</Text>
-                        </div>
-                    </div>
+            {/* BELL — rendered as identical antd menu-item li */}
+            <Dropdown
+                open={notifOpen}
+                onOpenChange={(v) => {
+                    setNotifOpen(v);
+                    if (v) setUnreadCount(0); // clear badge when opened
+                }}
+                popupRender={() => (
+                    <NotificationPanel
+                        role="user"
+                        onMarkRead={() => setUnreadCount(0)}
+                    />
                 )}
-
-                <Divider />
-
-                <Form
-                    form={form}
-                    layout="vertical"
-                    onFinish={handleSave}
-                    requiredMark={false}
-                >
-                    <Form.Item
-                        label={<Text strong>Tên đăng nhập</Text>}
-                        name="username"
-                    >
-                        <Input disabled prefix={<UserOutlined />} />
-                    </Form.Item>
-
-                    <Form.Item
-                        label={<Text strong>Email</Text>}
-                        name="email"
-                        rules={[
-                            { required: true, message: 'Vui lòng nhập email' },
-                            { type: 'email', message: 'Email không hợp lệ' },
-                        ]}
-                    >
-                        <Input placeholder="Nhập email mới" />
-                    </Form.Item>
-
-                    <Form.Item style={{ marginBottom: 0, marginTop: 8 }}>
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                            block
-                            loading={saving}
-                            style={{ height: 44, borderRadius: 12 }}
-                        >
-                            Lưu thay đổi
-                        </Button>
-                    </Form.Item>
-                </Form>
-            </Modal>
+                trigger={['click']}
+                placement="bottomLeft"
+            >
+                {/* li styled to exactly match antd Menu item */}
+                <li className={styles.bellItem}>
+                    <Badge count={unreadCount} size="small" offset={[4, -4]}>
+                        <BellOutlined className={styles.bellIcon} />
+                    </Badge>
+                </li>
+            </Dropdown>
         </Sider>
     );
 }

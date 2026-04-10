@@ -42,7 +42,7 @@ const LoginForm: React.FC<any> = () => {
 
             if (token) {
                 console.log('Login success');
-                router.push(isAdmin ? '/admin' : '/');
+                router.push(isAdmin ? '/admin' : '/user');
             }
         } catch (error) {
             console.error('Lỗi đăng nhập:', error);

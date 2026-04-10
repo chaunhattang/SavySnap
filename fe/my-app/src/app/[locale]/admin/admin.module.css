@@ -245,3 +245,86 @@
 .profileInfoEmail {
     font-size: 13px !important;
 }
+
+/* ──────────────────────────────────────────────
+   Settings Tab
+────────────────────────────────────────────── */
+.settingsWrapper {
+    /* inherits .content padding from parent */
+}
+
+.settingCard {
+    border-radius: 16px !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important;
+}
+
+.settingCardHeader {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.settingIconBox {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid #e2e8f0;
+}
+
+.settingCardTitle {
+    font-size: 15px !important;
+    display: block;
+    line-height: 1.4 !important;
+}
+
+.settingCardDesc {
+    font-size: 12px !important;
+    display: block;
+    margin-top: 2px;
+}
+
+.settingInput {
+    border-radius: 10px !important;
+    height: 40px;
+}
+
+.settingSelect {
+    border-radius: 10px !important;
+}
+
+.settingSaveBtn {
+    height: 40px !important;
+    border-radius: 10px !important;
+    font-weight: 700 !important;
+    background-color: #059669 !important;
+    border-color: #059669 !important;
+    min-width: 160px;
+}
+
+/* notification toggle row */
+.notifRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+/* status row */
+.statusRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.statusRow:last-child {
+    border-bottom: none;
+}

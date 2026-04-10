@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Snap } from '@/types/snap.td';
 import { snapService } from '@/services/apis/snap.service';
+import Cookies from 'js-cookie';
 
 export function useSnaps() {
     const [snaps, setSnaps] = useState<Snap[]>([]);
@@ -22,7 +23,7 @@ export function useSnaps() {
     }, []);
 
     useEffect(() => {
-        const token = localStorage.getItem('accessToken');
+        const token = Cookies.get('accessToken');
 
         if (!token) return;
         fetchSnaps();

@@ -152,7 +152,8 @@
         }
     },
     "dashboard": {
-        "totalFee": "Total Expense"
+        "totalFee": "Total Expense",
+        "totalSaving": "Total Savings"
     },
     "headerBar": {
         "placeholder": "Search notes",

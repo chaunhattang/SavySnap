@@ -10,7 +10,7 @@ const intlMiddleware = createMiddleware({
     localeDetection: true,
 });
 
-const protectedRoutes = ['/admin', '/'];
+const protectedRoutes = ['/admin', '/user', '/profile', '/'];
 const authRoutes = ['/login', '/register', '/forgot-password'];
 
 export default function middleware(req: NextRequest) {
@@ -37,7 +37,7 @@ export default function middleware(req: NextRequest) {
 
     // Case 2: Authenticated but trying to hit login/register page
     if (isAuthRoute && token) {
-        const targetRoute = role === 'ADMIN' ? `/${locale}/admin` : `/${locale}`;
+        const targetRoute = role === 'ADMIN' ? `/${locale}/admin` : `/${locale}/user`;
         return NextResponse.redirect(new URL(targetRoute, req.url));
     }
 

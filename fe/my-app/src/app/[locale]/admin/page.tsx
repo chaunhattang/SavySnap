@@ -9,6 +9,8 @@ import AdminSidebar from './components/AdminSidebar';
 import AdminHeader from './components/AdminHeader';
 import DashboardTab from './components/DashboardTab';
 import UsersTab from './components/UsersTab';
+import SettingsTab from './components/SettingsTab';
+import SnapsTab from './components/SnapsTab';
 
 const { Content } = Layout;
 
@@ -33,6 +35,8 @@ export default function AdminPage() {
                     <Content className={styles.content}>
                         {activeTab === '1' && <DashboardTab />}
                         {activeTab === '2' && <UsersTab />}
+                        {activeTab === '3' && <SnapsTab />}
+                        {activeTab === '4' && <SettingsTab />}
                     </Content>
                 </Layout>
             </Layout>

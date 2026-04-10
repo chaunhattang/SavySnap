@@ -12,6 +12,10 @@ export default function DashboardSummary() {
         0
     );
 
+    const totalSaving = snaps
+        .filter((snap) => snap.category === 'SAVING')
+        .reduce((sum, snap) => sum + (snap.amount ? Number(snap.amount) : 0), 0);
+
     const t = useTranslations('dashboard');
 
     return (
@@ -26,9 +30,9 @@ export default function DashboardSummary() {
 
             <Col span={8}>
                 <Card className={styles.normalCard}>
-                    <div>_____________</div>
+                    <div>{t('totalSaving')}</div>
 
-                    <h2>5.050.000 đ</h2>
+                    <h2>{totalSaving.toLocaleString()} đ</h2>
                 </Card>
             </Col>
         </Row>

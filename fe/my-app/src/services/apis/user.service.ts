@@ -20,8 +20,16 @@ export const userService = {
     },
 
     updateByUserName: async (username: string, data: any): Promise<User> => {
-        const response = await axiosClient.put(`${ENDPOINT.USERS.BASE}/${username}`, data);
+        const response = await axiosClient.put(`${ENDPOINT.USERS.BASE}/${username}`, data, {
+            headers: { 'Content-Type': 'application/json' },
+        });
+        return response as unknown as User;
+    },
 
+    updateProfile: async (username: string, formData: FormData): Promise<User> => {
+        const response = await axiosClient.put(`${ENDPOINT.USERS.BASE}/${username}`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' },
+        });
         return response as unknown as User;
     },
 

@@ -142,7 +142,8 @@
         }
     },
     "dashboard": {
-        "totalFee": "Tổng chi tiêu"
+        "totalFee": "Tổng chi tiêu",
+        "totalSaving": "Khoản tiết kiệm"
     },
     "headerBar": {
         "placeholder": "Tìm kiếm ghi chú",

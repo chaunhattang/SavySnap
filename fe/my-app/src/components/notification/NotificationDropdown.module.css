@@ -1,0 +1,167 @@
+.dropdownWrapper {
+    width: 380px;
+    max-height: 520px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+}
+
+/* ── Header ── */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid #f1f5f9;
+    flex-shrink: 0;
+}
+
+.title {
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    margin: 0 !important;
+}
+
+.markAllBtn {
+    font-size: 12px !important;
+    color: #059669 !important;
+    padding: 0 !important;
+    height: auto !important;
+}
+
+/* ── List ── */
+.list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.list::-webkit-scrollbar-thumb {
+    background: #e2e8f0;
+    border-radius: 4px;
+}
+
+/* ── Item ── */
+.item {
+    display: flex;
+    gap: 12px;
+    padding: 14px 20px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    position: relative;
+    border-bottom: 1px solid #f8fafc;
+}
+
+.item:last-child {
+    border-bottom: none;
+}
+
+.item:hover {
+    background: #f8fafc;
+}
+
+.itemUnread {
+    background: #f0fdf9;
+}
+
+.itemUnread:hover {
+    background: #e6faf3;
+}
+
+/* Unread dot */
+.unreadDot {
+    position: absolute;
+    top: 18px;
+    right: 16px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #059669;
+    flex-shrink: 0;
+}
+
+/* Icon container */
+.iconBox {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.iconSnap    { background: #d1fae5; color: #059669; }
+.iconProfile { background: #dbeafe; color: #2563eb; }
+.iconSystem  { background: #fde68a; color: #d97706; }
+.iconWelcome { background: #ede9fe; color: #7c3aed; }
+.iconAdmin   { background: #fee2e2; color: #dc2626; }
+
+/* Text */
+.itemContent {
+    flex: 1;
+    min-width: 0;
+    padding-right: 16px;
+}
+
+.itemTitle {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1.4;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.itemDesc {
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.itemTime {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 4px;
+    display: block;
+}
+
+/* ── Empty state ── */
+.empty {
+    padding: 40px 20px;
+    text-align: center;
+    color: #94a3b8;
+}
+
+.emptyIcon {
+    font-size: 40px;
+    margin-bottom: 8px;
+}
+
+/* ── Footer ── */
+.footer {
+    padding: 12px 20px;
+    border-top: 1px solid #f1f5f9;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.footerBtn {
+    font-size: 13px !important;
+    color: #059669 !important;
+    font-weight: 600 !important;
+    padding: 0 !important;
+    height: auto !important;
+}
