@@ -5,7 +5,7 @@ import queryString from 'query-string';
 import Cookies from 'js-cookie';
 
 const axiosClient = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL, // base url server
+    baseURL: process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL, // base url server
     paramsSerializer: (params) => queryString.stringify(params),
 });
 
@@ -30,7 +30,13 @@ axiosClient.interceptors.response.use(
     },
     (error) => {
         const { response } = error;
-        return Promise.reject(response.data.message as string);
+        if (response?.data?.message) {
+            return Promise.reject(response.data.message);
+        }
+        if (response?.data) {
+            return Promise.reject(response.data);
+        }
+        return Promise.reject(error.message || error);
     }
 );
 
