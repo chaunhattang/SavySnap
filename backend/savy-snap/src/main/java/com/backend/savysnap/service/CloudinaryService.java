@@ -27,7 +27,9 @@ public class CloudinaryService {
         }
         try {
             Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
-            return uploadResult.get("secure_url").toString();
+            String originalUrl = uploadResult.get("secure_url").toString();
+
+            return originalUrl.replace("/upload/", "/upload/f_auto,q_auto/");
         } catch (IOException e) {
             log.error("Lỗi khi upload ảnh lên Cloudinary", e);
             throw new AppException(ErrorCode.ERROR_UPLOAD_IMAGE);

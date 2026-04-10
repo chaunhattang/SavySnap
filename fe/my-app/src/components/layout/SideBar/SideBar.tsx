@@ -5,16 +5,28 @@ import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { userService } from '@/services/apis/user.service';
 import { User } from '@/types/user.td';
+import { Grid } from 'antd';
 
-export default function Sidebar() {
+const { useBreakpoint } = Grid;
+
+interface Props {
+    collapsed: boolean;
+    setCollapsed: (v: boolean) => void;
+}
+
+export default function Sidebar({ collapsed, setCollapsed }: Props) {
     const [loggedIn, setLoggedIn] = useState(false);
     const [user, setUser] = useState<User | null>(null);
+
+    const screens = useBreakpoint();
+    const isMobile = !screens.md;
 
     useEffect(() => {
         const token = Cookies.get('accessToken');
 
         if (token) {
             setLoggedIn(true);
+
             userService
                 .getMyInfo()
                 .then((info) => {
@@ -31,6 +43,7 @@ export default function Sidebar() {
         localStorage.clear();
         Cookies.remove('accessToken', { path: '/' });
         Cookies.remove('role', { path: '/' });
+
         window.location.href = '/login';
     };
 
@@ -49,6 +62,9 @@ export default function Sidebar() {
             user={user}
             onLogout={handleLogout}
             onRefreshUser={refreshUser}
+            collapsed={collapsed}
+            setCollapsed={setCollapsed}
+            isMobile={isMobile}
         />
     );
 }
