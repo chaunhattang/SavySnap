@@ -15,7 +15,8 @@ import {
 
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+
 import { User } from '@/types/user.td';
 import { NotificationPanel } from '@/components/notification/NotificationDropdown';
 
@@ -44,7 +45,9 @@ export default function SidebarView({
     isMobile,
 }: Props) {
     const t = useTranslations('sideBar');
+
     const router = useRouter();
+    const pathname = usePathname();
 
     const [unreadCount, setUnreadCount] = useState(0);
     const [notifOpen, setNotifOpen] = useState(false);
@@ -61,12 +64,22 @@ export default function SidebarView({
         }
     }, []);
 
+    /* ========================= */
+    /* GET LOCALE */
+    /* ========================= */
+
+    const locale = pathname.split('/')[1] || 'vi';
+
+    /* ========================= */
+    /* AVATAR MENU */
+    /* ========================= */
+
     const avatarMenuItems = [
         {
             key: 'profile',
             label: t('editProfile'),
             icon: <EditOutlined />,
-            onClick: () => router.push('/profile'),
+            onClick: () => router.push(`/${locale}/profile`),
         },
         {
             key: 'logout',
@@ -77,14 +90,45 @@ export default function SidebarView({
         },
     ];
 
-    const navItems = [CameraOutlined, WalletOutlined, PieChartOutlined].map((icon, index) => ({
-        key: String(index + 1),
-        icon: React.createElement(icon),
-    }));
+    /* ========================= */
+    /* NAVIGATION ITEMS */
+    /* ========================= */
+
+    const navItems = [
+        {
+            key: `/${locale}/user`,
+            icon: <CameraOutlined />,
+        },
+        {
+            key: `/${locale}/wallet`,
+            icon: <WalletOutlined />,
+        },
+        {
+            key: `/${locale}/analytics`,
+            icon: <PieChartOutlined />,
+        },
+    ];
+
+    /* ========================= */
+    /* HANDLE CLICK */
+    /* ========================= */
+
+    const handleMenuClick = ({ key }: any) => {
+        router.push(key);
+
+        if (isMobile) {
+            setCollapsed(false);
+        }
+    };
+
+    /* ========================= */
+    /* SIDEBAR CONTENT */
+    /* ========================= */
 
     const sidebarContent = (
         <>
             {/* USER */}
+
             <div className={styles.userArea}>
                 {loggedIn ? (
                     <>
@@ -109,18 +153,25 @@ export default function SidebarView({
             </div>
 
             {/* MENU */}
+
             <Menu
                 className={styles.menuSidebar}
                 mode="inline"
-                defaultSelectedKeys={['1']}
+                selectedKeys={[pathname]}
                 items={navItems}
+                onClick={handleMenuClick}
+                style={{
+                    paddingInline: 0,
+                }}
             />
 
             {/* BELL */}
+
             <Dropdown
                 open={notifOpen}
                 onOpenChange={(v) => {
                     setNotifOpen(v);
+
                     if (v) setUnreadCount(0);
                 }}
                 popupRender={() => (
@@ -138,6 +189,10 @@ export default function SidebarView({
         </>
     );
 
+    /* ========================= */
+    /* MOBILE */
+    /* ========================= */
+
     if (isMobile) {
         return (
             <Drawer
@@ -145,12 +200,20 @@ export default function SidebarView({
                 onClose={() => setCollapsed(false)}
                 placement="left"
                 width={240}
-                bodyStyle={{ padding: 0 }}
+                styles={{
+                    body: {
+                        padding: 0,
+                    },
+                }}
             >
                 {sidebarContent}
             </Drawer>
         );
     }
+
+    /* ========================= */
+    /* DESKTOP */
+    /* ========================= */
 
     return (
         <Sider

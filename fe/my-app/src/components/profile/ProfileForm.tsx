@@ -7,6 +7,7 @@ import {
     CameraOutlined,
     MailOutlined,
     UserOutlined,
+    LockOutlined,
 } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
@@ -42,31 +43,26 @@ export default function ProfileForm() {
     const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
-        if (!file.type.startsWith('image/')) return message.error('Chỉ chấp nhận file ảnh!');
-        if (file.size / 1024 / 1024 > 3) return message.error('Ảnh phải nhỏ hơn 3MB!');
+        if (!file.type.startsWith('image/')) { message.error('Chỉ chấp nhận file ảnh!'); return; }
+        if (file.size / 1024 / 1024 > 3) { message.error('Ảnh phải nhỏ hơn 3MB!'); return; }
         setAvatarFile(file);
         setAvatarPreview(URL.createObjectURL(file));
     };
 
-    const onFinish = async (values: { username: string; email: string }) => {
+    const onFinish = async (values: { password: string }) => {
         if (!user?.username) return;
         setSaving(true);
         try {
+            // Backend only accepts multipart/form-data.
+            // It supports: password (required) + file (optional avatar).
+            const formData = new FormData();
+            formData.append('password', values.password);
             if (avatarFile) {
-                // Has avatar → send as FormData (multipart)
-                const formData = new FormData();
-                formData.append('username', values.username);
-                formData.append('email', values.email);
-                formData.append('avatar', avatarFile);
-                await userService.updateProfile(user.username, formData);
-            } else {
-                // No avatar → send as JSON (matches existing backend endpoint)
-                await userService.updateByUserName(user.username, {
-                    username: values.username,
-                    email: values.email,
-                });
+                // Backend @RequestParam("file")
+                formData.append('file', avatarFile);
             }
 
+            await userService.updateProfile(user.username, formData);
             message.success('Cập nhật thông tin thành công!');
             router.push('/user');
         } catch (err) {
@@ -94,7 +90,7 @@ export default function ProfileForm() {
                             Cá nhân hoá tài khoản của bạn.
                         </Title>
                         <Text className={styles.leftSubtitle}>
-                            Cập nhật tên, email và ảnh đại diện để trải nghiệm tốt nhất.
+                            Cập nhật ảnh đại diện và mật khẩu để bảo mật tốt nhất.
                         </Text>
                     </div>
                     <div className={styles.shapeTopRight} />
@@ -148,32 +144,44 @@ export default function ProfileForm() {
 
                     {/* Form */}
                     <Form form={form} layout="vertical" onFinish={onFinish} requiredMark={false}>
+
+                        {/* Username — read-only display only */}
                         <Form.Item
                             label={<Text className={styles.inputLabel}>Tên đăng nhập</Text>}
                             name="username"
-                            rules={[{ required: true, message: 'Vui lòng nhập tên đăng nhập!' }]}
                         >
                             <Input
                                 prefix={<UserOutlined style={{ color: '#94a3b8', marginRight: 6 }} />}
                                 className={styles.customInput}
                                 variant="filled"
-                                placeholder="Tên đăng nhập"
+                                disabled
                             />
                         </Form.Item>
 
+                        {/* Email — read-only */}
                         <Form.Item
                             label={<Text className={styles.inputLabel}>Email</Text>}
                             name="email"
-                            rules={[
-                                { required: true, message: 'Vui lòng nhập email!' },
-                                { type: 'email', message: 'Email không hợp lệ!' },
-                            ]}
                         >
                             <Input
                                 prefix={<MailOutlined style={{ color: '#94a3b8', marginRight: 6 }} />}
                                 className={styles.customInput}
                                 variant="filled"
-                                placeholder="email@example.com"
+                                disabled
+                            />
+                        </Form.Item>
+
+                        {/* Password — required because backend always re-encodes */}
+                        <Form.Item
+                            label={<Text className={styles.inputLabel}>Mật khẩu mới</Text>}
+                            name="password"
+                            rules={[{ required: true, message: 'Vui lòng nhập mật khẩu hiện tại hoặc mật khẩu mới!' }]}
+                        >
+                            <Input.Password
+                                prefix={<LockOutlined style={{ color: '#94a3b8', marginRight: 6 }} />}
+                                className={styles.customInput}
+                                variant="filled"
+                                placeholder="Nhập mật khẩu hiện tại hoặc mật khẩu mới"
                             />
                         </Form.Item>
 

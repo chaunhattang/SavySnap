@@ -66,3 +66,49 @@
     transform: translateY(-2px);
     box-shadow: var(--btn_boxShadow);
 }
+
+/* ============================= */
+/* MOBILE HEADER FIX */
+/* ============================= */
+
+@media (max-width: 768px) {
+    .headerCotainer {
+        height: 64px;
+
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    /* logo */
+
+    .logoText {
+        padding-left: 0;
+
+        flex: 1;
+
+        align-items: center;
+    }
+
+    .brand {
+        font-size: 20px;
+    }
+
+    /* actions */
+
+    .actions {
+        gap: 8px;
+    }
+
+    /* button */
+
+    .addButton {
+        padding-left: 12px;
+        padding-right: 12px;
+
+        height: 36px;
+
+        font-size: 16px;
+
+        border-radius: 10px;
+    }
+}

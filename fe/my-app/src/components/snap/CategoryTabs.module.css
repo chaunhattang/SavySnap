@@ -3,31 +3,92 @@
 .container {
     display: flex;
     gap: 10px;
+
     margin: 16px 0;
+
+    flex-wrap: wrap;
 }
+
+/* TAB */
 
 .tab {
     padding: 8px 16px;
+
     border-radius: 999px;
     border: none;
+
     background: var(--background);
     color: var(--foreground);
+
     font-weight: 500;
+
     cursor: pointer;
+
     transition: all 0.2s ease;
+
+    white-space: nowrap;
 }
 
 .tab:hover {
     background: var(--hover);
 }
 
+/* ACTIVE */
+
 .active {
     padding: 8px 16px;
+
     border-radius: 999px;
     border: none;
+
     background: var(--btn_background);
     color: white;
+
     font-weight: 600;
+
     cursor: pointer;
+
     box-shadow: var(--btn_boxShadow);
+
+    white-space: nowrap;
+}
+
+
+
+
+
+
+/* ============================= */
+/* MOBILE FIX */
+/* ============================= */
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+
+        flex-wrap: nowrap;
+
+        overflow-x: auto;
+
+        padding-left: 12px;
+        padding-right: 12px;
+
+        margin-top: 12px;
+        margin-bottom: 12px;
+
+        scrollbar-width: none;
+    }
+
+    .container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab,
+    .active {
+        flex: 0 0 auto;
+
+        font-size: 14px;
+
+        padding: 6px 14px;
+    }
 }

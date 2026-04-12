@@ -19,19 +19,6 @@ const LoginForm: React.FC<any> = () => {
     const [loading, setLoading] = useState(false);
 
     const router = useRouter();
-    const [form] = Form.useForm();
-
-    useEffect(() => {
-        const email = localStorage.getItem('registeredEmail');
-        const password = localStorage.getItem('registeredPassword');
-
-        if (email && password) {
-            form.setFieldsValue({
-                email: email,
-                password: password,
-            });
-        }
-    }, []);
 
     const onFinish = async (values: any) => {
         setLoading(true);
@@ -42,6 +29,7 @@ const LoginForm: React.FC<any> = () => {
 
             if (token) {
                 console.log('Login success');
+
                 router.push(isAdmin ? '/admin' : '/user');
             }
         } catch (error) {
@@ -57,13 +45,7 @@ const LoginForm: React.FC<any> = () => {
                 <h3 className={styles.headerText}>{t('headerText')}</h3>
                 <p className={styles.subHeaderText}>{t('subHeaderText')}</p>
             </div>
-            <Form
-                form={form}
-                name="login"
-                layout="vertical"
-                onFinish={onFinish}
-                requiredMark={false}
-            >
+            <Form name="login" layout="vertical" onFinish={onFinish} requiredMark={false}>
                 <Form.Item
                     label={
                         <Typography.Text className={styles.inputLabel}>

@@ -233,3 +233,90 @@
     background-color: #047857 !important;
     transform: scale(0.99);
 }
+/* ============================= */
+/* MOBILE RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 768px) {
+    /* wrapper */
+
+    .pageWrapper {
+        padding: 1rem 0.75rem;
+        align-items: flex-start;
+    }
+
+    /* card */
+
+    .card {
+        flex-direction: column;
+
+        border-radius: 20px;
+
+        max-width: 100%;
+
+        box-shadow: 0 10px 25px rgba(5, 150, 105, 0.15);
+    }
+
+    /* hide green panel */
+
+    .leftPanel {
+        display: none;
+    }
+
+    /* right panel */
+
+    .rightPanel {
+        padding: 1.5rem 1.25rem;
+    }
+
+    /* heading */
+
+    .heading {
+        font-size: 1.25rem !important;
+    }
+
+    .subHeading {
+        font-size: 0.8rem !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    /* avatar section */
+
+    .avatarSection {
+        flex-direction: column;
+
+        align-items: center;
+
+        text-align: center;
+
+        gap: 0.75rem;
+
+        padding: 1rem;
+    }
+
+    .avatarMeta {
+        align-items: center;
+    }
+
+    /* input */
+
+    .customInput {
+        padding: 0.85rem !important;
+    }
+
+    /* button */
+
+    .submitBtn {
+        height: 48px !important;
+
+        font-size: 0.95rem !important;
+    }
+
+    /* back button */
+
+    .backBtn {
+        font-size: 12px !important;
+
+        margin-bottom: 1rem;
+    }
+}
