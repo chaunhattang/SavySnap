@@ -1,11 +1,11 @@
 package com.backend.savysnap.entity;
 
+import com.backend.savysnap.enums.RoleEnum;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -34,6 +34,5 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     List<SavingNote> savingNotes;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    Set<String> roles;
+    RoleEnum role;
 }

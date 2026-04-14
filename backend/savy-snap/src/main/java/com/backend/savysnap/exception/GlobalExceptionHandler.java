@@ -20,4 +20,14 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest().body(apiResponse);
     }
+
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity<ApiResponse<?>> handlingRuntimeException(Exception exception) {
+        ApiResponse<?> apiResponse = ApiResponse.builder()
+                .code(ErrorCode.UNCATEGORIZED_EXCEPTION.getCode())
+                .message(exception.getMessage())
+                .build();
+
+        return ResponseEntity.internalServerError().body(apiResponse);
+    }
 }

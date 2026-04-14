@@ -24,10 +24,11 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/all")
-    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ApiResponse<List<UserResponse>> getAllUsers() {
         return ApiResponse.<List<UserResponse>>builder()
                 .result(userService.getAllUsers())
+                .message("All Users Got Successfully")
                 .build();
     }
 
@@ -35,35 +36,39 @@ public class UserController {
     public ApiResponse<UserResponse> getMyInfo() {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.getMyInfo())
+                .message("My Information Got Successfully")
                 .build();
     }
 
     @GetMapping(value = "/{username}")
-    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN') or #username == authentication.name")
+    @PreAuthorize("hasRole('ADMIN') or #username == authentication.name")
     public ApiResponse<UserResponse> getUser(
             @PathVariable("username") String username) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.getUserByUsername(username))
+                .message("User Got Successfully")
                 .build();
     }
 
     @PutMapping(value = "/{username}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN') or #username == authentication.name")
+    @PreAuthorize("hasRole('ADMIN') or #username == authentication.name")
     public ApiResponse<UserResponse> updateUserByUsername(
             @PathVariable("username") String username,
             @ModelAttribute UserUpdateRequest request,
             @RequestParam(value = "file", required = false) MultipartFile file) {
         return ApiResponse.<UserResponse>builder()
                 .result(userService.updateUserByUsername(username, request, file))
+                .message("User Updated Successfully")
                 .build();
     }
 
     @DeleteMapping(value = "/{username}")
-    @PreAuthorize("hasAuthority('SCOPE_ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public ApiResponse<String> deleteUser(
             @PathVariable("username") String username) {
         return ApiResponse.<String>builder()
                 .result(userService.deleteByUsername(username))
+                .message("User Deleted Successfully")
                 .build();
     }
 }

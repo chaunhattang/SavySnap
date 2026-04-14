@@ -4,6 +4,7 @@ import com.backend.savysnap.dto.request.UserCreateRequest;
 import com.backend.savysnap.dto.request.UserUpdateRequest;
 import com.backend.savysnap.dto.response.UserResponse;
 import com.backend.savysnap.entity.User;
+import com.backend.savysnap.enums.RoleEnum;
 import com.backend.savysnap.exception.AppException;
 import com.backend.savysnap.exception.ErrorCode;
 import com.backend.savysnap.mapper.UserMapper;
@@ -18,7 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -37,7 +37,7 @@ public class UserService {
         }
         User user = userMapper.toUser(request);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(Set.of("USER"));
+        user.setRole(RoleEnum.USER);
 
         return userMapper.toUserResponse(userRepository.save(user));
     }
@@ -81,6 +81,6 @@ public class UserService {
 
     public String deleteByUsername(String username) {
         userRepository.deleteByUsername(username);
-        return "Successfully deleted";
+        return "Deleted by " + username;
     }
 }
