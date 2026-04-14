@@ -9,16 +9,22 @@ const axiosClient = axios.create({
     paramsSerializer: (params) => queryString.stringify(params),
 });
 
-axiosClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
-    const accesstoken = Cookies.get('accessToken');
+axiosClient.interceptors.request.use(
+  async (config: InternalAxiosRequestConfig) => {
+    const accessToken = Cookies.get('accessToken');
 
-    if (accesstoken) {
-        config.headers.Authorization = `Bearer ${accesstoken}`;
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
-    config.headers.Accept = 'application/json';
+
+    // Chỉ set Accept nếu không phải upload file
+    if (!(config.data instanceof FormData)) {
+      config.headers.Accept = 'application/json';
+    }
 
     return config;
-});
+  }
+);
 
 axiosClient.interceptors.response.use(
     (res) => {

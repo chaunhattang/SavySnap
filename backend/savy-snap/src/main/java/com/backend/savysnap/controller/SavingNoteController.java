@@ -30,6 +30,7 @@ public class SavingNoteController {
     ) {
         return ApiResponse.<SavingNoteResponse>builder()
                 .result(savingNoteService.createSavingNote(request, file))
+                .message("Saving Note Created Successfully")
                 .build();
     }
 
@@ -37,6 +38,7 @@ public class SavingNoteController {
     public ApiResponse<List<SavingNoteResponse>> getAllSavingNotes() {
         return ApiResponse.<List<SavingNoteResponse>>builder()
                 .result(savingNoteService.getAllSavingNotes())
+                .message("All Saving Notes Got Successfully")
                 .build();
     }
 
@@ -46,6 +48,7 @@ public class SavingNoteController {
     ) {
         return ApiResponse.<SavingNoteResponse>builder()
                 .result(savingNoteService.getSavingNoteById(id))
+                .message("Saving Note Got Successfully")
                 .build();
     }
 
@@ -57,6 +60,7 @@ public class SavingNoteController {
     ) {
         return ApiResponse.<SavingNoteResponse>builder()
                 .result(savingNoteService.updateSavingNote(id, request, file))
+                .message("Saving Note Updated Successfully")
                 .build();
     }
 
@@ -66,6 +70,7 @@ public class SavingNoteController {
     ) {
         return ApiResponse.<String>builder()
                 .result(savingNoteService.deleteSavingNote(id))
+                .message("Saving Note Deleted Successfully")
                 .build();
     }
 }

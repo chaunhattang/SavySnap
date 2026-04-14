@@ -8,23 +8,30 @@ export function useCreateSnap(onClose?: () => void) {
     const { message } = App.useApp();
     const [title, setTitle] = useState('');
     const [amount, setAmount] = useState<number | null>(null);
-    const [category, setCategory] = useState('Thiết yếu');
+    const [category, setCategory] = useState('NEED');
     const [file, setFile] = useState<RcFile | null>(null);
     const [loading, setLoading] = useState(false);
 
     const beforeUpload = (file: RcFile) => {
-        const isImage = file.type === 'image/jpeg' || file.type === 'image/png';
+        const isImage = file.type.startsWith('image/');
+        console.log(file);
+        console.log(file.type);
+        console.log(file.size);
         if (!isImage) {
-            message.error('Chỉ hỗ trợ JPG hoặc PNG');
+            message.error('Chỉ hỗ trợ file ảnh');
             return Upload.LIST_IGNORE;
         }
-        const isLt5M = file.size / 1024 / 1024 < 5;
-        if (!isLt5M) {
+
+        const isLt15M = file.size / 1024 / 1024 < 15;
+
+        if (!isLt15M) {
             message.error('Ảnh phải nhỏ hơn 5MB');
             return Upload.LIST_IGNORE;
         }
+
         setFile(file);
-        return false; // Trả về false để ngăn Ant Design tự động upload
+
+        return false;
     };
 
     // Mở rộng map để xử lý được cả tiếng Việt (từ giao diện) và tiếng Anh
@@ -38,7 +45,7 @@ export function useCreateSnap(onClose?: () => void) {
     };
 
     const handleSubmit = async () => {
-        if (!title || !amount || !file) {
+        if (!title || amount === null || !file) {
             message.error('Vui lòng nhập tiêu đề, số tiền và chọn ảnh');
             return;
         }

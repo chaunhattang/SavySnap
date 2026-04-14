@@ -1,5 +1,47 @@
 .container {
     display: grid;
-    gap: 16;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+
+    gap: 16px;
+
+    grid-template-columns: repeat(
+        auto-fill,
+        minmax(260px, 1fr)
+    );
+
+    width: 100%;
+
+    padding-left: 16px;
+    padding-right: 16px;
+
+    box-sizing: border-box;
+}
+
+/* ============================= */
+/* TABLET */
+/* ============================= */
+
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: repeat(
+            auto-fill,
+            minmax(240px, 1fr)
+        );
+
+        gap: 14px;
+    }
+}
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+
+        gap: 12px;
+
+        padding-left: 12px;
+        padding-right: 12px;
+    }
 }
