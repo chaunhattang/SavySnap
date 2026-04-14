@@ -1,4 +1,4 @@
-import axiosClient from '@/utils/axiosClient';
+import axiosClient from '@/services/apis/axiosClient';
 import { ENDPOINT } from '../endpoint';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';

@@ -10,9 +10,11 @@ import CreateSnapModal from '@/components/snap/CreateSnapModal';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import { useTranslations } from 'next-intl';
 import { MenuOutlined } from '@ant-design/icons';
+import { useSnapCrud } from '@/hooks/useSnapCrud';
 
 const { Header } = Layout;
 const { useBreakpoint } = Grid;
+
 interface Props {
     setCollapsed: (v: boolean) => void;
 }
@@ -23,6 +25,8 @@ export default function HeaderBar({ setCollapsed }: Props) {
     const screens = useBreakpoint();
 
     const isMobile = !screens.md;
+
+    const setSearch = useSnapCrud((s) => s.setSearch);
 
     const t = useTranslations('headerBar');
 
@@ -47,9 +51,9 @@ export default function HeaderBar({ setCollapsed }: Props) {
                         placeholder={t('placeholder')}
                         prefix={<SearchOutlined />}
                         allowClear
+                        onChange={(e) => setSearch(e.target.value)}
                     />
                 )}
-
                 <Button
                     type="primary"
                     size={isMobile ? 'middle' : 'large'}
