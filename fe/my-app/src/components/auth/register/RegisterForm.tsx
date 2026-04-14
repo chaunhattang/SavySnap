@@ -9,18 +9,16 @@ import { useRouter } from 'next/navigation';
 import { authService } from '@/services/apis/auth.service';
 
 const RegisterForm: React.FC = () => {
-    const [form] = Form.useForm();
     const t = useTranslations('auth.register');
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+
     const onFinish = async (values: any) => {
         setLoading(true);
+
         try {
-            console.log('Received values of form: ', values);
-            await new Promise((resolve) => setTimeout(resolve, 1500));
             await authService.register(values);
-            localStorage.setItem('registeredEmail', values.email);
-            localStorage.setItem('registeredPassword', values.password);
+
             router.push('/login');
         } catch (error) {
             console.error(error);
@@ -35,14 +33,7 @@ const RegisterForm: React.FC = () => {
                 <h3 className={styles.headerText}>{t('headerText')}</h3>
                 <p className={styles.subHeaderText}>{t('subHeaderText')}</p>
             </div>
-            <Form
-                form={form}
-                name="register"
-                layout="vertical"
-                onFinish={onFinish}
-                initialValues={{}}
-                requiredMark={false}
-            >
+            <Form name="register" layout="vertical" onFinish={onFinish} requiredMark={false}>
                 <Form.Item
                     name="username"
                     label={
@@ -121,7 +112,6 @@ const RegisterForm: React.FC = () => {
                             ),
                         },
                     ]}
-                    hasFeedback
                 >
                     <Input.Password
                         prefix={<LockOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
@@ -129,25 +119,6 @@ const RegisterForm: React.FC = () => {
                         variant="filled"
                         className={styles.customInput}
                     />
-                </Form.Item>
-
-                <Form.Item
-                    name="agreement"
-                    valuePropName="checked"
-                    rules={[
-                        {
-                            validator: (_, value) =>
-                                value
-                                    ? Promise.resolve()
-                                    : Promise.reject(new Error(t('agreementRequired'))),
-                        },
-                    ]}
-                >
-                    <Checkbox>
-                        <Typography.Text className={styles.inheritColorText}>
-                            {t('agreement')}
-                        </Typography.Text>
-                    </Checkbox>
                 </Form.Item>
 
                 <Form.Item style={{ marginBottom: 0, marginTop: 16 }}>
@@ -160,13 +131,17 @@ const RegisterForm: React.FC = () => {
                         icon={!loading && <ArrowRightOutlined />}
                         iconPosition="end"
                     >
-                        <Typography.Text className={styles.whiteText}>{t('submit')}</Typography.Text>
+                        <Typography.Text className={styles.whiteText}>
+                            {t('submit')}
+                        </Typography.Text>
                     </Button>
                 </Form.Item>
             </Form>
 
             <p style={{ marginTop: 20 }} className={styles.footerText}>
-                <Typography.Text className={styles.inheritColorText}>{t('hasAccount')}</Typography.Text>{' '}
+                <Typography.Text className={styles.inheritColorText}>
+                    {t('hasAccount')}
+                </Typography.Text>{' '}
                 <Link href="/login" className={styles.loginLink}>
                     <Typography.Text className={styles.inheritWeightText}>
                         {t('loginUrlText')}

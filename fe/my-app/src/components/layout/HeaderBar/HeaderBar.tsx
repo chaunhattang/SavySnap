@@ -5,20 +5,33 @@ import styles from './styles.module.css';
 
 import { SearchOutlined } from '@ant-design/icons';
 
-import { Button, Input, Layout } from 'antd';
+import { Button, Input, Layout, Grid } from 'antd';
 import CreateSnapModal from '@/components/snap/CreateSnapModal';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import { useTranslations } from 'next-intl';
+import { MenuOutlined } from '@ant-design/icons';
 
 const { Header } = Layout;
+const { useBreakpoint } = Grid;
+interface Props {
+    setCollapsed: (v: boolean) => void;
+}
 
-export default function HeaderBar() {
+export default function HeaderBar({ setCollapsed }: Props) {
     const [open, setOpen] = useState(false);
+
+    const screens = useBreakpoint();
+
+    const isMobile = !screens.md;
+
     const t = useTranslations('headerBar');
 
     return (
         <Header className={styles.headerCotainer}>
             {/* LEFT */}
+            {isMobile && (
+                <Button type="text" icon={<MenuOutlined />} onClick={() => setCollapsed(true)} />
+            )}
             <div className={styles.logoText}>
                 <span className={styles.brand}>SavySnap</span>
             </div>
@@ -26,21 +39,26 @@ export default function HeaderBar() {
             {/* RIGHT */}
             <div className={styles.actions}>
                 <LanguageSwitcher />
-                <Input
-                    className={styles.search}
-                    placeholder={t('placeholder')}
-                    prefix={<SearchOutlined />}
-                    allowClear
-                />
+
+                {/* Desktop only */}
+                {!isMobile && (
+                    <Input
+                        className={styles.search}
+                        placeholder={t('placeholder')}
+                        prefix={<SearchOutlined />}
+                        allowClear
+                    />
+                )}
 
                 <Button
                     type="primary"
-                    size="large"
+                    size={isMobile ? 'middle' : 'large'}
                     className={styles.addButton}
                     onClick={() => setOpen(true)}
                 >
-                    {t('addNew')}
+                    {isMobile ? '+' : t('addNew')}
                 </Button>
+
                 <CreateSnapModal open={open} onClose={() => setOpen(false)} />
             </div>
         </Header>

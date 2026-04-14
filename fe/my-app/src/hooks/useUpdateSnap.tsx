@@ -42,17 +42,17 @@ export function useUpdateSnap(snap: any, onClose?: () => void) {
     }, [snap]);
 
     const beforeUpload = (file: RcFile) => {
-        const isImage = file.type === 'image/jpeg' || file.type === 'image/png';
+        const isImage = file.type.startsWith('image/');
 
         if (!isImage) {
-            message.error('Chỉ hỗ trợ JPG hoặc PNG');
+            message.error('Chỉ hỗ trợ file ảnh');
             return Upload.LIST_IGNORE;
         }
 
-        const isLt5M = file.size / 1024 / 1024 < 5;
+        const isLt15M = file.size / 1024 / 1024 < 15;
 
-        if (!isLt5M) {
-            message.error('Ảnh phải nhỏ hơn 5MB');
+        if (!isLt15M) {
+            message.error('Ảnh phải nhỏ hơn 15MB');
             return Upload.LIST_IGNORE;
         }
 

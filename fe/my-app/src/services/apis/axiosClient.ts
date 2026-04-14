@@ -5,20 +5,26 @@ import queryString from 'query-string';
 import Cookies from 'js-cookie';
 
 const axiosClient = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_BASE_URL, // base url server
+    baseURL: process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE_URL, // base url server
     paramsSerializer: (params) => queryString.stringify(params),
 });
 
-axiosClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) => {
-    const accesstoken = Cookies.get('accessToken');
+axiosClient.interceptors.request.use(
+  async (config: InternalAxiosRequestConfig) => {
+    const accessToken = Cookies.get('accessToken');
 
-    if (accesstoken) {
-        config.headers.Authorization = `Bearer ${accesstoken}`;
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
-    config.headers.Accept = 'application/json';
+
+    // Chỉ set Accept nếu không phải upload file
+    if (!(config.data instanceof FormData)) {
+      config.headers.Accept = 'application/json';
+    }
 
     return config;
-});
+  }
+);
 
 axiosClient.interceptors.response.use(
     (res) => {
@@ -30,7 +36,16 @@ axiosClient.interceptors.response.use(
     },
     (error) => {
         const { response } = error;
-        return Promise.reject(response.data.message as string);
+        if (response?.data?.message) {
+            return Promise.reject(response.data.message);
+        }
+        if (
+            response?.data &&
+            (typeof response.data !== 'object' || Object.keys(response.data).length > 0)
+        ) {
+            return Promise.reject(response.data);
+        }
+        return Promise.reject(error.message || error);
     }
 );
 
