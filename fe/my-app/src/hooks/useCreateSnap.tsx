@@ -14,9 +14,7 @@ export function useCreateSnap(onClose?: () => void) {
 
     const beforeUpload = (file: RcFile) => {
         const isImage = file.type.startsWith('image/');
-        console.log(file);
-        console.log(file.type);
-        console.log(file.size);
+
         if (!isImage) {
             message.error('Chỉ hỗ trợ file ảnh');
             return Upload.LIST_IGNORE;

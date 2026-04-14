@@ -1,4 +1,4 @@
-import axiosClient from './axiosClient';
+import axiosClient from '@/utils/axiosClient';
 import { ENDPOINT } from '../endpoint';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
@@ -14,27 +14,27 @@ export const authService = {
         if (!token) return response;
 
         const decoded: any = jwtDecode(token);
+        console.log(decoded);
 
-        // LẤY ROLE TỪ scope
-        const role = decoded.scope;
+        const role = decoded.role;
 
-        const isAdmin = role === 'ROLE_ADMIN';
+        const isAdmin = role === 'ADMIN';
 
         // lưu cookie
         Cookies.set('accessToken', token, {
             expires: 7,
-            path: '/'
+            path: '/',
         });
 
         Cookies.set('role', role, {
             expires: 7,
-            path: '/'
+            path: '/',
         });
 
         return {
             ...response,
             role,
-            isAdmin
+            isAdmin,
         };
     },
 

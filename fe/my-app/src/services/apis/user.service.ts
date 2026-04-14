@@ -1,4 +1,4 @@
-import axiosClient from '@/services/apis/axiosClient';
+import axiosClient from '@/utils/axiosClient';
 import { ENDPOINT } from '@/services/endpoint';
 import { User } from '@/types/user.td';
 
