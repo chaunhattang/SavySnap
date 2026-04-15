@@ -47,7 +47,6 @@ public class SavingNoteService {
             savingNote.setImageUrl(imageUrl);
         }
 
-
         long currentTotal = user.getTotalPayment() == null ? 0L : user.getTotalPayment();
         long addedAmount = request.getAmount() == null ? 0L : request.getAmount();
 
@@ -121,6 +120,6 @@ public class SavingNoteService {
         userRepository.save(user);
 
         savingNoteRepository.deleteById(idSavingNote);
-        return "Saving note deleted successfully";
+        return "Saving note deleted successfully by id" + idSavingNote;
     }
 }

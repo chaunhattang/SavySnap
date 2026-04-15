@@ -6,6 +6,7 @@ import com.backend.savysnap.dto.request.UserCreateRequest;
 import com.backend.savysnap.dto.response.ApiResponse;
 import com.backend.savysnap.dto.response.AuthenticationResponse;
 import com.backend.savysnap.dto.response.UserResponse;
+import com.backend.savysnap.enums.RoleEnum;
 import com.backend.savysnap.service.AuthenticationService;
 import com.backend.savysnap.service.UserService;
 import jakarta.validation.Valid;
@@ -38,6 +39,7 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ApiResponse<UserResponse> register(@RequestBody @Valid UserCreateRequest request) {
+        request.setRole(RoleEnum.USER.name());
         return ApiResponse.<UserResponse>builder()
                 .result(userService.createUser(request))
                 .message("Register Successfully")

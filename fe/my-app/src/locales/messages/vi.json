@@ -1,45 +1,53 @@
 {
     "auth": {
         "login": {
-            "title": "Tiết kiệm thông minh qua từng khung hình.",
-            "subtitle": "Bắt đầu hành trình quản lý tài chính trực quan ngay hôm nay.",
+            "title": "Nơi những giấc mơ tài chính bắt đầu.",
+            "subtitle": "Hãy để chúng tôi đồng hành cùng bạn vẽ nên bức tranh tương lai.",
             "brandName": "SavySnap",
-            "trustedUsers": "Hơn 10,000 người đã tin dùng",
-            "emailLabel": "Địa chỉ Email",
+            "trustedUsers": "Hàng ngàn vì sao đã cùng hội ngộ",
+            "emailLabel": "Email hoặc Tên đăng nhập",
             "emailRequired": "Vui lòng nhập địa chỉ email!",
             "emailInvalid": "Email không đúng định dạng!",
             "emailPlaceholder": "name@example.com",
             "usernameLabel": "Tên đăng nhập",
             "usernameRequired": "Vui lòng nhập tên đăng nhập!",
             "usernamePlaceholder": "nguyenvana",
-            "passwordLabel": "Mật khẩu",
-            "forgotPassword": "Quên mật khẩu?",
+            "passwordLabel": "Khóa bí mật",
+            "forgotPassword": "Quên chìa khóa? 🗝️",
             "passwordRequired": "Vui lòng nhập mật khẩu!",
             "passwordPlaceholder": "••••••••",
-            "submit": "Đăng nhập ngay",
+            "submit": "Bắt đầu ngay 🚀",
             "divider": "HOẶC",
+            "orDivider": "Hoặc bay cùng",
             "loginWithGoogle": "Google",
             "loginWithGithub": "Github",
-            "noAccount": "Chưa có tài khoản?",
+            "noAccount": "Bạn là một vì sao mới?",
             "register": "Đăng ký miễn phí",
+            "registerBtn": "Tạo tài khoản",
             "headerText": "Chào mừng trở lại!",
-            "subHeaderText": "Vui lòng đăng nhập để tiếp tục quản lý các Snap của bạn."
+            "subHeaderText": "Vui lòng đăng nhập để tiếp tục quản lý các Snap của bạn.",
+            "welcomeTitle": "Vùng đất mộng mơ 🐾",
+            "welcomeSubtitle": "Nhập thông tin để tiếp tục trải nghiệm",
+            "errorTitle": "Đăng nhập thất bại",
+            "errorDefault": "Đã có lỗi xảy ra. Vui lòng thử lại.",
+            "artTitle": "Lưu giữ Khoảnh khắc 🌸",
+            "artSubtitle": "Biến mỗi bức ảnh chi tiêu thành một tác phẩm nghệ thuật đáng yêu.",
+            "artQuote": "Nghệ thuật không chỉ nằm ở việc chi tiêu, mà còn ở cách bạn trân trọng những gì mình đang có. 🎀"
         },
         "register": {
             "agreement": "Đồng ý",
             "brandName": "SavySnap",
-            "bannerTitle": "Kiến tạo tương lai tài chính vững chắc.",
-            "bannerSubtitle": "Tham gia cùng cộng đồng hơn 10,000 người tiết kiệm thông minh.",
-            "testimonial": "\"SavySnap giúp tôi tiết kiệm được 20% thu nhập hàng tháng nhờ việc theo dõi chi tiêu qua hình ảnh cực kỳ trực quan.\"",
-            "usernameLabel": "Tên đăng nhập",
+            "bannerTitle": "Gieo mầm cho những ước mơ rực rỡ.",
+            "bannerSubtitle": "Cùng chúng tôi kiến tạo một cuộc sống an nhiên và thịnh vượng.",
+            "testimonial": "\"SavySnap như một phép màu, giúp tôi nhìn thấy rõ hơn những mảnh ghép tài chính của mình mỗi ngày.\"",
+            "usernameLabel": "Tên gọi dễ thương",
             "usernameRequired": "Vui lòng nhập tên đăng nhập!",
-            "usernamePlaceholder": "nguyenvana",
-            "emailLabel": "Địa chỉ email",
+            "usernamePlaceholder": "Bé Dâu Tây 🍓...",
+            "emailLabel": "Email tinh tú",
             "emailRequired": "Vui lòng nhập email!",
             "emailInvalid": "Email không đúng định dạng!",
             "emailPlaceholder": "name@example.com",
-
-            "passwordLabel": "Mật khẩu",
+            "passwordLabel": "Khóa bí mật",
             "passwordRequired": "Vui lòng nhập mật khẩu!",
             "passwordPlaceholder": "Tối thiểu 8 ký tự",
             "confirmPasswordLabel": "Xác nhận mật khẩu",
@@ -55,15 +63,21 @@
                 "female": "Nữ",
                 "other": "Khác"
             },
-
             "agreementPrefix": "Tôi đã đọc và đồng ý với ",
             "termsLink": "Điều khoản dịch vụ",
-
-            "submit": "Đăng ký",
+            "submit": "Khắc họa tài khoản 🎨",
             "headerText": "Tạo tài khoản mới!",
             "subHeaderText": "Vui lòng điền thông tin để đăng ký.",
-            "hasAccount": "Đã có tài khoản?",
-            "loginUrlText": "Đăng nhập ngay"
+            "hasAccount": "Bạn đã có nơi lưu trú?",
+            "loginUrlText": "Đăng nhập ngay",
+            "loginBtn": "Trở về nhà",
+            "welcomeTitle": "Khởi đầu mới 🌿",
+            "welcomeSubtitle": "Mở khóa thế giới nghệ thuật tài chính",
+            "errorTitle": "Đăng ký thất bại",
+            "errorDefault": "Đã có lỗi xảy ra. Vui lòng thử lại.",
+            "artTitle": "Kiến tạo Tương lai ✨",
+            "artSubtitle": "Tham gia cùng cộng đồng yêu cái đẹp và quản lý tài chính thông minh.",
+            "artQuote": "Mỗi đồng tiết kiệm là một hạt mầm cho khu vườn ước mơ của bạn trong tương tương lai. 🌱"
         },
         "forgotPassword": {
             "headerText": "Quên mật khẩu?",
@@ -87,49 +101,37 @@
             "backToRegister": "Quay lại trang Đăng ký"
         }
     },
-
     "snap": {
         "create": {
             "title": "Chụp khoảnh khắc",
             "uploadTitle": "Tải ảnh hóa đơn hoặc món đồ",
             "uploadHint": "JPG, PNG LÊN ĐẾN 5MB",
-
             "noteLabel": "TIÊU ĐỀ GHI CHÚ",
             "notePlaceholder": "VD: Cà phê sáng, Giày mới...",
-
             "amountLabel": "SỐ TIỀN",
             "amountPlaceholder": "Số tiền...",
-
             "categoryLabel": "DANH MỤC",
-
             "category": {
                 "need": "Thiết yếu",
                 "want": "Ăn uống",
                 "saving": "Giải trí"
             },
-
             "submit": "Xác nhận lưu Snap"
         },
         "update": {
             "title": "Cập nhật Snap",
-
             "uploadTitle": "Tải ảnh hóa đơn hoặc món đồ",
             "uploadHint": "JPG, PNG LÊN ĐẾN 5MB",
-
             "noteLabel": "TIÊU ĐỀ GHI CHÚ",
             "notePlaceholder": "VD: Cà phê sáng, Giày mới...",
-
             "amountLabel": "SỐ TIỀN",
             "amountPlaceholder": "Số tiền...",
-
             "categoryLabel": "DANH MỤC",
-
             "category": {
                 "need": "Thiết yếu",
                 "want": "Ăn uống",
                 "saving": "Giải trí"
             },
-
             "submit": "Cập nhật Snap",
             "edit": "Sửa",
             "delete": "Xóa"
@@ -157,34 +159,34 @@
     "admin": {
         "title": "SavyAdmin",
         "menu": {
-            "overview": "Tổng quan",
-            "users": "Người dùng",
-            "snaps": "Bài đăng (Snaps)",
-            "settings": "Cài đặt hệ thống"
+            "overview": "Khu vườn chính",
+            "users": "Hội bạn bè",
+            "snaps": "Kho kỉ niệm",
+            "settings": "Góc tinh chỉnh"
         },
         "logout": "Đăng xuất",
-        "searchPlaceholder": "Tìm kiếm người dùng, ID giao dịch...",
-        "dashboardTitle": "Bảng điều khiển",
-        "dashboardDesc": "Thống kê tổng quan hoạt động hệ thống SavySnap hôm nay.",
+        "searchPlaceholder": "Tìm kiếm phép màu...",
+        "dashboardTitle": "Chào ngày mới nghen! ☀️",
+        "dashboardDesc": "Hôm nay mọi người đã tiết kiệm được rất nhiều đó!",
         "stats": {
-            "totalUsers": "Tổng người dùng",
-            "createdSnaps": "Snaps đã tạo",
-            "totalTrackingValue": "Tổng giá trị theo dõi",
-            "dailyVisits": "Lượt truy cập/Ngày",
-            "vsLastMonth": "so với tháng trước"
+            "totalUsers": "Thành viên mới",
+            "createdSnaps": "Snaps kỉ niệm",
+            "totalTrackingValue": "Hũ tiết kiệm",
+            "dailyVisits": "Thả tim",
+            "vsLastMonth": "tháng này nha ~"
         },
         "recentSnaps": {
-            "title": "Snaps mới cập nhật từ hệ thống",
-            "viewAll": "Xem toàn bộ hệ thống",
+            "title": "Ký Ức Mới Nhất nà",
+            "viewAll": "Xem tất cả nha",
             "columns": {
-                "user": "Người dùng",
-                "goalAndSpend": "Mục tiêu / Chi tiêu",
-                "amount": "Số tiền",
+                "user": "Bạn dễ thương",
+                "goalAndSpend": "Snap lưu nè",
+                "amount": "Số xu",
                 "date": "Ngày tạo",
-                "status": "Trạng thái",
+                "status": "Tình trạng",
                 "statusTypes": {
-                    "approved": "Duyệt",
-                    "pending": "Chờ",
+                    "approved": "Tươi xanh",
+                    "pending": "Chờ xíu",
                     "rejected": "Từ chối"
                 }
             }
@@ -194,9 +196,9 @@
             "desc": "Danh sách toàn bộ người dùng đang hoạt động trong hệ thống.",
             "searchPlaceholder": "Tìm user bằng tên...",
             "columns": {
-                "id": "ID",
-                "username": "Tên đăng nhập",
-                "email": "Email",
+                "id": "Mã định danh",
+                "username": "Tên dễ thương",
+                "email": "Email tinh tú",
                 "totalPayment": "Tổng chi tiêu",
                 "action": "Thao tác"
             },

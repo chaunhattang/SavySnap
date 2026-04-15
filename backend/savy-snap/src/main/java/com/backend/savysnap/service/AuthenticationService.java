@@ -50,14 +50,11 @@ public class AuthenticationService {
     private String GOOGLE_CLIENT_ID;
 
     private User getUser(AuthenticationRequest request) {
-        if (userRepository.existsByUsername(request.getAccountName())) {
-            return userRepository.findByUsername(request.getAccountName()).orElse(null);
-        }
-        if (userRepository.existsByEmail(request.getAccountName())) {
-            return userRepository.findByEmail(request.getAccountName()).orElse(null);
-        }
-        return null;
+        return userRepository.findByUsername(request.getAccountName())
+                .orElseGet(() -> userRepository.findByEmail(request.getAccountName())
+                        .orElse(null));
     }
+
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         User user = getUser(request);
         if (user == null) {
@@ -79,14 +76,12 @@ public class AuthenticationService {
     private String generateToken(User user) {
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS256);
 
-        String userRole = user.getRole().name();
-
         JWTClaimsSet jwtClaimsSet = new JWTClaimsSet.Builder()
                 .subject(user.getUsername())
                 .issuer("savy-snap")
                 .issueTime(new Date())
                 .expirationTime(new Date(Instant.now().plus(VALID_DURATION, ChronoUnit.HOURS).toEpochMilli()))
-                .claim("role", userRole)
+                .claim("role", user.getRole().name())
                 .build();
 
         Payload payload = new Payload(jwtClaimsSet.toJSONObject());
@@ -116,22 +111,10 @@ public class AuthenticationService {
 
             GoogleIdToken.Payload payload = idToken.getPayload();
             String email = payload.getEmail();
-            String name = (String) payload.get("name");
-            String pictureUrl = (String) payload.get("picture");
-            log.info("picture: " + pictureUrl);
 
-            User user = userRepository.findByEmail(email).orElse(null);
+            User user = userRepository.findByEmail(email)
+                    .orElseGet(() -> getUserWithGoogle(payload));
 
-            if (user == null) {
-                user = User.builder()
-                        .username(email)
-                        .email(email)
-                        .password(passwordEncoder.encode(java.util.UUID.randomUUID().toString()))
-                        .avatarUrl(pictureUrl)
-                        .role(RoleEnum.USER)
-                        .build();
-                user = userRepository.save(user);
-            }
 
             var token = generateToken(user);
             return AuthenticationResponse.builder()
@@ -145,5 +128,28 @@ public class AuthenticationService {
         }
     }
 
+    private User getUserWithGoogle(GoogleIdToken.Payload payload) {
+        String email = payload.getEmail();
+        String name = (String) payload.get("name");
+        String pictureUrl = (String) payload.get("picture");
+
+        String baseUsername = email.substring(0, email.indexOf("@"));
+        String username = baseUsername;
+
+        while (userRepository.existsByUsername(username)) {
+            username = baseUsername + (int) (Math.random() * 1e4);
+        }
+
+        User user = User.builder()
+                .username(username)
+                .email(email)
+                .fullName(name)
+                .password(passwordEncoder.encode(java.util.UUID.randomUUID().toString()))
+                .avatarUrl(pictureUrl)
+                .role(RoleEnum.USER)
+                .build();
+
+        return userRepository.save(user);
+    }
 
 }

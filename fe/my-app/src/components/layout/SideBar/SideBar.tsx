@@ -4,7 +4,7 @@ import SidebarView from './SidebarView';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 import { userService } from '@/services/apis/user.service';
-import { User } from '@/types/user.td';
+import { User } from '@/types/user';
 import { Grid } from 'antd';
 
 const { useBreakpoint } = Grid;
