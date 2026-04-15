@@ -1,5 +1,6 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import AntdProvider from '@/components/ui/AntdProvider';
 
 export default async function LocaleLayout({
     children,
@@ -14,7 +15,9 @@ export default async function LocaleLayout({
 
     return (
         <NextIntlClientProvider locale={locale} messages={messages}>
-            {children}
+            <AntdProvider>
+                {children}
+            </AntdProvider>
         </NextIntlClientProvider>
     );
 }

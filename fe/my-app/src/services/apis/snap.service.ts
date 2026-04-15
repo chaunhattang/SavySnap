@@ -1,6 +1,6 @@
 import axiosClient from '@/services/apis/axiosClient';
 import { ENDPOINT } from '@/services/endpoint';
-import { Snap } from '@/types/snap.td';
+import { Snap } from '@/types/snap';
 
 export const snapService = {
     // GET ALL

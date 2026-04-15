@@ -27,7 +27,7 @@ import {
     ApiOutlined,
     CloudUploadOutlined,
 } from '@ant-design/icons';
-import styles from '../admin.module.css';
+import styles from '@/app/[locale]/admin/admin.module.css';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -45,7 +45,7 @@ function SettingSection({
 }) {
     return (
         <Card
-            className={styles.settingCard}
+            className={`${styles.settingCard} ${styles.cinematicCard}`}
             styles={{ body: { padding: '24px 28px' } }}
         >
             <div className={styles.settingCardHeader}>

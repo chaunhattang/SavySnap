@@ -12,7 +12,7 @@ import {
 import { useRouter } from 'next/navigation';
 import Cookies from 'js-cookie';
 import { userService } from '@/services/apis/user.service';
-import { User } from '@/types/user.td';
+import { User } from '@/types/user';
 import styles from './ProfileForm.module.css';
 
 const { Title, Text } = Typography;

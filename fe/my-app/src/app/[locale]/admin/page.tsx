@@ -1,45 +1,57 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Layout, ConfigProvider } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { ConfigProvider } from 'antd';
 import styles from './admin.module.css';
+import { TAB, TabKey } from './constants';
 
-// Admin Components
-import AdminSidebar from './components/AdminSidebar';
-import AdminHeader from './components/AdminHeader';
-import DashboardTab from './components/DashboardTab';
-import UsersTab from './components/UsersTab';
-import SettingsTab from './components/SettingsTab';
-import SnapsTab from './components/SnapsTab';
-
-const { Content } = Layout;
+// Các tab trong trang admin
+import AdminSidebar from '@/components/admin/AdminSidebar';
+import AdminHeader from '@/components/admin/AdminHeader';
+import DashboardTab from '@/components/admin/DashboardTab';
+import UsersTab from '@/components/admin/UsersTab';
+import SettingsTab from '@/components/admin/SettingsTab';
+import SnapsTab from '@/components/admin/SnapsTab';
+import CinematicBackground from '@/components/admin/CinematicBackground';
 
 export default function AdminPage() {
-    const [activeTab, setActiveTab] = useState<string>('1');
+    const [activeTab, setActiveTab] = useState<TabKey>(TAB.DASHBOARD);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        setIsLoaded(true);
+    }, []);
 
     return (
         <ConfigProvider
             theme={{
                 token: {
-                    colorPrimary: '#10b981',
-                    borderRadius: 8,
+                    colorPrimary: '#db2777',
+                    borderRadius: 12,
                 },
             }}
         >
-            <Layout className={styles.layout}>
-                <AdminSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+            <div className={styles.layout}>
+                <CinematicBackground />
+                
+                <div className={`mainContainer ${isLoaded ? styles.cinematicReveal : 'opacity-0'}`}>
+                    <div className={`${styles.glassDashboard} ${styles.dynamicBorder}`}>
+                        <AdminSidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+                        <div className={styles.content}>
+                            <AdminHeader />
 
-                <Layout className={styles.mainLayout}>
-                    <AdminHeader />
-
-                    <Content className={styles.content}>
-                        {activeTab === '1' && <DashboardTab />}
-                        {activeTab === '2' && <UsersTab />}
-                        {activeTab === '3' && <SnapsTab />}
-                        {activeTab === '4' && <SettingsTab />}
-                    </Content>
-                </Layout>
-            </Layout>
+                            <div className={styles.dashboardInner}>
+                                <div key={activeTab} className={styles.tabTransition}>
+                                    {activeTab === TAB.DASHBOARD && <DashboardTab />}
+                                    {activeTab === TAB.USERS && <UsersTab />}
+                                    {activeTab === TAB.SNAPS && <SnapsTab />}
+                                    {activeTab === TAB.SETTINGS && <SettingsTab />}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </ConfigProvider>
     );
 }
