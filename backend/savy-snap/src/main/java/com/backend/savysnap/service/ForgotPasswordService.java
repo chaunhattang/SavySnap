@@ -1,6 +1,7 @@
 package com.backend.savysnap.service;
 
 import com.backend.savysnap.dto.request.UpdatePasswordRequest;
+import com.backend.savysnap.dto.request.VerifyOtpRequest;
 import com.backend.savysnap.entity.ForgotPassword;
 import com.backend.savysnap.entity.User;
 import com.backend.savysnap.exception.AppException;
@@ -30,6 +31,7 @@ public class ForgotPasswordService {
     private final PasswordEncoder passwordEncoder;
 
     public void sendOtp(String email) {
+        log.info("Sending OTP for email {}", email);
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         int otp = new Random().nextInt(900_000) + 100_000;
@@ -49,10 +51,10 @@ public class ForgotPasswordService {
         forgotPasswordRepository.save(forgotPassword);
     }
 
-    public String verifyOtp(String email, Integer otp) {
-        User user = userRepository.findByEmail(email)
+    public String verifyOtp(VerifyOtpRequest request) {
+        User user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
-        ForgotPassword forgotPassword = forgotPasswordRepository.findByOtpAndUser(otp, user)
+        ForgotPassword forgotPassword = forgotPasswordRepository.findByOtpAndUser(request.getOtp(), user)
                 .orElseThrow(() -> new AppException(ErrorCode.WRONG_OTP));
 
         if (forgotPassword.getExpirationTime().before(new Date())) {
