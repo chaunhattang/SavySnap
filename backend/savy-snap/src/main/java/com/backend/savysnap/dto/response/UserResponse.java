@@ -20,5 +20,4 @@ public class UserResponse {
     String avatarUrl;
     List<SavingNoteResponse> savingNotes;
     RoleEnum role;
-
 }

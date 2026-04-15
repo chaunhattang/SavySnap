@@ -28,10 +28,9 @@ public class ForgotPasswordService {
     UserRepository userRepository;
     ForgotPasswordRepository forgotPasswordRepository;
     JavaMailSender javaMailSender;
-    private final PasswordEncoder passwordEncoder;
+    PasswordEncoder passwordEncoder;
 
     public void sendOtp(String email) {
-        log.info("Sending OTP for email {}", email);
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
         int otp = new Random().nextInt(900_000) + 100_000;

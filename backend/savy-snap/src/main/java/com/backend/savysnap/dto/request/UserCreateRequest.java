@@ -1,5 +1,6 @@
 package com.backend.savysnap.dto.request;
 
+import com.backend.savysnap.enums.RoleEnum;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -17,4 +18,7 @@ public class UserCreateRequest {
     String password;
 
     String email;
+    
+    @Builder.Default
+    String role = RoleEnum.USER.name();
 }
