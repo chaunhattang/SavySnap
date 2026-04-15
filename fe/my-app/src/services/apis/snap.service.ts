@@ -1,6 +1,6 @@
 import axiosClient from '@/services/apis/axiosClient';
 import { ENDPOINT } from '@/services/endpoint';
-import { Snap } from '@/types/snap.td'; // Không cần Create/Update DTO ở đây nữa vì mình dùng FormData
+import { Snap } from '@/types/snap.td';
 
 export const snapService = {
     // GET ALL

@@ -1,12 +1,17 @@
 'use client';
 
-import { Row, Col, Card } from 'antd';
-import { useSnaps } from '@/hooks/useSnaps';
+import { Row, Col, Card, Input, Grid } from 'antd';
+import { useSnapCrud } from '@/hooks/useSnapCrud';
 import { useTranslations } from 'next-intl';
 import styles from './DashboardSummary.module.css';
+import { SearchOutlined } from '@ant-design/icons';
+
+const { useBreakpoint } = Grid;
 
 export default function DashboardSummary() {
-    const { snaps } = useSnaps();
+    const { data: snaps } = useSnapCrud();
+
+    const t = useTranslations('dashboard');
 
     const totalExpense = snaps.reduce(
         (sum, snap) => sum + (snap.amount ? Number(snap.amount) : 0),
@@ -17,11 +22,25 @@ export default function DashboardSummary() {
         .filter((snap) => snap.category === 'SAVING')
         .reduce((sum, snap) => sum + (snap.amount ? Number(snap.amount) : 0), 0);
 
-    const t = useTranslations('dashboard');
+    const screens = useBreakpoint();
+
+    const isMobile = !screens.md;
+
+    const setSearch = useSnapCrud((s) => s.setSearch);
 
     return (
         <Row gutter={[16, 16]} className={styles.rowMargin}>
-            {/* TOTAL EXPENSE */}
+            {isMobile && (
+                <Col xs={24} sm={24} md={16}>
+                    <Input
+                        className={styles.search}
+                        placeholder={t('placeholder')}
+                        prefix={<SearchOutlined />}
+                        allowClear
+                        onChange={(e) => setSearch(e.target.value)}
+                    />
+                </Col>
+            )}
             <Col xs={24} sm={24} md={16}>
                 <Card className={styles.totalFeeCard}>
                     <div>{t('totalFee')}</div>
@@ -30,7 +49,6 @@ export default function DashboardSummary() {
                 </Card>
             </Col>
 
-            {/* SAVING */}
             <Col xs={24} sm={24} md={8}>
                 <Card className={styles.normalCard}>
                     <div>{t('totalSaving')}</div>

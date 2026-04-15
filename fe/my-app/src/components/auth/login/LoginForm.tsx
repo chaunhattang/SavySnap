@@ -1,6 +1,6 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import { Form, Input, Button, Divider, Row, Col, Flex, Typography } from 'antd';
+import React, { useState } from 'react';
+import { Form, Input, Button, Divider, Row, Col, Typography } from 'antd';
 import {
     MailOutlined,
     LockOutlined,
@@ -14,7 +14,7 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/apis/auth.service';
 
-const LoginForm: React.FC<any> = () => {
+export default function LoginForm() {
     const t = useTranslations('auth.login');
     const [loading, setLoading] = useState(false);
 
@@ -163,6 +163,4 @@ const LoginForm: React.FC<any> = () => {
             </p>
         </>
     );
-};
-
-export default LoginForm;
+}

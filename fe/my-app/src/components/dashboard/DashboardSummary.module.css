@@ -11,3 +11,22 @@
 .normalCard {
     border-radius: 20px !important;
 }
+
+.search {
+    width: 100%;
+    border-radius: 20px;
+    padding: 8px 12px;
+    transition: all 0.8s ease;
+    border: 2px solid transparent;
+    background-color: var(--border);
+}
+
+.search:hover {
+    border-color: var(--btn_background);
+    background-color: var(--border);
+}
+
+.search:focus-within {
+    border-color: var(--btn_background);
+    background-color: var(--border);
+}

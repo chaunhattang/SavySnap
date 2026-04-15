@@ -1,35 +1,48 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Spin } from 'antd';
 
 import SnapCard from './SnapCard';
-import { useSnaps } from '@/hooks/useSnaps';
 
 import styles from './SnapList.module.css';
 import CategoryTabs from './CategoryTabs';
 
+import { useSnapCrud } from '@/hooks/useSnapCrud';
+
 export default function SnapList() {
-    const { snaps, loading, fetchSnaps } = useSnaps();
+    const { data: snaps, loading, fetchAll, search } = useSnapCrud();
 
     const [category, setCategory] = useState('all');
 
-    if (loading) return <Spin />;
+    /*
+    load lần đầu
+    */
 
-    const filteredSnaps =
-        category === 'all'
-            ? snaps
-            : snaps.filter((snap) => snap.category.toUpperCase() === category.toUpperCase());
+    useEffect(() => {
+        fetchAll();
+    }, []);
+
+    if (loading)
+        return (
+            <div className={styles.center}>
+                <Spin />
+            </div>
+        );
+
+    const filteredSnaps = snaps
+        .filter((snap) =>
+            category === 'all' ? true : snap.category.toUpperCase().includes(category.toUpperCase())
+        )
+        .filter((snap) => snap.title.toLowerCase().includes(search.toLowerCase()));
 
     return (
         <>
-            {/* Category Tabs */}
             <CategoryTabs selected={category} onChange={setCategory} />
 
-            {/* Snap List */}
             <div className={styles.container}>
                 {filteredSnaps.map((snap) => (
-                    <SnapCard key={snap.id} snap={snap} onRefresh={fetchSnaps} />
+                    <SnapCard key={snap.id} snap={snap} />
                 ))}
             </div>
         </>

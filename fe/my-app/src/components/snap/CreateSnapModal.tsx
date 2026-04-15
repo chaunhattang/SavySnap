@@ -6,27 +6,52 @@ import { Button, Input, InputNumber, Modal, Select, Typography } from 'antd';
 import Dragger from 'antd/es/upload/Dragger';
 
 import styles from './CreateSnapModal.module.css';
-import { useCreateSnap } from '@/hooks/useCreateSnap';
+import { useSnapCrud } from '@/hooks/useSnapCrud';
 
 import { useTranslations } from 'next-intl';
+import { useFileUpload } from '@/hooks/useFileUpload';
+import { useState } from 'react';
+import { buildFormData } from '@/hooks/useFormData';
 
 const { Text } = Typography;
 
 export default function CreateSnapModal({ open, onClose }: any) {
     const t = useTranslations('snap.create');
 
-    const {
-        title,
-        setTitle,
-        amount,
-        setAmount,
-        category,
-        setCategory,
-        loading,
-        beforeUpload,
-        handleSubmit,
-    } = useCreateSnap(onClose);
+    const { create, loading } = useSnapCrud();
 
+    const { file, beforeUpload, resetFile } = useFileUpload();
+
+    const [title, setTitle] = useState('');
+
+    const [amount, setAmount] = useState<number | null>(null);
+
+    const [category, setCategory] = useState('NEED');
+
+    const handleSubmit = async () => {
+        if (!title || amount === null || !file) return;
+
+        const formData = buildFormData({
+            title,
+            amount,
+            category,
+            description: title,
+        });
+
+        if (file) {
+            formData.append('file', file);
+        }
+
+        await create(formData);
+
+        setTitle('');
+        setAmount(null);
+        setCategory('NEED');
+
+        resetFile();
+
+        onClose?.();
+    };
     return (
         <Modal open={open} footer={null} onCancel={onClose} title={t('title')} width={420}>
             {/* Upload box */}

@@ -136,11 +136,11 @@ export default function SidebarView({
                             <Avatar
                                 size={56}
                                 src={user?.avatarUrl}
+                                alt="avatar"
                                 icon={!user?.avatarUrl && <UserOutlined />}
                                 className={styles.avatarIcon}
                             />
                         </Dropdown>
-
                         {user && <span className={styles.emailText}>{user.username}</span>}
                     </>
                 ) : (
