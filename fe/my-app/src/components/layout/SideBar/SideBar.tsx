@@ -72,14 +72,16 @@ export default function Sidebar({ collapsed, setCollapsed }: Props) {
     };
 
     return (
-        <SidebarView
-            loggedIn={loggedIn}
-            user={user}
-            onLogout={handleLogout}
-            onRefreshUser={refreshUser}
-            collapsed={collapsed}
-            setCollapsed={setCollapsed}
-            isMobile={isMobile}
-        />
+        <>
+            <SidebarView
+                loggedIn={loggedIn}
+                user={user}
+                onLogout={handleLogout}
+                onRefreshUser={refreshUser}
+                collapsed={collapsed}
+                setCollapsed={setCollapsed}
+                isMobile={isMobile}
+            />
+        </>
     );
 }

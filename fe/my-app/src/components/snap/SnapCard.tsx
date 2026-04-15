@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, Button, Popconfirm, Tag } from 'antd';
+import { Card, Button, Popconfirm, Tag, message, App } from 'antd';
 import UpdateSnapModal from './UpdateSnapModal';
 import { useState } from 'react';
 import dayjs from 'dayjs';
@@ -14,9 +14,13 @@ export default function SnapCard({ snap, onRefresh }: any) {
     const { remove, loading } = useSnapCrud();
 
     const t = useTranslations('snap.update');
+    const d = useTranslations('snap');
+
+    const { message } = App.useApp();
 
     const handleDelete = async () => {
         await remove(snap.id);
+        message.success(d('delete'));
         onRefresh?.();
     };
 

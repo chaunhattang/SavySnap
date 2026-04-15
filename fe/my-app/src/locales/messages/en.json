@@ -118,7 +118,7 @@
                 "saving": "Entertainment"
             },
 
-            "submit": "Save Snap"
+            "submit": "Confirm save Snap"
         },
         "update": {
             "title": "Update Snap",
@@ -140,7 +140,7 @@
                 "saving": "Entertainment"
             },
 
-            "submit": "Update Snap",
+            "submit": "Updated Snap",
             "edit": "Edit",
             "delete": "Delete"
         },
@@ -149,7 +149,8 @@
             "need": "Essential",
             "want": "Food & Drink",
             "saving": "Entertainment"
-        }
+        },
+        "delete": "Snap has been deleted."
     },
     "dashboard": {
         "totalFee": "Total Expense",

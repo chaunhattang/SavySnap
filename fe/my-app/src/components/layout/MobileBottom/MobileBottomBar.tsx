@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import { NotificationPanel } from '@/components/notification/NotificationDropdown';
 
 import styles from './MobileBottomBar.module.css';
+import CreateSnapModal from '@/components/snap/CreateSnapModal';
 
 export default function MobileBottomBar({ unreadCount = 0 }: { unreadCount?: number }) {
     const router = useRouter();
@@ -48,11 +49,40 @@ export default function MobileBottomBar({ unreadCount = 0 }: { unreadCount?: num
         },
     ];
 
+    const [open, setOpen] = useState(false);
+
     return (
         <div className={`${styles.container} ${scrolled ? styles.containerScrolled : ''}`}>
-            {/* NORMAL ICONS */}
+            {/* LEFT ICONS */}
 
-            {items.map((item) => {
+            {items.slice(0, 2).map((item) => {
+                const active = pathname === item.key;
+
+                return (
+                    <div
+                        key={item.key}
+                        className={`${styles.item} ${active ? styles.active : ''}`}
+                        onClick={() => router.push(item.key)}
+                    >
+                        {item.icon}
+                    </div>
+                );
+            })}
+
+            {/* FAB */}
+
+            <div className={styles.fabWrapper}>
+                <div
+                    className={styles.fab}
+                    onClick={() => setOpen(true) }
+                >
+                    +
+                </div>
+            </div>
+
+            {/* RIGHT ICON */}
+
+            {items.slice(2).map((item) => {
                 const active = pathname === item.key;
 
                 return (
@@ -70,19 +100,19 @@ export default function MobileBottomBar({ unreadCount = 0 }: { unreadCount?: num
 
             <Dropdown
                 open={notifOpen}
-                onOpenChange={(v) => {
-                    setNotifOpen(v);
-                }}
+                onOpenChange={(v) => setNotifOpen(v)}
                 popupRender={() => <NotificationPanel role="user" />}
                 trigger={['click']}
-                placement="bottomLeft"
+                placement="topRight"
             >
-                <li className={styles.bellItem}>
-                    <Badge count={unreadCount} size="small" offset={[4, -4]}>
-                        <BellOutlined className={styles.bellIcon} />
+                <div className={styles.bellItem}>
+                    <Badge count={unreadCount} size="small" offset={[4, 2]}>
+                        <BellOutlined className={styles.bellIcon}/>
                     </Badge>
-                </li>
+                </div>
             </Dropdown>
+
+            <CreateSnapModal open={open} onClose={() => setOpen(false)} />
         </div>
     );
 }

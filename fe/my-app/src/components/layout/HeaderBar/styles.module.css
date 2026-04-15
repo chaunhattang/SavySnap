@@ -5,7 +5,6 @@
 /* ============================= */
 
 .headerContainer {
-    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(18px);
     height: 74px;
     display: flex;
@@ -16,7 +15,8 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow:0 10px 24px rgba(244,114,182,0.08);
+    box-shadow: 0 10px 24px rgba(244, 114, 182, 0.08);
+    background: linear-gradient(135deg, #fff1f5, #ffe4e6, #ffffff);
 }
 
 /* ============================= */
@@ -56,7 +56,12 @@
     padding: 10px 16px;
     transition: all 0.25s ease;
     border: 2px solid transparent;
+    color: #ec4899;
     background: white;
+}
+
+.search :global(.ant-input::placeholder) {
+    color: #f472b6 !important;
 }
 
 .search:hover {
@@ -66,17 +71,15 @@
 .search:focus-within {
     border-color: #ec4899;
 
-    box-shadow:0 0 0 4px rgba(236,72,153,0.15);
+    box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.15);
 }
-
-
 
 /* ============================= */
 /* BUTTON */
 /* ============================= */
 
 .addButton {
-    background: linear-gradient(135deg,#f472b6,#fb7185);
+    background: linear-gradient(135deg, #f472b6, #fb7185);
 
     border: none;
     color: white;
@@ -85,16 +88,43 @@
     font-weight: 700;
     height: 44px;
     transition: all 0.2s ease;
-    box-shadow:0 10px 18px rgba(244, 114, 182, 0.35);
+    box-shadow: 0 10px 18px rgba(244, 114, 182, 0.35);
 }
 
 .addButton:hover {
-    background: linear-gradient(135deg,#f472b6,#fb7185)!important;
+    background: linear-gradient(135deg, #f472b6, #fb7185) !important;
     color: white;
     transform: translateY(-2px);
-    box-shadow:0 10px 18px rgba(244, 114, 182, 0.35);
+    box-shadow: 0 10px 18px rgba(244, 114, 182, 0.35);
 }
 
+.userArea {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding-top: 12px;
+
+    gap: 8px;
+
+    margin-bottom: 10px;
+}
+
+.avatarIcon {
+    cursor: pointer;
+
+    background-color: var(--btn_background);
+
+    box-shadow: var(--btn_boxShadow);
+
+    transition: all 0.2s ease;
+}
+
+.avatarIcon:hover {
+    transform: scale(1.05);
+}
 
 /* ============================= */
 /* MOBILE */

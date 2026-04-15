@@ -15,18 +15,54 @@
 
     align-items: center;
 
-    border-top: 1px solid var(--border);
-
     z-index: 1000;
 
-    /* glass effect */
+    border-top: 1px solid var(--border);
+
+    /* glass */
 
     background: rgba(255, 255, 255, 0.6);
 
     backdrop-filter: blur(14px);
 
     transition: all 0.3s ease;
+
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 35px 0 rgba(255,255,255,0.6);
 }
+
+/* ===== NOTCH LÕM ===== */
+
+.container::before {
+    content: '';
+
+    position: absolute;
+
+    top: -32px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 110px;
+    height: 70px;
+
+    border-bottom-left-radius: 60px;
+    border-bottom-right-radius: 60px;
+
+    /* màu trùng container */
+
+    background: transparent;
+
+    /* tạo illusion lõm */
+
+    box-shadow: 0 35px 0 rgba(255, 255, 255, 0.6);
+
+    backdrop-filter: blur(14px);
+}
+
+/* scroll */
 
 .containerScrolled {
     background: rgba(255, 255, 255, 0.35);
@@ -36,7 +72,7 @@
     box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.08);
 }
 
-/* icon */
+/* ===== ICON ===== */
 
 .item {
     font-size: 22px;
@@ -72,41 +108,7 @@
     box-shadow: 0 6px 14px rgba(244, 114, 182, 0.35);
 }
 
-/* avatar */
-
-.avatar {
-    position: absolute;
-
-    right: 16px;
-
-    top: -20px;
-
-    background: white;
-
-    padding: 6px;
-
-    border-radius: 50%;
-
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
-}
-
-.bellItem {
-    list-style: none;
-
-    width: 88px;
-
-    height: 68px;
-
-    margin: 8px 0;
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    cursor: pointer;
-}
+/* ===== BELL ===== */
 
 .bellIcon {
     font-size: 25px;
@@ -126,4 +128,82 @@
     color: var(--btn_color) !important;
 
     transform: scale(0.92);
+}
+
+/* ============================= */
+/* FAB */
+/* ============================= */
+
+.fabWrapper {
+    position: absolute;
+
+    top: -36px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 10;
+}
+
+/* button */
+
+.fab {
+    width: 70px;
+    height: 70px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+    font-weight: bold;
+
+    color: white;
+
+    cursor: pointer;
+
+    background: linear-gradient(
+        135deg,
+        #f472b6,
+        #fb7185
+    );
+
+    box-shadow:
+        0 12px 30px rgba(244, 114, 182, 0.45);
+
+    transition: all 0.25s ease;
+}
+
+/* hover */
+
+.fab:hover {
+    transform: translateY(-4px) scale(1.05);
+}
+
+/* click */
+
+.fab:active {
+    transform: scale(0.92);
+}
+
+/* glow */
+
+.fab::after {
+    content: '';
+
+    position: absolute;
+
+    width: 90px;
+    height: 90px;
+
+    border-radius: 50%;
+
+    background: rgba(244, 114, 182, 0.25);
+
+    filter: blur(22px);
+
+    z-index: -1;
 }
