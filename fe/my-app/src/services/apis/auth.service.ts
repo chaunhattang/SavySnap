@@ -1,4 +1,4 @@
-import axiosClient from '@/services/apis/axiosClient';
+import axiosClient from './axiosClient';
 import { ENDPOINT } from '../endpoint';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
@@ -14,27 +14,39 @@ export const authService = {
         if (!token) return response;
 
         const decoded: any = jwtDecode(token);
-        console.log(decoded);
 
-        const role = decoded.role;
+        // LOG ĐỂ XEM BACKEND TRẢ VỀ GÌ TRONG JWT
+        console.log('JWT decoded:', decoded);
 
-        const isAdmin = role === 'ADMIN';
+        // Hỗ trợ cả roleNum (số) lẫn scope (chuỗi)
+        let role: string;
+        let isAdmin: boolean;
+
+        if (decoded.roleNum !== undefined) {
+            // Backend trả về roleNum dạng số: 1 = ADMIN, 0 = USER
+            isAdmin = decoded.roleNum === 1;
+            role = isAdmin ? 'ADMIN' : 'USER';
+        } else {
+            // Fallback: lấy scope dạng chuỗi
+            role = decoded.scope ?? decoded.role ?? '';
+            isAdmin = role === 'ROLE_ADMIN' || role === 'ADMIN';
+        }
 
         // lưu cookie
         Cookies.set('accessToken', token, {
             expires: 7,
-            path: '/',
+            path: '/'
         });
 
         Cookies.set('role', role, {
             expires: 7,
-            path: '/',
+            path: '/'
         });
 
         return {
             ...response,
             role,
-            isAdmin,
+            isAdmin
         };
     },
 

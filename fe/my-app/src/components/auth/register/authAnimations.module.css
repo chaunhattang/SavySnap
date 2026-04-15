@@ -1,0 +1,205 @@
+/* --- BACKGROUND SAKURA PASTEL --- */
+.bgArtistic {
+  background-color: #fff0f5;
+  position: relative;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  filter: blur(80px);
+  border-radius: 50%;
+  animation: floatBlob 20s infinite alternate ease-in-out;
+  opacity: 0.7;
+}
+.orb1 { background: #ffb6c1; width: 45vw; height: 45vw; top: -15%; left: -10%; }
+.orb2 { background: #ffc0cb; width: 40vw; height: 40vw; bottom: -10%; right: -15%; animation-delay: -5s; }
+.orb3 { background: #ffe4e1; width: 35vw; height: 35vw; top: 30%; left: 35%; animation-delay: -10s; }
+
+@keyframes floatBlob {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  100% { transform: translate(15%, 15%) scale(1.1) rotate(10deg); }
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(720deg) translateX(150px); opacity: 0; }
+}
+
+.petal {
+  position: absolute;
+  top: -10%;
+  background: linear-gradient(135deg, #ffb7c5, #ff9eb5);
+  border-radius: 15px 0 15px 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 5px rgba(255,255,255,0.5);
+}
+
+/* --- COLORS & GLASS --- */
+.textPrimary { color: #d64a78; }
+.textSecondary { color: #8a4b63; }
+
+.glassBase {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.3), 0 25px 50px -12px rgba(255, 182, 193, 0.5);
+}
+
+.glassInput {
+  background: rgba(255, 255, 255, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.9) !important;
+  color: #d64a78 !important;
+  font-weight: bold !important;
+  transition: all 0.3s;
+}
+.glassInput::placeholder { color: rgba(214, 74, 120, 0.4); font-weight: 500; }
+.glassInput:focus, .glassInput:focus-within {
+  background: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 0 0 4px rgba(255, 182, 193, 0.3) !important;
+  outline: none;
+}
+
+.btnPrimary {
+  background: linear-gradient(135deg, #ff8da1, #ff6b8b) !important;
+  box-shadow: 0 10px 20px -5px rgba(255, 107, 139, 0.5) !important;
+  color: white !important;
+  border: none !important;
+}
+.btnPrimary:hover {
+  background: linear-gradient(135deg, #ff9eb0, #ff7a98) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px -5px rgba(255, 107, 139, 0.6) !important;
+}
+
+/* --- SLIDING DOOR SYSTEM --- */
+.formWrapper {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@media (min-width: 768px) {
+  .formWrapper { width: 58.333%; }
+  .formLogin { right: 0; }
+  .formRegister { left: 0; }
+  
+  .artOverlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 41.666%;
+    height: 100%;
+    z-index: 50;
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+    background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,230,240,0.5) 100%);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border-right: 1px solid rgba(255,255,255,0.8);
+    border-left: 1px solid rgba(255,255,255,0.8);
+    box-shadow: 0 0 40px rgba(0,0,0,0.05);
+  }
+  
+  .viewRegister .artOverlay { transform: translateX(140%); }
+  .viewLogin .formLogin { opacity: 1; transform: scale(1); pointer-events: auto; z-index: 20; }
+  .viewLogin .formRegister { opacity: 0; transform: scale(0.9) translateX(-20%); pointer-events: none; z-index: 10; }
+  .viewRegister .formRegister { opacity: 1; transform: scale(1); pointer-events: auto; z-index: 20; }
+  .viewRegister .formLogin { opacity: 0; transform: scale(0.9) translateX(20%); pointer-events: none; z-index: 10; }
+}
+
+@media (max-width: 767px) {
+  .formWrapper { position: relative; height: auto; }
+  .artOverlay { position: relative; width: 100%; z-index: 50; border-radius: 2rem 2rem 0 0; }
+  .viewLogin .formLogin { display: block; animation: fadeInScale 0.8s ease forwards; }
+  .viewLogin .formRegister { display: none; }
+  .viewRegister .formRegister { display: block; animation: fadeInScale 0.8s ease forwards; }
+  .viewRegister .formLogin { display: none; }
+}
+
+@keyframes fadeInScale {
+  0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.artContent {
+  position: absolute; inset: 0;
+  transition: opacity 0.8s ease, transform 1s ease;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 3rem;
+}
+.viewLogin .artContentLogin { opacity: 1; transform: translateX(0); z-index: 2;}
+.viewLogin .artContentRegister { opacity: 0; transform: translateX(30px); z-index: 1; pointer-events:none;}
+.viewRegister .artContentRegister { opacity: 1; transform: translateX(0); z-index: 2;}
+.viewRegister .artContentLogin { opacity: 0; transform: translateX(-30px); z-index: 1; pointer-events:none;}
+
+
+/* ========================================================
+   HỆ THỐNG VẬT LÝ WOW CHO THÚ CƯNG (THE WOW ENGINE)
+   ======================================================== */
+
+@keyframes runBorder {
+   0%      { top: -20px; left: -20px; transform: rotate(0deg); }
+   24.99%  { top: -20px; left: calc(100% - 20px); transform: rotate(0deg); }
+   25%     { top: -20px; left: calc(100% - 20px); transform: rotate(90deg); }
+   49.99%  { top: calc(100% - 20px); left: calc(100% - 20px); transform: rotate(90deg); }
+   50%     { top: calc(100% - 20px); left: calc(100% - 20px); transform: rotate(180deg); }
+   74.99%  { top: calc(100% - 20px); left: -20px; transform: rotate(180deg); }
+   75%     { top: calc(100% - 20px); left: -20px; transform: rotate(270deg); }
+   99.99%  { top: -20px; left: -20px; transform: rotate(270deg); }
+   100%    { top: -20px; left: -20px; transform: rotate(360deg); } 
+}
+
+@keyframes catParkour {
+  0%, 100% { transform: translateY(0) rotate(0deg); filter: drop-shadow(0 4px 6px rgba(255,105,180,0.4)); }
+  20% { transform: translateY(0) rotate(0deg); }
+  35% { transform: translateY(-70px) rotate(180deg) scale(1.6); filter: drop-shadow(0 20px 30px #ff69b4); }
+  50% { transform: translateY(0) rotate(360deg); }
+}
+
+@keyframes dogZigZag {
+  0%, 100% { transform: translateY(0) rotate(0deg); filter: drop-shadow(0 4px 6px rgba(255,105,180,0.4)); }
+  25% { transform: translateY(-30px) rotate(20deg) scale(1.2); filter: drop-shadow(0 15px 20px #ffb6c1); }
+  75% { transform: translateY(10px) rotate(-15deg) scale(0.9); }
+}
+
+@keyframes rabbitQuantum {
+  0%, 100% { transform: scale(1); opacity: 1; filter: drop-shadow(0 4px 6px rgba(255,105,180,0.4)); }
+  30% { transform: scale(1); opacity: 1; filter: drop-shadow(0 0 20px white); }
+  35% { transform: scale(0) rotate(180deg); opacity: 0; filter: drop-shadow(0 0 50px white); } 
+  45% { transform: scale(0) rotate(180deg); opacity: 0; } 
+  50% { transform: scale(2.5) rotate(360deg); opacity: 1; filter: drop-shadow(0 0 40px #ffb6c1); }
+  60% { transform: scale(1) rotate(360deg); }
+}
+
+@keyframes turtleRocket {
+  0%, 75% { transform: translateX(0) scale(1); filter: drop-shadow(0 4px 6px rgba(255,105,180,0.4)); }
+  78% { transform: translateX(0) scale(1.3) rotate(-15deg); filter: drop-shadow(-30px 10px 10px #ff4500) drop-shadow(-50px 15px 20px #ffd700); }
+  83% { transform: translateX(100px) scale(1.3) rotate(-15deg); filter: drop-shadow(-40px 10px 15px #ff4500) drop-shadow(-80px 15px 30px #ffd700); }
+  92% { transform: translateX(100px) scale(1); filter: drop-shadow(0 4px 6px rgba(255,105,180,0.4)); }
+  100% { transform: translateX(0) scale(1); }
+}
+
+.animalWrapper {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  z-index: 60;
+  pointer-events: none;
+}
+
+.catRun { animation: runBorder 18s linear infinite; }
+.catJump { animation: catParkour 4s ease-in-out infinite; font-size: 2.25rem; }
+
+.dogRun { animation: runBorder 24s linear infinite -6s; }
+.dogJump { animation: dogZigZag 1.5s ease-in-out infinite; font-size: 2.25rem; }
+
+.rabbitRun { animation: runBorder 12s linear infinite -10s; }
+.rabbitJump { animation: rabbitQuantum 6s ease-in-out infinite; font-size: 2.25rem; }
+
+.turtleRun { animation: runBorder 40s linear infinite -20s; }
+.turtleJump { animation: turtleRocket 9s ease-in-out infinite; font-size: 2.25rem; }
+

@@ -8,51 +8,59 @@
         "create": "npx create-....-next-app",
         "multiLanguageslDescription": "This template supports multiple languages with Next-Intl, automatically detecting the browser language and redirecting users to the appropriate language. You can add more languages by creating JSON files in the messages folder.",
         "docs": "Next.js Documentation",
-        "author": "Author: ",
-        "followMe": "Follow me on",
-        "support": "Support",
+        "Author": "Author: ",
+        "Support": "Support",
         "multiLanguages": "Multi Languages"
     },
     "auth": {
         "login": {
-            "title": "Smart saving through every snapshot.",
-            "subtitle": "Start your visual financial management journey today.",
+            "title": "Where financial dreams begin.",
+            "subtitle": "Let us accompany you in painting the picture of your future.",
             "brandName": "SavySnap",
-            "trustedUsers": "Trusted by over 10,000 users",
-            "emailLabel": "Email address",
+            "trustedUsers": "Thousands of stars have gathered",
+            "emailLabel": "Email or Username",
             "emailRequired": "Please enter your email address!",
             "emailInvalid": "Invalid email format!",
             "emailPlaceholder": "name@example.com",
             "usernameLabel": "Username",
             "usernameRequired": "Please enter your username!",
             "usernamePlaceholder": "johndoe",
-            "passwordLabel": "Password",
-            "forgotPassword": "Forgot password?",
+            "passwordLabel": "Secret Key",
+            "forgotPassword": "Forgot your key? 🗝️",
             "passwordRequired": "Please enter your password!",
             "passwordPlaceholder": "••••••••",
-            "submit": "Login now",
+            "submit": "Start now 🚀",
             "divider": "OR",
+            "orDivider": "Or fly with",
             "loginWithGoogle": "Google",
             "loginWithGithub": "Github",
-            "noAccount": "Don't have an account?",
+            "noAccount": "Are you a new star?",
             "register": "Register for free",
+            "registerBtn": "Create account",
             "headerText": "Welcome back!",
-            "subHeaderText": "Please login to continue managing your Snaps."
+            "subHeaderText": "Please login to continue managing your Snaps.",
+            "welcomeTitle": "Dreamland 🐾",
+            "welcomeSubtitle": "Enter information to continue the experience",
+            "errorTitle": "Login failed",
+            "errorDefault": "Something went wrong. Please try again.",
+            "artTitle": "Capturing Moments 🌸",
+            "artSubtitle": "Turn every spending photo into a lovely piece of art.",
+            "artQuote": "Art is not just about spending, but about how you cherish what you have. 🎀"
         },
         "register": {
-            "agreement": "I argee",
+            "agreement": "I agree",
             "brandName": "SavySnap",
-            "bannerTitle": "Build a strong financial future.",
-            "bannerSubtitle": "Join over 10,000 smart savers today.",
-            "testimonial": "\"SavySnap helped me save 20% of my monthly income by tracking expenses visually.\"",
-            "usernameLabel": "Username",
+            "bannerTitle": "Sowing seeds for a brilliant future.",
+            "bannerSubtitle": "Join us in creating a peaceful and prosperous life.",
+            "testimonial": "\"SavySnap is like magic, helping me clearly see the financial pieces of my life every day.\"",
+            "usernameLabel": "Cute name",
             "usernameRequired": "Please enter your username!",
-            "usernamePlaceholder": "johndoe",
-            "emailLabel": "Email Address",
+            "usernamePlaceholder": "Strawberry Berry 🍓...",
+            "emailLabel": "Stellar Email",
             "emailRequired": "Please enter your email!",
             "emailInvalid": "Invalid email format!",
             "emailPlaceholder": "name@example.com",
-            "passwordLabel": "Password",
+            "passwordLabel": "Secret Key",
             "passwordRequired": "Please enter your password!",
             "passwordPlaceholder": "Minimum 8 characters",
             "confirmPasswordLabel": "Confirm Password",
@@ -60,8 +68,8 @@
             "confirmPasswordNotMatch": "Passwords do not match!",
             "phoneLabel": "Phone Number",
             "phoneRequired": "Please enter your phone number!",
-            "genderLabel": "Gender",
             "agreementRequired": "You must accept the agreement",
+            "genderLabel": "Gender",
             "genderRequired": "Please select gender!",
             "genderOptions": {
                 "male": "Male",
@@ -70,11 +78,19 @@
             },
             "agreementPrefix": "I have read and agree to the ",
             "termsLink": "Terms of Service",
-            "submit": "Register",
+            "submit": "Engrave account 🎨",
             "headerText": "Create new account!",
             "subHeaderText": "Please fill in the details below to register.",
-            "hasAccount": "Already have an account?",
-            "loginUrlText": "Login now"
+            "hasAccount": "Already have a shelter?",
+            "loginUrlText": "Login now",
+            "loginBtn": "Return home",
+            "welcomeTitle": "New Beginning 🌿",
+            "welcomeSubtitle": "Unlock the world of financial art",
+            "errorTitle": "Registration failed",
+            "errorDefault": "Something went wrong. Please try again.",
+            "artTitle": "Creating Future ✨",
+            "artSubtitle": "Join a community that loves beauty and smart financial management.",
+            "artQuote": "Every saving is a seed for your dream garden in the future. 🌱"
         },
         "forgotPassword": {
             "headerText": "Forgot password?",
@@ -103,15 +119,11 @@
             "title": "Capture a moment",
             "uploadTitle": "Upload receipt or item image",
             "uploadHint": "JPG, PNG UP TO 5MB",
-
             "noteLabel": "NOTE TITLE",
             "notePlaceholder": "Eg: Morning coffee, New shoes...",
-
             "amountLabel": "AMOUNT",
             "amountPlaceholder": "Enter amount...",
-
             "categoryLabel": "CATEGORY",
-
             "category": {
                 "need": "Essential",
                 "want": "Food & Drink",
@@ -122,18 +134,13 @@
         },
         "update": {
             "title": "Update Snap",
-
             "uploadTitle": "Upload receipt or item image",
             "uploadHint": "JPG, PNG UP TO 5MB",
-
             "noteLabel": "NOTE TITLE",
             "notePlaceholder": "Eg: Morning coffee, New shoes...",
-
             "amountLabel": "AMOUNT",
             "amountPlaceholder": "Enter amount...",
-
             "categoryLabel": "CATEGORY",
-
             "category": {
                 "need": "Essential",
                 "want": "Food & Drink",
@@ -168,34 +175,34 @@
     "admin": {
         "title": "SavyAdmin",
         "menu": {
-            "overview": "Overview",
-            "users": "Users",
-            "snaps": "Snaps",
-            "settings": "Settings"
+            "overview": "Main Garden",
+            "users": "Friend Circle",
+            "snaps": "Memory Vault",
+            "settings": "Tuning Corner"
         },
         "logout": "Logout",
-        "searchPlaceholder": "Search users, transaction IDs...",
-        "dashboardTitle": "Dashboard",
-        "dashboardDesc": "Overview of SavySnap system activities today.",
+        "searchPlaceholder": "Search for magic...",
+        "dashboardTitle": "Good morning! ☀️",
+        "dashboardDesc": "Everyone has saved a lot today!",
         "stats": {
-            "totalUsers": "Total Users",
-            "createdSnaps": "Created Snaps",
-            "totalTrackingValue": "Total Tracking Value",
-            "dailyVisits": "Daily Visits",
-            "vsLastMonth": "vs last month"
+            "totalUsers": "New Members",
+            "createdSnaps": "Memory Snaps",
+            "totalTrackingValue": "Saving Pot",
+            "dailyVisits": "Heart Beats",
+            "vsLastMonth": "this month ~"
         },
         "recentSnaps": {
-            "title": "Recent System Snaps",
-            "viewAll": "View all",
+            "title": "Latest Memories nà",
+            "viewAll": "View all nha",
             "columns": {
-                "user": "User",
-                "goalAndSpend": "Goal / Spend",
-                "amount": "Amount",
-                "date": "Date",
+                "user": "Cute Friend",
+                "goalAndSpend": "Saved Snap",
+                "amount": "Coins",
+                "date": "Created Date",
                 "status": "Status",
                 "statusTypes": {
-                    "approved": "Approved",
-                    "pending": "Pending",
+                    "approved": "Fresh Green",
+                    "pending": "Wait a bit",
                     "rejected": "Rejected"
                 }
             }
@@ -205,9 +212,9 @@
             "desc": "List of all active users in the system.",
             "searchPlaceholder": "Search users by name...",
             "columns": {
-                "id": "ID",
-                "username": "Username",
-                "email": "Email",
+                "id": "Identifier",
+                "username": "Cute Name",
+                "email": "Stellar Email",
                 "totalPayment": "Total Payment",
                 "action": "Action"
             },

@@ -1,6 +1,6 @@
 import axiosClient from '@/services/apis/axiosClient';
 import { ENDPOINT } from '@/services/endpoint';
-import { User } from '@/types/user.td';
+import { User } from '@/types/user';
 
 export const userService = {
     getAllUsers: async (): Promise<User[]> => {

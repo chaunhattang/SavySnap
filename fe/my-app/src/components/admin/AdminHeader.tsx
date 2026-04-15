@@ -5,34 +5,33 @@ import { Layout, Input, Space, Avatar, Dropdown } from 'antd';
 import { SearchOutlined, EditOutlined, LogoutOutlined } from '@ant-design/icons';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
-import Cookies from 'js-cookie';
-import styles from '../admin.module.css';
+import styles from '@/app/[locale]/admin/admin.module.css';
 import { userService } from '@/services/apis/user.service';
-import { User } from '@/types/user.td';
+import { User } from '@/types/user';
 import NotificationDropdown from '@/components/notification/NotificationDropdown';
+import { useLogout } from '@/hooks/useLogout';
 
 const { Header } = Layout;
 
 export default function AdminHeader() {
     const t = useTranslations('admin');
     const router = useRouter();
+    const logout = useLogout(); // hook dùng chung với AdminSidebar
 
+    // Thông tin admin đang đăng nhập
     const [adminUser, setAdminUser] = useState<User | null>(null);
 
+    // Lấy thông tin người dùng hiện tại khi component mount
     useEffect(() => {
         userService.getMyInfo().then(setAdminUser).catch(console.error);
     }, []);
 
-    const handleLogout = () => {
-        Cookies.remove('accessToken', { path: '/' });
-        Cookies.remove('role', { path: '/' });
-        router.push('/login');
-    };
-
+    // Lấy 2 chữ đầu của username để hiển thị trên avatar
     const avatarInitials = adminUser?.username
         ? adminUser.username.slice(0, 2).toUpperCase()
         : 'AD';
 
+    // Menu dropdown khi click vào avatar
     const menuItems = [
         {
             key: 'profile',
@@ -46,12 +45,13 @@ export default function AdminHeader() {
             icon: <LogoutOutlined />,
             label: t('logout'),
             danger: true,
-            onClick: handleLogout,
+            onClick: logout,
         },
     ];
 
     return (
-        <Header className={styles.header}>
+        <header className={styles.header}>
+            {/* Thanh tìm kiếm */}
             <div className={styles.searchContainer}>
                 <Input
                     size="large"
@@ -62,6 +62,7 @@ export default function AdminHeader() {
                 />
             </div>
 
+            {/* Vùng bên phải: chuông thông báo + avatar admin */}
             <Space size="large" align="center">
                 <NotificationDropdown role="admin" />
 
@@ -85,6 +86,6 @@ export default function AdminHeader() {
                     </Space>
                 </Dropdown>
             </Space>
-        </Header>
+        </header>
     );
 }
