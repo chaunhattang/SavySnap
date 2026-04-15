@@ -1,12 +1,15 @@
 'use client';
 import React, { useState } from 'react';
-import { Form, Input, Button, Typography } from 'antd';
-import { MailOutlined, ArrowRightOutlined, ArrowLeftOutlined } from '@ant-design/icons';
-import styles from '@/app/[locale]/(auth)/forgotPassword/styles/forgotPassword.module.css';
-import Link from 'next/link';
+import { Form, Input, Button, notification } from 'antd';
+import { Mail, ArrowRight, ArrowLeft } from 'lucide-react';
+import authStyles from '@/components/auth/register/authAnimations.module.css';
 import { useTranslations } from 'next-intl';
 
-const ForgotPassword: React.FC<any> = () => {
+interface ForgotPasswordProps {
+    onViewChange: (view: 'login' | 'register' | 'forgot-password') => void;
+}
+
+const ForgotPassword: React.FC<ForgotPasswordProps> = ({ onViewChange }) => {
     const t = useTranslations('auth.forgotPassword');
     const [loading, setLoading] = useState(false);
 
@@ -15,6 +18,11 @@ const ForgotPassword: React.FC<any> = () => {
         try {
             console.log('Success:', values);
             await new Promise((resolve) => setTimeout(resolve, 1500));
+            notification.success({
+                message: 'Thành công',
+                description: 'Đã gửi liên kết khôi phục mật khẩu đến email của bạn.'
+            });
+            onViewChange('login');
         } catch (error) {
             console.error('Error:', error);
         } finally {
@@ -23,70 +31,56 @@ const ForgotPassword: React.FC<any> = () => {
     };
 
     return (
-        <>
-            <div>
-                <h3 className={styles.headerText}>{t('headerText')}</h3>
-                <p className={styles.subHeaderText}>{t('subHeaderText')}</p>
+        <div className="w-full max-w-md mx-auto">
+            <div className="mb-8 w-full max-w-md mx-auto">
+                <h3 className={`text-3xl font-black ${authStyles.textPrimary} mb-2 flex items-center gap-2`}>Tìm lại khóa 🗝️</h3>
+                <p className={`${authStyles.textSecondary} font-bold text-sm uppercase tracking-widest`}>Nhập email để nhận hướng dẫn</p>
             </div>
-            <Form name="forgotPassword" layout="vertical" onFinish={onFinish} requiredMark={false}>
+
+            <Form name="forgotPassword" layout="vertical" onFinish={onFinish} requiredMark={false} className="space-y-4">
                 <Form.Item
-                    label={
-                        <Typography.Text className={styles.inputLabel}>
-                            {t('emailLabel')}
-                        </Typography.Text>
-                    }
                     name="email"
                     rules={[
-                        {
-                            required: true,
-                            message: (
-                                <Typography.Text className={styles.inheritColorText}>
-                                    {t('emailRequired')}
-                                </Typography.Text>
-                            ),
-                        },
-                        {
-                            type: 'email',
-                            message: (
-                                <Typography.Text className={styles.inheritColorText}>
-                                    {t('emailInvalid')}
-                                </Typography.Text>
-                            ),
-                        },
+                        { required: true, message: t('emailRequired') },
+                        { type: 'email', message: t('emailInvalid') },
                     ]}
+                    style={{ marginBottom: '1rem' }}
                 >
-                    <Input
-                        prefix={<MailOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
-                        placeholder={t('emailPlaceholder')}
-                        variant="filled"
-                        className={styles.customInput}
-                    />
+                    <div className="relative">
+                        <label className={`block text-xs font-black uppercase tracking-[0.1em] ${authStyles.textSecondary} mb-2 ml-2 text-left`}>
+                            Email tinh tú
+                        </label>
+                        <Input
+                            prefix={<Mail className={`text-primary opacity-60 mr-2 ${authStyles.textPrimary}`} size={20} />}
+                            placeholder="email@moonlight.com"
+                            variant="filled"
+                            className={`w-full py-3 ${authStyles.glassInput} rounded-2xl text-lg`}
+                        />
+                    </div>
                 </Form.Item>
 
-                <Form.Item style={{ marginBottom: 0, marginTop: 32 }}>
+                <Form.Item style={{ marginBottom: 0, marginTop: 16 }}>
                     <Button
                         type="primary"
                         htmlType="submit"
                         block
                         loading={loading}
-                        className={styles.submitBtn}
-                        icon={!loading && <ArrowRightOutlined />}
-                        iconPosition="end"
+                        className={`w-full py-6 mt-2 ${authStyles.btnPrimary} rounded-2xl font-black text-lg flex items-center justify-center gap-3 transition-all group`}
                     >
-                        <Typography.Text className={styles.whiteText}>{t('submit')}</Typography.Text>
+                        Gửi chìa khóa
+                        {!loading && <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />}
                     </Button>
                 </Form.Item>
             </Form>
 
-            <p className={styles.footerText}>
-                <Link href="/login" className={styles.backLink}>
-                    <ArrowLeftOutlined />
-                    <Typography.Text className={styles.inheritWeightText}>
-                        {t('backToLogin')}
-                    </Typography.Text>
-                </Link>
-            </p>
-        </>
+            <div className="w-full max-w-md mx-auto mt-8">
+               <div className={`mt-8 text-center ${authStyles.textSecondary} font-bold flex items-center justify-center gap-2`}>
+                   <button onClick={() => onViewChange('login')} className={`flex items-center gap-1 font-black ${authStyles.textPrimary} hover:underline decoration-2 underline-offset-4 transition-all`}>
+                       <ArrowLeft size={16} /> Nhớ ra rồi? Trở về nhà
+                   </button>
+               </div>
+           </div>
+        </div>
     );
 };
 

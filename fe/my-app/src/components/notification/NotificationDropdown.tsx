@@ -128,9 +128,20 @@ interface PanelProps {
 // ─── Shared hook ──────────────────────────────────────────────────────
 function useNotifications(role: 'user' | 'admin', onMarkRead?: () => void) {
     const defaults = role === 'admin' ? DEFAULT_ADMIN : DEFAULT_USER;
-    const [notifs, setNotifs] = useState<Notification[]>(() => loadNotifs(role, defaults));
+    const [notifs, setNotifs] = useState<Notification[]>(defaults);
+    const [isHydrated, setIsHydrated] = useState(false);
 
-    useEffect(() => { saveNotifs(role, notifs); }, [notifs, role]);
+    useEffect(() => {
+        const saved = loadNotifs(role, defaults);
+        setNotifs(saved);
+        setIsHydrated(true);
+    }, [role]);
+
+    useEffect(() => {
+        if (isHydrated) {
+            saveNotifs(role, notifs);
+        }
+    }, [notifs, role, isHydrated]);
 
     const unreadCount = notifs.filter((n) => !n.read).length;
 

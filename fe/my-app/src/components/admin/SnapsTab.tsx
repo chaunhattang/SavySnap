@@ -30,18 +30,18 @@ import {
     BarsOutlined,
 } from '@ant-design/icons';
 import { snapService } from '@/services/apis/snap.service';
-import { Snap } from '@/types/snap.td';
+import { Snap } from '@/types/snap';
 import styles from './SnapsTab.module.css';
 
 const { Title, Text, Paragraph } = Typography;
 
 // ─── Category config ─────────────────────────────────────────────────
 const CATEGORIES: Record<string, { label: string; color: string }> = {
-    essential:     { label: 'Thiết yếu',  color: 'blue'    },
-    food:          { label: 'Ăn uống',    color: 'orange'  },
-    entertainment: { label: 'Giải trí',   color: 'purple'  },
-    saving:        { label: 'Tiết kiệm',  color: 'green'   },
-    other:         { label: 'Khác',       color: 'default' },
+    essential: { label: 'Thiết yếu', color: 'blue' },
+    food: { label: 'Ăn uống', color: 'orange' },
+    entertainment: { label: 'Giải trí', color: 'purple' },
+    saving: { label: 'Tiết kiệm', color: 'green' },
+    other: { label: 'Khác', color: 'default' },
 };
 
 function getCat(key: string) {
@@ -54,7 +54,7 @@ const formatVND = (n: number) =>
 // ─── Main component ───────────────────────────────────────────────────
 export default function SnapsTab() {
     const [snaps, setSnaps] = useState<Snap[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true); 
     const [search, setSearch] = useState('');
     const [catFilter, setCatFilter] = useState<string>('all');
     const [selected, setSelected] = useState<Snap | null>(null);
@@ -82,7 +82,7 @@ export default function SnapsTab() {
     const totalAmount = filtered.reduce((sum, s) => sum + (s.amount || 0), 0);
 
     return (
-        <div>
+        <div className="flex flex-col gap-8">
             {/* ── Page heading ── */}
             <div className={styles.header}>
                 <div>
@@ -167,47 +167,47 @@ export default function SnapsTab() {
                         const cat = getCat(snap.category);
                         return (
                             <Col key={snap.id} xs={24} sm={12} md={8} lg={6} xl={6}>
-                                <Card
-                                    className={styles.snapCard}
-                                    onClick={() => setSelected(snap)}
-                                    cover={
-                                        snap.imageUrl ? (
-                                            <div className={styles.imgContainer}>
-                                                <img
-                                                    src={snap.imageUrl}
-                                                    alt={snap.title}
-                                                    className={styles.snapImg}
-                                                />
-                                                <div className={styles.imgOverlay}>
-                                                    <PictureOutlined style={{ fontSize: 28, color: 'white' }} />
-                                                </div>
-                                            </div>
-                                        ) : (
-                                            <div className={styles.noImg}>
-                                                <FileTextOutlined style={{ fontSize: 36, color: '#cbd5e1' }} />
-                                            </div>
-                                        )
-                                    }
-                                    styles={{ body: { padding: '12px 14px' } }}
-                                >
-                                    <div className={styles.cardMeta}>
-                                        <Tag color={cat.color} style={{ borderRadius: 6, fontSize: 11, marginBottom: 6 }}>
-                                            {cat.label}
-                                        </Tag>
-                                        <Text strong className={styles.cardTitle} ellipsis>
-                                            {snap.title || 'Không có tiêu đề'}
-                                        </Text>
-                                        <Text className={styles.cardAmount}>
-                                            {formatVND(snap.amount || 0)}
-                                        </Text>
-                                        <Text type="secondary" className={styles.cardDate}>
-                                            <CalendarOutlined style={{ marginRight: 4 }} />
-                                            {snap.createdAt
-                                                ? new Date(snap.createdAt).toLocaleDateString('vi-VN')
-                                                : '—'}
-                                        </Text>
-                                    </div>
-                                </Card>
+                                 <Card
+                                     className={`${styles.snapCard} ${styles.cinematicCard}`}
+                                     onClick={() => setSelected(snap)}
+                                     cover={
+                                         snap.imageUrl ? (
+                                             <div className={styles.imgContainer}>
+                                                 <img
+                                                     src={snap.imageUrl}
+                                                     alt={snap.title}
+                                                     className={styles.snapImg}
+                                                 />
+                                                 <div className={styles.imgOverlay}>
+                                                     <PictureOutlined style={{ fontSize: 28, color: 'white' }} />
+                                                 </div>
+                                             </div>
+                                         ) : (
+                                             <div className={styles.noImg}>
+                                                 <FileTextOutlined style={{ fontSize: 36, color: '#cbd5e1' }} />
+                                             </div>
+                                         )
+                                     }
+                                     styles={{ body: { padding: '12px 14px' } }}
+                                 >
+                                     <div className={styles.cardMeta}>
+                                         <Tag color={cat.color} style={{ borderRadius: 6, fontSize: 11, marginBottom: 6 }}>
+                                             {cat.label}
+                                         </Tag>
+                                         <Text strong className={styles.cardTitle} ellipsis>
+                                             {snap.title || 'Không có tiêu đề'}
+                                         </Text>
+                                         <Text className={styles.cardAmount}>
+                                             {formatVND(snap.amount || 0)}
+                                         </Text>
+                                         <Text type="secondary" className={styles.cardDate}>
+                                             <CalendarOutlined style={{ marginRight: 4 }} />
+                                             {snap.createdAt
+                                                 ? new Date(snap.createdAt).toLocaleDateString('vi-VN')
+                                                 : '—'}
+                                         </Text>
+                                     </div>
+                                 </Card>
                             </Col>
                         );
                     })}

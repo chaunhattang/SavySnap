@@ -14,7 +14,7 @@ import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/apis/auth.service';
 
-export default function LoginForm() {
+export default function LoginForm({ onViewChange }: { onViewChange: (view: any) => void }) {
     const t = useTranslations('auth.login');
     const [loading, setLoading] = useState(false);
 
@@ -88,11 +88,15 @@ export default function LoginForm() {
                             <Typography.Text className={styles.inputLabel}>
                                 {t('passwordLabel')}
                             </Typography.Text>
-                            <Link href="/forgot-password" className={styles.forgotLink}>
-                                <Typography.Text className={styles.inheritColorText}>
-                                    {t('forgotPassword')}
-                                </Typography.Text>
-                            </Link>
+                                <span 
+                                    onClick={() => onViewChange('forgot-password')} 
+                                    className={styles.forgotLink} 
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    <Typography.Text className={styles.inheritColorText}>
+                                        {t('forgotPassword')}
+                                    </Typography.Text>
+                                </span>
                         </div>
                     }
                     name="password"
@@ -155,11 +159,15 @@ export default function LoginForm() {
                     {t('noAccount')}
                 </Typography.Text>
                 ?{' '}
-                <Link href="/register" className={styles.registerLink}>
-                    <Typography.Text className={styles.inheritWeightText}>
-                        {t('register')}
-                    </Typography.Text>
-                </Link>
+                                <span 
+                                    onClick={() => onViewChange('register')} 
+                                    className={styles.registerLink} 
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    <Typography.Text className={styles.inheritWeightText}>
+                                        {t('register')}
+                                    </Typography.Text>
+                                </span>
             </p>
         </>
     );

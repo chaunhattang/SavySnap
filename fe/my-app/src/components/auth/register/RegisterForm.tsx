@@ -1,153 +1,52 @@
 'use client';
 import React, { useState } from 'react';
-import { Button, Checkbox, Form, Input, Typography } from 'antd';
+import { Form, Input, Button, Typography } from 'antd';
+import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons';
 import { useTranslations } from 'next-intl';
-import { MailOutlined, LockOutlined, ArrowRightOutlined, UserOutlined } from '@ant-design/icons';
-import styles from './register.module.css';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/apis/auth.service';
+import styles from './authAnimations.module.css';
 
-export default function RegisterForm() {
+export default function RegisterForm({ onViewChange }: { onViewChange: (view: any) => void }) {
     const t = useTranslations('auth.register');
     const [loading, setLoading] = useState(false);
     const router = useRouter();
 
     const onFinish = async (values: any) => {
         setLoading(true);
-
         try {
             await authService.register(values);
-
-            router.push('/login');
+            router.push('/user');
         } catch (error) {
-            console.error(error);
+            console.error('Registration error:', error);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <>
+        <div className="flex flex-col gap-6">
             <div>
-                <h3 className={styles.headerText}>{t('headerText')}</h3>
-                <p className={styles.subHeaderText}>{t('subHeaderText')}</p>
+                <h3 className="text-2xl font-bold text-pink-600">{t('headerText') || 'Đăng ký tài khoản'}</h3>
+                <p className="text-gray-500">{t('subHeaderText') || 'Tham gia cùng SavySnap ngay hôm nay'}</p>
             </div>
-            <Form name="register" layout="vertical" onFinish={onFinish} requiredMark={false}>
-                <Form.Item
-                    name="username"
-                    label={
-                        <Typography.Text className={styles.inputLabel}>
-                            {t('usernameLabel')}
-                        </Typography.Text>
-                    }
-                    rules={[
-                        {
-                            required: true,
-                            message: (
-                                <Typography.Text className={styles.inheritColorText}>
-                                    {t('usernameRequired')}
-                                </Typography.Text>
-                            ),
-                        },
-                    ]}
-                >
-                    <Input
-                        prefix={<UserOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
-                        autoComplete="username"
-                        placeholder={t('usernamePlaceholder')}
-                        variant="filled"
-                        className={styles.customInput}
-                    />
+            <Form layout="vertical" onFinish={onFinish}>
+                <Form.Item label="Tên đăng nhập" name="username" rules={[{ required: true }]}>
+                    <Input prefix={<UserOutlined />} placeholder="Username" />
                 </Form.Item>
-
-                <Form.Item
-                    name="email"
-                    label={
-                        <Typography.Text className={styles.inputLabel}>
-                            {t('emailLabel')}
-                        </Typography.Text>
-                    }
-                    rules={[
-                        {
-                            type: 'email',
-                            message: (
-                                <Typography.Text className={styles.inheritColorText}>
-                                    {t('emailInvalid')}
-                                </Typography.Text>
-                            ),
-                        },
-                        {
-                            required: true,
-                            message: (
-                                <Typography.Text className={styles.inheritColorText}>
-                                    {t('emailRequired')}
-                                </Typography.Text>
-                            ),
-                        },
-                    ]}
-                >
-                    <Input
-                        prefix={<MailOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
-                        placeholder={t('emailPlaceholder')}
-                        variant="filled"
-                        className={styles.customInput}
-                    />
+                <Form.Item label="Email" name="email" rules={[{ required: true, type: 'email' }]}>
+                    <Input prefix={<MailOutlined />} placeholder="Email" />
                 </Form.Item>
-
-                <Form.Item
-                    name="password"
-                    label={
-                        <Typography.Text className={styles.inputLabel}>
-                            {t('passwordLabel')}
-                        </Typography.Text>
-                    }
-                    rules={[
-                        {
-                            required: true,
-                            message: (
-                                <Typography.Text className={styles.inheritColorText}>
-                                    {t('passwordRequired')}
-                                </Typography.Text>
-                            ),
-                        },
-                    ]}
-                >
-                    <Input.Password
-                        prefix={<LockOutlined style={{ color: '#94a3b8', marginRight: 8 }} />}
-                        placeholder={t('passwordPlaceholder')}
-                        variant="filled"
-                        className={styles.customInput}
-                    />
+                <Form.Item label="Mật khẩu" name="password" rules={[{ required: true }]}>
+                    <Input.Password prefix={<LockOutlined />} placeholder="Password" />
                 </Form.Item>
-
-                <Form.Item style={{ marginBottom: 0, marginTop: 16 }}>
-                    <Button
-                        type="primary"
-                        htmlType="submit"
-                        block
-                        loading={loading}
-                        className={styles.submitBtn}
-                        icon={!loading && <ArrowRightOutlined />}
-                        iconPosition="end"
-                    >
-                        <Typography.Text className={styles.whiteText}>
-                            {t('submit')}
-                        </Typography.Text>
-                    </Button>
-                </Form.Item>
+                <Button type="primary" htmlType="submit" block loading={loading} className="bg-pink-600 border-pink-600">
+                    Đăng ký
+                </Button>
             </Form>
-
-            <p style={{ marginTop: 20 }} className={styles.footerText}>
-                <Typography.Text className={styles.inheritColorText}>
-                    {t('hasAccount')}
-                </Typography.Text>{' '}
-                <Link href="/login" className={styles.loginLink}>
-                    <Typography.Text className={styles.inheritWeightText}>
-                        {t('loginUrlText')}
-                    </Typography.Text>
-                </Link>
+            <p className="text-center">
+                Đã có tài khoản? <a href="#" onClick={() => onViewChange('login')} className="text-pink-600 font-bold">Đăng nhập</a>
             </p>
-        </>
+        </div>
     );
 }
