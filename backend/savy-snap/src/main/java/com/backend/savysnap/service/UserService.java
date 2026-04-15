@@ -63,6 +63,12 @@ public class UserService {
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
 
         userMapper.updateUser(user, request);
+
+        boolean passwordMatch = passwordEncoder.matches(request.getConfirmPassword(), user.getPassword());
+        if (!passwordMatch) {
+            throw new AppException(ErrorCode.WRONG_PASSWORD);
+        }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         String imageUrl = cloudinaryService.uploadImage(file);

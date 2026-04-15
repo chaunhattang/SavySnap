@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/apis/auth.service';
 
-const RegisterForm: React.FC = () => {
+export default function RegisterForm() {
     const t = useTranslations('auth.register');
     const [loading, setLoading] = useState(false);
     const router = useRouter();
@@ -150,6 +150,4 @@ const RegisterForm: React.FC = () => {
             </p>
         </>
     );
-};
-
-export default RegisterForm;
+}

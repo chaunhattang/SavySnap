@@ -25,6 +25,10 @@ public class User {
     String password;
     @Column(nullable = false, unique = true)
     String email;
+
+    @Column(nullable = true)
+    String fullName;
+
     @Builder.Default
     Long totalPayment = 0L;
 
