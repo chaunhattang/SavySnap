@@ -6,6 +6,7 @@ import com.backend.savysnap.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -16,17 +17,20 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ApplicationInitConfig implements ApplicationRunner {
     UserRepository userRepository;
     PasswordEncoder passwordEncoder;
 
+    @NonFinal
     @Value("${app.admin.username}")
     String adminUsername;
-
+    
+    @NonFinal
     @Value("${app.admin.password}")
     String adminPassword;
 
+    @NonFinal
     @Value("${app.admin.email}")
     String adminEmail;
 
