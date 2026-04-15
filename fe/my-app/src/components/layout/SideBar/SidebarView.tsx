@@ -189,10 +189,6 @@ export default function SidebarView({
         </>
     );
 
-    /* ========================= */
-    /* MOBILE */
-    /* ========================= */
-
     if (isMobile) {
         return (
             <Drawer

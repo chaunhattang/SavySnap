@@ -1,0 +1,56 @@
+.container {
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    overflow: hidden;
+
+    z-index: 1;
+}
+
+.petal {
+    position: absolute;
+
+    top: -10%;
+
+    background: linear-gradient(
+        135deg,
+        #ffb7c5,
+        #ffcce6
+    );
+
+    border-radius: 15px 2px 15px 2px;
+    animation: fall linear infinite;
+    opacity: 0.35;
+    filter: blur(1px);
+}
+
+@keyframes fall {
+    0% {
+        transform:
+            translateY(-20vh)
+            rotate(0deg)
+            translateX(0);
+
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 0.4;
+    }
+
+    100% {
+        transform:
+            translateY(120vh)
+            rotate(360deg)
+            translateX(200px);
+
+        opacity: 0;
+    }
+}

@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { Spin } from 'antd';
 
 import SnapCard from './SnapCard';
-
 import styles from './SnapList.module.css';
 import CategoryTabs from './CategoryTabs';
 
@@ -15,10 +14,6 @@ export default function SnapList() {
 
     const [category, setCategory] = useState('all');
 
-    /*
-    load lần đầu
-    */
-
     useEffect(() => {
         fetchAll();
     }, []);
@@ -26,7 +21,7 @@ export default function SnapList() {
     if (loading)
         return (
             <div className={styles.center}>
-                <Spin />
+                <Spin size="large" />
             </div>
         );
 
@@ -34,7 +29,7 @@ export default function SnapList() {
         .filter((snap) =>
             category === 'all' ? true : snap.category.toUpperCase().includes(category.toUpperCase())
         )
-        .filter((snap) => snap.title.toLowerCase().includes(search.toLowerCase()));
+        .filter((snap) => snap.title?.toLowerCase().includes(search.toLowerCase()));
 
     return (
         <>
@@ -42,7 +37,7 @@ export default function SnapList() {
 
             <div className={styles.container}>
                 {filteredSnaps.map((snap) => (
-                    <SnapCard key={snap.id} snap={snap} />
+                    <SnapCard key={snap.id} snap={snap} onRefresh={fetchAll} />
                 ))}
             </div>
         </>

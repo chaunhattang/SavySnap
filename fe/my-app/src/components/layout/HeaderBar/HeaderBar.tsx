@@ -3,13 +3,12 @@
 import { useState } from 'react';
 import styles from './styles.module.css';
 
-import { SearchOutlined } from '@ant-design/icons';
+import { SearchOutlined, MenuOutlined, PlusOutlined } from '@ant-design/icons';
 
 import { Button, Input, Layout, Grid } from 'antd';
 import CreateSnapModal from '@/components/snap/CreateSnapModal';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import { useTranslations } from 'next-intl';
-import { MenuOutlined } from '@ant-design/icons';
 import { useSnapCrud } from '@/hooks/useSnapCrud';
 
 const { Header } = Layout;
@@ -31,20 +30,18 @@ export default function HeaderBar({ setCollapsed }: Props) {
     const t = useTranslations('headerBar');
 
     return (
-        <Header className={styles.headerCotainer}>
+        <Header className={styles.headerContainer}>
             {/* LEFT */}
-            {isMobile && (
-                <Button type="text" icon={<MenuOutlined />} onClick={() => setCollapsed(true)} />
-            )}
-            <div className={styles.logoText}>
+
+            <div className={styles.leftSection}>
                 <span className={styles.brand}>SavySnap</span>
             </div>
 
             {/* RIGHT */}
+
             <div className={styles.actions}>
                 <LanguageSwitcher />
 
-                {/* Desktop only */}
                 {!isMobile && (
                     <Input
                         className={styles.search}
@@ -54,13 +51,15 @@ export default function HeaderBar({ setCollapsed }: Props) {
                         onChange={(e) => setSearch(e.target.value)}
                     />
                 )}
+
                 <Button
                     type="primary"
+                    icon={isMobile ? <PlusOutlined /> : undefined}
                     size={isMobile ? 'middle' : 'large'}
                     className={styles.addButton}
                     onClick={() => setOpen(true)}
                 >
-                    {isMobile ? '+' : t('addNew')}
+                    {isMobile ? '' : t('addNew')}
                 </Button>
 
                 <CreateSnapModal open={open} onClose={() => setOpen(false)} />
