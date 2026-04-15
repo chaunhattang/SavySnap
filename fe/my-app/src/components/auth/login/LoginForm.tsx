@@ -13,6 +13,9 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import { authService } from '@/services/apis/auth.service';
+import { jwtDecode } from 'jwt-decode';
+import Cookies from 'js-cookie';
+import { GoogleLogin } from '@react-oauth/google';
 
 export default function LoginForm({ onViewChange }: { onViewChange: (view: any) => void }) {
     const t = useTranslations('auth.login');
@@ -36,6 +39,54 @@ export default function LoginForm({ onViewChange }: { onViewChange: (view: any) 
             console.error('Lỗi đăng nhập:', error);
         } finally {
             setLoading(false);
+        }
+    };
+
+    const loginWithGoogle = async (googleToken: string) => {
+        try {
+            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/google`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    token: googleToken,
+                }),
+            });
+
+            if (!res.ok) {
+                console.error('Login failed:', res.status);
+                return;
+            }
+
+            const data = await res.json();
+
+            const accessToken = data.result.token;
+
+            if (!accessToken) {
+                console.error('No token returned');
+                return;
+            }
+
+            const decoded: any = jwtDecode(accessToken);
+
+            const role = decoded.role;
+
+            const isAdmin = role === 'ADMIN';
+
+            Cookies.set('accessToken', accessToken, {
+                expires: 7,
+                path: '/',
+            });
+
+            Cookies.set('role', role, {
+                expires: 7,
+                path: '/',
+            });
+
+            router.push(isAdmin ? '/admin' : '/user');
+        } catch (error) {
+            console.error(error);
         }
     };
 
@@ -139,19 +190,20 @@ export default function LoginForm({ onViewChange }: { onViewChange: (view: any) 
                 <Typography.Text className={styles.inheritAllText}>{t('divider')}</Typography.Text>
             </Divider>
             <Row gutter={16}>
-                <Col span={12}>
-                    <Button block className={styles.socialBtn} icon={<GoogleOutlined />}>
-                        <Typography.Text className={styles.inheritWeightText}>
-                            {t('loginWithGoogle')}
-                        </Typography.Text>
-                    </Button>
-                </Col>
-                <Col span={12}>
-                    <Button block className={styles.socialBtn} icon={<GithubOutlined />}>
-                        <Typography.Text className={styles.inheritWeightText}>
-                            {t('loginWithGithub')}
-                        </Typography.Text>
-                    </Button>
+                <Col span={24}>
+                    <GoogleLogin
+                        onError={() => console.error('Login Failed')}
+                        onSuccess={(credentialResponse) => {
+                            const token = credentialResponse.credential;
+
+                            if (!token) {
+                                console.error('No credential');
+                                return;
+                            }
+
+                            loginWithGoogle(token);
+                        }}
+                    />
                 </Col>
             </Row>
             <p className={styles.footerText}>
