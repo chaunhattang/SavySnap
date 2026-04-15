@@ -34,7 +34,7 @@ public class SecurityConfig {
 
     final String[] PUBLIC_ENDPOINTS = {
             "/auth/login", "/auth/register", "/auth/google",
-            "/auth/forgot-password/*", "/auth/verify-otp", "/auth/change-password"
+            "/auth/forgot-password", "/auth/verify-otp", "/auth/change-password"
     };
 
     @NonFinal
