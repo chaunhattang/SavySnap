@@ -1,7 +1,7 @@
 'use client';
 
 import { InboxOutlined } from '@ant-design/icons';
-import { Button, Input, InputNumber, Modal, Select, Typography } from 'antd';
+import { App, Button, Input, InputNumber, Modal, Select, Typography } from 'antd';
 
 import Dragger from 'antd/es/upload/Dragger';
 
@@ -28,6 +28,8 @@ export default function CreateSnapModal({ open, onClose }: any) {
 
     const [category, setCategory] = useState('NEED');
 
+    const { message } = App.useApp();
+
     const handleSubmit = async () => {
         if (!title || amount === null || !file) return;
 
@@ -47,13 +49,13 @@ export default function CreateSnapModal({ open, onClose }: any) {
         setTitle('');
         setAmount(null);
         setCategory('NEED');
-
+        message.success(t('submit'));
         resetFile();
 
         onClose?.();
     };
     return (
-        <Modal open={open} footer={null} onCancel={onClose} title={t('title')} width={420}>
+        <Modal open={open} footer={null} onCancel={onClose} title={`💖 ${t('title')}`} width={420}>
             {/* Upload box */}
 
             <Dragger

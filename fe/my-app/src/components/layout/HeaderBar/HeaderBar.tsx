@@ -3,40 +3,67 @@
 import { useState } from 'react';
 import styles from './styles.module.css';
 
-import { SearchOutlined } from '@ant-design/icons';
+import {
+    SearchOutlined,
+    PlusOutlined,
+    EditOutlined,
+    LogoutOutlined,
+    UserOutlined,
+} from '@ant-design/icons';
 
-import { Button, Input, Layout, Grid } from 'antd';
+import { Button, Input, Layout, Grid, Dropdown, Avatar } from 'antd';
 import CreateSnapModal from '@/components/snap/CreateSnapModal';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import { useTranslations } from 'next-intl';
-import { MenuOutlined } from '@ant-design/icons';
 import { useSnapCrud } from '@/hooks/useSnapCrud';
+import Link from 'next/link';
+import { useRouter, usePathname } from 'next/navigation';
 
 const { Header } = Layout;
 const { useBreakpoint } = Grid;
 
 interface Props {
     setCollapsed: (v: boolean) => void;
+    loggedIn: boolean;
+    user: any;
+    onLogout: () => void;
 }
 
-export default function HeaderBar({ setCollapsed }: Props) {
+export default function HeaderBar({ setCollapsed, loggedIn, user, onLogout }: Props) {
     const [open, setOpen] = useState(false);
 
     const screens = useBreakpoint();
-
     const isMobile = !screens.md;
 
     const setSearch = useSnapCrud((s) => s.setSearch);
-
     const t = useTranslations('headerBar');
+     const a = useTranslations('sideBar');
+
+    const router = useRouter();
+    const pathname = usePathname();
+    const locale = pathname.split('/')[1] || 'vi';
+
+    /* AVATAR MENU */
+    const avatarMenuItems = [
+        {
+            key: 'profile',
+            label: a('editProfile'),
+            icon: <EditOutlined />,
+            onClick: () => router.push(`/${locale}/profile`),
+        },
+        {
+            key: 'logout',
+            label: a('logout'),
+            icon: <LogoutOutlined />,
+            onClick: onLogout,
+            danger: true,
+        },
+    ];
 
     return (
-        <Header className={styles.headerCotainer}>
+        <Header className={styles.headerContainer}>
             {/* LEFT */}
-            {isMobile && (
-                <Button type="text" icon={<MenuOutlined />} onClick={() => setCollapsed(true)} />
-            )}
-            <div className={styles.logoText}>
+            <div className={styles.leftSection}>
                 <span className={styles.brand}>SavySnap</span>
             </div>
 
@@ -44,7 +71,7 @@ export default function HeaderBar({ setCollapsed }: Props) {
             <div className={styles.actions}>
                 <LanguageSwitcher />
 
-                {/* Desktop only */}
+                {/* SEARCH DESKTOP */}
                 {!isMobile && (
                     <Input
                         className={styles.search}
@@ -54,14 +81,44 @@ export default function HeaderBar({ setCollapsed }: Props) {
                         onChange={(e) => setSearch(e.target.value)}
                     />
                 )}
-                <Button
-                    type="primary"
-                    size={isMobile ? 'middle' : 'large'}
-                    className={styles.addButton}
-                    onClick={() => setOpen(true)}
-                >
-                    {isMobile ? '+' : t('addNew')}
-                </Button>
+
+                {/* ADD BUTTON DESKTOP */}
+                {!isMobile && (
+                    <Button
+                        type="primary"
+                        size="large"
+                        className={styles.addButton}
+                        onClick={() => setOpen(true)}
+                    >
+                        {t('addNew')}
+                    </Button>
+                )}
+
+                {/* 👉 AVATAR MOBILE */}
+                {isMobile && (
+                    <div className={styles.userArea}>
+                        {loggedIn ? (
+                            <>
+                                <Dropdown menu={{ items: avatarMenuItems }} placement="bottomRight">
+                                    <Avatar
+                                        size={56}
+                                        src={user?.avatarUrl}
+                                        alt="avatar"
+                                        icon={!user?.avatarUrl && <UserOutlined />}
+                                        className={styles.avatarIcon}
+                                    />
+                                </Dropdown>
+                              
+                            </>
+                        ) : (
+                            <Link href="/login">
+                                <Button className={`${styles.logout} ${styles.signInBtn}`}>
+                                    {a('SignIn')}
+                                </Button>
+                            </Link>
+                        )}
+                    </div>
+                )}
 
                 <CreateSnapModal open={open} onClose={() => setOpen(false)} />
             </div>

@@ -1,19 +1,120 @@
 @import '../../app/globals.css';
 
 /* ============================= */
+/* MODAL GLOBAL */
+/* ============================= */
+
+:global(.ant-modal-content) {
+    border-radius: 22px !important;
+
+    background: rgba(255, 255, 255, 0.75) !important;
+
+    backdrop-filter: blur(18px);
+
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+
+    padding: 20px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+:global(.ant-modal-content::before) {
+    content: '';
+
+    position: absolute;
+
+    inset: 0;
+
+    background: radial-gradient(circle at top, rgba(244, 114, 182, 0.25), transparent 60%);
+
+    opacity: 0.4;
+
+    pointer-events: none;
+}
+
+:global(.ant-modal-header) {
+    background: transparent !important;
+
+    border-bottom: none;
+}
+
+:global(.ant-modal-title) {
+    font-size: 20px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+}
+
+/* ============================= */
 /* UPLOAD */
 /* ============================= */
 
 .uploadBox {
     margin-bottom: 20px;
+
+    border-radius: 18px !important;
+
+    background: linear-gradient(135deg, #ffe4e6, #fbcfe8) !important;
+
+    border: 2px dashed #f472b6 !important;
+
+    transition: all 0.25s ease;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.uploadBox:hover {
+    transform: scale(1.02);
+
+    border-color: #ec4899 !important;
+}
+
+.uploadBox::after {
+    content: '';
+
+    position: absolute;
+
+    width: 200%;
+    height: 200%;
+
+    top: -50%;
+    left: -50%;
+
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.4), transparent 70%);
+
+    animation: pulse 4s infinite;
+
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1);
+        opacity: 0.2;
+    }
+
+    100% {
+        transform: scale(0.8);
+        opacity: 0.4;
+    }
 }
 
 .icon {
-    color: var(--btn_background) !important;
+    color: #ec4899 !important;
 }
 
 .largeIcon {
-    font-size: 32px;
+    font-size: 36px;
 }
 
 .smallHint {
@@ -30,7 +131,9 @@
 
 .label {
     font-size: 12px;
+
     font-weight: 600;
+
     color: var(--title);
 }
 
@@ -52,19 +155,61 @@
 /* INPUT */
 /* ============================= */
 
-.inputNumber {
-    width: 100%;
-    margin-top: 6px;
-}
-
-.inputField {
-    width: 100%;
-    margin-top: 6px;
-}
-
+.inputNumber,
+.inputField,
 .selectField {
     width: 100%;
+
     margin-top: 6px;
+
+    border-radius: 14px !important;
+
+    border: 2px solid transparent !important;
+
+    background: #f9fafb !important;
+
+    transition: all 0.2s ease;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    outline: transparent !important;
+}
+
+.inputField:focus,
+.inputNumber:focus,
+.selectField:focus {
+    border-color: #ec4899 !important;
+
+    box-shadow:
+        0 0 0 3px rgba(236, 72, 153, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.selectField :global(.ant-select-selector) {
+    border-radius: 14px !important;
+
+    border: 2px solid transparent !important;
+
+    background: #f9fafb !important;
+
+    transition: all 0.25s ease !important;
+}
+
+.selectField :global(.ant-select-focused .ant-select-selector),
+.selectField :global(.ant-select-selector:focus) {
+    border-color: #ec4899 !important;
+
+    box-shadow:
+        0 0 0 3px rgba(236, 72, 153, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.05) !important;
+}
+
+.inputNumber:focus-within,
+.selectField:focus-within {
+    border-color: #ec4899 !important;
+    border: 2px solid #ec4899 !important;
+
+    box-shadow:
+        0 0 0 3px rgba(236, 72, 153, 0.15),
+        0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
 /* ============================= */
@@ -74,17 +219,49 @@
 .submitButton {
     height: 48px;
 
-    border-radius: 12px;
-
-    background: var(--btn_background);
-
-    border: none;
+    border-radius: 14px;
 
     font-weight: 600;
+
+    font-size: 15px;
+
+    background: linear-gradient(135deg, #f472b6, #fb7185) !important;
+
+    border: none !important;
+
+    box-shadow: 0 10px 20px rgba(244, 114, 182, 0.35);
+
+    transition: all 0.25s ease;
+
+    position: relative;
+
+    overflow: hidden;
 }
 
 .submitButton:hover {
-    background-color: var(--btn_hover) !important;
+    transform: translateY(-2px);
+
+    box-shadow: 0 14px 28px rgba(244, 114, 182, 0.45);
+}
+
+.submitButton::after {
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 100%;
+    height: 100%;
+
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+
+    transition: all 0.5s;
+}
+
+.submitButton:hover::after {
+    left: 100%;
 }
 
 /* ============================= */

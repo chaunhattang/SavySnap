@@ -4,4 +4,6 @@
 
 .dashboardContent {
     padding: 24px;
+    background: linear-gradient(135deg, #fff1f5, #ffe4e6, #ffffff);
+    padding-bottom: 90px;
 }

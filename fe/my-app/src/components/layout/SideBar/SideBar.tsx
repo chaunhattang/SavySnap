@@ -19,29 +19,43 @@ export default function Sidebar({ collapsed, setCollapsed }: Props) {
     const [user, setUser] = useState<User | null>(null);
 
     const screens = useBreakpoint();
+
     const isMobile = !screens.md;
+
+    /* AUTO COLLAPSE WHEN MOBILE */
+
+    useEffect(() => {
+        if (isMobile) {
+            setCollapsed(false);
+        }
+    }, [isMobile]);
 
     useEffect(() => {
         const token = Cookies.get('accessToken');
 
-        if (token) {
-            setLoggedIn(true);
+        if (!token) return;
 
-            userService
-                .getMyInfo()
-                .then((info) => {
-                    setUser(info);
-                })
-                .catch(() => {
-                    Cookies.remove('accessToken', { path: '/' });
-                    Cookies.remove('role', { path: '/' });
-                });
-        }
+        const fetchUser = async () => {
+            try {
+                setLoggedIn(true);
+
+                const info = await userService.getMyInfo();
+
+                setUser(info);
+            } catch {
+                Cookies.remove('accessToken', { path: '/' });
+                Cookies.remove('role', { path: '/' });
+            }
+        };
+
+        fetchUser();
     }, []);
 
     const handleLogout = () => {
         localStorage.clear();
+
         Cookies.remove('accessToken', { path: '/' });
+
         Cookies.remove('role', { path: '/' });
 
         window.location.href = '/login';
@@ -50,6 +64,7 @@ export default function Sidebar({ collapsed, setCollapsed }: Props) {
     const refreshUser = async () => {
         try {
             const info = await userService.getMyInfo();
+
             setUser(info);
         } catch (error) {
             console.error('Failed to refresh user info', error);
@@ -57,14 +72,16 @@ export default function Sidebar({ collapsed, setCollapsed }: Props) {
     };
 
     return (
-        <SidebarView
-            loggedIn={loggedIn}
-            user={user}
-            onLogout={handleLogout}
-            onRefreshUser={refreshUser}
-            collapsed={collapsed}
-            setCollapsed={setCollapsed}
-            isMobile={isMobile}
-        />
+        <>
+            <SidebarView
+                loggedIn={loggedIn}
+                user={user}
+                onLogout={handleLogout}
+                onRefreshUser={refreshUser}
+                collapsed={collapsed}
+                setCollapsed={setCollapsed}
+                isMobile={isMobile}
+            />
+        </>
     );
 }

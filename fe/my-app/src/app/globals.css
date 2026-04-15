@@ -3,13 +3,48 @@
 @tailwind utilities;
 
 :root {
+    /* ========================= */
+    /* BACKGROUND */
+    /* ========================= */
+
     --background: #ffffff;
+
     --foreground: #171717;
-    --btn_background: #059669;
-    --btn_color: white;
+
+    /* ========================= */
+    /* PRIMARY BUTTON */
+    /* ========================= */
+
+    --btn_background: #f472b6;
+
+    --btn_color: #ffffff;
+
+    --btn_hover: #ec4899;
+
+    --btn_boxShadow:
+        0 6px 16px rgba(244, 114, 182, 0.35);
+
+    /* ========================= */
+    /* TEXT */
+    /* ========================= */
+
     --title: #6b7280;
-    --border: #e5e7eb;
-    --btn_boxShadow: 0 10px 15px rgba(0, 0, 0, 0.15);
-    --hover: #e5e7eb;
-    --btn_hover: rgb(4 120 87);
+
+    /* ========================= */
+    /* BORDER / SURFACE */
+    /* ========================= */
+
+    --border: #ffe4e8;
+
+    --hover: #fff1f2;
+
+    /* ========================= */
+    /* OPTIONAL EXTENSIONS */
+    /* ========================= */
+
+    --card_shadow:
+        0 8px 24px rgba(0, 0, 0, 0.06);
+
+    --glass_background:
+        rgba(255, 255, 255, 0.7);
 }
