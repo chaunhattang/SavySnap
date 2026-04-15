@@ -21,13 +21,17 @@ public enum ErrorCode {
     USER_ALREADY_EXISTS(2001, "User already exists", HttpStatus.BAD_REQUEST),
     USER_NOT_FOUND(2002, "User not found", HttpStatus.NOT_FOUND),
     WRONG_PASSWORD(2003, "Wrong password", HttpStatus.FORBIDDEN),
-    
+
     SAVING_NOTE_NOT_FOUND(2004, "Saving note not found", HttpStatus.NOT_FOUND),
     ERROR_UPLOAD_IMAGE(2005, "Error uploading image", HttpStatus.BAD_REQUEST),
+    WRONG_OTP(2006, "Wrong OTP", HttpStatus.BAD_REQUEST),
+    EXPIRED_OTP(2007, "OTP expired", HttpStatus.BAD_REQUEST),
+    EXPIRED_PASSWORD(2008, "Password expired", HttpStatus.BAD_REQUEST),
 
     UNAUTHENTICATED(3001, "Unauthenticated", HttpStatus.UNAUTHORIZED),
     UNAUTHORIZED(3002, "You do not have permission", HttpStatus.FORBIDDEN),
     INVALID_TOKEN(3003, "Invalid or expired token", HttpStatus.UNAUTHORIZED),
+    INVALID_REQUEST(3004, "Invalid request", HttpStatus.BAD_REQUEST),
     ;
 
     int code;

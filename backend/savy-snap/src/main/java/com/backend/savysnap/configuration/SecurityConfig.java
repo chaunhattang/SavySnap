@@ -34,7 +34,7 @@ public class SecurityConfig {
 
     final String[] PUBLIC_ENDPOINTS = {
             "/auth/login", "/auth/register", "/auth/google",
-            "/error"
+            "/auth/forgot-password/*", "/auth/verify-otp", "/auth/change-password"
     };
 
     @NonFinal
@@ -50,9 +50,11 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(request -> request
                 .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
+                .requestMatchers("/error").permitAll()
                 .anyRequest().authenticated());
 
-        http.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder())));
+        http.oauth2ResourceServer(oauth2 -> oauth2.jwt(jwtConfigurer -> jwtConfigurer.decoder(jwtDecoder())
+                .jwtAuthenticationConverter(jwtAuthenticationConverter())));
 
         return http.build();
     }
