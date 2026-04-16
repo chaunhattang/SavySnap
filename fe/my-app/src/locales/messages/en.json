@@ -45,7 +45,9 @@
             "errorDefault": "Something went wrong. Please try again.",
             "artTitle": "Capturing Moments 🌸",
             "artSubtitle": "Turn every receipt into a lovely piece of art.",
-            "artQuote": "Art is not just about spending, but about how you cherish what you have. 🎀"
+            "artQuote": "Art is not just about spending, but about how you cherish what you have. 🎀",
+            "sucess": "Login successful",
+            "fail": "Login failed"
         },
         "register": {
             "agreement": "I agree",
@@ -90,7 +92,9 @@
             "errorDefault": "Something went wrong. Please try again.",
             "artTitle": "Creating Future ✨",
             "artSubtitle": "Join a community that loves beauty and smart financial management.",
-            "artQuote": "Every saving is a seed for your dream garden in the future. 🌱"
+            "artQuote": "Every saving is a seed for your dream garden in the future. 🌱",
+            "sucess": "Registration successful",
+            "fail": "Registration failed"
         },
         "forgotPassword": {
             "headerText": "Forgot password?",

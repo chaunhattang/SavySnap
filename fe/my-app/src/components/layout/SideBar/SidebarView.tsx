@@ -22,7 +22,6 @@ import { NotificationPanel } from '@/components/notification/NotificationDropdow
 import styles from './styles.module.css';
 
 const { Sider } = Layout;
-const { Text } = Typography;
 
 interface Props {
     loggedIn: boolean;

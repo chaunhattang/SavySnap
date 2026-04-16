@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 import { userService } from '@/services/apis/user.service';
 import { User } from '@/types/user';
 import { Grid } from 'antd';
+import { useLocale } from 'next-intl';
 
 const { useBreakpoint } = Grid;
 
@@ -19,7 +20,7 @@ export default function Sidebar({ collapsed, setCollapsed }: Props) {
     const [user, setUser] = useState<User | null>(null);
 
     const screens = useBreakpoint();
-
+    const locale = useLocale();
     const isMobile = !screens.md;
 
     /* AUTO COLLAPSE WHEN MOBILE */
@@ -55,10 +56,9 @@ export default function Sidebar({ collapsed, setCollapsed }: Props) {
         localStorage.clear();
 
         Cookies.remove('accessToken', { path: '/' });
-
         Cookies.remove('role', { path: '/' });
 
-        window.location.href = '/login';
+        window.location.href = `/${locale}/login`;
     };
 
     const refreshUser = async () => {

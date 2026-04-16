@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, App } from 'antd';
 import { User, Mail, Lock, ArrowRight, Eye, EyeOff } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
@@ -11,14 +11,18 @@ export default function RegisterForm({ onViewChange }: { onViewChange: (view: an
     const t = useTranslations('auth.register');
     const [loading, setLoading] = useState(false);
     const router = useRouter();
+    const { message } = App.useApp();
 
     const onFinish = async (values: any) => {
         setLoading(true);
         try {
             await authService.register(values);
-            router.push('/user');
+            //router.push('/login');
+            message.success(t('sucess'));
+            onViewChange('login');
         } catch (error) {
             console.error('Registration error:', error);
+            message.error(t('fail'));
         } finally {
             setLoading(false);
         }
@@ -27,12 +31,27 @@ export default function RegisterForm({ onViewChange }: { onViewChange: (view: an
     return (
         <div className="max-w-md w-full mx-auto relative z-20">
             <h3 className="text-3xl font-black text-pink-600 mb-2">{t('welcomeTitle')}</h3>
-            <p className="text-pink-500/70 font-bold text-sm uppercase tracking-widest mb-8">{t('welcomeSubtitle')}</p>
+            <p className="text-pink-500/70 font-bold text-sm uppercase tracking-widest mb-8">
+                {t('welcomeSubtitle')}
+            </p>
             <Form layout="vertical" onFinish={onFinish} requiredMark={false} className="space-y-4">
                 <Form.Item
-                    label={<span className="block text-xs font-black uppercase tracking-widest text-pink-600/70 ml-2">{t('usernameLabel')}</span>}
+                    label={
+                        <span className="block text-xs font-black uppercase tracking-widest text-pink-600/70 ml-2">
+                            {t('usernameLabel')}
+                        </span>
+                    }
                     name="username"
-                    rules={[{ required: true, message: <span className="text-pink-500 font-bold">{t('usernameRequired')}</span> }]}
+                    rules={[
+                        {
+                            required: true,
+                            message: (
+                                <span className="text-pink-500 font-bold">
+                                    {t('usernameRequired')}
+                                </span>
+                            ),
+                        },
+                    ]}
                 >
                     <Input
                         prefix={<User className="text-pink-400 mr-2" size={22} />}
@@ -42,11 +61,27 @@ export default function RegisterForm({ onViewChange }: { onViewChange: (view: an
                 </Form.Item>
 
                 <Form.Item
-                    label={<span className="block text-xs font-black uppercase tracking-widest text-pink-600/70 ml-2">{t('emailLabel')}</span>}
+                    label={
+                        <span className="block text-xs font-black uppercase tracking-widest text-pink-600/70 ml-2">
+                            {t('emailLabel')}
+                        </span>
+                    }
                     name="email"
                     rules={[
-                        { required: true, message: <span className="text-pink-500 font-bold">{t('emailRequired')}</span> },
-                        { type: 'email', message: <span className="text-pink-500 font-bold">{t('emailInvalid')}</span> }
+                        {
+                            required: true,
+                            message: (
+                                <span className="text-pink-500 font-bold">
+                                    {t('emailRequired')}
+                                </span>
+                            ),
+                        },
+                        {
+                            type: 'email',
+                            message: (
+                                <span className="text-pink-500 font-bold">{t('emailInvalid')}</span>
+                            ),
+                        },
                     ]}
                 >
                     <Input
@@ -57,15 +92,34 @@ export default function RegisterForm({ onViewChange }: { onViewChange: (view: an
                 </Form.Item>
 
                 <Form.Item
-                    label={<span className="block text-xs font-black uppercase tracking-widest text-pink-600/70 ml-2">{t('passwordLabel')}</span>}
+                    label={
+                        <span className="block text-xs font-black uppercase tracking-widest text-pink-600/70 ml-2">
+                            {t('passwordLabel')}
+                        </span>
+                    }
                     name="password"
-                    rules={[{ required: true, message: <span className="text-pink-500 font-bold">{t('passwordRequired')}</span> }]}
+                    rules={[
+                        {
+                            required: true,
+                            message: (
+                                <span className="text-pink-500 font-bold">
+                                    {t('passwordRequired')}
+                                </span>
+                            ),
+                        },
+                    ]}
                 >
                     <Input.Password
                         prefix={<Lock className="text-pink-400 mr-2" size={22} />}
                         placeholder={t('passwordPlaceholder')}
                         className="py-3.5 cute-input rounded-3xl text-lg"
-                        iconRender={(visible) => (visible ? <Eye className="text-pink-400" size={22} /> : <EyeOff className="text-pink-400" size={22} />)}
+                        iconRender={(visible) =>
+                            visible ? (
+                                <Eye className="text-pink-400" size={22} />
+                            ) : (
+                                <EyeOff className="text-pink-400" size={22} />
+                            )
+                        }
                     />
                 </Form.Item>
 
@@ -75,14 +129,23 @@ export default function RegisterForm({ onViewChange }: { onViewChange: (view: an
                         loading={loading}
                         className="w-full h-auto py-3.5 mt-2 btn-pink rounded-3xl font-black text-xl flex items-center justify-center gap-3 group border-0 text-white shadow-[0_6px_15px_rgba(244,114,182,0.3)] transition-transform hover:-translate-y-1"
                     >
-                        {t('submit')} {!loading && <ArrowRight size={22} className="group-hover:translate-x-2 transition-transform" />}
+                        {t('submit')}{' '}
+                        {!loading && (
+                            <ArrowRight
+                                size={22}
+                                className="group-hover:translate-x-2 transition-transform"
+                            />
+                        )}
                     </Button>
                 </Form.Item>
             </Form>
 
             <div className="mt-8 text-center text-pink-600/80 font-bold">
                 {t('hasAccount')}
-                <button onClick={() => onViewChange('login')} className="ml-2 font-black text-pink-500 hover:text-pink-600 underline decoration-2 underline-offset-4 cursor-pointer focus:outline-none">
+                <button
+                    onClick={() => onViewChange('login')}
+                    className="ml-2 font-black text-pink-500 hover:text-pink-600 underline decoration-2 underline-offset-4 cursor-pointer focus:outline-none"
+                >
                     {t('loginBtn')}
                 </button>
             </div>

@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Form, Input, Button, Divider, Row, Col, Typography } from 'antd';
+import { Form, Input, Button, Divider, Row, Col, Typography, App } from 'antd';
 import { Mail, Lock, ArrowRight, Eye, EyeOff } from 'lucide-react';
 import styles from './login.module.css';
 import Link from 'next/link';
@@ -17,6 +17,7 @@ export default function LoginForm({ onViewChange }: { onViewChange: (view: any) 
     const [loading, setLoading] = useState(false);
 
     const router = useRouter();
+    const { message } = App.useApp();
 
     const onFinish = async (values: any) => {
         setLoading(true);
@@ -26,12 +27,11 @@ export default function LoginForm({ onViewChange }: { onViewChange: (view: any) 
             const { isAdmin, token } = await authService.login(values);
 
             if (token) {
-                console.log('Login success');
-
-                router.push(isAdmin ? '/admin' : '/user');
+                message.success(t('sucess'));
+                router.push(`/${locale}/${isAdmin ? 'admin' : 'user'}`);
             }
         } catch (error) {
-            console.error('Lỗi đăng nhập:', error);
+            message.error(t('fail'));
         } finally {
             setLoading(false);
         }
@@ -79,7 +79,7 @@ export default function LoginForm({ onViewChange }: { onViewChange: (view: any) 
                 path: '/',
             });
 
-            router.push(isAdmin ? '/admin' : '/user');
+            router.push(`/${locale}/${isAdmin ? 'admin' : 'user'}`);
         } catch (error) {
             console.error(error);
         }
@@ -88,13 +88,26 @@ export default function LoginForm({ onViewChange }: { onViewChange: (view: any) 
     return (
         <div className="max-w-md w-full mx-auto relative z-20">
             <h3 className="text-3xl font-black text-pink-600 mb-2">{t('welcomeTitle')}</h3>
-            <p className="text-pink-500/70 font-bold text-sm uppercase tracking-widest mb-8">{t('welcomeSubtitle')}</p>
+            <p className="text-pink-500/70 font-bold text-sm uppercase tracking-widest mb-8">
+                {t('welcomeSubtitle')}
+            </p>
             <Form layout="vertical" onFinish={onFinish} requiredMark={false} className="space-y-4">
                 <Form.Item
-                    label={<span className="block text-xs font-black uppercase tracking-widest text-pink-800 ml-2">{t('emailLabel')}</span>}
+                    label={
+                        <span className="block text-xs font-black uppercase tracking-widest text-pink-800 ml-2">
+                            {t('emailLabel')}
+                        </span>
+                    }
                     name="accountName"
                     rules={[
-                        { required: true, message: <Typography.Text className="text-pink-600 font-bold">{t('emailRequired')}</Typography.Text> }
+                        {
+                            required: true,
+                            message: (
+                                <Typography.Text className="text-pink-600 font-bold">
+                                    {t('emailRequired')}
+                                </Typography.Text>
+                            ),
+                        },
                     ]}
                 >
                     <Input
@@ -105,21 +118,47 @@ export default function LoginForm({ onViewChange }: { onViewChange: (view: any) 
                     />
                 </Form.Item>
 
-<Form.Item
-                    label={<div className="flex justify-between items-center w-full" style={{ width: '100%', minWidth: '100%', display: 'flex' }}><span className="block text-xs font-black uppercase tracking-widest text-pink-800">{t('passwordLabel')}</span><span onClick={() => onViewChange('forgot-password')} className="text-xs font-bold text-pink-600 hover:text-pink-700 cursor-pointer whitespace-nowrap ml-auto" style={{ marginLeft: 'auto' }}>{t('forgotPassword')}</span></div>}
+                <Form.Item
+                    label={
+                        <div
+                            className="flex justify-between items-center w-full"
+                            style={{ width: '100%', minWidth: '100%', display: 'flex' }}
+                        >
+                            <span className="block text-xs font-black uppercase tracking-widest text-pink-800">
+                                {t('passwordLabel')}
+                            </span>
+                            <span
+                                onClick={() => onViewChange('forgot-password')}
+                                className="text-xs font-bold text-pink-600 hover:text-pink-700 cursor-pointer whitespace-nowrap ml-auto"
+                                style={{ marginLeft: 'auto' }}
+                            >
+                                {t('forgotPassword')}
+                            </span>
+                        </div>
+                    }
                     name="password"
-                    rules={[{ required: true, message: <Typography.Text className="text-pink-600 font-bold">{t('passwordRequired')}</Typography.Text> }]}
-
-
-
-
-
+                    rules={[
+                        {
+                            required: true,
+                            message: (
+                                <Typography.Text className="text-pink-600 font-bold">
+                                    {t('passwordRequired')}
+                                </Typography.Text>
+                            ),
+                        },
+                    ]}
                 >
                     <Input.Password
                         prefix={<Lock className="text-pink-500 mr-2" size={22} />}
                         placeholder={t('passwordPlaceholder')}
                         className="py-5 cute-input rounded-3xl text-lg bg-white/90"
-                        iconRender={(visible) => (visible ? <Eye className="text-pink-500" size={22} /> : <EyeOff className="text-pink-500" size={22} />)}
+                        iconRender={(visible) =>
+                            visible ? (
+                                <Eye className="text-pink-500" size={22} />
+                            ) : (
+                                <EyeOff className="text-pink-500" size={22} />
+                            )
+                        }
                     />
                 </Form.Item>
 
@@ -129,7 +168,13 @@ export default function LoginForm({ onViewChange }: { onViewChange: (view: any) 
                         loading={loading}
                         className="w-full h-auto py-3.5 mt-2 btn-pink rounded-3xl font-black text-xl flex items-center justify-center gap-3 group border-0 text-white shadow-[0_6px_15px_rgba(244,114,182,0.3)] transition-transform hover:-translate-y-1"
                     >
-                        {t('submit')} {!loading && <ArrowRight size={22} className="group-hover:translate-x-2 transition-transform" />}
+                        {t('submit')}{' '}
+                        {!loading && (
+                            <ArrowRight
+                                size={22}
+                                className="group-hover:translate-x-2 transition-transform"
+                            />
+                        )}
                     </Button>
                 </Form.Item>
             </Form>
@@ -137,13 +182,15 @@ export default function LoginForm({ onViewChange }: { onViewChange: (view: any) 
             <div className="mt-8">
                 <div className="flex items-center gap-4 mb-6">
                     <div className="h-px flex-1 bg-pink-200"></div>
-                    <span className="text-[10px] font-black text-pink-400 uppercase tracking-widest">{t('orDivider')}</span>
+                    <span className="text-[10px] font-black text-pink-400 uppercase tracking-widest">
+                        {t('orDivider')}
+                    </span>
                     <div className="h-px flex-1 bg-pink-200"></div>
                 </div>
                 {/* Giữ nguyên nút GoogleLogin từ hệ thống cũ để log logic an toàn */}
                 <div className="flex justify-center w-full">
                     {/* @ts-ignore */}
-                    <GoogleLogin locale={locale}
+                    <GoogleLogin
                         onError={() => console.error('Login Failed')}
                         onSuccess={(credentialResponse) => {
                             const token = credentialResponse.credential;
@@ -156,8 +203,11 @@ export default function LoginForm({ onViewChange }: { onViewChange: (view: any) 
                     />
                 </div>
                 <div className="mt-8 text-center text-pink-600/80 font-bold">
-                    {t('noAccount')} 
-                    <button onClick={() => onViewChange('register')} className="ml-2 font-black text-pink-500 hover:text-pink-600 underline decoration-2 underline-offset-4 cursor-pointer focus:outline-none">
+                    {t('noAccount')}
+                    <button
+                        onClick={() => onViewChange('register')}
+                        className="ml-2 font-black text-pink-500 hover:text-pink-600 underline decoration-2 underline-offset-4 cursor-pointer focus:outline-none"
+                    >
                         {t('registerBtn')}
                     </button>
                 </div>
