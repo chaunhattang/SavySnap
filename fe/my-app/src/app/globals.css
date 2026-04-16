@@ -21,8 +21,7 @@
 
     --btn_hover: #ec4899;
 
-    --btn_boxShadow:
-        0 6px 16px rgba(244, 114, 182, 0.35);
+    --btn_boxShadow: 0 6px 16px rgba(244, 114, 182, 0.35);
 
     /* ========================= */
     /* TEXT */
@@ -42,11 +41,9 @@
     /* OPTIONAL EXTENSIONS */
     /* ========================= */
 
-    --card_shadow:
-        0 8px 24px rgba(0, 0, 0, 0.06);
+    --card_shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 
-    --glass_background:
-        rgba(255, 255, 255, 0.7);
+    --glass_background: rgba(255, 255, 255, 0.7);
 }
 
 /* ========================= */
@@ -54,64 +51,213 @@
 /* ========================= */
 
 .bg-artistic {
-  background-color: #fff0f5;
-  background: radial-gradient(circle at top left, #fff5f8 0%, #ffe4e8 50%, #fce7f3 100%);
+    background-color: #fff0f5;
+    background: radial-gradient(circle at top left, #fff5f8 0%, #ffe4e8 50%, #fce7f3 100%);
 }
 .orb {
-  position: absolute; filter: blur(90px); border-radius: 50%;
-  animation: float-blob 25s infinite alternate ease-in-out;
-  opacity: 0.7; mix-blend-mode: multiply;
+    position: absolute;
+    filter: blur(90px);
+    border-radius: 50%;
+    animation: float-blob 25s infinite alternate ease-in-out;
+    opacity: 0.7;
+    mix-blend-mode: multiply;
 }
-.orb-1 { background: #ffd1dc; width: 50vw; height: 50vw; top: -10%; left: -10%; }
-.orb-2 { background: #ffdfba; width: 45vw; height: 45vw; bottom: -10%; right: -10%; animation-delay: -5s; opacity: 0.5; }
-.orb-3 { background: #e0b0ff; width: 40vw; height: 40vw; top: 30%; left: 30%; animation-delay: -10s; opacity: 0.4; }
+.orb-1 {
+    background: #ffd1dc;
+    width: 50vw;
+    height: 50vw;
+    top: -10%;
+    left: -10%;
+}
+.orb-2 {
+    background: #ffdfba;
+    width: 45vw;
+    height: 45vw;
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
+    opacity: 0.5;
+}
+.orb-3 {
+    background: #e0b0ff;
+    width: 40vw;
+    height: 40vw;
+    top: 30%;
+    left: 30%;
+    animation-delay: -10s;
+    opacity: 0.4;
+}
 
 @keyframes float-blob {
-  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  100% { transform: translate(5%, 10%) scale(1.1) rotate(15deg); }
+    0% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    100% {
+        transform: translate(5%, 10%) scale(1.1) rotate(15deg);
+    }
 }
 @keyframes fall {
-  0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
-  10% { opacity: var(--target-opacity, 1); }
-  80% { opacity: var(--target-opacity, 1); }
-  100% { transform: translateY(120vh) rotate(360deg) translateX(200px); opacity: 0; }
+    0% {
+        transform: translateY(-10vh) rotate(0deg) translateX(0);
+        opacity: 0;
+    }
+    10% {
+        opacity: var(--target-opacity, 1);
+    }
+    80% {
+        opacity: var(--target-opacity, 1);
+    }
+    100% {
+        transform: translateY(120vh) rotate(360deg) translateX(200px);
+        opacity: 0;
+    }
 }
 .petal {
-  position: absolute; top: -10%; pointer-events: none;
-  background: linear-gradient(135deg, #ffb7c5, #ffcce6);
-  border-radius: 15px 2px 15px 2px;
+    position: absolute;
+    top: -10%;
+    pointer-events: none;
+    background: linear-gradient(135deg, #ffb7c5, #ffcce6);
+    border-radius: 15px 2px 15px 2px;
 }
 .glass-panel {
-  background: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-  border: 2px solid rgba(255, 255, 255, 0.9);
-  box-shadow: 0 30px 60px -15px rgba(255, 182, 193, 0.3), inset 0 0 0 2px rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+        0 30px 60px -15px rgba(255, 182, 193, 0.3),
+        inset 0 0 0 2px rgba(255, 255, 255, 0.6);
 }
 .cute-input {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(255, 182, 193, 0.5);
-  color: #be185d; font-weight: bold; transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 182, 193, 0.5);
+    color: #be185d;
+    font-weight: bold;
+    transition: all 0.3s;
 }
-.cute-input::placeholder { color: rgba(244, 114, 182, 0.6); font-weight: 600; }
+.cute-input::placeholder {
+    color: rgba(244, 114, 182, 0.6);
+    font-weight: 600;
+}
 .cute-input:focus {
-  background: rgba(255, 255, 255, 1);
-  border-color: #f472b6; box-shadow: 0 0 0 4px rgba(244, 114, 182, 0.2); outline: none;
+    background: rgba(255, 255, 255, 1);
+    border-color: #f472b6;
+    box-shadow: 0 0 0 4px rgba(244, 114, 182, 0.2);
+    outline: none;
 }
 .btn-pink {
-  background: linear-gradient(180deg, #f472b6, #fb7185) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 6px 15px rgba(244, 114, 182, 0.3) !important;
-  border: 1px solid #e11d48 !important; color: white !important; transition: all 0.3s !important;
+    background: linear-gradient(180deg, #f472b6, #fb7185) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.4),
+        0 6px 15px rgba(244, 114, 182, 0.3) !important;
+    border: 1px solid #e11d48 !important;
+    color: white !important;
+    transition: all 0.3s !important;
 }
 .btn-pink:hover {
-  background: linear-gradient(180deg, #fbcfe8, #f472b6) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6), 0 8px 20px rgba(244, 114, 182, 0.4) !important;
-  transform: translateY(-2px);
+    background: linear-gradient(180deg, #fbcfe8, #f472b6) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.6),
+        0 8px 20px rgba(244, 114, 182, 0.4) !important;
+    transform: translateY(-2px);
 }
 
 @keyframes floatingPet {
-  0%, 100% { transform: translateY(0) rotate(-3deg); filter: drop-shadow(0 5px 10px rgba(244,114,182,0.4)); }
-  50% { transform: translateY(-8px) rotate(5deg) scale(1.05); filter: drop-shadow(0 15px 20px rgba(244,114,182,0.8)); }
+    0%,
+    100% {
+        transform: translateY(0) rotate(-3deg);
+        filter: drop-shadow(0 5px 10px rgba(244, 114, 182, 0.4));
+    }
+    50% {
+        transform: translateY(-8px) rotate(5deg) scale(1.05);
+        filter: drop-shadow(0 15px 20px rgba(244, 114, 182, 0.8));
+    }
 }
 .pet-highlight {
-  animation: floatingPet 3s ease-in-out infinite;
+    animation: floatingPet 3s ease-in-out infinite;
+}
+@layer components {
+    /* 🌸 Nền Gradient nghệ thuật cho toàn trang */
+    .bg-artistic {
+        background-color: #fdf2f8; /* pink-50 */
+        background-image:
+            radial-gradient(at 0% 0%, hsla(328, 100%, 84%, 0.3) 0px, transparent 50%),
+            radial-gradient(at 100% 0%, hsla(343, 100%, 76%, 0.2) 0px, transparent 50%),
+            radial-gradient(at 100% 100%, hsla(328, 100%, 84%, 0.3) 0px, transparent 50%),
+            radial-gradient(at 0% 100%, hsla(343, 100%, 76%, 0.2) 0px, transparent 50%);
+        background-attachment: fixed;
+    }
+
+    /* 🎀 Ô nhập liệu (Input) kiểu dễ thương, bo tròn mềm mại */
+    .cute-input {
+        @apply border-2 border-pink-100 shadow-sm transition-all duration-300 outline-none;
+    }
+
+    .cute-input:focus,
+    .cute-input:focus-within {
+        @apply border-pink-400 bg-white shadow-[0_0_0_4px_rgba(244,114,182,0.15)] -translate-y-0.5;
+    }
+
+    /* 🚫 Style riêng khi input bị disabled (Tên đăng nhập, Email) */
+    .cute-input:disabled {
+        @apply bg-pink-50/50 border-transparent text-pink-400 font-medium;
+    }
+
+    /* 🚀 Nút bấm hồng đặc trưng (SavySnap Button) */
+    .btn-pink {
+        background: linear-gradient(135deg, #f472b6 0%, #fb7185 100%); /* pink-400 to rose-400 */
+        background-size: 200% auto;
+        @apply text-white border-0 transition-all duration-300;
+    }
+
+    .btn-pink:hover {
+        background-position: right center;
+        @apply shadow-[0_10px_20px_rgba(244,114,182,0.4)] scale-[1.02];
+    }
+}
+
+/* Hiệu ứng hoạt ảnh (Animation) nếu bạn chưa cài tailwindcss-animate */
+@keyframes fadeInZoom {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+.animate-in {
+    animation: fadeInZoom 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.cute-input.ant-input,
+.cute-input.ant-input-affix-wrapper {
+    @apply border-2 border-pink-100 bg-white shadow-sm transition-all duration-300 rounded-3xl !important;
+}
+
+/* Khi Focus vào input */
+.cute-input.ant-input-affix-wrapper-focused,
+.cute-input.ant-input:focus {
+    @apply border-pink-400 bg-white shadow-[0_0_0_4px_rgba(244,114,182,0.15)] -translate-y-0.5 !important;
+}
+
+/* 🚫 Ép nền trong trẻo cho ô bị Disabled (Tên đăng nhập, Email) */
+.cute-input.ant-input-disabled,
+.cute-input.ant-input-affix-wrapper-disabled {
+    @apply bg-pink-50/50 border-pink-50 opacity-100 cursor-not-allowed shadow-none !important;
+}
+.cute-input.ant-input-affix-wrapper-disabled .ant-input[disabled] {
+    @apply bg-transparent text-pink-400 font-bold !important;
+    -webkit-text-fill-color: #f472b6 !important; /* Ép màu hồng cho chữ disabled */
+}
+
+/* 🪄 SỬA LỖI NỀN XANH KHI CHROME TỰ ĐỘNG ĐIỀN (AUTOFILL) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important; /* Ép nền trắng */
+    -webkit-text-fill-color: #db2777 !important; /* Màu chữ hồng đậm text-pink-600 */
+    transition: background-color 5000s ease-in-out 0s;
+    border-radius: 9999px !important;
 }
