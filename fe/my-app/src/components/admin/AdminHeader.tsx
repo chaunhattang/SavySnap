@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Layout, Input, Space, Avatar, Dropdown } from 'antd';
-import { SearchOutlined, EditOutlined, LogoutOutlined } from '@ant-design/icons';
+import { Layout, Input, Space, Avatar, Dropdown, Button } from 'antd';
+import { SearchOutlined, EditOutlined, LogoutOutlined, MenuOutlined } from '@ant-design/icons';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 import styles from '@/app/[locale]/admin/admin.module.css';
@@ -13,7 +13,7 @@ import { useLogout } from '@/hooks/useLogout';
 
 const { Header } = Layout;
 
-export default function AdminHeader() {
+export default function AdminHeader({ onMenuClick }: { onMenuClick?: () => void }) {
     const t = useTranslations('admin');
     const router = useRouter();
     const logout = useLogout(); // hook dùng chung với AdminSidebar
@@ -50,7 +50,14 @@ export default function AdminHeader() {
     ];
 
     return (
-        <header className={styles.header}>
+        <header className={`${styles.header} flex items-center`}>
+            {/* Nút Hamburger cho Mobile */}
+            <Button 
+                type="text" 
+                icon={<MenuOutlined className="text-xl text-pink-600" />} 
+                onClick={onMenuClick} 
+                className="md:hidden mr-2"
+            />
             {/* Thanh tìm kiếm */}
             <div className={styles.searchContainer}>
                 <Input

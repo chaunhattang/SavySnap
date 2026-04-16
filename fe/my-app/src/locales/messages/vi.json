@@ -32,7 +32,9 @@
             "errorDefault": "Đã có lỗi xảy ra. Vui lòng thử lại.",
             "artTitle": "Lưu giữ Khoảnh khắc 🌸",
             "artSubtitle": "Biến mỗi bức ảnh chi tiêu thành một tác phẩm nghệ thuật đáng yêu.",
-            "artQuote": "Nghệ thuật không chỉ nằm ở việc chi tiêu, mà còn ở cách bạn trân trọng những gì mình đang có. 🎀"
+            "artQuote": "Nghệ thuật không chỉ nằm ở việc chi tiêu, mà còn ở cách bạn trân trọng những gì mình đang có. 🎀",
+            "sucess": "Đăng nhập thành công",
+            "fail": "Đăng nhập thất bại"
         },
         "register": {
             "agreement": "Đồng ý",
@@ -77,7 +79,9 @@
             "errorDefault": "Đã có lỗi xảy ra. Vui lòng thử lại.",
             "artTitle": "Kiến tạo Tương lai ✨",
             "artSubtitle": "Tham gia cùng cộng đồng yêu cái đẹp và quản lý tài chính thông minh.",
-            "artQuote": "Mỗi đồng tiết kiệm là một hạt mầm cho khu vườn ước mơ của bạn trong tương tương lai. 🌱"
+            "artQuote": "Mỗi đồng tiết kiệm là một hạt mầm cho khu vườn ước mơ của bạn trong tương tương lai. 🌱",
+            "sucess": "Đăng ký thành công",
+            "fail": "Đăng ký thất bại"
         },
         "forgotPassword": {
             "headerText": "Quên mật khẩu?",

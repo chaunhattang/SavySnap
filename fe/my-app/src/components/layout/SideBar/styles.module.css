@@ -1,168 +1,218 @@
 @import '../../../app/globals.css';
 
+/* ============================= */
+/* SIDEBAR */
+/* ============================= */
+
 .sidebar {
     background: var(--background);
+
     height: 100vh;
+
     border-right: 1px solid var(--border);
+
     display: flex;
+
     flex-direction: column;
+
     align-items: center;
-    padding-top: 20px;
+
+    padding-top: 18px;
+
     overflow: hidden;
+
+    transition: all 0.25s ease;
 }
 
-/* logo chữ app */
+/* ============================= */
+/* USER AREA */
+/* ============================= */
 
-/* menu container */
+.userArea {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding-top: 12px;
+
+    gap: 8px;
+
+    margin-bottom: 10px;
+}
+
+.avatarIcon {
+    cursor: pointer;
+
+    background-color: var(--btn_background);
+
+    box-shadow: var(--btn_boxShadow);
+
+    transition: all 0.2s ease;
+}
+
+.avatarIcon:hover {
+    transform: scale(1.05);
+}
+
+.emailText {
+    font-size: 10px;
+
+    color: var(--title);
+
+    text-align: center;
+
+    padding: 0 8px;
+}
+
+/* ============================= */
+/* MENU */
+/* ============================= */
 
 .menuSidebar {
     background: transparent;
+
     border: none;
+
     width: 100%;
 }
 
-/* center icon */
+/* menu item */
 
 .menuSidebar :global(.ant-menu-item) {
     display: flex;
+
     justify-content: center;
+
     align-items: center;
-    height: 70px;
-    margin: 10px 0;
+
+    height: 68px;
+
+    margin: 8px 0;
 }
 
 /* icon */
 
 .menuSidebar :global(.ant-menu-item .anticon) {
-    font-size: 22px;
-    color: var(--title);
+    font-size: 25px;
+    font-weight: bold;
+    color: #ec4899;
+
     padding: 12px;
 
-    border-radius: 14px;
-    transition: all 0.5s ease;
+    border-radius: 16px;
+
+    transition: all 0.2s ease;
 }
 
 /* hover */
+
 .menuSidebar :global(.ant-menu-item:hover) {
     background: transparent !important;
 }
 
 .menuSidebar :global(.ant-menu-item .anticon:hover) {
     background: var(--btn_background);
+
     color: var(--btn_color);
 
-    padding: 12px;
-    transform: scale(0.9);
+    transform: scale(0.92);
 }
 
-/* selected icon background */
+/* selected */
 
 .menuSidebar :global(.ant-menu-item-selected) {
     background: transparent;
 }
 
-/* green rounded button */
-
 .menuSidebar :global(.ant-menu-item-selected .anticon) {
     background: var(--btn_background);
+
     color: var(--btn_color);
-    padding: 12px;
-    border-radius: 14px;
+
+    border-radius: 16px;
+
     box-shadow: var(--btn_boxShadow);
 }
+
+/* ============================= */
+/* LOGOUT */
+/* ============================= */
+
 .logout {
-    padding: 20px 9px;
+    padding: 18px 10px;
+
     background-color: var(--btn_background) !important;
+
     box-shadow: var(--btn_boxShadow);
+
     border-radius: 12px;
+
     font-weight: 600;
 
     color: white;
+
     transition: all 0.2s ease;
 }
+
 .logout:hover {
-    transform: scale(0.93);
-    border-color: transparent !important;
-    color: white !important;
-    background-color: rgb(4 120 87) !important;
-    box-shadow: var(--btn_boxShadow);
+    transform: scale(0.94);
+
+    background-color: var(--btn_hover) !important;
 }
 
-.userArea {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 16px;
-    gap: 8px;
-}
-
-.avatarIcon {
-    background-color: #1677ff;
-    cursor: pointer;
-}
-
-.emailText {
-    font-size: 7px;
-    color: #666;
-    text-align: center;
-    padding: 0 8px;
-}
+/* ============================= */
+/* SIGN IN */
+/* ============================= */
 
 .signInBtn {
     cursor: pointer;
-    background-color: darkgray !important;
+
+    background-color: #d1d5db !important;
 }
 
-.profileInfoBox {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    background: #f8fafc;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 4px;
-}
+/* ============================= */
+/* BELL */
+/* ============================= */
 
-.profileInfoText {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-}
-
-.profileInfoUsername {
-    font-size: 16px !important;
-}
-
-.profileInfoEmail {
-    font-size: 13px !important;
-}
-/* ── Bell — perfectly mirrors antd Menu item li ── */
 .bellItem {
     list-style: none;
+
     width: 88px;
-    height: 70px;
-    margin: 10px 0;
-    padding: 0;
+
+    height: 68px;
+
+    margin: 8px 0;
+
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
     cursor: pointer;
 }
 
 .bellIcon {
-    font-size: 22px !important;
-    color: var(--title) !important;
+    font-size: 25px;
+    font-weight: bold;
+    color: #ec4899;
+
     padding: 12px;
-    border-radius: 14px;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+    border-radius: 16px;
+
+    transition: all 0.2s ease;
 }
 
 .bellItem:hover .bellIcon {
     background: var(--btn_background);
+
     color: var(--btn_color) !important;
-    transform: scale(0.9);
+
+    transform: scale(0.92);
 }
+
+
 

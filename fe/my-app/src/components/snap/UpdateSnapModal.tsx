@@ -1,6 +1,6 @@
 'use client';
 
-import { Modal, Input, InputNumber, Button, Select, Typography } from 'antd';
+import { Modal, Input, InputNumber, Button, Select, Typography, App } from 'antd';
 
 import styles from './UpdateSnapModal.module.css';
 
@@ -32,6 +32,8 @@ export default function UpdateSnapModal({ open, onClose, snap }: any) {
     const [amount, setAmount] = useState<number | null>(null);
 
     const [category, setCategory] = useState('NEED');
+
+    const { message } = App.useApp();
 
     // load dữ liệu khi mở modal
 
@@ -75,6 +77,8 @@ export default function UpdateSnapModal({ open, onClose, snap }: any) {
         }
 
         await update(snap.id, formData);
+
+        message.success(t('submit'));
 
         resetFile();
 

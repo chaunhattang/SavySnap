@@ -36,7 +36,7 @@ export default function AdminSidebar({ activeTab, setActiveTab }: AdminSidebarPr
     const logout = useLogout();
 
     return (
-        <aside className={styles.sider}>
+        <aside className="w-full h-full flex flex-col p-6 gap-8">
             {/* Logo ứng dụng */}
             <div className={styles.logoContainer}>
                 <div className={styles.logoIconWrapper}>

@@ -1,0 +1,58 @@
+.segmented {
+    background: #ffe4e8;
+
+    padding: 4px;
+
+    border-radius: 999px;
+
+    box-shadow:
+        0 4px 10px rgba(244, 114, 182, 0.15);
+}
+
+/* item */
+
+.segmented :global(.ant-segmented-item) {
+    border-radius: 999px;
+
+    transition: all 0.2s ease;
+}
+
+/* selected */
+
+.segmented
+    :global(.ant-segmented-item-selected) {
+    background: linear-gradient(
+        135deg,
+        #f472b6,
+        #fb7185
+    );
+
+    box-shadow:
+        0 6px 14px rgba(244, 114, 182, 0.35);
+}
+
+/* flag */
+
+.flag {
+    width: 22px;
+
+    height: 22px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    display: block;
+    margin: auto;
+    
+}
+
+/* hover */
+
+.segmented :global(.ant-segmented-item-label) {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}

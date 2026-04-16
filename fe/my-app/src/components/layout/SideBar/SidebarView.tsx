@@ -15,14 +15,13 @@ import {
 
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { User } from '@/types/user';
 import { NotificationPanel } from '@/components/notification/NotificationDropdown';
 
 import styles from './styles.module.css';
 
 const { Sider } = Layout;
-const { Text } = Typography;
 
 interface Props {
     loggedIn: boolean;
@@ -45,6 +44,7 @@ export default function SidebarView({
 }: Props) {
     const t = useTranslations('sideBar');
     const router = useRouter();
+    const pathname = usePathname();
 
     const [unreadCount, setUnreadCount] = useState(0);
     const [notifOpen, setNotifOpen] = useState(false);
@@ -76,11 +76,29 @@ export default function SidebarView({
             danger: true,
         },
     ];
+    const locale = pathname.split('/')[1] || 'vi';
+    const navItems = [
+        {
+            key: `/${locale}/user`,
+            icon: <CameraOutlined />,
+        },
+        {
+            key: `/${locale}/wallet`,
+            icon: <WalletOutlined />,
+        },
+        {
+            key: `/${locale}/analytics`,
+            icon: <PieChartOutlined />,
+        },
+    ];
 
-    const navItems = [CameraOutlined, WalletOutlined, PieChartOutlined].map((icon, index) => ({
-        key: String(index + 1),
-        icon: React.createElement(icon),
-    }));
+    const handleMenuClick = ({ key }: any) => {
+        router.push(key);
+
+        if (isMobile) {
+            setCollapsed(false);
+        }
+    };
 
     const sidebarContent = (
         <>
@@ -112,8 +130,12 @@ export default function SidebarView({
             <Menu
                 className={styles.menuSidebar}
                 mode="inline"
-                defaultSelectedKeys={['1']}
+                selectedKeys={[pathname]}
                 items={navItems}
+                onClick={handleMenuClick}
+                style={{
+                    paddingInline: 0,
+                }}
             />
 
             {/* BELL */}

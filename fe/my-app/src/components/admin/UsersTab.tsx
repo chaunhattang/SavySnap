@@ -209,13 +209,16 @@ export default function UsersTab() {
                 </div>
 
                 {/* Bảng hiển thị danh sách người dùng */}
-                <Table<User>
-                    columns={userColumns}
-                    dataSource={users}
-                    loading={loadingUsers}
-                    rowKey="id"
-                    pagination={{ pageSize: 10 }}
-                />
+                <div className="overflow-x-auto w-full">
+                    <Table<User>
+                        columns={userColumns}
+                        dataSource={users}
+                        loading={loadingUsers}
+                        rowKey="id"
+                        pagination={{ pageSize: 10 }}
+                        className="min-w-[800px]"
+                    />
+                </div>
             </Card>
 
             {/* Modal tạo mới / sửa người dùng (tách riêng để gọn) */}

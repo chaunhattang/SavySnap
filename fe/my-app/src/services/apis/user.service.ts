@@ -27,7 +27,6 @@ export const userService = {
     },
 
     updateProfile: async (username: string, formData: FormData): Promise<User> => {
-        // Do NOT set Content-Type manually — browser sets multipart/form-data with correct boundary
         const response = await axiosClient.put(`${ENDPOINT.USERS.BASE}/${username}`, formData);
         return response as unknown as User;
     },

@@ -25,27 +25,29 @@
             "usernameLabel": "Username",
             "usernameRequired": "Please enter your username!",
             "usernamePlaceholder": "johndoe",
-            "passwordLabel": "Secret Key",
-            "forgotPassword": "Forgot your key? 🗝️",
+            "passwordLabel": "Password",
+            "forgotPassword": "Forgot password?",
             "passwordRequired": "Please enter your password!",
             "passwordPlaceholder": "••••••••",
-            "submit": "Start now 🚀",
+            "submit": "Sign in",
             "divider": "OR",
-            "orDivider": "Or fly with",
+            "orDivider": "Or continue with",
             "loginWithGoogle": "Google",
             "loginWithGithub": "Github",
-            "noAccount": "Are you a new star?",
-            "register": "Register for free",
-            "registerBtn": "Create account",
+            "noAccount": "New here?",
+            "register": "Create free account",
+            "registerBtn": "Sign up",
             "headerText": "Welcome back!",
-            "subHeaderText": "Please login to continue managing your Snaps.",
+            "subHeaderText": "Sign in to continue",
             "welcomeTitle": "Dreamland 🐾",
-            "welcomeSubtitle": "Enter information to continue the experience",
+            "welcomeSubtitle": "Sign in to continue",
             "errorTitle": "Login failed",
             "errorDefault": "Something went wrong. Please try again.",
             "artTitle": "Capturing Moments 🌸",
-            "artSubtitle": "Turn every spending photo into a lovely piece of art.",
-            "artQuote": "Art is not just about spending, but about how you cherish what you have. 🎀"
+            "artSubtitle": "Turn every receipt into a lovely piece of art.",
+            "artQuote": "Art is not just about spending, but about how you cherish what you have. 🎀",
+            "sucess": "Login successful",
+            "fail": "Login failed"
         },
         "register": {
             "agreement": "I agree",
@@ -60,7 +62,7 @@
             "emailRequired": "Please enter your email!",
             "emailInvalid": "Invalid email format!",
             "emailPlaceholder": "name@example.com",
-            "passwordLabel": "Secret Key",
+            "passwordLabel": "Password",
             "passwordRequired": "Please enter your password!",
             "passwordPlaceholder": "Minimum 8 characters",
             "confirmPasswordLabel": "Confirm Password",
@@ -78,7 +80,7 @@
             },
             "agreementPrefix": "I have read and agree to the ",
             "termsLink": "Terms of Service",
-            "submit": "Engrave account 🎨",
+            "submit": "Create account",
             "headerText": "Create new account!",
             "subHeaderText": "Please fill in the details below to register.",
             "hasAccount": "Already have a shelter?",
@@ -90,7 +92,9 @@
             "errorDefault": "Something went wrong. Please try again.",
             "artTitle": "Creating Future ✨",
             "artSubtitle": "Join a community that loves beauty and smart financial management.",
-            "artQuote": "Every saving is a seed for your dream garden in the future. 🌱"
+            "artQuote": "Every saving is a seed for your dream garden in the future. 🌱",
+            "sucess": "Registration successful",
+            "fail": "Registration failed"
         },
         "forgotPassword": {
             "headerText": "Forgot password?",
@@ -129,7 +133,8 @@
                 "want": "Food & Drink",
                 "saving": "Entertainment"
             },
-            "submit": "Save Snap"
+
+            "submit": "Confirm save Snap"
         },
         "update": {
             "title": "Update Snap",
@@ -145,7 +150,8 @@
                 "want": "Food & Drink",
                 "saving": "Entertainment"
             },
-            "submit": "Update Snap",
+
+            "submit": "Updated Snap",
             "edit": "Edit",
             "delete": "Delete"
         },
@@ -154,7 +160,8 @@
             "need": "Essential",
             "want": "Food & Drink",
             "saving": "Entertainment"
-        }
+        },
+        "delete": "Snap has been deleted."
     },
     "dashboard": {
         "totalFee": "Total Expense",
