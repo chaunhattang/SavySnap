@@ -63,19 +63,18 @@ public class UserService {
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
 
         userMapper.updateUser(user, request);
-
-        boolean passwordMatch = passwordEncoder.matches(request.getConfirmPassword(), user.getPassword());
-        if (!passwordMatch) {
-            throw new AppException(ErrorCode.WRONG_PASSWORD);
+        if (request.getPassword() != null && !request.getPassword().trim().isEmpty()) {
+            if (request.getConfirmPassword() == null || !passwordEncoder.matches(request.getConfirmPassword(), user.getPassword())) {
+                throw new AppException(ErrorCode.WRONG_PASSWORD);
+            }
+            user.setPassword(passwordEncoder.encode(request.getPassword()));
         }
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        String imageUrl = cloudinaryService.uploadImage(file);
-        if (imageUrl != null) {
-            user.setAvatarUrl(imageUrl);
+        if (file != null && !file.isEmpty()) {
+            String imageUrl = cloudinaryService.uploadImage(file);
+            if (imageUrl != null) {
+                user.setAvatarUrl(imageUrl);
+            }
         }
-
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
