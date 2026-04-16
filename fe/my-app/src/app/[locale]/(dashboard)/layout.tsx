@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 import SakuraFalling from '@/components/ui/SakuraFalling';
 import MobileBottomBar from '@/components/layout/MobileBottom/MobileBottomBar';
 import Cookies from 'js-cookie';
-import { User } from '@/types/user.td';
+import { User } from '@/types/user';
 import { userService } from '@/services/apis/user.service';
 
 const { Content } = Layout;

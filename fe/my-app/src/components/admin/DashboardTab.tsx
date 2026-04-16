@@ -181,15 +181,13 @@ export default function DashboardTab() {
                 </Text>
             </div>
 
-            <Row gutter={[24, 24]} className={styles.statsRow}>
+            <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 ${styles.statsRow}`}>
                 {stats.map((stat, idx) => (
-                    <Col xs={24} sm={12} xl={6} key={idx}>
-                        <div className={styles.fadeStagger} style={{ '--delay': `${0.2 + idx * 0.1}s` } as any}>
-                            <StatCard stat={stat} />
-                        </div>
-                    </Col>
+                    <div key={idx} className={styles.fadeStagger} style={{ '--delay': `${0.2 + idx * 0.1}s` } as any}>
+                        <StatCard stat={stat} />
+                    </div>
                 ))}
-            </Row>
+            </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <Card
