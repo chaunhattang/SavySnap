@@ -92,6 +92,12 @@ export default function ProfileForm() {
             if (avatarFile) {
                 formData.append('file', avatarFile);
             }
+            console.log('FormData to be sent:', {
+                fullName: values.fullName,
+                newPassword: values.newPassword,
+                oldPassword: values.oldPassword,
+                avatarFile: avatarFile ? avatarFile.name : '(no change)',
+            });
 
             await userService.updateProfile(user.username, formData);
 

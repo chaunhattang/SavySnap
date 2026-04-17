@@ -63,11 +63,13 @@ public class UserService {
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_FOUND));
 
         userMapper.updateUser(user, request);
-        if (request.getPassword() != null && !request.getPassword().trim().isEmpty()) {
-            if (request.getConfirmPassword() == null || !passwordEncoder.matches(request.getConfirmPassword(), user.getPassword())) {
+        if (request.getNewPassword() != null && !request.getNewPassword().trim().isEmpty()) {
+            if (request.getOldPassword() == null
+                    || !passwordEncoder.matches(request.getOldPassword(), user.getPassword())) {
                 throw new AppException(ErrorCode.WRONG_PASSWORD);
             }
-            user.setPassword(passwordEncoder.encode(request.getPassword()));
+            user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+            log.info(request.getNewPassword());
         }
         if (file != null && !file.isEmpty()) {
             String imageUrl = cloudinaryService.uploadImage(file);
