@@ -3,9 +3,12 @@
     max-height: 520px;
     display: flex;
     flex-direction: column;
-    background: #fff;
+    background: #ffffff;
     border-radius: 16px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+
+    /* Pink shadow */
+    box-shadow: 0 20px 40px rgba(255, 105, 180, 0.18);
+
     overflow: hidden;
 }
 
@@ -15,7 +18,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 16px 20px 12px;
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid #ffe4ec;
     flex-shrink: 0;
 }
 
@@ -23,11 +26,12 @@
     font-size: 16px !important;
     font-weight: 800 !important;
     margin: 0 !important;
+    color: #be185d;
 }
 
 .markAllBtn {
     font-size: 12px !important;
-    color: #059669 !important;
+    color: #ec4899 !important;
     padding: 0 !important;
     height: auto !important;
 }
@@ -43,7 +47,7 @@
 }
 
 .list::-webkit-scrollbar-thumb {
-    background: #e2e8f0;
+    background: #fbcfe8;
     border-radius: 4px;
 }
 
@@ -55,7 +59,8 @@
     cursor: pointer;
     transition: background 0.15s ease;
     position: relative;
-    border-bottom: 1px solid #f8fafc;
+    border-bottom: 1px solid #fff1f5;
+    transition: all 0.2s ease;
 }
 
 .item:last-child {
@@ -63,15 +68,17 @@
 }
 
 .item:hover {
-    background: #f8fafc;
+    background: #fff0f6;
+    background: #fff0f6;
+    transform: translateY(-2px);
 }
 
 .itemUnread {
-    background: #f0fdf9;
+    background: #ffe4ec;
 }
 
 .itemUnread:hover {
-    background: #e6faf3;
+    background: #ffd6e7;
 }
 
 /* Unread dot */
@@ -82,8 +89,21 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #059669;
+    background: #ec4899;
     flex-shrink: 0;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.6);
+    }
+    70% {
+        box-shadow: 0 0 0 6px rgba(236, 72, 153, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(236, 72, 153, 0);
+    }
 }
 
 /* Icon container */
@@ -98,11 +118,32 @@
     flex-shrink: 0;
 }
 
-.iconSnap    { background: #d1fae5; color: #059669; }
-.iconProfile { background: #dbeafe; color: #2563eb; }
-.iconSystem  { background: #fde68a; color: #d97706; }
-.iconWelcome { background: #ede9fe; color: #7c3aed; }
-.iconAdmin   { background: #fee2e2; color: #dc2626; }
+/* Pink palette icons */
+
+.iconSnap {
+    background: #fce7f3;
+    color: #ec4899;
+}
+
+.iconProfile {
+    background: #fdf2f8;
+    color: #db2777;
+}
+
+.iconSystem {
+    background: #ffe4e6;
+    color: #e11d48;
+}
+
+.iconWelcome {
+    background: #fbcfe8;
+    color: #be185d;
+}
+
+.iconAdmin {
+    background: #ffe4e6;
+    color: #f43f5e;
+}
 
 /* Text */
 .itemContent {
@@ -114,7 +155,7 @@
 .itemTitle {
     font-size: 13px;
     font-weight: 700;
-    color: #1e293b;
+    color: #831843;
     line-height: 1.4;
     margin-bottom: 2px;
     white-space: nowrap;
@@ -124,7 +165,7 @@
 
 .itemDesc {
     font-size: 12px;
-    color: #64748b;
+    color: #9d174d;
     line-height: 1.5;
     white-space: nowrap;
     overflow: hidden;
@@ -133,7 +174,7 @@
 
 .itemTime {
     font-size: 11px;
-    color: #94a3b8;
+    color: #f472b6;
     margin-top: 4px;
     display: block;
 }
@@ -142,7 +183,7 @@
 .empty {
     padding: 40px 20px;
     text-align: center;
-    color: #94a3b8;
+    color: #f472b6;
 }
 
 .emptyIcon {
@@ -153,14 +194,14 @@
 /* ── Footer ── */
 .footer {
     padding: 12px 20px;
-    border-top: 1px solid #f1f5f9;
+    border-top: 1px solid #ffe4ec;
     text-align: center;
     flex-shrink: 0;
 }
 
 .footerBtn {
     font-size: 13px !important;
-    color: #059669 !important;
+    color: #ec4899 !important;
     font-weight: 600 !important;
     padding: 0 !important;
     height: auto !important;
