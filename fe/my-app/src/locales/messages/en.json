@@ -134,7 +134,12 @@
                 "saving": "Entertainment"
             },
 
-            "submit": "Confirm save Snap"
+            "submit": "Confirm save Snap",
+            "amountRequired": "Please enter amount!",
+            "amountInvalid": "Amount is invalid",
+            "fileRequired": "Please upload an image!",
+            "titleRequired": "Please enter title!",
+            "amountMustBeInteger": "Amount must be a whole number"
         },
         "update": {
             "title": "Update Snap",

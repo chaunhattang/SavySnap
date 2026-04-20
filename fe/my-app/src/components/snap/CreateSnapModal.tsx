@@ -31,7 +31,25 @@ export default function CreateSnapModal({ open, onClose }: any) {
     const { message } = App.useApp();
 
     const handleSubmit = async () => {
-        if (!title || amount === null || !file) return;
+        if (!title.trim()) {
+            message.error(t('titleRequired'));
+            return;
+        }
+
+        if (amount === null || amount <= 0) {
+            message.error(t('amountInvalid'));
+            return;
+        }
+
+        if (!file) {
+            message.error(t('fileRequired'));
+            return;
+        }
+
+        if (!Number.isInteger(amount)) {
+            message.error(t('amountMustBeInteger'));
+            return;
+        }
 
         const formData = buildFormData({
             title,
@@ -40,17 +58,16 @@ export default function CreateSnapModal({ open, onClose }: any) {
             description: title,
         });
 
-        if (file) {
-            formData.append('file', file);
-        }
+        formData.append('file', file);
 
         await create(formData);
 
         setTitle('');
         setAmount(null);
         setCategory('NEED');
-        message.success(t('submit'));
         resetFile();
+
+        message.success(t('submit'));
 
         onClose?.();
     };
@@ -105,6 +122,7 @@ export default function CreateSnapModal({ open, onClose }: any) {
                         value={amount}
                         onChange={(v) => setAmount(v)}
                         size="large"
+                        min={0}
                     />
                 </div>
 

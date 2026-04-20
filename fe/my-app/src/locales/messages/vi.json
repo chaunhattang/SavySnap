@@ -120,7 +120,12 @@
                 "want": "Ăn uống",
                 "saving": "Giải trí"
             },
-            "submit": "Xác nhận lưu Snap"
+            "submit": "Xác nhận lưu Snap",
+            "amountRequired": "Vui lòng nhập số tiền!",
+            "amountInvalid": "Số tiền không hợp lệ",
+            "fileRequired": "Vui lòng tải ảnh!",
+            "titleRequired": "Vui lòng nhập tiêu đề!",
+            "amountMustBeInteger": "Số tiền phải là số nguyên"
         },
         "update": {
             "title": "Cập nhật Snap",
@@ -145,7 +150,8 @@
             "need": "Thiết yếu",
             "want": "Ăn uống",
             "saving": "Giải trí"
-        }
+        },
+        "delete": "Đã xóa snap"
     },
     "dashboard": {
         "totalFee": "Tổng chi tiêu",

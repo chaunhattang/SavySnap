@@ -82,7 +82,7 @@ export default function ProfileForm() {
 
             // 2. Chỉ gửi mật khẩu nếu người dùng thực sự có nhập
             if (values.newPassword) {
-                formData.append('rawPassword', values.newPassword);
+                formData.append('password', values.newPassword);
             }
             if (values.oldPassword) {
                 formData.append('confirmPassword', values.oldPassword);
