@@ -63,8 +63,22 @@ export default function UpdateSnapModal({ open, onClose, snap }: any) {
     const handleUpdate = async () => {
         if (!snap?.id) return;
 
-        if (!title || !amount) return;
+        if (!title.trim()) {
+            message.error(t('titleRequired'));
+            return;
+        }
 
+        if (amount === null || amount <= 0) {
+            message.error(t('amountInvalid'));
+            return;
+        }
+
+        if (!Number.isInteger(amount)) {
+            message.error(t('amountMustBeInteger'));
+            return;
+        }
+
+        // chỉ check file nếu user upload file mới
         const formData = buildFormData({
             title,
             amount,

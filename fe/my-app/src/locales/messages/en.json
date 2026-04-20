@@ -158,7 +158,12 @@
 
             "submit": "Updated Snap",
             "edit": "Edit",
-            "delete": "Delete"
+            "delete": "Delete",
+            "amountRequired": "Please enter amount!",
+            "amountInvalid": "Amount is invalid",
+            "fileRequired": "Please upload an image!",
+            "titleRequired": "Please enter title!",
+            "amountMustBeInteger": "Amount must be a whole number"
         },
         "category": {
             "all": "All",

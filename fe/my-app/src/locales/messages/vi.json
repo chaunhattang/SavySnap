@@ -143,7 +143,12 @@
             },
             "submit": "Cập nhật Snap",
             "edit": "Sửa",
-            "delete": "Xóa"
+            "delete": "Xóa",
+            "amountRequired": "Vui lòng nhập số tiền!",
+            "amountInvalid": "Số tiền không hợp lệ",
+            "fileRequired": "Vui lòng tải ảnh!",
+            "titleRequired": "Vui lòng nhập tiêu đề!",
+            "amountMustBeInteger": "Số tiền phải là số nguyên"
         },
         "category": {
             "all": "Tất cả",
